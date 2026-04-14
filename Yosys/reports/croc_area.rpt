@@ -1,0 +1,389 @@
+
+51. Printing statistics.
+
+=== main_chip ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+     3845        - wires
+     3845        - wire bits
+     1525        - public wires
+     1525        - public wire bits
+       43        - ports
+       43        - port bits
+     3433 1.16E+06 cells
+        9        -   $scopeinfo
+       57  402.192   AND2X1
+        1    7.056   AND2X1P5
+        2   22.579   AND3BX1
+        1    8.467   AND3X1
+      205 1.74E+03   AND3X2
+        1    9.878   AND4X1
+        2   19.757   AND4X2
+        1    9.878   AO211X1
+        1    9.878   AO211X2
+        5   49.392   AO21X2
+        4   45.158   AO31X1
+       19   187.69   AOAI211X1
+        4   39.514   AOAI211X2
+       13  110.074   AOI211X1
+        2   16.934   AOI211X2
+        3   25.402   AOI21BX1
+       29  204.624   AOI21X1
+        1    7.056   AOI21X2
+        1    9.878   AOI221X1
+        1    9.878   AOI22X1
+       17  143.942   AOI2B1X1
+        1    11.29   BUFX12
+      263 1.48E+03   BUFX3
+      796  1.8E+04   DFFQX1
+      224 6.32E+03   DFFRQX3
+      227  961.027   INVX1
+        1    4.234   INVX2
+       16  203.213   MUX2X1
+      486 5.49E+03   MUXI2X1
+       57  402.192   NAND2BX1
+        1    7.056   NAND2BX2
+       41  231.437   NAND2X1
+        2   19.757   NAND3BX1
+      234 1.65E+03   NAND3X1
+        5   49.392   NAND4X2
+      171 1.21E+03   NOR2BX1
+      145  818.496   NOR2X1
+        3   16.934   NOR2X2
+        8   67.738   NOR3BX1
+        6   42.336   NOR3X1
+        1    7.056   NOR3X2
+        1    11.29   NOR4BX2
+        2   19.757   NOR4X1
+        2   19.757   OA211X1
+        3   29.635   OA211X2
+        5   42.336   OA21X2
+        4   33.869   OAI211X1
+        7   49.392   OAI21X1
+        1   12.701   OAI221X2
+       11  108.662   OAI31X1
+        1    9.878   OAI31X2
+      229 2.26E+03   OAOI211X1
+        2   19.757   OAOI211X2
+        1    7.056   OR2X2
+       10   84.672   OR3BX1
+        1    8.467   OR3X2
+        5   49.392   OR4X1
+        1 9.32E+04   RM_IHPSG13_1P_256x64_c2_bm_bist
+        2 1.01E+05   RM_IHPSG13_1P_64x64_c2_bm_bist
+        1    4.234   TIEHI
+        1    4.234   TIELO
+        2   25.402   XNOR2X1
+        1   12.701   XNOR2X2
+        1   12.701   XOR2X1
+        8   79.027   XOR2X2
+        4    57600   sg13cmos5l_IOPadIOVdd
+        4    57600   sg13cmos5l_IOPadIOVss
+       20   288000   sg13cmos5l_IOPadIn
+       28   403200   sg13cmos5l_IOPadOut16mA
+        4    57600   sg13cmos5l_IOPadVdd
+        4    57600   sg13cmos5l_IOPadVss
+        1        - submodules
+        1        -   matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul
+
+   Area for cell type $scopeinfo is unknown!
+
+   Chip area for module '\main_chip': 1158707.260800
+     of which used for sequential elements: 24295.219200 (2.10%)
+
+=== matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+    15960        - wires
+    15960        - wire bits
+      560        - public wires
+      560        - public wire bits
+      560        - ports
+      560        - port bits
+    15624 1.36E+05 cells
+      402 2.84E+03   AND2X1
+        2   14.112   AND2X1P5
+        1    7.056   AND2X2
+        1    7.056   AND2X3
+       67  756.403   AND3BX1
+        1    11.29   AND3BX2
+        1    8.467   AND3X1
+      164 1.39E+03   AND3X2
+        3   29.635   AND4X1
+       84  829.786   AND4X2
+        7   69.149   AO211X1
+      132  1.3E+03   AO211X2
+      148 1.46E+03   AO21X2
+        1   12.701   AO22X1
+       43  546.134   AO22X2
+        4   45.158   AO31X1
+       49   553.19   AO31X2
+      548 5.41E+03   AOAI211X1
+       62  612.461   AOAI211X2
+      187 1.58E+03   AOI211X1
+       25   211.68   AOI211X2
+       74  626.573   AOI21BX1
+        1    9.878   AOI21BX2
+      544 3.84E+03   AOI21X1
+       25    176.4   AOI21X2
+      186 1.84E+03   AOI221X1
+       12  135.475   AOI221X2
+       22  248.371   AOI221X3
+      143 1.41E+03   AOI22X1
+        5   49.392   AOI22X1P5
+        6    59.27   AOI22X2
+      178 1.51E+03   AOI2B1X1
+        4   39.514   AOI2B1X2
+        5   77.616   AOI2B2BX1
+       64  722.534   AOI2B2X1
+       10   141.12   AOI2BB2X1
+        3   16.934   BUFX1
+        7   79.027   BUFX12
+        1   15.523   BUFX16
+        7   39.514   BUFX2
+      841 4.75E+03   BUFX3
+       38  268.128   BUFX6
+      557 2.36E+03   INVX1
+       26  110.074   INVX2
+        9   38.102   INVX3
+      738 7.29E+03   MIN3X1
+        3   29.635   MIN3X1P5
+       15  148.176   MIN3X2
+      119 1.51E+03   MUX2X1
+        5   63.504   MUX2X2
+      436 4.92E+03   MUXI2X1
+        2   25.402   MUXI2X2
+        3   84.672   MUXT4X3
+      360  2540.16   NAND2BX1
+        3   21.168   NAND2BX1P5
+       11   77.616   NAND2BX2
+        8   56.448   NAND2BX3
+     1213 6.85E+03   NAND2X1
+       11   62.093   NAND2X1P5
+       16   90.317   NAND2X2
+       15   84.672   NAND2X3
+       48  474.163   NAND3BX1
+        4   39.514   NAND3BX2
+      406 2.86E+03   NAND3X1
+       15   105.84   NAND3X2
+        7   98.784   NAND4BBX1
+        2   28.224   NAND4BBX2
+        9  101.606   NAND4BX1
+        1    11.29   NAND4BX2
+       54  533.434   NAND4X2
+      347 2.45E+03   NOR2BX1
+       35   246.96   NOR2BX2
+      903  5.1E+03   NOR2X1
+       27   152.41   NOR2X2
+       25   141.12   NOR2X3
+      199 1.68E+03   NOR3BX1
+       11   93.139   NOR3BX1P5
+        2   19.757   NOR3BX3
+      309 2.18E+03   NOR3X1
+       24  169.344   NOR3X2
+       35  444.528   NOR4BBX1
+        5    70.56   NOR4BBX2
+        8   90.317   NOR4BX1
+        4   45.158   NOR4BX2
+       31   306.23   NOR4X1
+        7   69.149   NOR4X2
+        6    59.27   OA211X1
+      156  1541.03   OA211X2
+      165  1.4E+03   OA21X2
+      320 2.71E+03   OAI211X1
+       46  389.491   OAI211X2
+      502 3.54E+03   OAI21X1
+       13   91.728   OAI21X2
+       80 1.02E+03   OAI221X1
+       29  368.323   OAI221X2
+       70  691.488   OAI22X1
+        6    59.27   OAI22X2
+       21  296.352   OAI2B2BX1
+        1   14.112   OAI2B2BX2
+       28  355.622   OAI2BB2X2
+      129 1.27E+03   OAI31X1
+        8   79.027   OAI31X2
+      388 3.83E+03   OAOI211X1
+       51  503.798   OAOI211X2
+        1    7.056   OR2X1
+      232 1.64E+03   OR2X2
+      165  1.4E+03   OR3BX1
+        1    8.467   OR3BX2
+        8   67.738   OR3X1
+      107   905.99   OR3X2
+       37  365.501   OR4X1
+        1    9.878   OR4X2
+      268  3.4E+03   XNOR2X1
+       88  1117.67   XNOR2X2
+      450   9525.6   XNOR3X1
+      108 2.29E+03   XNOR3X2
+       35  444.528   XOR2X1
+     1928  1.9E+04   XOR2X2
+
+   Chip area for module '\matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul': 136072.137600
+     of which used for sequential elements: 0.000000 (0.00%)
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        |        +-Area including submodules.
+        |        | 
+    19057 1.29E+06 main_chip
+    15624 1.36E+05 matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul
+
+        +----------Count including submodules.
+        |        +-Area including submodules.
+        |        | 
+    19805        - wires
+    19805        - wire bits
+     2085        - public wires
+     2085        - public wire bits
+      603        - ports
+      603        - port bits
+        -        - memories
+        -        - memory bits
+        -        - processes
+    19057 1.29E+06 cells
+        9        -   $scopeinfo
+      459 3.24E+03   AND2X1
+        3   21.168   AND2X1P5
+        1    7.056   AND2X2
+        1    7.056   AND2X3
+       69  778.982   AND3BX1
+        1    11.29   AND3BX2
+        2   16.934   AND3X1
+      369 3.12E+03   AND3X2
+        4   39.514   AND4X1
+       86  849.542   AND4X2
+        8   79.027   AO211X1
+      133 1.31E+03   AO211X2
+      153 1.51E+03   AO21X2
+        1   12.701   AO22X1
+       43  546.134   AO22X2
+        8   90.317   AO31X1
+       49   553.19   AO31X2
+      567  5.6E+03   AOAI211X1
+       66  651.974   AOAI211X2
+      200  1693.44   AOI211X1
+       27  228.614   AOI211X2
+       77  651.974   AOI21BX1
+        1    9.878   AOI21BX2
+      573 4.04E+03   AOI21X1
+       26  183.456   AOI21X2
+      187 1.85E+03   AOI221X1
+       12  135.475   AOI221X2
+       22  248.371   AOI221X3
+      144  1422.49   AOI22X1
+        5   49.392   AOI22X1P5
+        6    59.27   AOI22X2
+      195 1.65E+03   AOI2B1X1
+        4   39.514   AOI2B1X2
+        5   77.616   AOI2B2BX1
+       64  722.534   AOI2B2X1
+       10   141.12   AOI2BB2X1
+        3   16.934   BUFX1
+        8   90.317   BUFX12
+        1   15.523   BUFX16
+        7   39.514   BUFX2
+     1104 6.23E+03   BUFX3
+       38  268.128   BUFX6
+      796  1.8E+04   DFFQX1
+      224 6.32E+03   DFFRQX3
+      784 3.32E+03   INVX1
+       27  114.307   INVX2
+        9   38.102   INVX3
+      738 7.29E+03   MIN3X1
+        3   29.635   MIN3X1P5
+       15  148.176   MIN3X2
+      135 1.71E+03   MUX2X1
+        5   63.504   MUX2X2
+      922 1.04E+04   MUXI2X1
+        2   25.402   MUXI2X2
+        3   84.672   MUXT4X3
+      417 2.94E+03   NAND2BX1
+        3   21.168   NAND2BX1P5
+       12   84.672   NAND2BX2
+        8   56.448   NAND2BX3
+     1254 7.08E+03   NAND2X1
+       11   62.093   NAND2X1P5
+       16   90.317   NAND2X2
+       15   84.672   NAND2X3
+       50   493.92   NAND3BX1
+        4   39.514   NAND3BX2
+      640  4515.84   NAND3X1
+       15   105.84   NAND3X2
+        7   98.784   NAND4BBX1
+        2   28.224   NAND4BBX2
+        9  101.606   NAND4BX1
+        1    11.29   NAND4BX2
+       59  582.826   NAND4X2
+      518 3.66E+03   NOR2BX1
+       35   246.96   NOR2BX2
+     1048  5915.75   NOR2X1
+       30  169.344   NOR2X2
+       25   141.12   NOR2X3
+      207  1752.71   NOR3BX1
+       11   93.139   NOR3BX1P5
+        2   19.757   NOR3BX3
+      315  2222.64   NOR3X1
+       25    176.4   NOR3X2
+       35  444.528   NOR4BBX1
+        5    70.56   NOR4BBX2
+        8   90.317   NOR4BX1
+        5   56.448   NOR4BX2
+       33  325.987   NOR4X1
+        7   69.149   NOR4X2
+        8   79.027   OA211X1
+      159 1.57E+03   OA211X2
+      170 1.44E+03   OA21X2
+      324 2.74E+03   OAI211X1
+       46  389.491   OAI211X2
+      509 3.59E+03   OAI21X1
+       13   91.728   OAI21X2
+       80 1.02E+03   OAI221X1
+       30  381.024   OAI221X2
+       70  691.488   OAI22X1
+        6    59.27   OAI22X2
+       21  296.352   OAI2B2BX1
+        1   14.112   OAI2B2BX2
+       28  355.622   OAI2BB2X2
+      140 1.38E+03   OAI31X1
+        9   88.906   OAI31X2
+      617 6.09E+03   OAOI211X1
+       53  523.555   OAOI211X2
+        1    7.056   OR2X1
+      233 1.64E+03   OR2X2
+      175  1481.76   OR3BX1
+        1    8.467   OR3BX2
+        8   67.738   OR3X1
+      108  914.458   OR3X2
+       42  414.893   OR4X1
+        1    9.878   OR4X2
+        1 9.32E+04   RM_IHPSG13_1P_256x64_c2_bm_bist
+        2 1.01E+05   RM_IHPSG13_1P_64x64_c2_bm_bist
+        1    4.234   TIEHI
+        1    4.234   TIELO
+      270 3.43E+03   XNOR2X1
+       89 1.13E+03   XNOR2X2
+      450   9525.6   XNOR3X1
+      108 2.29E+03   XNOR3X2
+       36  457.229   XOR2X1
+     1936 1.91E+04   XOR2X2
+        4    57600   sg13cmos5l_IOPadIOVdd
+        4    57600   sg13cmos5l_IOPadIOVss
+       20   288000   sg13cmos5l_IOPadIn
+       28   403200   sg13cmos5l_IOPadOut16mA
+        4    57600   sg13cmos5l_IOPadVdd
+        4    57600   sg13cmos5l_IOPadVss
+        1 1.36E+05 submodules
+        1 1.36E+05   matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul
+
+   Area for cell type $scopeinfo is unknown!
+
+   Chip area for top module '\main_chip': 1294779.398400
+     of which used for sequential elements: 24295.219200 (1.88%)
+

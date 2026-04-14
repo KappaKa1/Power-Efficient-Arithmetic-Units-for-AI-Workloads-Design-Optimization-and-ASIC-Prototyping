@@ -1,0 +1,251 @@
+
+16. Printing statistics.
+
+=== matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul ===
+
+        +----------Local Count, excluding submodules.
+        | 
+    91552 wires
+    92656 wire bits
+    10832 public wires
+    11936 public wire bits
+       64 ports
+      560 port bits
+    58464 cells
+    11328   $and
+     4032   $not
+     5760   $or
+    37344   $xor
+
+=== GEMM_CORE$main_chip.u_main.mul ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       63 wires
+     4304 wire bits
+       14 public wires
+     1284 public wire bits
+        7 ports
+      356 port bits
+       15 cells
+        3   $dff
+        1   $logic_not
+       11   $mux
+        1 submodules
+        1   matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul
+
+=== GEMM_controller$main_chip.u_main.u_gemm_ctrl ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      250 wires
+      870 wire bits
+       40 public wires
+      147 public wire bits
+        8 ports
+       29 port bits
+      137 cells
+        6   $add
+       16   $dff
+       25   $eq
+       13   $logic_not
+        4   $mul
+       67   $mux
+        6   $pmux
+
+=== SRAM_controller$main_chip.u_main.ctrl ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      497 wires
+     1257 wire bits
+       55 public wires
+      150 public wire bits
+       21 ports
+       46 port bits
+      291 cells
+        7   $add
+       17   $dff
+       98   $eq
+        2   $logic_and
+        8   $logic_not
+        2   $logic_or
+        1   $lt
+        1   $mod
+      144   $mux
+       11   $pmux
+
+=== shift_registers_out$main_chip.u_main.sr_out ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       15 wires
+      471 wire bits
+        6 public wires
+      147 public wire bits
+        5 ports
+       83 port bits
+        5 cells
+        1   $dff
+        1   $logic_not
+        3   $mux
+
+=== shift_registers_in$main_chip.u_main.sr_inp ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       14 wires
+      407 wire bits
+        5 public wires
+       83 public wire bits
+        5 ports
+       83 port bits
+        5 cells
+        1   $dff
+        1   $logic_not
+        3   $mux
+
+=== mux2to1$main_chip.u_main.inp_B_sram_gen ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        5 wires
+       33 wire bits
+        4 public wires
+       25 public wire bits
+        4 ports
+       25 port bits
+        1 cells
+        1   $mux
+
+=== mux2to1$main_chip.u_main.inp_A_sram_gen ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        5 wires
+       33 wire bits
+        4 public wires
+       25 public wire bits
+        4 ports
+       25 port bits
+        1 cells
+        1   $mux
+
+=== pack14to16_signext$main_chip.u_main.u_pack14to16 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       19 wires
+     2103 wire bits
+        8 public wires
+      804 public wire bits
+        6 ports
+      292 port bits
+        5 cells
+        1   $aldff
+        1   $logic_not
+        3   $mux
+
+=== main$main_chip.u_main ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      140 wires
+     2957 wire bits
+       88 public wires
+     1295 public wire bits
+       39 ports
+       39 port bits
+       33 cells
+        8   $dff
+        2   $logic_not
+        1   $logic_or
+       16   $mux
+        3   $not
+        1   RM_IHPSG13_1P_256x64_c2_bm_bist
+        2   RM_IHPSG13_1P_64x64_c2_bm_bist
+        8 submodules
+        1   GEMM_CORE$main_chip.u_main.mul
+        1   GEMM_controller$main_chip.u_main.u_gemm_ctrl
+        1   SRAM_controller$main_chip.u_main.ctrl
+        1   mux2to1$main_chip.u_main.inp_A_sram_gen
+        1   mux2to1$main_chip.u_main.inp_B_sram_gen
+        1   pack14to16_signext$main_chip.u_main.u_pack14to16
+        1   shift_registers_in$main_chip.u_main.sr_inp
+        1   shift_registers_out$main_chip.u_main.sr_out
+
+=== main_chip ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      100 wires
+      100 wire bits
+      100 public wires
+      100 public wire bits
+       43 ports
+       43 port bits
+       64 cells
+        4   sg13cmos5l_IOPadIOVdd
+        4   sg13cmos5l_IOPadIOVss
+       20   sg13cmos5l_IOPadIn
+       28   sg13cmos5l_IOPadOut16mA
+        4   sg13cmos5l_IOPadVdd
+        4   sg13cmos5l_IOPadVss
+        1 submodules
+        1   main$main_chip.u_main
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+    59021 main_chip
+       33 main$main_chip.u_main
+       15   GEMM_CORE$main_chip.u_main.mul
+    58464     matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul
+      137   GEMM_controller$main_chip.u_main.u_gemm_ctrl
+      291   SRAM_controller$main_chip.u_main.ctrl
+        1   mux2to1$main_chip.u_main.inp_A_sram_gen
+        1   mux2to1$main_chip.u_main.inp_B_sram_gen
+        5   pack14to16_signext$main_chip.u_main.u_pack14to16
+        5   shift_registers_in$main_chip.u_main.sr_inp
+        5   shift_registers_out$main_chip.u_main.sr_out
+
+        +----------Count including submodules.
+        | 
+    92660 wires
+   105191 wire bits
+    11156 public wires
+    15996 public wire bits
+      206 ports
+     1581 port bits
+        - memories
+        - memory bits
+        - processes
+    59021 cells
+       13   $add
+        1   $aldff
+    11328   $and
+       46   $dff
+      123   $eq
+        2   $logic_and
+       27   $logic_not
+        3   $logic_or
+        1   $lt
+        1   $mod
+        4   $mul
+      249   $mux
+     4035   $not
+     5760   $or
+       17   $pmux
+    37344   $xor
+        1   RM_IHPSG13_1P_256x64_c2_bm_bist
+        2   RM_IHPSG13_1P_64x64_c2_bm_bist
+        4   sg13cmos5l_IOPadIOVdd
+        4   sg13cmos5l_IOPadIOVss
+       20   sg13cmos5l_IOPadIn
+       28   sg13cmos5l_IOPadOut16mA
+        4   sg13cmos5l_IOPadVdd
+        4   sg13cmos5l_IOPadVss
+        1 submodules
+        1   main$main_chip.u_main
+

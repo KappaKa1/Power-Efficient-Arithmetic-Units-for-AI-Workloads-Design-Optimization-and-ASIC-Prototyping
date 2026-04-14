@@ -1,0 +1,272 @@
+
+38. Printing statistics.
+
+=== GEMM_CORE$main_chip.u_main.mul ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       30 wires
+     1159 wire bits
+       11 public wires
+      932 public wire bits
+        7 ports
+      356 port bits
+      544 cells
+        1   $_AND_
+      209   $_MUX_
+        1   $_NOT_
+        1   $_OR_
+      128   $_SDFF_PN0_
+      204   $_SDFF_PP0_
+        1 submodules
+        1   matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul
+
+   Estimated number of transistors:     105786+
+
+=== GEMM_controller$main_chip.u_main.u_gemm_ctrl ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      100 wires
+      191 wire bits
+       26 public wires
+       88 public wire bits
+        8 ports
+       29 port bits
+      151 cells
+       26   $_AND_
+        9   $_DFF_P_
+       27   $_MUX_
+       22   $_NOT_
+       25   $_OR_
+       18   $_SDFFE_PN0P_
+       18   $_SDFF_PN0_
+        6   $_XOR_
+
+   Estimated number of transistors:        890+
+
+=== SRAM_controller$main_chip.u_main.ctrl ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      207 wires
+      456 wire bits
+       40 public wires
+      103 public wire bits
+       21 ports
+       46 port bits
+      363 cells
+       79   $_AND_
+       16   $_DFF_P_
+       78   $_MUX_
+       46   $_NOT_
+       78   $_OR_
+       17   $_SDFFE_PN0P_
+       20   $_SDFF_PN0_
+       29   $_XOR_
+
+   Estimated number of transistors:       2574+
+
+=== main$main_chip.u_main ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       85 wires
+     1151 wire bits
+       75 public wires
+     1141 public wire bits
+       39 ports
+       39 port bits
+      484 cells
+        6   $_AND_
+        5   $_DFF_P_
+      232   $_MUX_
+        4   $_NOT_
+        1   $_OR_
+      232   $_SDFFE_PP0P_
+        1   $_SDFF_PP0_
+        1   RM_IHPSG13_1P_256x64_c2_bm_bist
+        2   RM_IHPSG13_1P_64x64_c2_bm_bist
+        8 submodules
+        1   GEMM_CORE$main_chip.u_main.mul
+        1   GEMM_controller$main_chip.u_main.u_gemm_ctrl
+        1   SRAM_controller$main_chip.u_main.ctrl
+        1   mux2to1$main_chip.u_main.inp_A_sram_gen
+        1   mux2to1$main_chip.u_main.inp_B_sram_gen
+        1   pack14to16_signext$main_chip.u_main.u_pack14to16
+        1   shift_registers_in$main_chip.u_main.sr_inp
+        1   shift_registers_out$main_chip.u_main.sr_out
+
+   Estimated number of transistors:     115632+
+
+=== main_chip ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       91 wires
+       91 wire bits
+       91 public wires
+       91 public wire bits
+       43 ports
+       43 port bits
+       64 cells
+        4   sg13cmos5l_IOPadIOVdd
+        4   sg13cmos5l_IOPadIOVss
+       20   sg13cmos5l_IOPadIn
+       28   sg13cmos5l_IOPadOut16mA
+        4   sg13cmos5l_IOPadVdd
+        4   sg13cmos5l_IOPadVss
+        1 submodules
+        1   main$main_chip.u_main
+
+   Estimated number of transistors:     115632+
+
+=== matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul ===
+
+        +----------Local Count, excluding submodules.
+        | 
+    12464 wires
+    12960 wire bits
+     6432 public wires
+     6928 public wire bits
+       64 ports
+      560 port bits
+    12400 cells
+     5504   $_AND_
+      272   $_NOT_
+     1632   $_OR_
+     4992   $_XOR_
+
+   Estimated number of transistors:     103264
+
+=== mux2to1$main_chip.u_main.inp_A_sram_gen ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        4 wires
+       25 wire bits
+        4 public wires
+       25 public wire bits
+        4 ports
+       25 port bits
+        8 cells
+        8   $_MUX_
+
+   Estimated number of transistors:         96
+
+=== mux2to1$main_chip.u_main.inp_B_sram_gen ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        4 wires
+       25 wire bits
+        4 public wires
+       25 public wire bits
+        4 ports
+       25 port bits
+        8 cells
+        8   $_MUX_
+
+   Estimated number of transistors:         96
+
+=== pack14to16_signext$main_chip.u_main.u_pack14to16 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        9 wires
+      805 wire bits
+        7 public wires
+      548 public wire bits
+        6 ports
+      292 port bits
+      449 cells
+      224   $_DFFE_PN0P_
+      224   $_MUX_
+        1   $_OR_
+
+   Estimated number of transistors:       2694+
+
+=== shift_registers_in$main_chip.u_main.sr_inp ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        5 wires
+       83 wire bits
+        5 public wires
+       83 public wire bits
+        5 ports
+       83 port bits
+       64 cells
+       64   $_SDFFE_PN0P_
+
+   Estimated number of transistors:          0+
+
+=== shift_registers_out$main_chip.u_main.sr_out ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        8 wires
+      212 wire bits
+        6 public wires
+      147 public wire bits
+        5 ports
+       83 port bits
+      113 cells
+        1   $_AND_
+       48   $_MUX_
+       64   $_SDFF_PN0_
+
+   Estimated number of transistors:        582+
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+    14648 main_chip
+      484 main$main_chip.u_main
+      544   GEMM_CORE$main_chip.u_main.mul
+    12400     matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul.u_matmul
+      151   GEMM_controller$main_chip.u_main.u_gemm_ctrl
+      363   SRAM_controller$main_chip.u_main.ctrl
+        8   mux2to1$main_chip.u_main.inp_A_sram_gen
+        8   mux2to1$main_chip.u_main.inp_B_sram_gen
+      449   pack14to16_signext$main_chip.u_main.u_pack14to16
+       64   shift_registers_in$main_chip.u_main.sr_inp
+      113   shift_registers_out$main_chip.u_main.sr_out
+
+        +----------Count including submodules.
+        | 
+    13007 wires
+    17158 wire bits
+     6701 public wires
+    10111 public wire bits
+      206 ports
+     1581 port bits
+        - memories
+        - memory bits
+        - processes
+    14648 cells
+     5617   $_AND_
+      224   $_DFFE_PN0P_
+       30   $_DFF_P_
+      834   $_MUX_
+      345   $_NOT_
+     1738   $_OR_
+       99   $_SDFFE_PN0P_
+      232   $_SDFFE_PP0P_
+      230   $_SDFF_PN0_
+      205   $_SDFF_PP0_
+     5027   $_XOR_
+        1   RM_IHPSG13_1P_256x64_c2_bm_bist
+        2   RM_IHPSG13_1P_64x64_c2_bm_bist
+        4   sg13cmos5l_IOPadIOVdd
+        4   sg13cmos5l_IOPadIOVss
+       20   sg13cmos5l_IOPadIn
+       28   sg13cmos5l_IOPadOut16mA
+        4   sg13cmos5l_IOPadVdd
+        4   sg13cmos5l_IOPadVss
+        1 submodules
+        1   main$main_chip.u_main
+
+   Estimated number of transistors:     115632+
+
