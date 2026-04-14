@@ -16,7 +16,7 @@ def matmul_hw(A, B, C):
             for k in range(4):
                 acc += A[i][k] * B[k][j]
             acc &= 0x1FFF
-            Y[i][j] = 0x2000 | acc
+            Y[i][j] = 0x0000 | acc
     return Y
 
 def print_matrix(mat, name, width):
