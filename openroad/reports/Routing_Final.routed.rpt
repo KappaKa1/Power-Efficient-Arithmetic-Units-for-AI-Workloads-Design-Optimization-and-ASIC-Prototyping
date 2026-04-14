@@ -1,0 +1,358 @@
+
+==========================================================================
+Routing_Final.routed check_setup
+--------------------------------------------------------------------------
+0
+
+==========================================================================
+Routing_Final.routed report_tns
+--------------------------------------------------------------------------
+tns max 0.00
+
+==========================================================================
+Routing_Final.routed report_wns
+--------------------------------------------------------------------------
+wns max 0.00
+
+==========================================================================
+Routing_Final.routed report_worst_slack
+--------------------------------------------------------------------------
+worst slack max 2.05
+
+==========================================================================
+Routing_Final.routed report_checks -path_delay min
+--------------------------------------------------------------------------
+[WARNING STA-0168] unknown field nets.
+Startpoint: u_main.final64_wdata_58__reg
+            (rising edge-triggered flip-flop clocked by clk_sys)
+Endpoint: u_main.inp_sram_1 (rising edge-triggered flip-flop clocked by clk_sys)
+Path Group: clk_sys
+Path Type: min
+Corner: ff
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.20    0.25    0.02    0.02 ^ clk_i (in)
+                  0.25    0.00    0.02 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.15    0.18    0.09    0.11 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.17    0.05    0.16 ^ clkbuf_regs_0_clk_sys/A (BUFX64)
+     1    0.03    0.02    0.10    0.26 ^ clkbuf_regs_0_clk_sys/Y (BUFX64)
+                  0.02    0.00    0.26 ^ clkbuf_0_soc_clk_i_regs/A (BUFX64)
+     4    0.14    0.02    0.06    0.32 ^ clkbuf_0_soc_clk_i_regs/Y (BUFX64)
+                  0.05    0.02    0.34 ^ clkbuf_2_1_0_soc_clk_i_regs/A (BUFX64)
+    10    0.40    0.03    0.08    0.42 ^ clkbuf_2_1_0_soc_clk_i_regs/Y (BUFX64)
+                  0.11    0.05    0.47 ^ clkbuf_leaf_29_soc_clk_i_regs/A (BUFX64)
+    32    0.09    0.02    0.09    0.56 ^ clkbuf_leaf_29_soc_clk_i_regs/Y (BUFX64)
+                  0.03    0.01    0.57 ^ u_main.final64_wdata_58__reg/CK (DFFQX1)
+     1    0.00    0.02    0.14    0.70 ^ u_main.final64_wdata_58__reg/Q (DFFQX1)
+                  0.02    0.00    0.70 ^ hold3545/A (BUFX3)
+     1    0.00    0.02    0.05    0.75 ^ hold3545/Y (BUFX3)
+                  0.02    0.00    0.75 ^ hold3495/A (BUFX3)
+     1    0.00    0.02    0.05    0.80 ^ hold3495/Y (BUFX3)
+                  0.02    0.00    0.80 ^ place3255/A (BUFX8)
+     2    0.01    0.02    0.06    0.86 ^ place3255/Y (BUFX8)
+                  0.02    0.00    0.86 ^ hold3496/A (BUFX12)
+     2    0.10    0.06    0.09    0.95 ^ hold3496/Y (BUFX12)
+                  0.09    0.00    0.95 ^ u_main.inp_sram_1/A_DIN[58] (RM_IHPSG13_1P_64x64_c2_bm_bist)
+                                  0.95   data arrival time
+
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.24    0.26    0.03    0.03 ^ clk_i (in)
+                  0.26    0.00    0.03 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.16    0.19    0.09    0.12 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.19    0.06    0.17 ^ clkbuf_0_soc_clk_i/A (BUFX64)
+     2    0.13    0.03    0.12    0.29 ^ clkbuf_0_soc_clk_i/Y (BUFX64)
+                  0.04    0.02    0.31 ^ clkbuf_1_0__f_soc_clk_i/A (BUFX64)
+     6    0.14    0.02    0.06    0.37 ^ clkbuf_1_0__f_soc_clk_i/Y (BUFX64)
+                  0.09    0.03    0.40 ^ u_main.inp_sram_1/A_CLK (RM_IHPSG13_1P_64x64_c2_bm_bist)
+                          0.10    0.50   clock uncertainty
+                         -0.01    0.50   clock reconvergence pessimism
+                          0.36    0.85   library hold time
+                                  0.85   data required time
+-----------------------------------------------------------------------------
+                                  0.85   data required time
+                                 -0.95   data arrival time
+-----------------------------------------------------------------------------
+                                  0.09   slack (MET)
+
+
+
+==========================================================================
+Routing_Final.routed report_checks -path_delay max
+--------------------------------------------------------------------------
+[WARNING STA-0168] unknown field nets.
+Startpoint: rst_ni (input port)
+Endpoint: ANTENNA_10/A (internal path endpoint)
+Path Group: path delay
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          1.00    1.00 v input external delay
+     2    0.23    0.49    0.03    1.03 v rst_ni (in)
+                  0.49    0.00    1.03 v pad_rst_ni/pad (sg13cmos5l_IOPadIn)
+    92    0.18    0.34    0.72    1.74 v pad_rst_ni/p2c (sg13cmos5l_IOPadIn)
+                  0.25    0.00    1.74 v ANTENNA_10/A (ANTENNA2)
+                                  1.74   data arrival time
+
+                         10.00   10.00   max_delay
+                          0.00   10.00   output external delay
+                                 10.00   data required time
+-----------------------------------------------------------------------------
+                                 10.00   data required time
+                                 -1.74   data arrival time
+-----------------------------------------------------------------------------
+                                  8.26   slack (MET)
+
+
+Startpoint: soc_streamed_rdata_6_o_reg
+            (rising edge-triggered flip-flop clocked by clk_sys)
+Endpoint: streamed_rdata_6_o (output port clocked by clk_sys)
+Path Group: clk_sys
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.24    0.35    0.04    0.04 ^ clk_i (in)
+                  0.35    0.00    0.04 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.16    0.29    0.15    0.19 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.25    0.06    0.25 ^ clkbuf_regs_0_clk_sys/A (BUFX64)
+     1    0.03    0.03    0.16    0.41 ^ clkbuf_regs_0_clk_sys/Y (BUFX64)
+                  0.03    0.00    0.41 ^ clkbuf_0_soc_clk_i_regs/A (BUFX64)
+     4    0.17    0.04    0.09    0.50 ^ clkbuf_0_soc_clk_i_regs/Y (BUFX64)
+                  0.07    0.03    0.53 ^ clkbuf_2_3_0_soc_clk_i_regs/A (BUFX64)
+     8    0.56    0.07    0.12    0.65 ^ clkbuf_2_3_0_soc_clk_i_regs/Y (BUFX64)
+                  0.18    0.08    0.73 ^ clkbuf_leaf_6_soc_clk_i_regs/A (BUFX64)
+     9    0.16    0.04    0.15    0.87 ^ clkbuf_leaf_6_soc_clk_i_regs/Y (BUFX64)
+                  0.05    0.01    0.89 ^ soc_streamed_rdata_6_o_reg/CK (DFFQX1)
+     1    0.05    0.50    0.54    1.43 ^ soc_streamed_rdata_6_o_reg/Q (DFFQX1)
+                  0.67    0.01    1.44 ^ pad_rdata_6_o/c2p (sg13cmos5l_IOPadOut16mA)
+     2   15.00    3.55    3.42    4.85 ^ pad_rdata_6_o/pad (sg13cmos5l_IOPadOut16mA)
+                  2.66    0.00    4.85 ^ streamed_rdata_6_o (out)
+                                  4.85   data arrival time
+
+                         10.00   10.00   clock clk_sys (rise edge)
+                          0.00   10.00   clock network delay (propagated)
+                         -0.10    9.90   clock uncertainty
+                          0.00    9.90   clock reconvergence pessimism
+                         -3.00    6.90   output external delay
+                                  6.90   data required time
+-----------------------------------------------------------------------------
+                                  6.90   data required time
+                                 -4.85   data arrival time
+-----------------------------------------------------------------------------
+                                  2.05   slack (MET)
+
+
+
+==========================================================================
+Routing_Final.routed report_checks -unconstrained
+--------------------------------------------------------------------------
+[WARNING STA-0168] unknown field nets.
+Startpoint: rst_ni (input port)
+Endpoint: ANTENNA_10/A (internal path endpoint)
+Path Group: path delay
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          1.00    1.00 v input external delay
+     2    0.23    0.49    0.03    1.03 v rst_ni (in)
+                  0.49    0.00    1.03 v pad_rst_ni/pad (sg13cmos5l_IOPadIn)
+    92    0.18    0.34    0.72    1.74 v pad_rst_ni/p2c (sg13cmos5l_IOPadIn)
+                  0.25    0.00    1.74 v ANTENNA_10/A (ANTENNA2)
+                                  1.74   data arrival time
+
+                         10.00   10.00   max_delay
+                          0.00   10.00   output external delay
+                                 10.00   data required time
+-----------------------------------------------------------------------------
+                                 10.00   data required time
+                                 -1.74   data arrival time
+-----------------------------------------------------------------------------
+                                  8.26   slack (MET)
+
+
+Startpoint: soc_streamed_rdata_6_o_reg
+            (rising edge-triggered flip-flop clocked by clk_sys)
+Endpoint: streamed_rdata_6_o (output port clocked by clk_sys)
+Path Group: clk_sys
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.24    0.35    0.04    0.04 ^ clk_i (in)
+                  0.35    0.00    0.04 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.16    0.29    0.15    0.19 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.25    0.06    0.25 ^ clkbuf_regs_0_clk_sys/A (BUFX64)
+     1    0.03    0.03    0.16    0.41 ^ clkbuf_regs_0_clk_sys/Y (BUFX64)
+                  0.03    0.00    0.41 ^ clkbuf_0_soc_clk_i_regs/A (BUFX64)
+     4    0.17    0.04    0.09    0.50 ^ clkbuf_0_soc_clk_i_regs/Y (BUFX64)
+                  0.07    0.03    0.53 ^ clkbuf_2_3_0_soc_clk_i_regs/A (BUFX64)
+     8    0.56    0.07    0.12    0.65 ^ clkbuf_2_3_0_soc_clk_i_regs/Y (BUFX64)
+                  0.18    0.08    0.73 ^ clkbuf_leaf_6_soc_clk_i_regs/A (BUFX64)
+     9    0.16    0.04    0.15    0.87 ^ clkbuf_leaf_6_soc_clk_i_regs/Y (BUFX64)
+                  0.05    0.01    0.89 ^ soc_streamed_rdata_6_o_reg/CK (DFFQX1)
+     1    0.05    0.50    0.54    1.43 ^ soc_streamed_rdata_6_o_reg/Q (DFFQX1)
+                  0.67    0.01    1.44 ^ pad_rdata_6_o/c2p (sg13cmos5l_IOPadOut16mA)
+     2   15.00    3.55    3.42    4.85 ^ pad_rdata_6_o/pad (sg13cmos5l_IOPadOut16mA)
+                  2.66    0.00    4.85 ^ streamed_rdata_6_o (out)
+                                  4.85   data arrival time
+
+                         10.00   10.00   clock clk_sys (rise edge)
+                          0.00   10.00   clock network delay (propagated)
+                         -0.10    9.90   clock uncertainty
+                          0.00    9.90   clock reconvergence pessimism
+                         -3.00    6.90   output external delay
+                                  6.90   data required time
+-----------------------------------------------------------------------------
+                                  6.90   data required time
+                                 -4.85   data arrival time
+-----------------------------------------------------------------------------
+                                  2.05   slack (MET)
+
+
+
+==========================================================================
+Routing_Final.routed report_check_types -max_slew -max_cap -max_fanout -violators
+--------------------------------------------------------------------------
+
+==========================================================================
+Routing_Final.routed max_slew_check_slack
+--------------------------------------------------------------------------
+-2.3495290279388428
+
+==========================================================================
+Routing_Final.routed max_slew_check_limit
+--------------------------------------------------------------------------
+1.2000000476837158
+
+==========================================================================
+Routing_Final.routed max_slew_check_slack_limit
+--------------------------------------------------------------------------
+-1.9579
+
+==========================================================================
+Routing_Final.routed max_fanout_check_slack
+--------------------------------------------------------------------------
+-84.0
+
+==========================================================================
+Routing_Final.routed max_fanout_check_limit
+--------------------------------------------------------------------------
+8.0
+
+==========================================================================
+Routing_Final.routed max_fanout_check_slack_limit
+--------------------------------------------------------------------------
+-10.5000
+
+==========================================================================
+Routing_Final.routed max_capacitance_check_slack
+--------------------------------------------------------------------------
+-10.786949157714844
+
+==========================================================================
+Routing_Final.routed max_capacitance_check_limit
+--------------------------------------------------------------------------
+4.21304988861084
+
+==========================================================================
+Routing_Final.routed max_capacitance_check_slack_limit
+--------------------------------------------------------------------------
+-2.5604
+
+==========================================================================
+Routing_Final.routed max_slew_violation_count
+--------------------------------------------------------------------------
+max slew violation count 19
+
+==========================================================================
+Routing_Final.routed max_fanout_violation_count
+--------------------------------------------------------------------------
+max fanout violation count 36
+
+==========================================================================
+Routing_Final.routed max_cap_violation_count
+--------------------------------------------------------------------------
+max cap violation count 26
+
+==========================================================================
+Routing_Final.routed setup_violation_count
+--------------------------------------------------------------------------
+setup violation count 0
+
+==========================================================================
+Routing_Final.routed hold_violation_count
+--------------------------------------------------------------------------
+hold violation count 0
+
+==========================================================================
+Routing_Final.routed critical path delay
+--------------------------------------------------------------------------
+4.8516
+
+==========================================================================
+Routing_Final.routed critical path slack
+--------------------------------------------------------------------------
+2.0484
+
+==========================================================================
+Routing_Final.routed slack div critical path delay
+--------------------------------------------------------------------------
+42.221123
+
+==========================================================================
+Routing_Final.routed report_power tt
+--------------------------------------------------------------------------
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             1.62e-03   9.94e-06   2.38e-07   1.63e-03  27.3%
+Combinational          1.78e-05   5.65e-05   1.27e-06   7.56e-05   1.3%
+Clock                  1.61e-03   1.06e-03   1.37e-07   2.67e-03  44.7%
+Macro                  1.47e-04   0.00e+00   2.97e-07   1.47e-04   2.5%
+Pad                    1.19e-04   1.33e-03   4.54e-08   1.45e-03  24.3%
+----------------------------------------------------------------
+Total                  3.51e-03   2.46e-03   1.99e-06   5.97e-03 100.0%
+                          58.8%      41.1%       0.0%
+
+==========================================================================
+Routing_Final.routed report_design_area
+--------------------------------------------------------------------------
+
+==========================================================================
+Routing_Final.routed area by hierarchy
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Design Area Summary
+--------------------------------------------------------------------------------
+Die Area:              5837056.0 um2
+Core Area:             3073283.136 um2
+Total Area:            2253805.168 um2
+Total Active Area:     431085.16799999995 um2
+
+Core Utilization:      0.14026861467800666
+Std Cell Utilization:  0.08229112061522305
+
+--------------------------------------------------------------------------------
+Hierarchical Area Report
+--------------------------------------------------------------------------------
+                                                                                Global Area (um^2)                                                              Global Instances                                                                Local Area (um^2)                                                               Local Instances
+                                                                                ------------------------------------------------------------------------------- ------------------------------------------------------------------------------- ------------------------------------------------------------------------------- ----------------------------------------------------------------------------
+Hierarchy Name                                                                  Total           StdCell         Macro           Cover           Pad             Total           StdCell         Macro           Cover           Pad             Total           StdCell         Macro           Cover           Pad             Total           StdCell         Macro           Cover           Pad             
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<top>                                                                           2253805.168     236926.368      194158.800      313600.000      1509120.000     32106           31783           3               64              256             2122823.229     105944.429      194158.800      313600.000      1509120.000     17361           17038           3               64              256             
+  u_main.mul.u_matmul                                                           130981.939      130981.939      0.000           0.000           0.000           14745           14745           0               0               0               130981.939      130981.939      0.000           0.000           0.000           14745           14745           0               0               0               
