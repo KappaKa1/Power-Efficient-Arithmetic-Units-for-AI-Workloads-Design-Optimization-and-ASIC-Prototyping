@@ -37,6 +37,3 @@ global_connect
 
 # voltage domains
 set_voltage_domain -name {CORE} -power {VDD} -ground {VSS}
-
-# standard cell grid and rings
-define_pdn_grid -name {core_grid} -voltage_domains {CORE}
