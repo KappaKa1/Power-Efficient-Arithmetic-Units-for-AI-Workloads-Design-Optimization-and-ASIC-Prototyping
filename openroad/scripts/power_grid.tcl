@@ -58,6 +58,33 @@ set mprOffsetY 1.0
 #set mpgOffset 20; # arbitrary
 
 ##########################################################################
+##  Core Power
+##########################################################################
+# standard cell grid and rings
+define_pdn_grid -name {core_grid} -voltage_domains {CORE}
+
+# Top 1 - Top 2
+add_pdn_ring -grid {core_grid} \
+   -layer        {TopMetal1 Metal4} \
+   -widths       "$pgcrWidth $pgcrWidth" \
+   -spacings     "$pgcrSpacing $pgcrSpacing" \
+   -core_offsets "$pgcrOffset $pgcrOffset" \
+   -add_connect                        \
+   -connect_to_pads                    
+
+# M1 Standardcell Rows (tracks)
+add_pdn_stripe -grid {core_grid} -layer {Metal1} -width {0.32} -offset {0} -followpins -extend_to_core_ring
+
+# Top power grid
+# Add stripes with less resistance
+add_pdn_stripe  -grid {core_grid} -layer {TopMetal1} -width $tpg1Width \
+                -pitch $tpg1Pitch -spacing $tpg1Spacing -offset $tpg1Offset \
+                -extend_to_core_ring -snap_to_grid -number_of_straps 7
+                
+# Add VIAs
+add_pdn_connect -grid {core_grid} -layers {Metal4 Metal1}
+
+##########################################################################
 ##  SRAM power rings
 ##########################################################################
 proc sram_power { name macro } {
@@ -80,34 +107,9 @@ proc sram_power { name macro } {
     # Connection of Stripes on Macro to Core Power Stripes
     add_pdn_connect -grid ${name}_grid -layers {TopMetal1 Metal4}
 }
-
-
-##########################################################################
-##  Core Power
-##########################################################################
-# Top 1 - Top 2
-add_pdn_ring -grid {core_grid} \
-   -layer        {TopMetal1 Metal4} \
-   -widths       "$pgcrWidth $pgcrWidth" \
-   -spacings     "$pgcrSpacing $pgcrSpacing" \
-   -core_offsets "$pgcrOffset $pgcrOffset" \
-   -add_connect                        \
-   -connect_to_pads                    
-
-# M1 Standardcell Rows (tracks)
-add_pdn_stripe -grid {core_grid} -layer {Metal1} -width {0.32} -offset {0} -followpins -extend_to_core_ring
-
-# Top power grid
-# Add stripes with less resistance
-add_pdn_stripe  -grid {core_grid} -layer {TopMetal1} -width $tpg1Width \
-                -pitch $tpg1Pitch -spacing $tpg1Spacing -offset $tpg1Offset \
-                -extend_to_core_ring -snap_to_grid -number_of_straps 7
-                
-# Add VIAs
-add_pdn_connect -grid {core_grid} -layers {Metal4 Metal1}
-
 # Add power rings around the macro
 sram_power "sram_256x64"  "RM_IHPSG13_1P_256x64_c2_bm_bist"
+sram_power "sram_64x64"  "RM_IHPSG13_1P_64x64_c2_bm_bist"
 
 ##########################################################################
 ##  Generate
