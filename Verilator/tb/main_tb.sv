@@ -26,8 +26,12 @@ module main_tb;
   logic finish_o;
   logic ack_o;
 
+  logic [63:0] Operand_A [0:NO_OF_TEST/2 -1];
+  logic [63:0] Operand_B [0:NO_OF_TEST/2 -1];
   logic [63:0] test_data [0:NO_OF_TEST-1];
   logic [63:0] rx_word;
+  logic [63:0] expected_data [0:255];
+  logic [63:0] actual_data   [0:255];
   
 main #(
     .INPUT_SRAM_NUM_WORDS (INPUT_SRAM_NUM_WORDS),
@@ -183,7 +187,7 @@ main #(
       
       for (int i = 0; i < 256; i++) begin
         read_data64(rx_word);
-        $display("Received data[%0d] = 0x%016h", i, rx_word);
+        actual_data[i] = rx_word;
       end
 
       @(negedge clk_i);
@@ -192,135 +196,38 @@ main #(
     end
   endtask
 
+  task automatic compare_results(input string filename);
+    int error_count;
+    begin
+      $readmemh(filename, expected_data);
+
+      error_count = 0;
+
+      for (int i = 0; i < 256; i++) begin
+        if (actual_data[i] !== expected_data[i]) begin
+          $display("MISMATCH at [%0d]: expected=0x%016h actual=0x%016h",
+                   i, expected_data[i], actual_data[i]);
+          error_count++;
+        end
+      end
+
+      if (error_count == 0)
+        $display("PASS: all outputs match expected results");
+      else
+        $display("FAIL: %0d mismatches found", error_count);
+    end
+  endtask
+
   initial begin
-    test_data[0]   = 64'hFEDC_BA98_7654_3210;
-    test_data[1]   = 64'h2222_2222_0000_0002;
-    test_data[2]   = 64'h3333_0000_3333_0003;
-    test_data[3]   = 64'h4444_0044_4400_0004;
-    test_data[4]   = 64'h5555_5500_0055_0005;
-    test_data[5]   = 64'h6666_0600_6000_0006;
-    test_data[6]   = 64'h7777_0777_0700_0007;
-    test_data[7]   = 64'h8888_0080_0800_0008;
-    test_data[8]   = 64'h9999_9999_9999_0009;
-    test_data[9]   = 64'hAAAA_AAAA_0000_000A;
-    test_data[10]  = 64'hBBBB_0000_BBBB_000B;
-    test_data[11]  = 64'hCCCC_00CC_CC00_000C;
-    test_data[12]  = 64'hDDDD_DD00_00DD_000D;
-    test_data[13]  = 64'hEEEE_0E00_E000_000E;
-    test_data[14]  = 64'hFFFF_0FFF_0F00_000F;
-    test_data[15]  = 64'h1111_1111_1111_0010;
-    test_data[16]  = 64'h2222_2222_0000_0011;
-    test_data[17]  = 64'h3333_0000_3333_0012;
-    test_data[18]  = 64'h4444_0044_4400_0013;
-    test_data[19]  = 64'h5555_5500_0055_0014;
-    test_data[20]  = 64'h6666_0600_6000_0015;
-    test_data[21]  = 64'h7777_0777_0700_0016;
-    test_data[22]  = 64'h8888_0080_0800_0017;
-    test_data[23]  = 64'h9999_9999_9999_0018;
-    test_data[24]  = 64'hAAAA_AAAA_0000_0019;
-    test_data[25]  = 64'hBBBB_0000_BBBB_001A;
-    test_data[26]  = 64'hCCCC_00CC_CC00_001B;
-    test_data[27]  = 64'hDDDD_DD00_00DD_001C;
-    test_data[28]  = 64'hEEEE_0E00_E000_001D;
-    test_data[29]  = 64'hFFFF_0FFF_0F00_001E;
-    test_data[30]  = 64'h1111_1111_1111_001F;
-    test_data[31]  = 64'h2222_2222_0000_0020;
-    test_data[32]  = 64'h3333_0000_3333_0021;
-    test_data[33]  = 64'h4444_0044_4400_0022;
-    test_data[34]  = 64'h5555_5500_0055_0023;
-    test_data[35]  = 64'h6666_0600_6000_0024;
-    test_data[36]  = 64'h7777_0777_0700_0025;
-    test_data[37]  = 64'h8888_0080_0800_0026;
-    test_data[38]  = 64'h9999_9999_9999_0027;
-    test_data[39]  = 64'hAAAA_AAAA_0000_0028;
-    test_data[40]  = 64'hBBBB_0000_BBBB_0029;
-    test_data[41]  = 64'hCCCC_00CC_CC00_002A;
-    test_data[42]  = 64'hDDDD_DD00_00DD_002B;
-    test_data[43]  = 64'hEEEE_0E00_E000_002C;
-    test_data[44]  = 64'hFFFF_0FFF_0F00_002D;
-    test_data[45]  = 64'h1111_1111_1111_002E;
-    test_data[46]  = 64'h2222_2222_0000_002F;
-    test_data[47]  = 64'h3333_0000_3333_0030;
-    test_data[48]  = 64'h4444_0044_4400_0031;
-    test_data[49]  = 64'h5555_5500_0055_0032;
-    test_data[50]  = 64'h6666_0600_6000_0033;
-    test_data[51]  = 64'h7777_0777_0700_0034;
-    test_data[52]  = 64'h8888_0080_0800_0035;
-    test_data[53]  = 64'h9999_9999_9999_0036;
-    test_data[54]  = 64'hAAAA_AAAA_0000_0037;
-    test_data[55]  = 64'hBBBB_0000_BBBB_0038;
-    test_data[56]  = 64'hCCCC_00CC_CC00_0039;
-    test_data[57]  = 64'hDDDD_DD00_00DD_003A;
-    test_data[58]  = 64'hEEEE_0E00_E000_003B;
-    test_data[59]  = 64'hFFFF_0FFF_0F00_003C;
-    test_data[60]  = 64'h1111_1111_1111_003D;
-    test_data[61]  = 64'h2222_2222_0000_003E;
-    test_data[62]  = 64'h3333_0000_3333_003F;
-    test_data[63]  = 64'h4444_0044_4400_0040;
-    test_data[64]  = 64'h5555_5500_0055_0041;
-    test_data[65]  = 64'h6666_0600_6000_0042;
-    test_data[66]  = 64'h7777_0777_0700_0043;
-    test_data[67]  = 64'h8888_0080_0800_0044;
-    test_data[68]  = 64'h9999_9999_9999_0045;
-    test_data[69]  = 64'hAAAA_AAAA_0000_0046;
-    test_data[70]  = 64'hBBBB_0000_BBBB_0047;
-    test_data[71]  = 64'hCCCC_00CC_CC00_0048;
-    test_data[72]  = 64'hDDDD_DD00_00DD_0049;
-    test_data[73]  = 64'hEEEE_0E00_E000_004A;
-    test_data[74]  = 64'hFFFF_0FFF_0F00_004B;
-    test_data[75]  = 64'h1111_1111_1111_004C;
-    test_data[76]  = 64'h2222_2222_0000_004D;
-    test_data[77]  = 64'h3333_0000_3333_004E;
-    test_data[78]  = 64'h4444_0044_4400_004F;
-    test_data[79]  = 64'h5555_5500_0055_0050;
-    test_data[80]  = 64'h6666_0600_6000_0051;
-    test_data[81]  = 64'h7777_0777_0700_0052;
-    test_data[82]  = 64'h8888_0080_0800_0053;
-    test_data[83]  = 64'h9999_9999_9999_0054;
-    test_data[84]  = 64'hAAAA_AAAA_0000_0055;
-    test_data[85]  = 64'hBBBB_0000_BBBB_0056;
-    test_data[86]  = 64'hCCCC_00CC_CC00_0057;
-    test_data[87]  = 64'hDDDD_DD00_00DD_0058;
-    test_data[88]  = 64'hEEEE_0E00_E000_0059;
-    test_data[89]  = 64'hFFFF_0FFF_0F00_005A;
-    test_data[90]  = 64'h1111_1111_1111_005B;
-    test_data[91]  = 64'h2222_2222_0000_005C;
-    test_data[92]  = 64'h3333_0000_3333_005D;
-    test_data[93]  = 64'h4444_0044_4400_005E;
-    test_data[94]  = 64'h5555_5500_0055_005F;
-    test_data[95]  = 64'h6666_0600_6000_0060;
-    test_data[96]  = 64'h7777_0777_0700_0061;
-    test_data[97]  = 64'h8888_0080_0800_0062;
-    test_data[98]  = 64'h9999_9999_9999_0063;
-    test_data[99]  = 64'hAAAA_AAAA_0000_0064;
-    test_data[100] = 64'hBBBB_0000_BBBB_0065;
-    test_data[101] = 64'hCCCC_00CC_CC00_0066;
-    test_data[102] = 64'hDDDD_DD00_00DD_0067;
-    test_data[103] = 64'hEEEE_0E00_E000_0068;
-    test_data[104] = 64'hFFFF_0FFF_0F00_0069;
-    test_data[105] = 64'h1111_1111_1111_006A;
-    test_data[106] = 64'h2222_2222_0000_006B;
-    test_data[107] = 64'h3333_0000_3333_006C;
-    test_data[108] = 64'h4444_0044_4400_006D;
-    test_data[109] = 64'h5555_5500_0055_006E;
-    test_data[110] = 64'h6666_0600_6000_006F;
-    test_data[111] = 64'h7777_0777_0700_0070;
-    test_data[112] = 64'h8888_0080_0800_0071;
-    test_data[113] = 64'h9999_9999_9999_0072;
-    test_data[114] = 64'hAAAA_AAAA_0000_0073;
-    test_data[115] = 64'hBBBB_0000_BBBB_0074;
-    test_data[116] = 64'hCCCC_00CC_CC00_0075;
-    test_data[117] = 64'hDDDD_DD00_00DD_0076;
-    test_data[118] = 64'hEEEE_0E00_E000_0077;
-    test_data[119] = 64'hFFFF_0FFF_0F00_0078;
-    test_data[120] = 64'h1111_1111_1111_0079;
-    test_data[121] = 64'h2222_2222_0000_007A;
-    test_data[122] = 64'h3333_0000_3333_007B;
-    test_data[123] = 64'h4444_0044_4400_007C;
-    test_data[124] = 64'h5555_5500_0055_007D;
-    test_data[125] = 64'h6666_0600_6000_007E;
-    test_data[126] = 64'h7777_0777_0700_007F;
-    test_data[127] = 64'h8888_0080_0800_0080;
+    // Read files
+    $readmemh("Golden_Model/A.hex", Operand_A);
+    $readmemh("Golden_Model/B.hex", Operand_B);
+
+    // Concatenate into test_data
+    for (int i = 0; i < NO_OF_TEST/2; i++) begin
+      test_data[i] = Operand_A[i];
+      test_data[i + NO_OF_TEST/2] = Operand_B[i];
+    end
   end
 
   initial begin
@@ -333,10 +240,12 @@ main #(
     rst_ni = 1'b1;
 
     do_write_transaction(1'b0);
+    compare_results("Golden_Model/Golden_Model_Out_0.hex");
 
     repeat (20) @(posedge clk_i);
 
     do_write_transaction(1'b1);
+    compare_results("Golden_Model/Golden_Model_Out_1.hex");
 
     $display("\n=== WRITE TRANSACTION DONE ===");
 
