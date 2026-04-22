@@ -9,7 +9,6 @@ set TOP_MODULE ""
 # Setup (Gotten from Croc's "startup.tcl"
 ###############################################################################
 source scripts/startup.tcl 
-#-project ${PROJ_NAME} -top_module ${TOP_MODULE}
 
 ###############################################################################
 # Stage 01: FLOORPLAN, Similar to Lab
@@ -65,9 +64,9 @@ source src/padring.tcl
 ########################################################
 
 # Macro names
-set bank0_sram0 u_main.out_sram
-set bank1_sram0 u_main.inp_sram_1
-set bank2_sram0 u_main.inp_sram_2
+set bank0_sram0 "u_main/out_sram"
+set bank1_sram0 "u_main/inp_sram_1"
+set bank2_sram0 "u_main/inp_sram_2"
 
 # SRAM Size
 set RamMaster256x64   [[ord::get_db] findMaster "RM_IHPSG13_1P_256x64_c2_bm_bist"]
@@ -133,7 +132,6 @@ pdngen -failed_via_report ${report_dir}/01_${proj_name}_pdngen.rpt
 # Stage 02 PLACING AND TIMING 
 ###############################################################################
 
-# load_checkpoint Floorplan_Final.floorplan
 set_dont_use $dont_use_cells
 set_thread_count 8
 
@@ -157,8 +155,8 @@ remove_buffers
 repair_design -verbose
 
 # To estimate delay with parasitics, use this command and press update 
-set_wire_rc -clock -layer Metal4
-set_wire_rc -signal -layer Metal4
+set_wire_rc -clock -layer Metal3
+set_wire_rc -signal -layer Metal3
 
 ########################################################
 # 02-02: Global Placement
@@ -172,38 +170,19 @@ set_wire_rc -signal -layer Metal4
 # timing_driven:      Prioritize near-critical timing paths (reduce their length)
 
 # First global_placement 
-#global_placement
 global_placement -density 0.60 -routability_driven -routability_check_overflow 0.30 -timing_driven
 
 # Only includes all cell placement (like SRAM)
 report_cell_usage
-
-# Only include Active std cells, but does not include macros (SRAM)
-# report_metrics "Placement_First_Glob.gpl1"
-# report_image "Placement_First_Glob.gpl1" true true
-# save_checkpoint Placement_First_Glob.gpl1
-
-# To print report violations, can use these commands
-# puts "Vio: max_slew:[sta::max_slew_violation_count]  max_fanout:[sta::max_fanout_violation_count]  max_cap:[sta::max_capacitance_violation_count]"
-# report_check_types
 
 # To estimate delay with parasitics, use this command and press update 
 estimate_parasitics -placement
 
 # Repair Design
 repair_design -verbose
-# save_checkpoint Placement_First_Glob_with_Rep.gpl1_fix
 
 # Repair Setup, done later
 repair_timing -setup -verbose
-# save_checkpoint Placement_First_Glob_with_Rep_Time.gpl1_repaired
-
-
-# Actual Placement used in Croc's chip
-# global_placement -density 0.60 -routability_driven -routability_check_overflow 0.30 -timing_driven
-# report_metrics "Placement_Glob_Actual.gpl2"
-# report_image "Placement_Glob_Actual.gpl2" true true
-# save_checkpoint Placement_Glob_Actual.gpl2
 
 ###############################################################################
 # 02-03: Detailed Placement
@@ -223,8 +202,6 @@ save_checkpoint Placement_Final.placed
 # Stage 03: CLOCK TREE SYNTHESIS
 ###############################################################################
 
-# load_checkpoint Placement_Final.placed
-
 ########################################################
 # 03-01: Clock Tree Synthesis
 ########################################################
@@ -241,17 +218,6 @@ clock_tree_synthesis -buf_list $ctsBuf -root_buf $ctsBufRoot -sink_clustering_en
 
 repair_clock_nets
 
-# To check quality of CTS, run this
-# report_cts
-# report_clock_latency -clock clk_sys
-# report_design_area
-# report_power -corner tt
-# or use report_metrics
-
-# report_cts -out_file CTS_Initial.cts.rpt
-# report_metrics "CTS_Initial.grt"
-# report_image "CTS_Initial.grt" true false false true
-# save_checkpoint ROUTING_After_Global_Route.grt
 
 ########################################################
 # 03-02: Fixing CTS
@@ -259,7 +225,6 @@ repair_clock_nets
 
 estimate_parasitics -placement
 set_propagated_clock [all_clocks]
-# report_checks -path_group clk_sys
 repair_design -verbose
 
 repair_timing -setup -skip_pin_swap -verbose
@@ -280,8 +245,6 @@ save_checkpoint CTS_Final.cts
 ###############################################################################
 # Stage 04: ROUTING
 ###############################################################################
-
-# load_checkpoint CTS_Final.cts
 
 ###############################################################################
 # 04-01: Global Route
@@ -335,7 +298,7 @@ repair_antennas
 
 set_thread_count 8
 
-detailed_route -output_drc reports/croc_route_drc.rpt -droute_end_iter 15 -clean_patches -verbose 1
+detailed_route -output_drc reports/main_chip_route_drc.rpt -droute_end_iter 15 -clean_patches -verbose 1
 
 filler_placement $stdfill
 
@@ -350,19 +313,52 @@ report_image "Routing_Final.routed" true false false true
 ###############################################################################
 
 # Contains information regarding the physical layout of the design
-write_def out/croc.def
+write_def out/main_chip.def
 
 # Normal netlist file containing additional cells we inserted (like buffers)
-write_verilog out/croc.v
+write_verilog out/main_chip.v
 
 # The LVS netlist that includes power and ground
-write_verilog -include_pwr_gnd out/croc_lvs.v
+write_verilog -include_pwr_gnd -remove_cells "$stdfill bondpad*" out/main_chip_lvs.v
+
+write_verilog -remove_cells "$stdfill bondpad*" out/main_chip_sim.v
 
 # The SDC file which contains the timing constraints specified during the design process
-write_sdc out/croc.sdc
+write_sdc out/main_chip.sdc
 
 # The ODB Database that stores the complete state of the design
-write_db out/croc.odb
+write_db out/main_chip.odb
+
+###############################################################################
+# Stage 05: Generate SPEF file for parasitics
+###############################################################################
+
+set extRules ./src/IHP_rcx_patterns.rules
+define_process_corner -ext_model_index 0 tt
+extract_parasitics -ext_model_file $extRules
+write_spef ./out/main_chip.spef
+
+###############################################################################
+# Stage 06: Statiscal Power Analysis
+###############################################################################
+
+read_spef out/main_chip.spef
+
+# Can vary activity value for different analysis
+set_power_activity -input -activity 0.1
+set_power_activity -input_port rst_ni -activity 0
+
+# Can vary different corner (like ff)
+report_power -corner tt
+
+###############################################################################
+# Stage 06: Stimulai Based Power Analysis
+###############################################################################
+
+#scaling_factor = T_end / (T_end - T_start)
+#               = 1,015,729 / (1,015,729 - 957,177)
+ #              = 1,015,729 / 58,552 ≈ 17.35
 
 
-
+read_vcd -scope tb_main_chip/i_dut ../Test_Modules/main_chip.vcd
+report_power -corner tt
