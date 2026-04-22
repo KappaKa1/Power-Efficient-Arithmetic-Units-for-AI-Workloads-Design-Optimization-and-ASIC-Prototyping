@@ -2,6 +2,7 @@
 // After Receiving ACK_o from Chip, Testing Device must wait 1 more cycle for correct output to be received.
 
 // [1] - Things to parameterize when possible
+`timescale 1ns/1ps
 
 module main #(
   // Individual Parameters depending on the inputs, can potentially calculate the number of OUTPUT bits from INPUT bits.
@@ -112,6 +113,7 @@ module main #(
   // Control Signals for GEMM Cores
   logic 					start; // Communication signal from SRAM Controller to GEMM Controller
   logic 					done; // Communication signal from GEMM Controller to SRAM Controller
+  logic						enable;
   
   // Control Signals for MUX
   logic 					mux_sel;
@@ -131,11 +133,9 @@ module main #(
   logic [SRAM_DATA_WIDTH - 1 :0] 		sram_write; // Write data into input SRAMs
   logic [SRAM_DATA_WIDTH - 1 :0] 		sram_read; // Read data out from output SRAM
   logic [SRAM_DATA_WIDTH-1:0] 			SRAM_out_1, SRAM_out_2; // Data for GEMM operands A and B
-  
-  logic [224 - 1 : 0]				final_results;
 
   // Shared Registers between SRAM Controller and GEMM Controller, Using number first before using Parameters
-  logic [224 - 1 : 0]				final_data_q, final_data_d;
+  logic [224 - 1 : 0]				final_results, final_data_q, final_data_d;
   logic [OUTPUT_SRAM_ADDR_WIDTH - 1 : 0]	result_addr, result_addr_q, result_addr_d;
   logic						result_valid, result_valid_q, result_valid_d;
   logic						reset_intermediate_regs;
@@ -145,7 +145,7 @@ module main #(
   // -----------------------------------------
   // Instantiating Padding Registers
   // -----------------------------------------
-  pack14to16_signext u_pack14to16 (.clk_i(clk_i), .rst_ni(rst_ni), .en_i(pad_enable), .load_i(pad_load), .data_i(final_data_q), .data_o(final_data_padded));
+  pack14to16_signext u_pack14to16 (.clk_i(clk_i), .rst_ni(rst_ni), .en_i(pad_enable), .load_i(result_valid_q), .data_i(final_data_q), .data_o(final_data_padded));
   
   // -----------------------------------------
   // Instantiating MUX gates for Address Generation Selection
@@ -317,6 +317,9 @@ module main #(
     // control from SRAM controller
     .start_i             (start),
 
+    // control to GEMM core
+    .enable_o		 (enable),
+
     // addresses to SRAM
     .gemm_inp_A_addr_o   (GEMM_gen_inp_A_sram_addr),
     .gemm_inp_B_addr_o   (GEMM_gen_inp_B_sram_addr),
@@ -329,7 +332,7 @@ module main #(
     .gemm_out_Y_addr_o   (result_addr)
   );
   
-  GEMM_CORE # (.SRAM_DATA_WIDTH(64), .FINAL_DATA_WIDTH(224)) mul (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(mux_sel), .result_valid_i(result_valid), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(final_results));
+  GEMM_CORE # (.SRAM_DATA_WIDTH(64), .FINAL_DATA_WIDTH(224)) mul (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(enable), .result_valid_i(result_valid), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(final_results));
   
   always_comb begin
 
@@ -355,10 +358,7 @@ module main #(
       result_addr_q <= result_addr_d;
       result_valid_q <= result_valid_d;
     end else begin
-      //final_data_q <= final_data_d;
-      //result_addr_q <= result_addr_d;
-      result_valid_q <= result_valid_d;
+      result_valid_q <= '0;
     end
   end
 endmodule
-
