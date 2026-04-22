@@ -19,11 +19,18 @@ def matmul_hw(A, B, C):
             Y[i][j] = 0x0000 | acc
     return Y
 
-def print_matrix(mat, name, width):
+def print_matrix_packed(mat, name, width):
     print(name)
     for row in mat:
-        print("  ", " ".join(f"{x:0{width}X}" for x in row))
+        packed = "0x" + "".join(f"{x:0{width}X}" for x in reversed(row))
+        print(" ", packed)
     print()
+
+def write_matrix_packed(mat, width, filename):
+    with open(filename, "w") as f:
+        for row in mat:
+            packed = "0x" + "".join(f"{x:0{width}X}" for x in reversed(row))
+            f.write(f"{packed}\n")
 
 A_words = [
     0xFEDCBA9876543210,0x2222222200000002,0x3333000033330003,0x4444004444000004,
@@ -67,9 +74,7 @@ NUM_LARGE_ROUNDS = 64
 NUM_SMALL_ROUNDS = 8
 
 for large_round in range(NUM_LARGE_ROUNDS):
-    print("\n" + "=" * 100)
     print(f"LARGE ROUND {large_round}")
-    print("=" * 100)
 
     C = [[0] * 4 for _ in range(4)]  # reset every large round
 
@@ -87,13 +92,6 @@ for large_round in range(NUM_LARGE_ROUNDS):
         B = unpack_64_to_4x4(B_word)
         Y = matmul_hw(A, B, C)
 
-        print(f"--- SMALL ROUND {small_round} ---")
-        print(f"A index = {a_idx}, A_word = 0x{A_word:016X}")
-        print(f"B index = {b_idx}, B_word = 0x{B_word:016X}\n")
-
-        print_matrix(A, "A", 1)
-        print_matrix(B, "B", 1)
-        print_matrix(C, "C", 4)
-        print_matrix(Y, "Y", 4)
-
         C = [row[:] for row in Y]
+    print_matrix_packed(Y, "Y", 4)
+    write_matrix_packed(Y, 4, "Golden_Model_Out.txt")
