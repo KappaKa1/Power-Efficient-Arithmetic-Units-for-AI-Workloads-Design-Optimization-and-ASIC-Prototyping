@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module GEMM_CORE #(
   parameter int unsigned SRAM_DATA_WIDTH        	= 64,
   parameter int unsigned FINAL_DATA_WIDTH        	= 224
@@ -31,7 +33,7 @@ module GEMM_CORE #(
     .b_3_0(operand_B_q[51:48]),    .b_3_1(operand_B_q[55:52]),    .b_3_2(operand_B_q[59:56]),    .b_3_3(operand_B_q[63:60]),
 
     .c_0_0(intermediate_result_q[12:0]),      .c_0_1(intermediate_result_q[26:14]),    .c_0_2(intermediate_result_q[40:28]),    .c_0_3(intermediate_result_q[54:42]),
-    .c_1_0(intermediate_result_q[64:56]),     .c_1_1(intermediate_result_q[82:70]),    .c_1_2(intermediate_result_q[96:84]),    .c_1_3(intermediate_result_q[110:98]),
+    .c_1_0(intermediate_result_q[68:56]),     .c_1_1(intermediate_result_q[82:70]),    .c_1_2(intermediate_result_q[96:84]),    .c_1_3(intermediate_result_q[110:98]),
     .c_2_0(intermediate_result_q[124:112]),   .c_2_1(intermediate_result_q[138:126]),  .c_2_2(intermediate_result_q[152:140]),  .c_2_3(intermediate_result_q[166:154]),
     .c_3_0(intermediate_result_q[180:168]),   .c_3_1(intermediate_result_q[194:182]),  .c_3_2(intermediate_result_q[208:196]),  .c_3_3(intermediate_result_q[222:210]),
 
