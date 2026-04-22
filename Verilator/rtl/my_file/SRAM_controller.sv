@@ -2,6 +2,7 @@
 
 // Input Values 2 * 32 * 32 * 4
 // The mismatch between sram_inp_addr_o and input_sram_cnt_q is intentional, the code will work nonetheless.
+`timescale 1ns/1ps
 
 module SRAM_controller #(
   // Individual Parameters depending on the inputs, can potentially calculate the number of OUTPUT bits from INPUT bits.
@@ -128,6 +129,8 @@ module SRAM_controller #(
     output_sram_cnt_d = output_sram_cnt_q;
     state_d = state_q;
     
+    active_loading_d = active_loading_q;
+    done_pending_d = done_pending_q;
     case(state_q) 
     
       IDLE: begin
