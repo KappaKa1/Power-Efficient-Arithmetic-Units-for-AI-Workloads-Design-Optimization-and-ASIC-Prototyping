@@ -41,26 +41,26 @@ module main_chip #() (
   output wire  						streamed_rdata_14_o,
   output wire  						streamed_rdata_15_o, // MSB  
   
-  inout wire VDD,
-  inout wire VSS,
-  inout wire VDDIO,
-  inout wire VSSIO
+  output wire 						unused0_o,
+  output wire 						unused1_o,
+  output wire 						unused2_o,
+  output wire 						unused3_o,
+  output wire 						unused4_o,
+  output wire 						unused5_o,
+  output wire 						unused6_o,
+  output wire 						unused7_o,
+  output wire 						unused8_o,
+  
+  inout wire 						VDD,
+  inout wire 						VSS,
+  inout wire 						VDDIO,
+  inout wire 						VSSIO
 );
 
   // -------------------- Unused SoC Signals --------------------
-  logic unused0_o, unused1_o, unused2_o, unused3_o, unused4_o;
-  logic unused5_o, unused6_o, unused7_o, unused8_o;
-  logic soc_unused0_o, soc_unused1_o, soc_unused2_o, soc_unused3_o, soc_unused4_o;
-  logic soc_unused5_o, soc_unused6_o, soc_unused7_o, soc_unused8_o;
-  assign soc_unused0_o = 1'b0;
-  assign soc_unused1_o = 1'b0;
-  assign soc_unused2_o = 1'b0;
-  assign soc_unused3_o = 1'b0;
-  assign soc_unused4_o = 1'b0;
-  assign soc_unused5_o = 1'b0;
-  assign soc_unused6_o = 1'b0;
-  assign soc_unused7_o = 1'b0;
-  assign soc_unused8_o = 1'b0;
+
+  logic soc_unused;
+  assign soc_unused = 1'b0;
 
   // -------------------- Internal SoC Signals --------------------
   logic soc_clk_i, soc_rst_ni;
@@ -148,15 +148,15 @@ module main_chip #() (
   sg13cmos5l_IOPadOut16mA pad_rdata_14_o (.pad(streamed_rdata_14_o), .c2p(soc_streamed_rdata_14_o));
   sg13cmos5l_IOPadOut16mA pad_rdata_15_o (.pad(streamed_rdata_15_o), .c2p(soc_streamed_rdata_15_o));
 
-  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused0_o (.pad(unused0_o), .c2p(soc_unused0_o));
-  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused1_o (.pad(unused1_o), .c2p(soc_unused1_o));
-  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused2_o (.pad(unused2_o), .c2p(soc_unused2_o));
-  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused3_o (.pad(unused3_o), .c2p(soc_unused3_o));
-  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused4_o (.pad(unused4_o), .c2p(soc_unused4_o));
-  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused5_o (.pad(unused5_o), .c2p(soc_unused5_o));
-  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused6_o (.pad(unused6_o), .c2p(soc_unused6_o));
-  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused7_o (.pad(unused7_o), .c2p(soc_unused7_o));
-  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused8_o (.pad(unused8_o), .c2p(soc_unused8_o));
+  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused0_o (.pad(unused0_o), .c2p(soc_unused));
+  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused1_o (.pad(unused1_o), .c2p(soc_unused));
+  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused2_o (.pad(unused2_o), .c2p(soc_unused));
+  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused3_o (.pad(unused3_o), .c2p(soc_unused));
+  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused4_o (.pad(unused4_o), .c2p(soc_unused));
+  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused5_o (.pad(unused5_o), .c2p(soc_unused));
+  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused6_o (.pad(unused6_o), .c2p(soc_unused));
+  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused7_o (.pad(unused7_o), .c2p(soc_unused));
+  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused8_o (.pad(unused8_o), .c2p(soc_unused));
 
   (* dont_touch = "true" *)sg13cmos5l_IOPadVdd pad_vdd0();
   (* dont_touch = "true" *)sg13cmos5l_IOPadVdd pad_vdd1();
