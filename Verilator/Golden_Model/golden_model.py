@@ -26,11 +26,20 @@ def print_matrix_packed(mat, name, width):
         print(" ", packed)
     print()
 
-def write_matrix_packed(mat, width, filename):
-    with open(filename, "w") as f:
-        for row in mat:
-            packed = "0x" + "".join(f"{x:0{width}X}" for x in reversed(row))
-            f.write(f"{packed}\n")
+def write_matrix_packed_to_file(mat, width, f):
+    for row in mat:
+        packed = "0x" + "".join(f"{x:0{width}X}" for x in reversed(row))
+        f.write(f"{packed}\n")
+
+def load_hex_file(filename):
+    words = []
+    with open(filename, "r") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue  # skip empty lines / comments
+            words.append(int(line, 16))
+    return words
 
 A_words = [
     0xFEDCBA9876543210,0x2222222200000002,0x3333000033330003,0x4444004444000004,
@@ -73,25 +82,26 @@ B_words = [
 NUM_LARGE_ROUNDS = 64
 NUM_SMALL_ROUNDS = 8
 
-for large_round in range(NUM_LARGE_ROUNDS):
-    print(f"LARGE ROUND {large_round}")
-
-    C = [[0] * 4 for _ in range(4)]  # reset every large round
-
-    a_block = (large_round // 8) * 8
-    b_block = (large_round % 8) * 8
-
-    for small_round in range(NUM_SMALL_ROUNDS):
-        a_idx = a_block + small_round
-        b_idx = b_block + small_round
-
-        A_word = A_words[a_idx]
-        B_word = B_words[b_idx]
-
-        A = unpack_64_to_4x4(A_word)
-        B = unpack_64_to_4x4(B_word)
-        Y = matmul_hw(A, B, C)
-
-        C = [row[:] for row in Y]
-    print_matrix_packed(Y, "Y", 4)
-    write_matrix_packed(Y, 4, "Golden_Model_Out.txt")
+with open("Golden_Model_Out.txt", "w") as f:
+    for large_round in range(NUM_LARGE_ROUNDS):
+        print(f"LARGE ROUND {large_round}")
+    
+        C = [[0] * 4 for _ in range(4)]  # reset every large round
+    
+        a_block = (large_round // 8) * 8
+        b_block = (large_round % 8) * 8
+    
+        for small_round in range(NUM_SMALL_ROUNDS):
+            a_idx = a_block + small_round
+            b_idx = b_block + small_round
+    
+            A_word = A_words[a_idx]
+            B_word = B_words[b_idx]
+    
+            A = unpack_64_to_4x4(A_word)
+            B = unpack_64_to_4x4(B_word)
+            Y = matmul_hw(A, B, C)
+    
+            C = [row[:] for row in Y]
+        print_matrix_packed(Y, "Y", 4)
+        write_matrix_packed_to_file(Y, 4, f)
