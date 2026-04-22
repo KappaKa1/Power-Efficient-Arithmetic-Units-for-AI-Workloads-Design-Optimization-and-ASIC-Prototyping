@@ -22,7 +22,7 @@ source scripts/init_tech.tcl
 
 yosys plugin -i slang.so
 # default from yosys_common.tcl: top_design=croc_chip; sv_flist=./croc.flist
-yosys read_slang --top main_chip -f $sv_flist \
+yosys read_slang --top $top_design -f $sv_flist \
         --compat-mode --keep-hierarchy \
         --allow-use-before-declare --ignore-unknown-modules
 
@@ -30,30 +30,9 @@ yosys read_slang --top main_chip -f $sv_flist \
 # 't' means type as in select all instances of this type/module
 # yosys-slang uniquifies all modules with the naming scheme:
 # <module-name>$<instance-name> -> match for t:<module-name>$$
-#yosys setattr -set keep_hierarchy 1 "t:croc_soc$*"
-#yosys setattr -set keep_hierarchy 1 "t:croc_domain$*"
-#yosys setattr -set keep_hierarchy 1 "t:user_domain$*"
-#yosys setattr -set keep_hierarchy 1 "t:core_wrap$*"
-#yosys setattr -set keep_hierarchy 1 "t:cve2_register_file_ff$*"
-#yosys setattr -set keep_hierarchy 1 "t:cve2_cs_registers$*"
-#yosys setattr -set keep_hierarchy 1 "t:dmi_jtag$*"
-#yosys setattr -set keep_hierarchy 1 "t:dm_top$*"
-#yosys setattr -set keep_hierarchy 1 "t:gpio$*"
-#yosys setattr -set keep_hierarchy 1 "t:clint$*"
-#yosys setattr -set keep_hierarchy 1 "t:bootrom$*"
-#yosys setattr -set keep_hierarchy 1 "t:obi_timer$*"
-#yosys setattr -set keep_hierarchy 1 "t:croc_idma$*"
-#yosys setattr -set keep_hierarchy 1 "t:obi_uart$*"
-#yosys setattr -set keep_hierarchy 1 "t:soc_ctrl_regs$*"
-#yosys setattr -set keep_hierarchy 1 "t:tc_clk*$*"
-#yosys setattr -set keep_hierarchy 1 "t:tc_sram_impl$*"
-#yosys setattr -set keep_hierarchy 1 "t:cdc_reset*$*"
-#yosys setattr -set keep_hierarchy 1 "t:cdc*phase_*$*"
-#yosys setattr -set keep_hierarchy 1 "t:cdc*_src*$*"
-#yosys setattr -set keep_hierarchy 1 "t:cdc*_dst*$*"
-#yosys setattr -set keep_hierarchy 1 "t:sync$*"
-yosys setattr -set keep 1 "t:matmul*"
-yosys setattr -set keep_hierarchy 1 "t:matmul*"
+yosys setattr -set keep_hierarchy 1 "t:main$*"
+#yosys setattr -set keep_hierarchy 1 "t:matmul*"
+#yosys setattr -set keep 1 "t:matmul*"
 
 # blackbox modules (applies the *blackbox* attribute)
 yosys blackbox "t:tc_sram_blackbox$*"
@@ -69,7 +48,7 @@ yosys attrmvcp -copy -attr keep
 # -----------------------------------------------------------------------------
 # this section heavily borrows from the yosys synth command:
 # synth - check
-yosys hierarchy -top main_chip
+yosys hierarchy -top $top_design
 yosys check
 yosys proc
 yosys tee -q -o "${rep_dir}/${proj_name}_elaborated.rpt" stat
@@ -163,9 +142,8 @@ yosys hilomap -singleton -hicell {*}$tech_cell_tiehi -locell {*}$tech_cell_tielo
 
 # final reports
 yosys tee -q -o "${rep_dir}/${proj_name}_synth.rpt" check
-yosys tee -q -o "${rep_dir}/${proj_name}_area.rpt" stat -top main_chip {*}$liberty_args
-yosys tee -q -o "${rep_dir}/${proj_name}_area_logic.rpt" stat -top main_chip {*}$tech_cells_args
+yosys tee -q -o "${rep_dir}/${proj_name}_area.rpt" stat -top $top_design {*}$liberty_args
+yosys tee -q -o "${rep_dir}/${proj_name}_area_logic.rpt" stat -top $top_design {*}$tech_cells_args
 
 # final netlist
 yosys write_verilog -noattr -noexpr -nohex -nodec ${out_dir}/${proj_name}_yosys.v
-
