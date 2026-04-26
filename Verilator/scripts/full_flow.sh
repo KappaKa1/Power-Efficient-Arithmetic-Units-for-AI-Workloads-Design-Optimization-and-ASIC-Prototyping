@@ -9,6 +9,7 @@ if [ -z "$TB_FILE" ] || [ -z "$TOP_MODULE" ]; then
     echo "Usage: $0 <testbench_file> <top_module> [num_runs]"
     exit 1
 fi
+: > output.txt
 
 for ((run=0; run<NUM_RUNS; run++)); do
     echo "========================================"
