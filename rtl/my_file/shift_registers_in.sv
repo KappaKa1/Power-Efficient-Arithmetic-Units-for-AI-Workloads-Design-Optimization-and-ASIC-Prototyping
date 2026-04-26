@@ -1,3 +1,6 @@
+`timescale 1ns/1ps
+`include "common_cells/registers.svh"
+
 module shift_registers_in #(
   parameter int unsigned BIT_WIDTH   = 64,
   parameter int unsigned NO_OF_PORTS = 16
@@ -9,12 +12,6 @@ module shift_registers_in #(
   output logic [BIT_WIDTH-1:0]    data_o
 );
 
-  always_ff @(posedge clk_i) begin
-    if (!rst_ni) begin
-      data_o <= '0;
-    end else if (enable_i) begin
-      data_o <= {data_o[BIT_WIDTH-NO_OF_PORTS-1:0], streamed_i};
-    end
-  end
+  `FFL(data_o,  {data_o[BIT_WIDTH-NO_OF_PORTS-1:0], streamed_i}, enable_i, '0, clk_i, rst_ni)
   
 endmodule

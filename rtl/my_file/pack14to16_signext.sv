@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module pack14to16_signext #(
   parameter int IN_WIDTH  = 224,
   parameter int PAD_WIDTH = 256,
@@ -31,7 +33,7 @@ module pack14to16_signext #(
   end
 
   // ---------------- REGISTER WITH ENABLE ----------------
-  always_ff @(posedge clk_i or negedge rst_ni) begin
+  always_ff @(posedge clk_i) begin
     if (!rst_ni) begin
       padded_data_q <= '0;
     end else if (load_i) begin

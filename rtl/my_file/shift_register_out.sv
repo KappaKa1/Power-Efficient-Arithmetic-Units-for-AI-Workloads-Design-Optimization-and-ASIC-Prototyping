@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module shift_registers_out #(
   parameter int unsigned BIT_WIDTH   = 64,
   parameter int unsigned NO_OF_PORTS = 16
