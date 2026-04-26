@@ -1,0 +1,12 @@
+
+Just the DUT:
+VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS" ./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb
+or
+./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb
+
+DUT + PYTHON:
+VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS" ./Scripts/full_flow.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb 10
+or
+./Scripts/full_flow.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb 10
+
+
