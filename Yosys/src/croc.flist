@@ -36,7 +36,7 @@
 ../rtl/common_cells/rr_arb_tree.sv
 ../rtl/common_cells/rstgen_bypass.sv
 ../rtl/common_cells/serial_deglitch.sv
-# ../rtl/common_cells/shift_reg.sv
+../rtl/common_cells/shift_reg.sv
 ../rtl/common_cells/shift_reg_gated.sv
 ../rtl/common_cells/spill_register_flushable.sv
 ../rtl/common_cells/stream_demux.sv
@@ -99,7 +99,8 @@
 ../rtl/my_file/main.sv
 ../rtl/my_file/mux2to1.sv
 ../rtl/my_file/pack14to16_signext.sv
-../rtl/my_file/shift_reg.sv
 ../rtl/my_file/shift_register_out.sv
+../rtl/my_file/mux5to1.sv
 ../rtl/my_file/shift_registers_in.sv
 ../rtl/MATMULS/matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed.v
+../rtl/MATMULS/matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_area.v
