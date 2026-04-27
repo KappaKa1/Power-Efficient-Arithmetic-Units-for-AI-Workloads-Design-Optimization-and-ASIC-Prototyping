@@ -20,15 +20,14 @@ module GEMM_CORE #(
   
   output logic[FINAL_DATA_WIDTH-1:0] 	final_results_o
 );
-  logic accum_en;
+  logic gated_clk;
 
-  assign accum_en = enable_i | done_i;
-  
   logic [SRAM_DATA_WIDTH - 1 : 0] 					operand_A_q, operand_A_d;
   logic [SRAM_DATA_WIDTH - 1 : 0] 					operand_B_q, operand_B_d;
   logic [FINAL_DATA_WIDTH - 1 : 0]					intermediate_result_q, intermediate_result_d;
   logic [FINAL_DATA_WIDTH - 1 : 0] 					final_results;
 
+  clock_gate cg (.clk_i(clk_i), .en_i(enable_i), .clk_o(gated_clk));
   generate
     if (MATMUL_TYPE == "TC_SKLANSKY_FUSED_SPEED") begin : gen_matmul_sklansky_speed
       matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed u_matmul (
@@ -81,13 +80,14 @@ module GEMM_CORE #(
     end
   endgenerate
  
-  assign operand_A_d = enable_i ? operand_A_i : '0;
-  assign operand_B_d = enable_i ? operand_B_i : '0;
+  assign operand_A_d = (enable_i & ~done_i) ? operand_A_i : '0;
+  assign operand_B_d = (enable_i & ~done_i) ? operand_B_i : '0;
   assign intermediate_result_d = (result_valid_i | done_i) ? '0 : final_results;
   assign final_results_o = final_results;
     
-  `FFL(operand_A_q, operand_A_d, accum_en, '0, clk_i, rst_ni)
-  `FFL(operand_B_q, operand_B_d, accum_en, '0, clk_i, rst_ni)
-  `FFL(intermediate_result_q, intermediate_result_d, accum_en, '0, clk_i, rst_ni)
+  `FFL(operand_A_q, operand_A_d, enable_i, '0, gated_clk, rst_ni)
+  `FFL(operand_B_q, operand_B_d, enable_i, '0, gated_clk, rst_ni)
+  `FFL(intermediate_result_q, intermediate_result_d, enable_i, '0, gated_clk, rst_ni)
+  
   
 endmodule
