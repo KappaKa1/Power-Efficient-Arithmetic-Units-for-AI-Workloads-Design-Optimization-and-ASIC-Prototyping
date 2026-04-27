@@ -99,7 +99,7 @@ module GEMM_controller #(
       end
     
       COMPUTE: begin
-        enable_d = store_GEMM_select_q;
+        enable_d = store_GEMM_select_q; // put this at IDLE state as well?
         gemm_inp_A_addr_d = M_count_q * OPERAND_COUNT + K_count_q;
         gemm_inp_B_addr_d = N_count_q * OPERAND_COUNT + K_count_q;
         gemm_out_addr_d1 = ((M_count_q * OPERAND_COUNT) + N_count_q) * 4; // We let SRAM controller set the address
