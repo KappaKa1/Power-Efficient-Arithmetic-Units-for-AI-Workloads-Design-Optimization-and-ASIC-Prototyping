@@ -39,7 +39,7 @@ module GEMM_controller #(
   output logic [OUTPUT_SRAM_ADDR_WIDTH - 1:0]		gemm_out_Y_addr_o 
 );
 
-  typedef enum logic [2:0] {IDLE, COMPUTE, FINAL1, FINAL2} gemm_ctrl_state;
+  typedef enum logic [2:0] {IDLE, COMPUTE, FINAL1, FINAL2, FINAL3} gemm_ctrl_state;
   localparam int unsigned OPERAND_COUNT = 32 / 4;
   localparam int unsigned OPERAND_COUNT_WIDTH = $clog2(OPERAND_COUNT);
   
@@ -99,7 +99,7 @@ module GEMM_controller #(
       end
     
       COMPUTE: begin
-        enable_d = store_GEMM_select_q; // put this at IDLE state as well?
+        enable_d = store_GEMM_select_q;
         gemm_inp_A_addr_d = M_count_q * OPERAND_COUNT + K_count_q;
         gemm_inp_B_addr_d = N_count_q * OPERAND_COUNT + K_count_q;
         gemm_out_addr_d1 = ((M_count_q * OPERAND_COUNT) + N_count_q) * 4; // We let SRAM controller set the address
@@ -132,6 +132,11 @@ module GEMM_controller #(
       end
       
       FINAL2: begin 
+        enable_d = store_GEMM_select_q;
+        state_d = FINAL3;
+      end
+
+      FINAL3: begin 
         enable_d = store_GEMM_select_q;
         state_d = IDLE;
       end
