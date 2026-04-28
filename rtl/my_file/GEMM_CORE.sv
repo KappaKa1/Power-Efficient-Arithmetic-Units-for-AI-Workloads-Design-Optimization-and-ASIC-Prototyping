@@ -14,6 +14,7 @@ module GEMM_CORE #(
   input logic 				enable_i,
   input logic 				result_valid_i,
   input logic				done_i,
+  input logic 				start_i,
   
   input logic [SRAM_DATA_WIDTH-1:0] 	operand_A_i,
   input logic [SRAM_DATA_WIDTH-1:0] 	operand_B_i,
@@ -82,12 +83,19 @@ module GEMM_CORE #(
  
   assign operand_A_d = (enable_i & ~done_i) ? operand_A_i : '0;
   assign operand_B_d = (enable_i & ~done_i) ? operand_B_i : '0;
-  assign intermediate_result_d = (result_valid_i | done_i) ? '0 : final_results;
+  assign intermediate_result_d = (start_i | result_valid_i | done_i) ? '0 : final_results;
   assign final_results_o = final_results;
-    
-  `FFL(operand_A_q, operand_A_d, enable_i, '0, gated_clk, rst_ni)
-  `FFL(operand_B_q, operand_B_d, enable_i, '0, gated_clk, rst_ni)
-  `FFL(intermediate_result_q, intermediate_result_d, enable_i, '0, gated_clk, rst_ni)
-  
+
+  always_ff @(posedge gated_clk) begin
+    if (!rst_ni) begin
+      operand_A_q <= '0;
+      operand_B_q <= '0;
+      intermediate_result_q <= '0;
+    end else if (enable_i) begin
+      operand_A_q <= operand_A_d;
+      operand_B_q <= operand_B_d;
+      intermediate_result_q <= intermediate_result_d;
+    end
+  end  
   
 endmodule
