@@ -23,6 +23,7 @@ module GEMM_controller #(
   
   // from GEMM Controller to GEMM Core
   output logic [GEMM_SELECT_WIDTH -1 :0]		enable_o,
+  output logic [GEMM_SELECT_WIDTH -1 :0]		start_o, // force intermediate result in first cycle to be 0
   
   // from SRAM Controller to GEMM Controller
   input logic [GEMM_SELECT_WIDTH:0]			GEMM_ctrl_packet_i,
@@ -48,13 +49,14 @@ module GEMM_controller #(
   logic [OPERAND_COUNT_WIDTH - 1 : 0] K_count_q, K_count_d;
   logic [OPERAND_COUNT_WIDTH - 1 : 0] N_count_q, N_count_d;
   
-  logic [GEMM_SELECT_WIDTH -1 :0] enable_q, enable_d, store_GEMM_select_q, store_GEMM_select_d;
+  logic [GEMM_SELECT_WIDTH -1 :0] enable_q, enable_d, start_q, start_d, store_GEMM_select_q, store_GEMM_select_d;
   logic [INPUT_SRAM_ADDR_WIDTH -1 :0] gemm_inp_A_addr_q, gemm_inp_A_addr_d;
   logic [INPUT_SRAM_ADDR_WIDTH -1 :0] gemm_inp_B_addr_q, gemm_inp_B_addr_d;
   logic done_q1, done_d1, done_q2, done_d2, done_q3, done_d3, done_q4, done_d4;
   logic valid_q1, valid_d1, valid_q2, valid_d2, valid_q3, valid_d3; // Let it delay by 3 more due to computation from GEMM.
   logic [OUTPUT_SRAM_ADDR_WIDTH - 1:0] gemm_out_addr_q1, gemm_out_addr_d1, gemm_out_addr_q2, gemm_out_addr_d2, gemm_out_addr_q3, gemm_out_addr_d3;
   
+  assign start_o = start_q;
   assign enable_o = enable_q;
   assign gemm_inp_A_addr_o = gemm_inp_A_addr_q;
   assign gemm_inp_B_addr_o = gemm_inp_B_addr_q;
@@ -70,6 +72,7 @@ module GEMM_controller #(
   assign gemm_out_Y_addr_o = gemm_out_addr_q3;
   
   always_comb begin
+    start_d = '0;
     enable_d = '0;
     valid_d1 = '0;
     gemm_out_addr_d1 = '0;
@@ -99,6 +102,9 @@ module GEMM_controller #(
       end
     
       COMPUTE: begin
+        if(K_count_q == 1'b1 && N_count_q == '0 && M_count_q == '0) begin
+          start_d = store_GEMM_select_q;
+        end
         enable_d = store_GEMM_select_q;
         gemm_inp_A_addr_d = M_count_q * OPERAND_COUNT + K_count_q;
         gemm_inp_B_addr_d = N_count_q * OPERAND_COUNT + K_count_q;
@@ -154,6 +160,7 @@ module GEMM_controller #(
       M_count_q <= '0;
       N_count_q <= '0;
       K_count_q <= '0;
+      start_q <= '0;
       enable_q <= '0;
       gemm_inp_A_addr_q <= '0;
       gemm_inp_B_addr_q <= '0;
@@ -173,6 +180,7 @@ module GEMM_controller #(
       M_count_q <= M_count_d;
       N_count_q <= N_count_d;
       K_count_q <= K_count_d;
+      start_q <= start_d;
       enable_q <= enable_d;
       gemm_inp_A_addr_q <= gemm_inp_A_addr_d;
       gemm_inp_B_addr_q <= gemm_inp_B_addr_d;
