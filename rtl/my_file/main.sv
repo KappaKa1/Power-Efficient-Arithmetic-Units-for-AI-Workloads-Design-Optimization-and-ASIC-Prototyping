@@ -86,13 +86,27 @@ module main #(
   assign ack_d = ack_ctrl;
   assign ack_o = ack_q;
   
-  `FF(req_q, req_d, '0, clk_i, rst_ni)
-  `FF(we_q, we_d, '0, clk_i, rst_ni)
-  `FF(ready_q, ready_d, '0, clk_i, rst_ni)
-  `FF(finish_q, finish_d, '0, clk_i, rst_ni)
-  `FF(ack_q, ack_d, '0, clk_i, rst_ni)
+  always_ff @(posedge clk_i) begin
+    if (!rst_ni) begin
+      req_q <= '0;
+      we_q <= '0;
+      ready_q <= '0;
+      finish_q <= '0;
+      ack_q <= '0;
+    end else begin
+      req_q <= req_d;
+      we_q <= we_d;
+      ready_q <= ready_d;
+      finish_q <= finish_d;
+      ack_q <= ack_d;
+    end
+  end
   
   // ------------------------------------ SIGNALS USED IN SRAM & GEMM Controller ------------------------------------------
+  // Control Signals for Encoding
+  logic	[ENCODING_SCHEME_WIDTH-1 : 0]		encode_enable;
+  logic [SRAM_DATA_WIDTH-1:0] 			encoded_wdata;
+  
   // Control Signals for Padding
   logic						pad_load;
   logic						pad_enable;
@@ -107,7 +121,7 @@ module main #(
   // Control Signals for GEMM Cores
   logic [GEMM_SELECT_WIDTH :0]			GEMM_ctrl_packet; // Communication signal from SRAM Controller to GEMM Controller
   logic 					done; // Communication signal from GEMM Controller to SRAM Controller
-  logic	[GEMM_SELECT_WIDTH - 1:0]		enable;
+  logic	[GEMM_SELECT_WIDTH - 1:0]		GEMM_enable, GEMM_start;
   logic [SIZE_OF_FINAL_OUTPUT - 1 :0] 		GEMM_results [0:GEMM_SELECT_WIDTH-1]; 
   
   // Control Signals for MUX
@@ -134,6 +148,11 @@ module main #(
   logic [OUTPUT_SRAM_ADDR_WIDTH - 1 : 0]	result_addr, result_addr_q, result_addr_d;
   logic						result_valid, result_valid_q, result_valid_d;
   // ----------------------------------------------------------------------------------------------------------------------  
+ 
+  // -----------------------------------------
+  // Instantiating Encoding Block
+  // -----------------------------------------  
+  //encoder #(.WIDTH(64), .ENCODING_SCHEME_WIDTH(ENCODING_SCHEME_WIDTH)) encoder_main (.en_i(encode_enable), .data_i(final64_wdata), .encoded_o(encoded_wdata));
   
   // -----------------------------------------
   // Instantiating Padding Registers
@@ -169,7 +188,7 @@ module main #(
   };
   shift_registers_in #(.BIT_WIDTH(SRAM_DATA_WIDTH), .NO_OF_PORTS(NUM_OF_STREAMING_PORTS)) sr_inp (.clk_i(clk_i), .rst_ni(rst_ni), .streamed_i(streamed_wdata), .enable_i(sr_inp_enable), .data_o(final64_wdata));
   
-  assign sram_write = final64_wdata;
+  assign sram_write = final64_wdata; // or encoded_wdata if enable encoding
 
   assign {
     streamed_rdata_15_o,
@@ -210,6 +229,8 @@ module main #(
 
     .ctrl_packet_i(streamed_wdata),
 
+    .encode_enable_o (encode_enable),
+
     .pad_load_o(pad_load),
     .pad_enable_o(pad_enable),
 
@@ -247,7 +268,8 @@ module main #(
     .GEMM_ctrl_packet_i  (GEMM_ctrl_packet),
 
     // control to GEMM core
-    .enable_o		 (enable),
+    .enable_o		 (GEMM_enable),
+    .start_o		 (GEMM_start),
 
     // addresses to SRAM
     .gemm_inp_A_addr_o   (GEMM_gen_inp_A_sram_addr),
@@ -261,20 +283,34 @@ module main #(
     .gemm_out_Y_addr_o   (result_addr)
   );
   
-  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_SKLANSKY_FUSED_SPEED")) mul0 (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(enable[0]), .result_valid_i(result_valid), .done_i(done), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[0]));
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_SKLANSKY_FUSED_SPEED")) mul0 (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[0]), .result_valid_i(result_valid), .done_i(done), .start_i(GEMM_start[0]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[0]));
   
-  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_SKLANSKY_FUSED_AREA")) mul1 (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(enable[1]), .result_valid_i(result_valid), .done_i(done), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[1]));
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_SKLANSKY_FUSED_AREA")) mul1 (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[1]), .result_valid_i(result_valid), .done_i(done), .start_i(GEMM_start[1]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[1]));
   
-  mux_5to1_onehot #(.WIDTH(SIZE_OF_FINAL_OUTPUT)) select_final_result (.in(GEMM_results), .sel(enable), .out(final_results));
+  mux_5to1_onehot #(.WIDTH(SIZE_OF_FINAL_OUTPUT)) select_final_result (.in(GEMM_results), .sel(GEMM_enable), .out(final_results));
   
   
   assign final_data_d = final_results;
   assign result_addr_d = result_addr;
   assign result_valid_d = result_valid;
 
-  `FF(result_valid_q, result_valid_d, '0, clk_i, rst_ni)
-  `FFL(result_addr_q, result_addr_d, result_valid_d, '0, clk_i, rst_ni)
-  `FFL(final_data_q, final_data_d, result_valid_d, '0, clk_i, rst_ni)
+  always_ff @(posedge clk_i) begin
+    if (!rst_ni) begin
+      result_valid_q <= '0;
+    end else begin
+      result_valid_q <= result_valid_d;
+    end
+  end
+
+  always_ff @(posedge clk_i) begin
+    if (!rst_ni) begin
+      result_addr_q <= '0;
+      final_data_q <= '0;
+    end else if (result_valid_d) begin
+      result_addr_q <= result_addr_d;
+      final_data_q <= final_data_d;
+    end
+  end
   
   
   // -----------------------------------------
@@ -341,4 +377,3 @@ module main #(
   );
 
 endmodule
-
