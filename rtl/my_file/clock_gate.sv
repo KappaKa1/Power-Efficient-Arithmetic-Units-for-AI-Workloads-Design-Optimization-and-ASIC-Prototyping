@@ -3,7 +3,7 @@ module clock_gate (
   input  logic en_i,
   output logic clk_o
 );
-
+/*
   logic en_latched;
 
   // Latch enable while clock is low
@@ -15,5 +15,12 @@ module clock_gate (
 
   // Gate clock with stable latched enable
   assign clk_o = clk_i & en_latched;
+*/
 
+  CGTSX1 u_cg (
+    .ECK(clk_o),
+    .E  (en_i),
+    .SE (1'b0),
+    .CK (clk_i)
+  );
 endmodule
