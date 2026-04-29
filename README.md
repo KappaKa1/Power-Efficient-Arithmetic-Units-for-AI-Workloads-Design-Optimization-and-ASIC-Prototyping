@@ -23,20 +23,20 @@ $ oseda bash
   The table below details the files involved in the verification.
 | File-name | Description |
 |----------|----------|
-| ```bash input_generator.py```  | Generates Test-Vectors (of size 16 x 4-bits) used in verification |
-| ```bash golden_model.py```  | Produces the expected outputs of the DUT |
-| ```bash main_tb.sv```  | Produces the actual outputs of the DUT, and compares it with the expected outputs  |
-| output.txt  | Details the result of the comparison |
+| ```input_generator.py```  | Generates Test-Vectors (of size 16 x 4-bits) used in verification |
+| ```golden_model.py```  | Produces the expected outputs of the DUT |
+| ```main_tb.sv```  | Produces the actual outputs of the DUT, and compares it with the expected outputs  |
+| ```output.txt```  | Details the result of the comparison |
 
-  To verify just the DUT using Verilator, please run the following command:
-```bash
-verilator> ./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb
+  Run DUT-only Verification
+```</> Bash
+./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb
 ```
-  To run the entire verification flow, please run the following command:
-```bash
+  Run Full Verification flow
+```</> Bash
 verilator> ./Scripts/full_flow.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb 1
 ```
-The testbench also includes verification of the synthesized netlist from Yosys and OpenROAD. To verify the netlists, add the argument ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS"``` or ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS (not done)"``` at the front.
+The testbench also includes verification of the synthesized netlist from Yosys and OpenROAD. To verify synthesized results, prepend ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS"``` or ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS (not done)"``` at the front.
 
 ## Synthesis using Yosys
   This project uses 
