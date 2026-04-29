@@ -13,7 +13,18 @@ $ oseda bash
 ## Using Verilator for Functional Analysis
 <Image>
   
-  The above image shows the verification architecture used in the project. The architecture produces new inputs every run using _input_generator.py_ and feeds it to both _golden_model.py_ and _main_tb.sv_. The results from both model are compared inside _main_tb.sv_ and produces an _output.txt_ which can be used to verify the outputs. You can either verify just the DUT without executing the full-flow, or you can run the full-flow multiple rounds by including the round number at the back. 
+  In this project, we used Verilator and GTKWave to verify the functionality of the Device-Under-Test (DUT). The project deploys the verification architecture shown in the image above. The user can either verify just the DUT, or execute the full-flow of the verification. Multiple full-flow rounds can be executed by adding a number at the end of the command.
+
+  The table below details the files involved in the verification.
+| File-name | Description |
+|----------|----------|
+| input_generator.py  | Row 1 B  |
+| golden_model.py  | Row 2 B  |
+| main_tb.sv  | Row 3 B  |
+| output.txt  | Row 4 B  |
+  
+  
+  The architecture produces new inputs every run using _input_generator.py_ and feeds it to both _golden_model.py_ and _main_tb.sv_. The results from both model are compared inside _main_tb.sv_ and produces an _output.txt_ which can be used to verify the outputs. You can either verify just the DUT without executing the full-flow, or you can run the full-flow multiple rounds by including the round number at the back. 
 
   To verify just the DUT using Verilator, please run the following command:
 ```bash
@@ -23,4 +34,4 @@ verilator> ./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv ma
 ```bash
 verilator> ./Scripts/full_flow.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb 1
 ```
-The testbench also includes verification of the synthesized netlist from Yosys and OpenROAD. To verify the netlists, add the argument ```bash VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS"``` or ```ash VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS"``` at the front.
+The testbench also includes verification of the synthesized netlist from Yosys and OpenROAD. To verify the netlists, add the argument ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS"``` or ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS (not done)"``` at the front.
