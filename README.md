@@ -15,9 +15,9 @@ $ oseda bash
   
   In this project, we used Verilator and GTKWave to verify the functionality of the Device-Under-Test (DUT). The project deploys the verification architecture shown in the image above. 
   Users can:
-  * Verify only the DUT
-  * Execute the full verification flow
-  * Run multiple iterations by appending a number to the back of the command
+* Verify only the DUT
+* Execute the full verification flow
+* Run multiple iterations by appending a number to the back of the command
 
   The table below details the files involved in the verification.
 | File-name | Description |
