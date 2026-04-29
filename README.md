@@ -29,14 +29,16 @@ $ oseda bash
 | ```output.txt```  | Details the result of the comparison |
 
   Run DUT-only Verification
-```</> Bash
+```
+</> Bash
 ./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb
 ```
   Run Full Verification flow
-```</> Bash
+```
+</> Bash
 verilator> ./Scripts/full_flow.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb 1
 ```
-The testbench also includes verification of the synthesized netlist from Yosys and OpenROAD. To verify synthesized results, prepend ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS"``` or ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS (not done)"``` at the front.
+The testbench also includes verification of the synthesized netlist from Yosys and OpenROAD. To verify synthesized results, prepend ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS"``` or ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS (not done)"```.
 
 ## Synthesis using Yosys
   This project uses 
