@@ -60,7 +60,7 @@ Yosys> yosys -C
 ## Implementing Chip Layout using OpenROAD
   This project uses **OpenROAD** to implement the layout of the chip. Static-Timing-Analysis (STA), Place-and-Route (PnR) and Power-Analysis are implemented in this section. Different from the other sections, the user must be in a specific version of **Oseda Bash** to enter the **OpenROAD Environment**. Then, the user can run a fully-integrated script to execute the full layout implementation.
 
-  Entering the OpenROAD Environment
+  Enter the OpenROAD Environment
 ```
 openroad> oseda -2025.12 openroad -gui
 ```
