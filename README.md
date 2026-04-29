@@ -11,9 +11,13 @@ $ oseda bash
 ```
 
 ## Using Verilator for Functional Analysis
-<Image>
+<p align="center"> <img src="images/verification_arch.png" width="600"> </p>
   
-  In this project, we used Verilator and GTKWave to verify the functionality of the Device-Under-Test (DUT). The project deploys the verification architecture shown in the image above. The user can either verify just the DUT, or execute the full-flow of the verification. Multiple full-flow rounds can be executed by adding a number at the end of the command.
+  In this project, we used Verilator and GTKWave to verify the functionality of the Device-Under-Test (DUT). The project deploys the verification architecture shown in the image above. 
+  Users can:
+  * Verify only the DUT
+  * Execute the full verification flow
+  * Run multiple iterations by appending a number to the back of the command
 
   The table below details the files involved in the verification.
 | File-name | Description |
@@ -32,3 +36,6 @@ verilator> ./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv ma
 verilator> ./Scripts/full_flow.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb 1
 ```
 The testbench also includes verification of the synthesized netlist from Yosys and OpenROAD. To verify the netlists, add the argument ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS"``` or ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS (not done)"``` at the front.
+
+## Synthesis using Yosys
+  This project uses 
