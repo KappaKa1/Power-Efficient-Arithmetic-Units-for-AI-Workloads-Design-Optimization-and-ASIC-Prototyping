@@ -13,7 +13,7 @@ $ oseda bash
 ## Using Verilator for Functional Analysis
 <p align="center"> <img src="images/verification_arch.png" width="600"> </p>
   
-  In this project, we used Verilator and GTKWave to verify the functionality of the Device-Under-Test (DUT). The project deploys the verification architecture shown in the image above.
+  In this project, we used **Verilator** and **GTKWave** to verify the functionality of the Device-Under-Test (DUT). The project deploys the verification architecture shown in the image above.
   
   Users can:
   * Verify only the DUT
@@ -23,9 +23,9 @@ $ oseda bash
   The table below details the files involved in the verification.
 | File-name | Description |
 |----------|----------|
-| input_generator.py  | Generates Test-Vectors (of size 16 x 4-bits) used in verification |
-| golden_model.py  | Produces the expected outputs of the DUT |
-| main_tb.sv  | Produces the actual outputs of the DUT, and compares it with the expected outputs  |
+| ```bash input_generator.py```  | Generates Test-Vectors (of size 16 x 4-bits) used in verification |
+| ```bash golden_model.py```  | Produces the expected outputs of the DUT |
+| ```bash main_tb.sv```  | Produces the actual outputs of the DUT, and compares it with the expected outputs  |
 | output.txt  | Details the result of the comparison |
 
   To verify just the DUT using Verilator, please run the following command:
