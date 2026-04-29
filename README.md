@@ -30,7 +30,7 @@ $ oseda bash
 ```
 </> Bash
 
-./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb
+verilator> ./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb
 ```
   Run Full Verification flow
 ```
@@ -43,18 +43,31 @@ The testbench also includes verification of the synthesized netlist from Yosys a
 ## Synthesis using Yosys
   This project uses **Yosys** to generate the netlist of the RTL. To run synthesize, you must first enter the **Yosys Environment** and then execute the synthesizing script. The resultant netlist can be viewed inside the ```out/``` folder, and the report logs can be seen in ```reports/``` folder. 
 
-  Enter the **Yosys Environment**
+  Enter the Yosys Environment
 ```
 </> Bash
 
-yosys -C
+Yosys> yosys -C
 ```
 
   Run the Synthesis Script
 ```
-</> Bash
+</> Yosys
 
-source scripts/yosys_synthesis.tcl
+% source scripts/yosys_synthesis.tcl
 ```
 
 ## Implementing Chip Layout using OpenROAD
+  This project uses **OpenROAD** to implement the layout of the chip. Static-Timing-Analysis (STA), Place-and-Route (PnR) and Power-Analysis are implemented in this section. Different from the other sections, the user must be in a specific version of **Oseda Bash** to enter the **OpenROAD Environment**. Then, the user can run a fully-integrated script to execute the full layout implementation.
+
+  Entering the OpenROAD Environment
+```
+openroad> oseda -2025.12 openroad -gui
+```
+  Run the Fully-Integrated script
+```
+</> OpenROAD
+
+% source scripts/full_flow.tcl
+```
+## Physical Chip Implementation using KLayout
