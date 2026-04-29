@@ -13,8 +13,8 @@ $ oseda bash
 ## Using Verilator for Functional Analysis
 <p align="center"> <img src="images/verification_arch.png" width="600"> </p>
   
-  In this project, we used Verilator and GTKWave to verify the functionality of the Device-Under-Test (DUT). The project deploys the verification architecture shown in the image above. 
-  \Users can:
+  In this project, we used Verilator and GTKWave to verify the functionality of the Device-Under-Test (DUT). The project deploys the verification architecture shown in the image above.  
+  Users can:
   * Verify only the DUT
   * Execute the full verification flow
   * Run multiple iterations by appending a number to the back of the command
