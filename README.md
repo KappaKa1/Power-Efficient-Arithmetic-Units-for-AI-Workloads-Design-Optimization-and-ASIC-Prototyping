@@ -41,17 +41,20 @@ verilator> ./Scripts/full_flow.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv 
 The testbench also includes verification of the synthesized netlist from Yosys and OpenROAD. To verify synthesized results, prepend ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS"``` or ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS (not done)"```.
 
 ## Synthesis using Yosys
-  This project uses **Yosys** to generate the netlist of the RTL. To run synthesize, you must first enter the **Yosys environment** by executing the following command:
+  This project uses **Yosys** to generate the netlist of the RTL. To run synthesize, you must first enter the **Yosys Environment** and then execute the synthesizing script. The resultant netlist can be viewed inside the ```out/``` folder, and the report logs can be seen in ```reports/``` folder. 
+
+  Enter the **Yosys Environment**
 ```
 </> Bash
 
 yosys -C
 ```
 
-  Thereafter, execute the synthesis script:
+  Run the Synthesis Script
 ```
 </> Bash
 
 source scripts/yosys_synthesis.tcl
 ```
-  The resultant netlist can be viewed inside the ```out/``` folder, and the report logs can be seen in ```reports/``` folder.
+
+## Implementing Chip Layout using OpenROAD
