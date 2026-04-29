@@ -18,10 +18,10 @@ $ oseda bash
   The table below details the files involved in the verification.
 | File-name | Description |
 |----------|----------|
-| input_generator.py  | Row 1 B  |
-| golden_model.py  | Row 2 B  |
-| main_tb.sv  | Row 3 B  |
-| output.txt  | Row 4 B  |
+| input_generator.py  | Generates Test-Vectors (of size 16 x 4-bits) used in verification |
+| golden_model.py  | Produces the expected outputs of the DUT |
+| main_tb.sv  | Produces the actual outputs of the DUT, and compares it with the expected outputs  |
+| output.txt  | Details the result of the comparison |
   
   
   The architecture produces new inputs every run using _input_generator.py_ and feeds it to both _golden_model.py_ and _main_tb.sv_. The results from both model are compared inside _main_tb.sv_ and produces an _output.txt_ which can be used to verify the outputs. You can either verify just the DUT without executing the full-flow, or you can run the full-flow multiple rounds by including the round number at the back. 
