@@ -11,7 +11,8 @@ $ oseda bash
 ```
 
 ## Using Verilator for Functional Analysis
-
+<Image>
+The above image shows the verification architecture used in the project. The architecture produces new inputs every run using _file.py_ and feeds it to both _Golden_Model.py_ and _main_tb.sv_. The results from both model are compared inside _main_tb.sv_ and produces an _output.txt_ which can be used to verify the outputs. You can either verify just the DUT without executing the full-flow, or you can run the full-flow multiple rounds by including the round number at the back. 
 
 To verify just the DUT using Verilator, please run the following command:
 ```bash
