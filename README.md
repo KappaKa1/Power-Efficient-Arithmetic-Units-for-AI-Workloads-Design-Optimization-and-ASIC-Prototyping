@@ -20,7 +20,7 @@ $ oseda bash
   * Execute the full verification flow
   * Run multiple iterations by appending a number to the back of the command
 
-  The table below details the files involved in the verification.
+  Verification files
 | File-name | Description |
 |----------|----------|
 | ```input_generator.py```  | Generates Test-Vectors (of size 16 x 4-bits) used in verification |
@@ -31,11 +31,13 @@ $ oseda bash
   Run DUT-only Verification
 ```
 </> Bash
+
 ./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb
 ```
   Run Full Verification flow
 ```
 </> Bash
+
 verilator> ./Scripts/full_flow.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb 1
 ```
 The testbench also includes verification of the synthesized netlist from Yosys and OpenROAD. To verify synthesized results, prepend ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS"``` or ```VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS (not done)"```.
