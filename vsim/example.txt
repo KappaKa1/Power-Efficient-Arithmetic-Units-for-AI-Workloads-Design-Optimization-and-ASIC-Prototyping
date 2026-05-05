@@ -1,0 +1,1 @@
+scripts/full_flow.sh main_tb 1
