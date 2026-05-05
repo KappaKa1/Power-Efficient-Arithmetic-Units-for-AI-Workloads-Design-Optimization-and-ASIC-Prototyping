@@ -321,8 +321,6 @@ write_verilog out/main_chip.v
 # The LVS netlist that includes power and ground
 write_verilog -include_pwr_gnd -remove_cells "$stdfill bondpad*" out/main_chip_lvs.v
 
-write_verilog -remove_cells "$stdfill bondpad*" out/main_chip_sim.v
-
 # The SDC file which contains the timing constraints specified during the design process
 write_sdc out/main_chip.sdc
 
@@ -360,5 +358,5 @@ report_power -corner tt
  #              = 1,015,729 / 58,552 ≈ 17.35
 
 
-read_vcd -scope tb_main_chip/i_dut ../Test_Modules/main_chip.vcd
+read_vcd -scope main_tb/i_dut ../vsim/main_chip.vcd
 report_power -corner tt
