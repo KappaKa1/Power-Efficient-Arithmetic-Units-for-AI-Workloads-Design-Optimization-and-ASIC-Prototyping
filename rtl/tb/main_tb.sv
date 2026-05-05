@@ -51,6 +51,20 @@ module main_tb#(
   logic [63:0] actual_data   [0:255];
   
   //////////////////
+  //  Print Mode  //
+  //////////////////
+  
+  initial begin
+    `ifdef TARGET_NETLIST_OPENROAD
+      $display("[TB] DUT mode: OpenROAD post-PnR netlist");
+    `elsif TARGET_NETLIST_YOSYS
+      $display("[TB] DUT mode: Yosys gate-level netlist");
+    `else
+      $display("[TB] DUT mode: RTL / normal simulation");
+    `endif
+  end
+  
+  //////////////////
   //  Clock Gen   //
   //////////////////
 
@@ -76,19 +90,81 @@ module main_tb#(
   ////////////
   //  DUT   //
   ////////////
-  `ifdef TARGET_NETLIST_YOSYS
-     \main$main_chip.u_main i_dut(
-  `else
-    main #(
-    .INPUT_SRAM_NUM_WORDS (INPUT_SRAM_NUM_WORDS),
-    .INPUT_NUM_BITS       (INPUT_NUM_BITS),
-    .OUTPUT_SRAM_NUM_WORDS(OUTPUT_SRAM_NUM_WORDS),
-    .OUTPUT_NUM_BITS      (OUTPUT_NUM_BITS),
-    .NUM_OF_STREAMING_PORTS(NUM_OF_STREAMING_PORTS),
-    .SRAM_DATA_WIDTH      (SRAM_DATA_WIDTH),
-    .MATRIX_DIMENSION     (MATRIX_DIMENSION)
-    ) i_dut(
-  `endif
+  `ifdef TARGET_NETLIST_OPENROAD
+    wire [15:0] streamed_wdata_pad;
+    wire [15:0] streamed_rdata_pad;
+    assign streamed_wdata_pad = streamed_wdata_i;
+
+    assign streamed_rdata_o = streamed_rdata_pad;
+  
+    main_chip i_dut (
+      .clk_i  (clk_i),
+      .rst_ni (rst_ni),
+      .req_i  (req_i),
+      .we_i   (we_i),
+
+      .streamed_wdata_0_i  (streamed_wdata_pad[0]),
+      .streamed_wdata_1_i  (streamed_wdata_pad[1]),
+      .streamed_wdata_2_i  (streamed_wdata_pad[2]),
+      .streamed_wdata_3_i  (streamed_wdata_pad[3]),
+      .streamed_wdata_4_i  (streamed_wdata_pad[4]),
+      .streamed_wdata_5_i  (streamed_wdata_pad[5]),
+      .streamed_wdata_6_i  (streamed_wdata_pad[6]),
+      .streamed_wdata_7_i  (streamed_wdata_pad[7]),
+      .streamed_wdata_8_i  (streamed_wdata_pad[8]),
+      .streamed_wdata_9_i  (streamed_wdata_pad[9]),
+      .streamed_wdata_10_i (streamed_wdata_pad[10]),
+      .streamed_wdata_11_i (streamed_wdata_pad[11]),
+      .streamed_wdata_12_i (streamed_wdata_pad[12]),
+      .streamed_wdata_13_i (streamed_wdata_pad[13]),
+      .streamed_wdata_14_i (streamed_wdata_pad[14]),
+      .streamed_wdata_15_i (streamed_wdata_pad[15]),
+
+      .ready_o  (ready_o),
+      .finish_o (finish_o),
+      .ack_o    (ack_o),
+
+      .streamed_rdata_0_o  (streamed_rdata_pad[0]),
+      .streamed_rdata_1_o  (streamed_rdata_pad[1]),
+      .streamed_rdata_2_o  (streamed_rdata_pad[2]),
+      .streamed_rdata_3_o  (streamed_rdata_pad[3]),
+      .streamed_rdata_4_o  (streamed_rdata_pad[4]),
+      .streamed_rdata_5_o  (streamed_rdata_pad[5]),
+      .streamed_rdata_6_o  (streamed_rdata_pad[6]),
+      .streamed_rdata_7_o  (streamed_rdata_pad[7]),
+      .streamed_rdata_8_o  (streamed_rdata_pad[8]),
+      .streamed_rdata_9_o  (streamed_rdata_pad[9]),
+      .streamed_rdata_10_o (streamed_rdata_pad[10]),
+      .streamed_rdata_11_o (streamed_rdata_pad[11]),
+      .streamed_rdata_12_o (streamed_rdata_pad[12]),
+      .streamed_rdata_13_o (streamed_rdata_pad[13]),
+      .streamed_rdata_14_o (streamed_rdata_pad[14]),
+      .streamed_rdata_15_o (streamed_rdata_pad[15]),
+
+      .unused0_o(),
+      .unused1_o(),
+      .unused2_o(),
+      .unused3_o(),
+      .unused4_o(),
+      .unused5_o(),
+      .unused6_o(),
+      .unused7_o(),
+      .unused8_o()
+    );
+  `else 
+    `ifdef TARGET_NETLIST_YOSYS
+      \main$main_chip.u_main i_dut (
+    `else
+      main #(
+        .INPUT_SRAM_NUM_WORDS    (INPUT_SRAM_NUM_WORDS),
+        .INPUT_NUM_BITS          (INPUT_NUM_BITS),
+        .OUTPUT_SRAM_NUM_WORDS   (OUTPUT_SRAM_NUM_WORDS),
+        .OUTPUT_NUM_BITS         (OUTPUT_NUM_BITS),
+        .NUM_OF_STREAMING_PORTS  (NUM_OF_STREAMING_PORTS),
+        .SRAM_DATA_WIDTH         (SRAM_DATA_WIDTH),
+        .MATRIX_DIMENSION        (MATRIX_DIMENSION)
+      ) i_dut (
+    `endif
     .clk_i              (clk_i),
     .rst_ni             (rst_ni),
     .req_i              (req_i),
@@ -131,12 +207,12 @@ module main_tb#(
     .streamed_rdata_13_o(streamed_rdata_o[13]),
     .streamed_rdata_14_o(streamed_rdata_o[14]),
     .streamed_rdata_15_o(streamed_rdata_o[15])
-  );
-  
+    );
+  `endif
   //////////////////////
   //  VCD Generation  //
   //////////////////////
-  `ifdef TARGET_NETLIST_YOSYS
+  `ifdef TARGET_NETLIST_OPENROAD // Runs in Vsim and QuestaSIM
     initial begin
       #5205;
       $display("@%t | [VCD] Start dump", $time);
@@ -153,7 +229,12 @@ module main_tb#(
     final begin
         $dumpflush;
     end
-  `else
+  `elsif TARGET_NETLIST_YOSYS // Runs in Verilator
+    initial begin
+      $dumpfile("waveform.vcd");
+      $dumpvars(0, main_tb);
+    end
+  `else // Runs in Verilator
     initial begin
       $dumpfile("waveform.vcd");
       $dumpvars(0, main_tb);
@@ -318,14 +399,14 @@ module main_tb#(
     streamed_wdata_i = 16'h0000;
     
     $display("\nComputing Non-inverted Data");
-    Control_Bits = {5'b00001, 3'b010, 8'b00000000};
+    Control_Bits = {5'b00001, 3'b001, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_0.hex");
 
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Inverted Data");
-    Control_Bits = {5'b00010, 3'b010, 8'b00000000};
+    Control_Bits = {5'b00001, 3'b001, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_1.hex");
 
