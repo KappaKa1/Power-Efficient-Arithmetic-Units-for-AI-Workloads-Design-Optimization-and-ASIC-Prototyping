@@ -26,7 +26,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
 
     echo ""
     echo "3. Running Verilator simulation"
-    OPEN_WAVE=0 ./Scripts/run_dut.sh "$TB_FILE" "$TOP_MODULE"
+    OPEN_WAVE=0 ./scripts/run_dut.sh "$TB_FILE" "$TOP_MODULE"
 
     echo ""
     echo "Run $run complete"
