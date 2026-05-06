@@ -18,11 +18,11 @@ for ((run=0; run<NUM_RUNS; run++)); do
 
     echo ""
     echo "1. Generating inputs"
-    python3 ../Python/input_generator.py
+    python3 ./../Python/input_generator.py
 
     echo ""
     echo "2. Running golden model"
-    python3 ../Python/golden_model.py
+    python3 ./../Python/golden_model.py
 
     echo ""
     echo "3. Running Verilator simulation"
