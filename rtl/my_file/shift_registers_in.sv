@@ -12,6 +12,12 @@ module shift_registers_in #(
   output logic [BIT_WIDTH-1:0]    data_o
 );
 
-  `FFL(data_o,  {data_o[BIT_WIDTH-NO_OF_PORTS-1:0], streamed_i}, enable_i, '0, clk_i, rst_ni)
+  always_ff @(posedge clk_i) begin
+    if (!rst_ni) begin
+      data_o <= '0;
+    end else if (enable_i) begin
+      data_o <= {data_o[BIT_WIDTH-NO_OF_PORTS-1:0], streamed_i};
+    end
+  end
   
 endmodule

@@ -32,7 +32,6 @@ yosys read_slang --top $top_design -f $sv_flist \
 # <module-name>$<instance-name> -> match for t:<module-name>$$
 yosys setattr -set keep_hierarchy 1 "t:main$*"
 yosys setattr -set keep_hierarchy 1 "t:matmul*"
-#yosys setattr -set keep 1 "t:matmul*"
 
 # blackbox modules (applies the *blackbox* attribute)
 yosys blackbox "t:tc_sram_blackbox$*"
