@@ -95,7 +95,6 @@ vlog -incr -sv -svinputport=compat \
     $ROOT/rtl/MATMULS/matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_area.v \
     $ROOT/rtl/MATMULS/matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed.v \
     $ROOT/rtl/my_file/clock_gate.sv \
-    $ROOT/rtl/my_file/encoder.sv \
     $ROOT/rtl/my_file/GEMM_control.sv  \
     $ROOT/rtl/my_file/GEMM_CORE.sv \
     $ROOT/rtl/my_file/main.sv \
@@ -104,8 +103,7 @@ vlog -incr -sv -svinputport=compat \
     $ROOT/rtl/my_file/pack14to16_signext.sv \
     $ROOT/rtl/my_file/shift_register_out.sv \
     $ROOT/rtl/my_file/shift_registers_in.sv \
-    $ROOT/rtl/my_file/SRAM_controller.sv \
-    $ROOT/rtl/my_file/tc_to_sm.sv 
+    $ROOT/rtl/my_file/SRAM_controller.sv 
 
 vlog -incr -sv \
     +define+FUNCTIONAL \

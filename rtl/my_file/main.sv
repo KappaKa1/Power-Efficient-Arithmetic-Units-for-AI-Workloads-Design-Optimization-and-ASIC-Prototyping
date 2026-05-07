@@ -103,9 +103,6 @@ module main #(
   end
   
   // ------------------------------------ SIGNALS USED IN SRAM & GEMM Controller ------------------------------------------
-  // Control Signals for Encoding
-  logic	[ENCODING_SCHEME_WIDTH-1 : 0]		encode_enable;
-  logic [SRAM_DATA_WIDTH-1:0] 			encoded_wdata;
   
   // Control Signals for Padding
   logic						pad_load;
@@ -148,11 +145,6 @@ module main #(
   logic [OUTPUT_SRAM_ADDR_WIDTH - 1 : 0]	result_addr, result_addr_q, result_addr_d;
   logic						result_valid, result_valid_q, result_valid_d;
   // ----------------------------------------------------------------------------------------------------------------------  
- 
-  // -----------------------------------------
-  // Instantiating Encoding Block
-  // -----------------------------------------  
-  //encoder #(.WIDTH(64), .ENCODING_SCHEME_WIDTH(ENCODING_SCHEME_WIDTH)) encoder_main (.en_i(encode_enable), .data_i(final64_wdata), .encoded_o(encoded_wdata));
   
   // -----------------------------------------
   // Instantiating Padding Registers
@@ -228,8 +220,6 @@ module main #(
     .rst_ni(rst_ni),
 
     .ctrl_packet_i(streamed_wdata),
-
-    .encode_enable_o (encode_enable),
 
     .pad_load_o(pad_load),
     .pad_enable_o(pad_enable),

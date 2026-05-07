@@ -1,12 +1,13 @@
 
 Just the DUT:
-VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS" ./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb
+VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS" ./scripts/run_dut.sh ./../rtl/tb/main_tb.sv main_tb
 or
-./Scripts/run_dut.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb
+./scripts/run_dut.sh ./../rtl/tb/main_tb.sv main_tb
 
 DUT + PYTHON:
-VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS" ./Scripts/full_flow.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb 10
+VERILATOR_DEFINES="-DTARGET_NETLIST_YOSYS" ./scripts/full_flow.sh ./../rtl/tb/main_tb.sv main_tb 10
 or
-./scripts/full_flow.sh /scratch/Kai_Stuff/OpenROAD/rtl/tb/main_tb.sv main_tb 10
+./scripts/full_flow.sh ./../rtl/tb/main_tb.sv main_tb 10
+
 
 

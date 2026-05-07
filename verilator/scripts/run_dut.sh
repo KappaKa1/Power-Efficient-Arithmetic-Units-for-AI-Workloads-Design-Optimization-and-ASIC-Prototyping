@@ -32,7 +32,7 @@ echo ""
 echo "Running Verilator..."
 
 verilator $VERILATOR_DEFINES \
-  -I/scratch/Kai_Stuff/OpenROAD/rtl/common_cells/include \
+  -I./../rtl/common_cells/include \
   -f "$FILELIST" "$TB_FILE" \
   --top "$TOP_MODULE" \
   --binary \

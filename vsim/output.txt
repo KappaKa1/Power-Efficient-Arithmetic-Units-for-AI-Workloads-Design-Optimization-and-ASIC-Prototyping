@@ -1,0 +1,729 @@
+Reading pref.tcl
+
+# 10.7b_1
+
+# source compile_netlist.tcl
+# QuestaSim-64 vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:18:59 on May 07,2026
+# vlog -incr -sv -svinputport=compat "+define+SIMULATION" "+define+TARGET_NETLIST_OPENROAD" "+incdir+../rtl/common_cells/include" "+incdir+../rtl/apb/include" "+incdir+../rtl/idma/include" "+incdir+../rtl/obi/include" "+incdir+../rtl/cve2/include" ../rtl/common_cells/binary_to_gray.sv ../rtl/common_cells/cb_filter_pkg.sv ../rtl/common_cells/cc_onehot.sv ../rtl/common_cells/cdc_reset_ctrlr_pkg.sv ../rtl/common_cells/cf_math_pkg.sv ../rtl/common_cells/clk_int_div.sv ../rtl/common_cells/credit_counter.sv ../rtl/common_cells/delta_counter.sv ../rtl/common_cells/ecc_pkg.sv ../rtl/common_cells/edge_propagator_tx.sv ../rtl/common_cells/exp_backoff.sv ../rtl/common_cells/fifo_v3.sv ../rtl/common_cells/gray_to_binary.sv ../rtl/common_cells/heaviside.sv ../rtl/common_cells/isochronous_4phase_handshake.sv ../rtl/common_cells/isochronous_spill_register.sv ../rtl/common_cells/lfsr.sv ../rtl/common_cells/lfsr_16bit.sv ../rtl/common_cells/lfsr_8bit.sv ../rtl/common_cells/lossy_valid_to_stream.sv ../rtl/common_cells/mv_filter.sv ../rtl/common_cells/onehot_to_bin.sv ../rtl/common_cells/plru_tree.sv ../rtl/common_cells/passthrough_stream_fifo.sv ../rtl/common_cells/popcount.sv ../rtl/common_cells/ring_buffer.sv ../rtl/common_cells/rr_arb_tree.sv ../rtl/common_cells/rstgen_bypass.sv ../rtl/common_cells/serial_deglitch.sv ../rtl/common_cells/shift_reg.sv ../rtl/common_cells/shift_reg_gated.sv ../rtl/common_cells/spill_register_flushable.sv ../rtl/common_cells/stream_demux.sv ../rtl/common_cells/stream_filter.sv ../rtl/common_cells/stream_fork.sv ../rtl/common_cells/stream_intf.sv ../rtl/common_cells/stream_join_dynamic.sv ../rtl/common_cells/stream_mux.sv ../rtl/common_cells/stream_throttle.sv ../rtl/common_cells/sub_per_hash.sv ../rtl/common_cells/sync.sv ../rtl/common_cells/sync_wedge.sv ../rtl/common_cells/unread.sv ../rtl/common_cells/read.sv ../rtl/common_cells/addr_decode_dync.sv ../rtl/common_cells/boxcar.sv ../rtl/common_cells/cdc_2phase.sv ../rtl/common_cells/cdc_4phase.sv ../rtl/common_cells/clk_int_div_static.sv ../rtl/common_cells/trip_counter.sv ../rtl/common_cells/addr_decode.sv ../rtl/common_cells/addr_decode_napot.sv ../rtl/common_cells/multiaddr_decode.sv ../rtl/common_cells/cb_filter.sv ../rtl/common_cells/cdc_fifo_2phase.sv ../rtl/common_cells/clk_mux_glitch_free.sv ../rtl/common_cells/counter.sv ../rtl/common_cells/ecc_decode.sv ../rtl/common_cells/ecc_encode.sv ../rtl/common_cells/edge_detect.sv ../rtl/common_cells/lzc.sv ../rtl/common_cells/max_counter.sv ../rtl/common_cells/rstgen.sv ../rtl/common_cells/spill_register.sv ../rtl/common_cells/stream_delay.sv ../rtl/common_cells/stream_fifo.sv ../rtl/common_cells/stream_fork_dynamic.sv ../rtl/common_cells/stream_join.sv ../rtl/common_cells/cdc_reset_ctrlr.sv ../rtl/common_cells/cdc_fifo_gray.sv ../rtl/common_cells/fall_through_register.sv ../rtl/common_cells/id_queue.sv ../rtl/common_cells/stream_to_mem.sv ../rtl/common_cells/stream_arbiter_flushable.sv ../rtl/common_cells/stream_fifo_optimal_wrap.sv ../rtl/common_cells/stream_register.sv ../rtl/common_cells/stream_xbar.sv ../rtl/common_cells/cdc_fifo_gray_clearable.sv ../rtl/common_cells/cdc_2phase_clearable.sv ../rtl/common_cells/mem_to_banks_detailed.sv ../rtl/common_cells/stream_arbiter.sv ../rtl/common_cells/stream_omega_net.sv ../rtl/common_cells/mem_to_banks.sv ../rtl/MATMULS/matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_area.v ../rtl/MATMULS/matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed.v ../rtl/my_file/clock_gate.sv ../rtl/my_file/GEMM_control.sv ../rtl/my_file/GEMM_CORE.sv ../rtl/my_file/main.sv ../rtl/my_file/mux2to1.sv ../rtl/my_file/mux5to1.sv ../rtl/my_file/pack14to16_signext.sv ../rtl/my_file/shift_register_out.sv ../rtl/my_file/shift_registers_in.sv ../rtl/my_file/SRAM_controller.sv 
+# -- Skipping module binary_to_gray
+# -- Skipping package cb_filter_pkg
+# -- Skipping module cc_onehot
+# -- Skipping package cdc_reset_ctrlr_pkg
+# -- Skipping package cf_math_pkg
+# -- Skipping module clk_int_div
+# -- Skipping module credit_counter
+# -- Skipping module delta_counter
+# -- Skipping package ecc_pkg
+# -- Skipping module edge_propagator_tx
+# -- Skipping module exp_backoff
+# -- Skipping module fifo_v3
+# -- Skipping module gray_to_binary
+# -- Skipping module heaviside
+# -- Skipping module isochronous_4phase_handshake
+# -- Skipping module isochronous_spill_register
+# -- Skipping module lfsr
+# -- Skipping module lfsr_16bit
+# -- Skipping module lfsr_8bit
+# -- Skipping module lossy_valid_to_stream
+# -- Skipping module mv_filter
+# -- Skipping module onehot_to_bin
+# -- Skipping module plru_tree
+# -- Skipping module passthrough_stream_fifo
+# -- Skipping module popcount
+# -- Skipping module ring_buffer
+# -- Skipping module rr_arb_tree
+# -- Skipping module rstgen_bypass
+# -- Skipping module serial_deglitch
+# -- Skipping module shift_reg
+# -- Skipping module shift_reg_gated
+# -- Skipping module spill_register_flushable
+# -- Skipping module stream_demux
+# -- Skipping module stream_filter
+# -- Skipping module stream_fork
+# -- Skipping interface STREAM_DV
+# -- Skipping module stream_join_dynamic
+# -- Skipping module stream_mux
+# -- Skipping module stream_throttle
+# -- Skipping module sub_per_hash
+# -- Skipping module sync
+# -- Skipping module sync_wedge
+# -- Skipping module unread
+# -- Skipping module read
+# -- Skipping module addr_decode_dync
+# -- Skipping module boxcar
+# -- Skipping module cdc_2phase
+# -- Skipping module cdc_2phase_src
+# -- Skipping module cdc_2phase_dst
+# -- Skipping module cdc_4phase
+# -- Skipping module cdc_4phase_src
+# -- Skipping module cdc_4phase_dst
+# -- Skipping module clk_int_div_static
+# -- Skipping module trip_counter
+# -- Skipping module addr_decode
+# -- Skipping module addr_decode_napot
+# -- Skipping module multiaddr_decode
+# -- Skipping module cb_filter
+# -- Skipping module hash_block
+# -- Skipping module cdc_fifo_2phase
+# -- Skipping module clk_mux_glitch_free
+# -- Skipping module clk_or_tree
+# -- Skipping module counter
+# -- Skipping module ecc_decode
+# -- Skipping module ecc_encode
+# -- Skipping module edge_detect
+# -- Skipping module lzc
+# -- Skipping module max_counter
+# -- Skipping module rstgen
+# -- Skipping module spill_register
+# -- Skipping module stream_delay
+# -- Skipping module stream_fifo
+# -- Skipping module stream_fork_dynamic
+# -- Skipping module stream_join
+# -- Skipping module cdc_reset_ctrlr
+# -- Skipping module cdc_reset_ctrlr_half
+# -- Skipping module cdc_fifo_gray
+# -- Skipping module cdc_fifo_gray_src
+# -- Skipping module cdc_fifo_gray_dst
+# -- Skipping module fall_through_register
+# -- Skipping module id_queue
+# -- Skipping module stream_to_mem
+# -- Skipping module stream_arbiter_flushable
+# -- Skipping module stream_fifo_optimal_wrap
+# -- Skipping module stream_register
+# -- Skipping module stream_xbar
+# -- Skipping module cdc_fifo_gray_clearable
+# -- Skipping module cdc_fifo_gray_src_clearable
+# -- Skipping module cdc_fifo_gray_dst_clearable
+# -- Skipping module cdc_2phase_clearable
+# -- Skipping module cdc_2phase_src_clearable
+# -- Skipping module cdc_2phase_dst_clearable
+# -- Skipping module mem_to_banks_detailed
+# -- Skipping module stream_arbiter
+# -- Skipping module stream_omega_net
+# -- Skipping module mem_to_banks
+# -- Skipping module matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_area
+# -- Skipping module matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed
+# -- Skipping module clock_gate
+# -- Compiling module GEMM_controller
+# -- Skipping module GEMM_CORE
+# -- Skipping module main
+# -- Skipping module mux2to1
+# -- Skipping module mux_5to1_onehot
+# -- Skipping module pack14to16_signext
+# -- Skipping module shift_registers_out
+# -- Skipping module shift_registers_in
+# -- Skipping module SRAM_controller
+# 
+# Top level modules:
+# 	cc_onehot
+# 	credit_counter
+# 	edge_propagator_tx
+# 	exp_backoff
+# 	isochronous_4phase_handshake
+# 	isochronous_spill_register
+# 	lfsr
+# 	lfsr_8bit
+# 	lossy_valid_to_stream
+# 	mv_filter
+# 	plru_tree
+# 	passthrough_stream_fifo
+# 	popcount
+# 	ring_buffer
+# 	serial_deglitch
+# 	shift_reg
+# 	stream_filter
+# 	stream_mux
+# 	stream_throttle
+# 	unread
+# 	read
+# 	boxcar
+# 	cdc_4phase
+# 	clk_int_div_static
+# 	trip_counter
+# 	addr_decode
+# 	addr_decode_napot
+# 	multiaddr_decode
+# 	cb_filter
+# 	cdc_fifo_2phase
+# 	clk_mux_glitch_free
+# 	ecc_decode
+# 	ecc_encode
+# 	edge_detect
+# 	max_counter
+# 	stream_delay
+# 	stream_fork_dynamic
+# 	stream_join
+# 	cdc_fifo_gray
+# 	fall_through_register
+# 	id_queue
+# 	stream_to_mem
+# 	stream_fifo_optimal_wrap
+# 	stream_register
+# 	cdc_fifo_gray_clearable
+# 	cdc_2phase_clearable
+# 	stream_arbiter
+# 	stream_omega_net
+# 	mem_to_banks
+# 	main
+# End time: 13:18:59 on May 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:18:59 on May 07,2026
+# vlog -incr -sv "+define+FUNCTIONAL" "+define+TARGET_NETLIST_OPENROAD" ../technology/verilog/ez130_8t.v ../technology/verilog/sg13cmos5l_io.v ../ihp13/empty_cells.v ../technology/verilog/RM_IHPSG13_1P_core_behavioral_bm_bist.v ../technology/verilog/RM_IHPSG13_1P_64x64_c2_bm_bist.v ../technology/verilog/RM_IHPSG13_1P_256x64_c2_bm_bist.v ../technology/verilog/RM_IHPSG13_1P_512x64_c2_bm_bist.v ../technology/verilog/RM_IHPSG13_1P_1024x64_c2_bm_bist.v ../technology/verilog/RM_IHPSG13_1P_2048x64_c2_bm_bist.v ../technology/verilog/RM_IHPSG13_1P_256x48_c2_bm_bist.v ../ihp13/tc_sram_impl.sv ../ihp13/tc_clk.sv 
+# -- Compiling module AND2X1
+# -- Compiling module AND2X1P5
+# -- Compiling module AND2X2
+# -- Compiling module AND2X3
+# -- Compiling module AND3BX1
+# -- Compiling module AND3BX2
+# -- Compiling module AND3X1
+# -- Compiling module AND3X2
+# -- Compiling module AND4X1
+# -- Compiling module AND4X2
+# -- Compiling module ANTENNA2
+# -- Compiling module ANTENNA4
+# -- Compiling module ANTENNA8
+# -- Compiling module AO211X1
+# -- Compiling module AO211X2
+# -- Compiling module AO21X2
+# -- Compiling module AO22X1
+# -- Compiling module AO22X2
+# -- Compiling module AO31X1
+# -- Compiling module AO31X2
+# -- Compiling module AOAI211X1
+# -- Compiling module AOAI211X2
+# -- Compiling module AOI211X1
+# -- Compiling module AOI211X2
+# -- Compiling module AOI21BX1
+# -- Compiling module AOI21BX2
+# -- Compiling module AOI21X1
+# -- Compiling module AOI21X2
+# -- Compiling module AOI221X1
+# -- Compiling module AOI221X2
+# -- Compiling module AOI221X3
+# -- Compiling module AOI22X1
+# -- Compiling module AOI22X1P5
+# -- Compiling module AOI22X2
+# -- Compiling module AOI2B1X1
+# -- Compiling module AOI2B1X2
+# -- Compiling module AOI2B2BX1
+# -- Compiling module AOI2B2BX2
+# -- Compiling module AOI2B2X1
+# -- Compiling module AOI2B2X2
+# -- Compiling module AOI2BB2X1
+# -- Compiling module AOI2BB2X2
+# -- Compiling module AOI31X1
+# -- Compiling module AOI31X2
+# -- Compiling module BUFX1
+# -- Compiling module BUFX12
+# -- Compiling module BUFX16
+# -- Compiling module BUFX2
+# -- Compiling module BUFX24
+# -- Compiling module BUFX3
+# -- Compiling module BUFX32
+# -- Compiling module BUFX4
+# -- Compiling module BUFX44
+# -- Compiling module BUFX48
+# -- Compiling module BUFX6
+# -- Compiling module BUFX64
+# -- Compiling module BUFX8
+# -- Compiling module CGTSX1
+# -- Compiling module CGTSX1P5
+# -- Compiling module CGTSX2
+# -- Compiling module CGTSX3
+# -- Compiling module CGX3
+# -- Compiling module DECAP16
+# -- Compiling module DECAP32
+# -- Compiling module DECAP4
+# -- Compiling module DECAP8
+# -- Compiling module DFFMRQX2
+# -- Compiling module DFFQX1
+# -- Compiling module DFFQX1P5
+# -- Compiling module DFFQX2
+# -- Compiling module DFFQX3
+# -- Compiling module DFFQX4
+# -- Compiling module DFFQX6
+# -- Compiling module DFFRQ2X1
+# -- Compiling module DFFRQ2X1P5
+# -- Compiling module DFFRQ2X2
+# -- Compiling module DFFRQ2X3
+# -- Compiling module DFFRQ4X1
+# -- Compiling module DFFRQ4X1P5
+# -- Compiling module DFFRQ4X2
+# -- Compiling module DFFRQ4X3
+# -- Compiling module DFFRQX1
+# -- Compiling module DFFRQX1P5
+# -- Compiling module DFFRQX2
+# -- Compiling module DFFRQX3
+# -- Compiling module DFFRQX4
+# -- Compiling module DFFRQX6
+# -- Compiling module DFFRX1
+# -- Compiling module DFFRX1P5
+# -- Compiling module DFFRX2
+# -- Compiling module DFFRX3
+# -- Compiling module DFFRX4
+# -- Compiling module DFFRX6
+# -- Compiling module DLY1X2
+# -- Compiling module FAX1
+# -- Compiling module HAX2
+# -- Compiling module INVX1
+# -- Compiling module INVX14
+# -- Compiling module INVX16
+# -- Compiling module INVX2
+# -- Compiling module INVX3
+# -- Compiling module INVX32
+# -- Compiling module INVX4
+# -- Compiling module INVX6
+# -- Compiling module INVX64
+# -- Compiling module INVX8
+# -- Compiling module LATNQX1
+# -- Compiling module LATNQX2
+# -- Compiling module LATNQX3
+# -- Compiling module LATNRX1
+# -- Compiling module LATNRX1P5
+# -- Compiling module LATNRX2
+# -- Compiling module LATNRX3
+# -- Compiling module LATQX1
+# -- Compiling module LATQX2
+# -- Compiling module LATQX3
+# -- Compiling module LATRX1
+# -- Compiling module LATRX1P5
+# -- Compiling module LATRX2
+# -- Compiling module LATRX3
+# -- Compiling module MIN3X1
+# -- Compiling module MIN3X1P5
+# -- Compiling module MIN3X2
+# -- Compiling module MUX2X1
+# -- Compiling module MUX2X2
+# -- Compiling module MUXI2X1
+# -- Compiling module MUXI2X2
+# -- Compiling module MUXT4X1
+# -- Compiling module MUXT4X1P5
+# -- Compiling module MUXT4X2
+# -- Compiling module MUXT4X3
+# -- Compiling module NAND2BX1
+# -- Compiling module NAND2BX1P5
+# -- Compiling module NAND2BX2
+# -- Compiling module NAND2BX3
+# -- Compiling module NAND2BX4
+# -- Compiling module NAND2X1
+# -- Compiling module NAND2X1P5
+# -- Compiling module NAND2X2
+# -- Compiling module NAND2X3
+# -- Compiling module NAND2X4
+# -- Compiling module NAND3BX1
+# -- Compiling module NAND3BX2
+# -- Compiling module NAND3BX3
+# -- Compiling module NAND3X1
+# -- Compiling module NAND3X2
+# -- Compiling module NAND4BBX1
+# -- Compiling module NAND4BBX2
+# -- Compiling module NAND4BX1
+# -- Compiling module NAND4BX2
+# -- Compiling module NAND4X2
+# -- Compiling module NOR2BX1
+# -- Compiling module NOR2BX2
+# -- Compiling module NOR2X1
+# -- Compiling module NOR2X2
+# -- Compiling module NOR2X3
+# -- Compiling module NOR2X4
+# -- Compiling module NOR3BX1
+# -- Compiling module NOR3BX1P5
+# -- Compiling module NOR3BX2
+# -- Compiling module NOR3BX3
+# -- Compiling module NOR3X1
+# -- Compiling module NOR3X2
+# -- Compiling module NOR4BBX1
+# -- Compiling module NOR4BBX2
+# -- Compiling module NOR4BX1
+# -- Compiling module NOR4BX2
+# -- Compiling module NOR4X1
+# -- Compiling module NOR4X2
+# -- Compiling module OA211X1
+# -- Compiling module OA211X2
+# -- Compiling module OA21X2
+# -- Compiling module OAI211X1
+# -- Compiling module OAI211X2
+# -- Compiling module OAI21X1
+# -- Compiling module OAI21X2
+# -- Compiling module OAI221X1
+# -- Compiling module OAI221X2
+# -- Compiling module OAI22X1
+# -- Compiling module OAI22X2
+# -- Compiling module OAI2B2BX1
+# -- Compiling module OAI2B2BX1P5
+# -- Compiling module OAI2B2BX2
+# -- Compiling module OAI2B2BX3
+# -- Compiling module OAI2BB2X2
+# -- Compiling module OAI31X1
+# -- Compiling module OAI31X2
+# -- Compiling module OAOI211X1
+# -- Compiling module OAOI211X2
+# -- Compiling module OR2X1
+# -- Compiling module OR2X2
+# -- Compiling module OR2X3
+# -- Compiling module OR3BX1
+# -- Compiling module OR3BX2
+# -- Compiling module OR3X1
+# -- Compiling module OR3X2
+# -- Compiling module OR4X1
+# -- Compiling module OR4X2
+# -- Compiling module TBUFX1
+# -- Compiling module TBUFX2
+# -- Compiling module TIEHI
+# -- Compiling module TIELO
+# -- Compiling module TINVX1
+# -- Compiling module TINVX2
+# -- Compiling module XNOR2X1
+# -- Compiling module XNOR2X2
+# -- Compiling module XNOR3X1
+# -- Compiling module XNOR3X2
+# -- Compiling module XOR2X1
+# -- Compiling module XOR2X2
+# -- Compiling UDP altos_latch
+# -- Compiling UDP altos_dff_err
+# -- Compiling UDP altos_dff
+# -- Compiling UDP altos_dff_r_err
+# -- Compiling UDP altos_dff_r
+# -- Compiling UDP altos_dff_s_err
+# -- Compiling UDP altos_dff_s
+# -- Compiling UDP altos_dff_sr_err
+# -- Compiling UDP altos_dff_sr_0
+# -- Compiling UDP altos_dff_sr_1
+# -- Compiling UDP altos_latch_r
+# -- Compiling UDP altos_latch_s
+# -- Compiling UDP altos_latch_sr_0
+# -- Compiling UDP altos_latch_sr_1
+# -- Compiling module sg13cmos5l_Corner
+# -- Compiling module sg13cmos5l_Filler200
+# -- Compiling module sg13cmos5l_Filler400
+# -- Compiling module sg13cmos5l_Filler1000
+# -- Compiling module sg13cmos5l_Filler2000
+# -- Compiling module sg13cmos5l_Filler4000
+# -- Compiling module sg13cmos5l_Filler10000
+# -- Compiling module sg13cmos5l_IOPadIn
+# -- Compiling module sg13cmos5l_IOPadOut4mA
+# -- Compiling module sg13cmos5l_IOPadOut16mA
+# -- Compiling module sg13cmos5l_IOPadOut30mA
+# -- Compiling module sg13cmos5l_IOPadTriOut4mA
+# -- Compiling module sg13cmos5l_IOPadTriOut16mA
+# -- Compiling module sg13cmos5l_IOPadTriOut30mA
+# -- Compiling module sg13cmos5l_IOPadInOut4mA
+# -- Compiling module sg13cmos5l_IOPadInOut16mA
+# -- Compiling module sg13cmos5l_IOPadInOut30mA
+# -- Compiling module sg13cmos5l_IOPadAnalog
+# -- Compiling module sg13cmos5l_IOPadIOVss
+# -- Compiling module sg13cmos5l_IOPadIOVdd
+# -- Compiling module sg13cmos5l_IOPadVss
+# -- Compiling module sg13cmos5l_IOPadVdd
+# -- Compiling module FILLER1
+# -- Compiling module FILLER2
+# -- Compiling module FILLER4
+# -- Compiling module FILLER8
+# -- Compiling module FILLER16
+# -- Compiling module WELLTAP
+# -- Compiling module bondpad5l_70x70
+# -- Compiling module SRAM_1P_behavioral_bm_bist
+# -- Compiling module RM_IHPSG13_1P_64x64_c2_bm_bist
+# -- Compiling module RM_IHPSG13_1P_256x64_c2_bm_bist
+# -- Compiling module RM_IHPSG13_1P_512x64_c2_bm_bist
+# -- Compiling module RM_IHPSG13_1P_1024x64_c2_bm_bist
+# -- Compiling module RM_IHPSG13_1P_2048x64_c2_bm_bist
+# -- Compiling module RM_IHPSG13_1P_256x48_c2_bm_bist
+# -- Compiling module tc_sram_blackbox
+# -- Compiling module tc_sram_impl
+# ** Warning: ../ihp13/tc_sram_impl.sv(212): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(212): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(214): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(215): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(216): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(217): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(220): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(222): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(261): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(261): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(263): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(264): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(265): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(266): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(269): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(271): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(309): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(309): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(311): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(312): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(313): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(314): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(317): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../ihp13/tc_sram_impl.sv(319): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# -- Compiling module tc_clk_inverter
+# -- Compiling module tc_clk_buffer
+# -- Compiling module tc_clk_mux2
+# -- Compiling module tc_clk_xor2
+# -- Compiling module tc_clk_gating
+# 
+# Top level modules:
+# 	AND2X1
+# 	AND2X1P5
+# 	AND2X2
+# 	AND2X3
+# 	AND3BX1
+# 	AND3BX2
+# 	AND3X1
+# 	AND3X2
+# 	AND4X1
+# 	AND4X2
+# 	ANTENNA2
+# 	ANTENNA4
+# 	ANTENNA8
+# 	AO211X1
+# 	AO211X2
+# 	AO21X2
+# 	AO22X1
+# 	AO22X2
+# 	AO31X1
+# 	AO31X2
+# 	AOAI211X1
+# 	AOAI211X2
+# 	AOI211X1
+# 	AOI211X2
+# 	AOI21BX1
+# 	AOI21BX2
+# 	AOI21X1
+# 	AOI21X2
+# 	AOI221X1
+# 	AOI221X2
+# 	AOI221X3
+# 	AOI22X1
+# 	AOI22X1P5
+# 	AOI22X2
+# 	AOI2B1X1
+# 	AOI2B1X2
+# 	AOI2B2BX1
+# 	AOI2B2BX2
+# 	AOI2B2X1
+# 	AOI2B2X2
+# 	AOI2BB2X1
+# 	AOI2BB2X2
+# 	AOI31X1
+# 	AOI31X2
+# 	BUFX1
+# 	BUFX12
+# 	BUFX16
+# 	BUFX24
+# 	BUFX3
+# 	BUFX32
+# 	BUFX4
+# 	BUFX44
+# 	BUFX48
+# 	BUFX6
+# 	BUFX64
+# 	BUFX8
+# 	CGTSX1
+# 	CGTSX1P5
+# 	CGTSX3
+# 	CGX3
+# 	DECAP16
+# 	DECAP32
+# 	DECAP4
+# 	DECAP8
+# 	DFFMRQX2
+# 	DFFQX1
+# 	DFFQX1P5
+# 	DFFQX2
+# 	DFFQX3
+# 	DFFQX4
+# 	DFFQX6
+# 	DFFRQ2X1
+# 	DFFRQ2X1P5
+# 	DFFRQ2X2
+# 	DFFRQ2X3
+# 	DFFRQ4X1
+# 	DFFRQ4X1P5
+# 	DFFRQ4X2
+# 	DFFRQ4X3
+# 	DFFRQX1
+# 	DFFRQX1P5
+# 	DFFRQX2
+# 	DFFRQX3
+# 	DFFRQX4
+# 	DFFRQX6
+# 	DFFRX1
+# 	DFFRX1P5
+# 	DFFRX2
+# 	DFFRX3
+# 	DFFRX4
+# 	DFFRX6
+# 	DLY1X2
+# 	FAX1
+# 	HAX2
+# 	INVX1
+# 	INVX14
+# 	INVX16
+# 	INVX3
+# 	INVX32
+# 	INVX4
+# 	INVX6
+# 	INVX64
+# 	INVX8
+# 	LATNQX1
+# 	LATNQX2
+# 	LATNQX3
+# 	LATNRX1
+# 	LATNRX1P5
+# 	LATNRX2
+# 	LATNRX3
+# 	LATQX1
+# 	LATQX2
+# 	LATQX3
+# 	LATRX1
+# 	LATRX1P5
+# 	LATRX2
+# 	LATRX3
+# 	MIN3X1
+# 	MIN3X1P5
+# 	MIN3X2
+# 	MUX2X1
+# 	MUXI2X1
+# 	MUXI2X2
+# 	MUXT4X1
+# 	MUXT4X1P5
+# 	MUXT4X2
+# 	MUXT4X3
+# 	NAND2BX1
+# 	NAND2BX1P5
+# 	NAND2BX2
+# 	NAND2BX3
+# 	NAND2BX4
+# 	NAND2X1
+# 	NAND2X1P5
+# 	NAND2X2
+# 	NAND2X3
+# 	NAND2X4
+# 	NAND3BX1
+# 	NAND3BX2
+# 	NAND3BX3
+# 	NAND3X1
+# 	NAND3X2
+# 	NAND4BBX1
+# 	NAND4BBX2
+# 	NAND4BX1
+# 	NAND4BX2
+# 	NAND4X2
+# 	NOR2BX1
+# 	NOR2BX2
+# 	NOR2X1
+# 	NOR2X2
+# 	NOR2X3
+# 	NOR2X4
+# 	NOR3BX1
+# 	NOR3BX1P5
+# 	NOR3BX2
+# 	NOR3BX3
+# 	NOR3X1
+# 	NOR3X2
+# 	NOR4BBX1
+# 	NOR4BBX2
+# 	NOR4BX1
+# 	NOR4BX2
+# 	NOR4X1
+# 	NOR4X2
+# 	OA211X1
+# 	OA211X2
+# 	OA21X2
+# 	OAI211X1
+# 	OAI211X2
+# 	OAI21X1
+# 	OAI21X2
+# 	OAI221X1
+# 	OAI221X2
+# 	OAI22X1
+# 	OAI22X2
+# 	OAI2B2BX1
+# 	OAI2B2BX1P5
+# 	OAI2B2BX2
+# 	OAI2B2BX3
+# 	OAI2BB2X2
+# 	OAI31X1
+# 	OAI31X2
+# 	OAOI211X1
+# 	OAOI211X2
+# 	OR2X1
+# 	OR2X2
+# 	OR2X3
+# 	OR3BX1
+# 	OR3BX2
+# 	OR3X1
+# 	OR3X2
+# 	OR4X1
+# 	OR4X2
+# 	TBUFX1
+# 	TBUFX2
+# 	TIEHI
+# 	TIELO
+# 	TINVX1
+# 	TINVX2
+# 	XNOR2X1
+# 	XNOR2X2
+# 	XNOR3X1
+# 	XNOR3X2
+# 	XOR2X1
+# 	sg13cmos5l_Corner
+# 	sg13cmos5l_Filler200
+# 	sg13cmos5l_Filler400
+# 	sg13cmos5l_Filler1000
+# 	sg13cmos5l_Filler2000
+# 	sg13cmos5l_Filler4000
+# 	sg13cmos5l_Filler10000
+# 	sg13cmos5l_IOPadIn
+# 	sg13cmos5l_IOPadOut4mA
+# 	sg13cmos5l_IOPadOut16mA
+# 	sg13cmos5l_IOPadOut30mA
+# 	sg13cmos5l_IOPadTriOut4mA
+# 	sg13cmos5l_IOPadTriOut16mA
+# 	sg13cmos5l_IOPadTriOut30mA
+# 	sg13cmos5l_IOPadInOut4mA
+# 	sg13cmos5l_IOPadInOut16mA
+# 	sg13cmos5l_IOPadInOut30mA
+# 	sg13cmos5l_IOPadAnalog
+# 	sg13cmos5l_IOPadIOVss
+# 	sg13cmos5l_IOPadIOVdd
+# 	sg13cmos5l_IOPadVss
+# 	sg13cmos5l_IOPadVdd
+# 	FILLER1
+# 	FILLER2
+# 	FILLER4
+# 	FILLER8
+# 	FILLER16
+# 	WELLTAP
+# 	bondpad5l_70x70
+# 	RM_IHPSG13_1P_256x48_c2_bm_bist
+# 	tc_sram_blackbox
+# 	tc_sram_impl
+# 	tc_clk_inverter
+# 	tc_clk_buffer
+# 	tc_clk_mux2
+# 	tc_clk_xor2
+# 	tc_clk_gating
+# End time: 13:18:59 on May 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 24
+# QuestaSim-64 vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:18:59 on May 07,2026
+# vlog -incr ../openroad/out/main_chip.v 
+# -- Compiling module main_chip
+# 
+# Top level modules:
+# 	main_chip
+# End time: 13:19:00 on May 07,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 10.7b_1 Compiler 2018.07 Jul 26 2018
+# Start time: 13:19:00 on May 07,2026
+# vlog -incr -sv -svinputport=compat "+define+TARGET_NETLIST_OPENROAD" ../rtl/tb/main_tb.sv 
+# -- Compiling module main_tb
+# 
+# Top level modules:
+# 	main_tb
+# End time: 13:19:00 on May 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+#  exit

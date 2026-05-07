@@ -62,7 +62,7 @@ module SRAM_controller #(
   output logic 						ext_ack_o
 );
 
-  typedef enum logic [3:0] {IDLE, LATENCY_FROM_REG, READ_CONTROL, WRITE_SRAM, ENCODE_DATA, GET_DATA_GEMM, COMPUTE_DONE, READ_SRAM, FINAL_DATA} sram_ctrl_state; // ENABLE/DISABLE CHECK_INPUT
+  typedef enum logic [3:0] {IDLE, LATENCY_FROM_REG, READ_CONTROL, WRITE_SRAM, GET_DATA_GEMM, COMPUTE_DONE, READ_SRAM, FINAL_DATA} sram_ctrl_state; // ENABLE/DISABLE CHECK_INPUT
 
   localparam int unsigned SHIFT_REG_CYCLES = SRAM_DATA_WIDTH / NUM_OF_STREAMING_PORTS;
   localparam int unsigned SHIFT_REG_CNT_WIDTH = (SHIFT_REG_CYCLES <= 1) ? 1 : $clog2(SHIFT_REG_CYCLES);
@@ -177,7 +177,8 @@ module SRAM_controller #(
           
 	 if(input_sram_cnt_q == INPUT_SRAM_ACCESS_CYCLES - 1) begin 
 	   input_sram_cnt_d = '0;
-	   state_d = ENCODE_DATA;
+           GEMM_ctrl_packet_d = {select_GEMM_q, 1'b1};
+           state_d = GET_DATA_GEMM;
 
 	 end else begin
 	   input_sram_cnt_d = input_sram_cnt_q + 1;
@@ -187,11 +188,6 @@ module SRAM_controller #(
       end
     end  
       
-    ENCODE_DATA: begin
-    
-      GEMM_ctrl_packet_d = {select_GEMM_q, 1'b1};
-      state_d = GET_DATA_GEMM;
-    end
       
     GET_DATA_GEMM: begin
       if(done_i || done_pending_q) begin
