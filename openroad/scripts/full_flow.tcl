@@ -45,13 +45,14 @@ set ORDieHeight [expr {$ActualDieHeight - 2*$SealRingSize}];
 set ORCoreWidth [expr {$ORDieWidth - 2*$BondPadSize - 2*$PadDriverHeight - 2*$PowerRingSpacing}];
 set ORCoreHeight [expr {$ORDieHeight - 2*$BondPadSize - 2*$PadDriverHeight - 2*$PowerRingSpacing}];
 
-set chipH    $ORDieWidth
+set chipH    $ORDieHeight
 set chipW    $ORDieWidth
 
 set coreMargin [expr {$PadDriverHeight + $BondPadSize + $PowerRingSpacing}];
 
 initialize_floorplan -die_area "0 0 $chipW $chipH" -core_area "$coreMargin $coreMargin [expr $chipW-$coreMargin] [expr $chipH-$coreMargin]" -site "CoreSite"
 
+make_tracks
 ########################################################
 # 01-02: Padring
 ########################################################
@@ -70,8 +71,10 @@ set bank2_sram0 "u_main/inp_sram_2"
 
 # SRAM Size
 set RamMaster256x64   [[ord::get_db] findMaster "RM_IHPSG13_1P_256x64_c2_bm_bist"]
+set RamMaster64x64   [[ord::get_db] findMaster "RM_IHPSG13_1P_64x64_c2_bm_bist"]
 set RamSize256x64_W   [ord::dbu_to_microns [$RamMaster256x64 getWidth]]
 set RamSize256x64_H   [ord::dbu_to_microns [$RamMaster256x64 getHeight]]
+set RamSize64x64_H   [ord::dbu_to_microns [$RamMaster64x64 getHeight]]
 
 # Core size and coordinate
 set coreArea      [ord::get_core_area]
@@ -107,6 +110,8 @@ placeInstance $bank2_sram0 $X $Y MX
 
 cut_rows -halo_width_x 1 -halo_width_y 1
 
+insertTapCells
+
 ########################################################
 # 01-04: Global Connection (CHECK)
 ########################################################
@@ -114,14 +119,11 @@ cut_rows -halo_width_x 1 -halo_width_y 1
 # Defining Global Connection
 source scripts/power_connect.tcl
 
-make_tracks
-
-insertTapCells
-
 ########################################################
 # 01-05: Power Grid
 ########################################################
 source scripts/power_grid.tcl
+
 
 save_checkpoint Floorplan_Final.floorplan
 report_image "Floorplan_Final.floorplan" true

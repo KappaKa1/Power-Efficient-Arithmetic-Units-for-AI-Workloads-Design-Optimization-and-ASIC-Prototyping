@@ -30,7 +30,7 @@ if {[info exists power_grid_defined]} {
 ##########################################################################
 # Core Power Ring
 ## Space between pads and core -> used for power ring
-set PowRingSpace  35
+set PowRingSpace  80
 ## Spacing must meet TM2 rules
 set pgcrSpacing 4
 ## Width must meet TM2 rules
@@ -40,9 +40,9 @@ set pgcrOffset [expr ($PowRingSpace - $pgcrSpacing - 2 * $pgcrWidth) / 2]
 
 # TopMetal1 Core Power Grid
 set tpg1Width     3; # arbitrary number
-set tpg1Pitch    90; # multiple of pad-pitch
+set tpg1Pitch    122; # multiple of pad-pitch
 set tpg1Spacing  10; # big enough to skip over a pad
-set tpg1Offset   70; # offset from leftX of core
+set tpg1Offset   100; # offset from leftX of core
 
 set pg4Width      1; # two tracks on Metal4
 set pg4Pitch     90; # multiple of pad-pitch
@@ -61,7 +61,7 @@ set mprOffsetY 1.0
 ##  Core Power
 ##########################################################################
 # standard cell grid and rings
-define_pdn_grid -name {core_grid} -voltage_domains {CORE}
+define_pdn_grid -name core_grid -voltage_domains {CORE}
 
 # Top 1 - Top 2
 add_pdn_ring -grid {core_grid} \
@@ -79,10 +79,14 @@ add_pdn_stripe -grid {core_grid} -layer {Metal1} -width {0.32} -offset {0} -foll
 # Add stripes with less resistance
 add_pdn_stripe  -grid {core_grid} -layer {TopMetal1} -width $tpg1Width \
                 -pitch $tpg1Pitch -spacing $tpg1Spacing -offset $tpg1Offset \
-                -extend_to_core_ring -snap_to_grid -number_of_straps 7
+                -extend_to_core_ring -snap_to_grid
+
+#add_pdn_stripe  -grid {core_grid} -layer {Metal4} -width $tpg1Width \
+#                -pitch $tpg1Pitch -spacing $tpg1Spacing -offset $tpg1Offset \
+#                -extend_to_core_ring -snap_to_grid -number_of_straps 19
                 
 # Add VIAs
-add_pdn_connect -grid {core_grid} -layers {Metal4 Metal1}
+add_pdn_connect -grid core_grid -layers {Metal4 Metal1}
 
 ##########################################################################
 ##  SRAM power rings
@@ -114,4 +118,5 @@ sram_power "sram_64x64"  "RM_IHPSG13_1P_64x64_c2_bm_bist"
 ##########################################################################
 ##  Generate
 ##########################################################################
-#pdngen -failed_via_report ${report_dir}/01_${proj_name}_pdngen.rpt
+
+pdngen -failed_via_report ${report_dir}/01_${proj_name}_pdngen.rpt
