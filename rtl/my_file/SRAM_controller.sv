@@ -104,7 +104,7 @@ module SRAM_controller #(
   assign input_sram_addr_d = input_sram_cnt_q;
   assign output_sram_addr_d = output_sram_cnt_q;
   
-  assign sram_inp_addr_o = input_sram_addr_q % (INPUT_SRAM_ACCESS_CYCLES/2);
+  assign sram_inp_addr_o = input_sram_addr_q  & (INPUT_SRAM_ACCESS_CYCLES/2 - 1);
   assign sram_out_addr_o = output_sram_addr_q;
   assign sram_req_o = sram_req_q;
   assign sram_we_o = sram_we_q;
