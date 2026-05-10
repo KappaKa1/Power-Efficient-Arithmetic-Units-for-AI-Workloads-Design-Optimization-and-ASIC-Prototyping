@@ -128,8 +128,6 @@ source scripts/power_grid.tcl
 save_checkpoint Floorplan_Final.floorplan
 report_image "Floorplan_Final.floorplan" true
 
-pdngen -failed_via_report ${report_dir}/01_${proj_name}_pdngen.rpt
-
 ###############################################################################
 # Stage 02 PLACING AND TIMING 
 ###############################################################################
@@ -329,6 +327,8 @@ write_sdc out/main_chip.sdc
 # The ODB Database that stores the complete state of the design
 write_db out/main_chip.odb
 
+write_sdf -corner tt out/main_chip.sdf
+
 ###############################################################################
 # Stage 05: Generate SPEF file for parasitics
 ###############################################################################
@@ -360,5 +360,5 @@ report_power -corner tt
  #              = 1,015,729 / 58,552 ≈ 17.35
 
 
-read_vcd -scope main_tb/i_dut ../vsim/main_chip.vcd
-report_power -corner tt
+#read_vcd -scope main_tb/i_dut ../vsim/main_chip.vcd
+#report_power -corner tt
