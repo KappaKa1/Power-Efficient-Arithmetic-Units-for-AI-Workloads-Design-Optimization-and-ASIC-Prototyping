@@ -398,14 +398,30 @@ module main_tb#(
     we_i             = 1'b0;
     streamed_wdata_i = 16'h0000;
     
-    $display("\nComputing Non-inverted Data");
+    $display("\nComputing Non-inverted Data for GEMM 1");
     Control_Bits = {5'b00001, 3'b001, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_0.hex");
 
     repeat (20) @(posedge clk_i);
 
-    $display("\nComputing Inverted Data");
+    $display("\nComputing Non-inverted Data for GEMM 2");
+    Control_Bits = {5'b00010, 3'b001, 8'b00000000};
+    do_write_transaction(1'b0, Control_Bits);
+    compare_results("../Python/outputs/Golden_Model_Out_0.hex");
+
+    repeat (20) @(posedge clk_i);
+
+    $display("\nComputing Inverted Data for GEMM 2");
+    Control_Bits = {5'b00010, 3'b001, 8'b00000000};
+    do_write_transaction(1'b1, Control_Bits);
+    compare_results("../Python/outputs/Golden_Model_Out_1.hex");
+
+    $display("\n=== WRITE TRANSACTION DONE ===");
+
+    repeat (20) @(posedge clk_i);
+
+    $display("\nComputing Inverted Data for GEMM 1");
     Control_Bits = {5'b00001, 3'b001, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_1.hex");
@@ -413,6 +429,7 @@ module main_tb#(
     $display("\n=== WRITE TRANSACTION DONE ===");
 
     repeat (20) @(posedge clk_i);
+    
     $finish;
   end
 
