@@ -214,13 +214,13 @@ module main_tb#(
   //////////////////////
   `ifdef TARGET_NETLIST_OPENROAD // Runs in Vsim and QuestaSIM
     initial begin
-      #5205;
+      #5395;
       $display("@%t | [VCD] Start dump", $time);
       $dumpfile("main_chip.vcd");
       $dumpvars(0, i_dut);
         
-      // keep dumping for duration = 10,315- 5,205 = 5110 ns
-      #5110;
+      // keep dumping for duration = 10,525- 5,395 = 5130 ns
+      #5130;
 
       $display("@%t | [VCD] Stop dump", $time);
       $dumpoff;
@@ -343,10 +343,15 @@ module main_tb#(
 
       wait (ack_o == 1'b1);
       wait (ack_o != 1'b1);
-
+      
       // DUT note: wait 1 more cycle after ACK
       @(negedge clk_i);
       @(posedge clk_i);
+      
+      `ifdef TIMING_SIM
+        @(negedge clk_i);
+        @(posedge clk_i);
+      `endif
       
       for (int i = 0; i < 256; i++) begin
         read_data64(rx_word);
@@ -393,10 +398,16 @@ module main_tb#(
     end
   end
 
+
+  /////////////////
+  //  Testbench  //
+  /////////////////
   initial begin
     req_i            = 1'b0;
     we_i             = 1'b0;
     streamed_wdata_i = 16'h0000;
+    
+    $display("\n=== WRITE TRANSACTION DONE ===");
     
     $display("\nComputing Non-inverted Data for GEMM 1");
     Control_Bits = {5'b00001, 3'b001, 8'b00000000};
@@ -417,16 +428,12 @@ module main_tb#(
     do_write_transaction(1'b1, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_1.hex");
 
-    $display("\n=== WRITE TRANSACTION DONE ===");
-
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Inverted Data for GEMM 1");
     Control_Bits = {5'b00001, 3'b001, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_1.hex");
-
-    $display("\n=== WRITE TRANSACTION DONE ===");
 
     repeat (20) @(posedge clk_i);
     
