@@ -1,1 +1,5 @@
-scripts/full_flow.sh main_tb 1
+./full_flow.sh main_tb 1 1 (GUI) or scripts/full_flow.sh main_tb 1
+
+./scripts/full_flow.sh [testbench] [No-of-test] [0 = NO-GUI, 1 = GUI] [functional/timing]
+
+./scripts/full_flow.sh main_tb 1 0 timing
