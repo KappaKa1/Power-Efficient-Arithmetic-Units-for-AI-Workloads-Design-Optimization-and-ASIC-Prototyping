@@ -181,3 +181,4 @@ place_bondpad -bond $bondPadCell -offset {5.0 -70.0} pad_*
 
 # TODO 7: remove rows created by make_io_sites
 remove_io_rows
+
