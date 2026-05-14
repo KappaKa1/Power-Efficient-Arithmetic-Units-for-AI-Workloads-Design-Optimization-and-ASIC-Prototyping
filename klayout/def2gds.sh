@@ -4,11 +4,11 @@
 #
 # v1 Zerun Tue 27 Feb 13:49:08 CET 2024
 # - initial version
-source ../.setPDK.csh
+source ../setPDK.csh
 
 ### modify variables ###
-set topcell = <placeholder>
-set defpath = <placeholder>
+set topcell = main_chip
+set defpath = ./../openroad/out/main_chip.def
 #########################
 
 set outfile = ./out/${topcell}.gds

@@ -2,10 +2,10 @@
 
 # v1.0 Zerun Thu 29 Feb 16:16:23 CET 2024
 # - klayout batch mode running drc
-source ../.setPDK.csh
+source ../setPDK.csh
 ### set your gds and topcell ###
-set gds_path = <placeholder>
-set topcell  = <placeholder>
+set gds_path = ./out/main_chip.gds
+set topcell  = main_chip
 ################################
 
 #usage: 
