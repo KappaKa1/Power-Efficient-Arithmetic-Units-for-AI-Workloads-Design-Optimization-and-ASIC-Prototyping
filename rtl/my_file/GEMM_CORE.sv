@@ -21,14 +21,11 @@ module GEMM_CORE #(
   
   output logic[FINAL_DATA_WIDTH-1:0] 	final_results_o
 );
-  logic gated_clk;
-
   logic [SRAM_DATA_WIDTH - 1 : 0] 					operand_A_q, operand_A_d;
   logic [SRAM_DATA_WIDTH - 1 : 0] 					operand_B_q, operand_B_d;
   logic [FINAL_DATA_WIDTH - 1 : 0]					intermediate_result_q, intermediate_result_d;
   logic [FINAL_DATA_WIDTH - 1 : 0] 					final_results;
 
-  clock_gate cg (.clk_i(clk_i), .en_i(enable_i), .clk_o(gated_clk));
   generate
     if (MATMUL_TYPE == "TC_SKLANSKY_FUSED_SPEED") begin : gen_matmul_sklansky_speed
       matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed u_matmul (
@@ -86,7 +83,7 @@ module GEMM_CORE #(
   assign intermediate_result_d = (start_i | result_valid_i | done_i) ? '0 : final_results;
   assign final_results_o = final_results;
 
-  always_ff @(posedge gated_clk) begin
+  always_ff @(posedge clk_i) begin
     if (!rst_ni) begin
       operand_A_q <= '0;
       operand_B_q <= '0;

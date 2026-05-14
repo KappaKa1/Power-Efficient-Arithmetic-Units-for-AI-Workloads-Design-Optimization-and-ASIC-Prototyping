@@ -229,11 +229,6 @@ module main_tb#(
     final begin
         $dumpflush;
     end
-  `elsif TARGET_NETLIST_YOSYS // Runs in Verilator
-    initial begin
-      $dumpfile("waveform.vcd");
-      $dumpvars(0, main_tb);
-    end
   `else // Runs in Verilator
     initial begin
       $dumpfile("waveform.vcd");
@@ -305,6 +300,7 @@ module main_tb#(
   task automatic do_write_transaction(input bit invert_data, input logic [15:0] ctrl_packet);
     logic [63:0] curr_word;
     begin
+      wait (rst_ni == 1'b1);
       wait (ready_o == 1'b1);
       
       #TAppl

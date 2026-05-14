@@ -5518,7 +5518,6 @@ module \main$main_chip.u_main (clk_i, rst_ni, req_i, we_i, streamed_wdata_0_i, s
   wire initial64_rdata_9_;
   wire inp_sram_1_A_REN;
   wire inp_sram_2_A_REN;
-  wire \mul0.cg.clk_o ;
   wire \mul0.gen_matmul_sklansky_speed.u_matmul_y_0_0 ;
   wire \mul0.gen_matmul_sklansky_speed.u_matmul_y_0_1 ;
   wire \mul0.gen_matmul_sklansky_speed.u_matmul_y_0_2 ;
@@ -5873,7 +5872,6 @@ module \main$main_chip.u_main (clk_i, rst_ni, req_i, we_i, streamed_wdata_0_i, s
   wire \mul0.operand_B_q_9_ ;
   wire \mul0.result_valid_i ;
   wire \mul0.start_i ;
-  wire \mul1.cg.clk_o ;
   wire \mul1.gen_matmul_sklansky_area.u_matmul_y_0_0 ;
   wire \mul1.gen_matmul_sklansky_area.u_matmul_y_0_1 ;
   wire \mul1.gen_matmul_sklansky_area.u_matmul_y_0_2 ;
@@ -33129,16 +33127,10 @@ module \main$main_chip.u_main (clk_i, rst_ni, req_i, we_i, streamed_wdata_0_i, s
     .A_REN(inp_sram_2_A_REN),
     .A_WEN(\ctrl.sram_we_o_1_ )
   );
-  DFFQX1 \mul0.cg.en_i_reg  (
+  DFFQX1 \mul0.enable_i_reg  (
     .CK(clk_i),
     .D(_0405_),
     .Q(GEMM_enable_0_)
-  );
-  CGTSX1 \mul0.cg.u_cg  (
-    .CK(clk_i),
-    .E(GEMM_enable_0_),
-    .ECK(\mul0.cg.clk_o ),
-    .SE(_4391_)
   );
   \matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed$main_chip.u_main.mul0.gen_matmul_sklansky_speed.u_matmul  \mul0.gen_matmul_sklansky_speed.u_matmul  (
     .a_0_0_0_(\mul0.operand_A_q_0_ ),
@@ -33703,1682 +33695,1682 @@ module \main$main_chip.u_main (clk_i, rst_ni, req_i, we_i, streamed_wdata_0_i, s
     .y_3_3_9_(GEMM_results_1115_)
   );
   DFFQX1 \mul0.intermediate_result_q_0__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0406_),
     .Q(\mul0.intermediate_result_q_0_ )
   );
   DFFQX1 \mul0.intermediate_result_q_100__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0407_),
     .Q(\mul0.intermediate_result_q_100_ )
   );
   DFFQX1 \mul0.intermediate_result_q_101__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0408_),
     .Q(\mul0.intermediate_result_q_101_ )
   );
   DFFQX1 \mul0.intermediate_result_q_102__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0409_),
     .Q(\mul0.intermediate_result_q_102_ )
   );
   DFFQX1 \mul0.intermediate_result_q_103__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0410_),
     .Q(\mul0.intermediate_result_q_103_ )
   );
   DFFQX1 \mul0.intermediate_result_q_104__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0411_),
     .Q(\mul0.intermediate_result_q_104_ )
   );
   DFFQX1 \mul0.intermediate_result_q_105__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0412_),
     .Q(\mul0.intermediate_result_q_105_ )
   );
   DFFQX1 \mul0.intermediate_result_q_106__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0413_),
     .Q(\mul0.intermediate_result_q_106_ )
   );
   DFFQX1 \mul0.intermediate_result_q_107__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0414_),
     .Q(\mul0.intermediate_result_q_107_ )
   );
   DFFQX1 \mul0.intermediate_result_q_108__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0415_),
     .Q(\mul0.intermediate_result_q_108_ )
   );
   DFFQX1 \mul0.intermediate_result_q_109__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0416_),
     .Q(\mul0.intermediate_result_q_109_ )
   );
   DFFQX1 \mul0.intermediate_result_q_10__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0417_),
     .Q(\mul0.intermediate_result_q_10_ )
   );
   DFFQX1 \mul0.intermediate_result_q_110__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0418_),
     .Q(\mul0.intermediate_result_q_110_ )
   );
   DFFQX1 \mul0.intermediate_result_q_112__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0419_),
     .Q(\mul0.intermediate_result_q_112_ )
   );
   DFFQX1 \mul0.intermediate_result_q_113__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0420_),
     .Q(\mul0.intermediate_result_q_113_ )
   );
   DFFQX1 \mul0.intermediate_result_q_114__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0421_),
     .Q(\mul0.intermediate_result_q_114_ )
   );
   DFFQX1 \mul0.intermediate_result_q_115__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0422_),
     .Q(\mul0.intermediate_result_q_115_ )
   );
   DFFQX1 \mul0.intermediate_result_q_116__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0423_),
     .Q(\mul0.intermediate_result_q_116_ )
   );
   DFFQX1 \mul0.intermediate_result_q_117__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0424_),
     .Q(\mul0.intermediate_result_q_117_ )
   );
   DFFQX1 \mul0.intermediate_result_q_118__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0425_),
     .Q(\mul0.intermediate_result_q_118_ )
   );
   DFFQX1 \mul0.intermediate_result_q_119__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0426_),
     .Q(\mul0.intermediate_result_q_119_ )
   );
   DFFQX1 \mul0.intermediate_result_q_11__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0427_),
     .Q(\mul0.intermediate_result_q_11_ )
   );
   DFFQX1 \mul0.intermediate_result_q_120__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0428_),
     .Q(\mul0.intermediate_result_q_120_ )
   );
   DFFQX1 \mul0.intermediate_result_q_121__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0429_),
     .Q(\mul0.intermediate_result_q_121_ )
   );
   DFFQX1 \mul0.intermediate_result_q_122__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0430_),
     .Q(\mul0.intermediate_result_q_122_ )
   );
   DFFQX1 \mul0.intermediate_result_q_123__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0431_),
     .Q(\mul0.intermediate_result_q_123_ )
   );
   DFFQX1 \mul0.intermediate_result_q_124__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0432_),
     .Q(\mul0.intermediate_result_q_124_ )
   );
   DFFQX1 \mul0.intermediate_result_q_126__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0433_),
     .Q(\mul0.intermediate_result_q_126_ )
   );
   DFFQX1 \mul0.intermediate_result_q_127__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0434_),
     .Q(\mul0.intermediate_result_q_127_ )
   );
   DFFQX1 \mul0.intermediate_result_q_128__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0435_),
     .Q(\mul0.intermediate_result_q_128_ )
   );
   DFFQX1 \mul0.intermediate_result_q_129__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0436_),
     .Q(\mul0.intermediate_result_q_129_ )
   );
   DFFQX1 \mul0.intermediate_result_q_12__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0437_),
     .Q(\mul0.intermediate_result_q_12_ )
   );
   DFFQX1 \mul0.intermediate_result_q_130__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0438_),
     .Q(\mul0.intermediate_result_q_130_ )
   );
   DFFQX1 \mul0.intermediate_result_q_131__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0439_),
     .Q(\mul0.intermediate_result_q_131_ )
   );
   DFFQX1 \mul0.intermediate_result_q_132__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0440_),
     .Q(\mul0.intermediate_result_q_132_ )
   );
   DFFQX1 \mul0.intermediate_result_q_133__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0441_),
     .Q(\mul0.intermediate_result_q_133_ )
   );
   DFFQX1 \mul0.intermediate_result_q_134__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0442_),
     .Q(\mul0.intermediate_result_q_134_ )
   );
   DFFQX1 \mul0.intermediate_result_q_135__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0443_),
     .Q(\mul0.intermediate_result_q_135_ )
   );
   DFFQX1 \mul0.intermediate_result_q_136__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0444_),
     .Q(\mul0.intermediate_result_q_136_ )
   );
   DFFQX1 \mul0.intermediate_result_q_137__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0445_),
     .Q(\mul0.intermediate_result_q_137_ )
   );
   DFFQX1 \mul0.intermediate_result_q_138__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0446_),
     .Q(\mul0.intermediate_result_q_138_ )
   );
   DFFQX1 \mul0.intermediate_result_q_140__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0447_),
     .Q(\mul0.intermediate_result_q_140_ )
   );
   DFFQX1 \mul0.intermediate_result_q_141__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0448_),
     .Q(\mul0.intermediate_result_q_141_ )
   );
   DFFQX1 \mul0.intermediate_result_q_142__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0449_),
     .Q(\mul0.intermediate_result_q_142_ )
   );
   DFFQX1 \mul0.intermediate_result_q_143__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0450_),
     .Q(\mul0.intermediate_result_q_143_ )
   );
   DFFQX1 \mul0.intermediate_result_q_144__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0451_),
     .Q(\mul0.intermediate_result_q_144_ )
   );
   DFFQX1 \mul0.intermediate_result_q_145__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0452_),
     .Q(\mul0.intermediate_result_q_145_ )
   );
   DFFQX1 \mul0.intermediate_result_q_146__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0453_),
     .Q(\mul0.intermediate_result_q_146_ )
   );
   DFFQX1 \mul0.intermediate_result_q_147__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0454_),
     .Q(\mul0.intermediate_result_q_147_ )
   );
   DFFQX1 \mul0.intermediate_result_q_148__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0455_),
     .Q(\mul0.intermediate_result_q_148_ )
   );
   DFFQX1 \mul0.intermediate_result_q_149__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0456_),
     .Q(\mul0.intermediate_result_q_149_ )
   );
   DFFQX1 \mul0.intermediate_result_q_14__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0457_),
     .Q(\mul0.intermediate_result_q_14_ )
   );
   DFFQX1 \mul0.intermediate_result_q_150__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0458_),
     .Q(\mul0.intermediate_result_q_150_ )
   );
   DFFQX1 \mul0.intermediate_result_q_151__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0459_),
     .Q(\mul0.intermediate_result_q_151_ )
   );
   DFFQX1 \mul0.intermediate_result_q_152__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0460_),
     .Q(\mul0.intermediate_result_q_152_ )
   );
   DFFQX1 \mul0.intermediate_result_q_154__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0461_),
     .Q(\mul0.intermediate_result_q_154_ )
   );
   DFFQX1 \mul0.intermediate_result_q_155__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0462_),
     .Q(\mul0.intermediate_result_q_155_ )
   );
   DFFQX1 \mul0.intermediate_result_q_156__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0463_),
     .Q(\mul0.intermediate_result_q_156_ )
   );
   DFFQX1 \mul0.intermediate_result_q_157__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0464_),
     .Q(\mul0.intermediate_result_q_157_ )
   );
   DFFQX1 \mul0.intermediate_result_q_158__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0465_),
     .Q(\mul0.intermediate_result_q_158_ )
   );
   DFFQX1 \mul0.intermediate_result_q_159__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0466_),
     .Q(\mul0.intermediate_result_q_159_ )
   );
   DFFQX1 \mul0.intermediate_result_q_15__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0467_),
     .Q(\mul0.intermediate_result_q_15_ )
   );
   DFFQX1 \mul0.intermediate_result_q_160__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0468_),
     .Q(\mul0.intermediate_result_q_160_ )
   );
   DFFQX1 \mul0.intermediate_result_q_161__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0469_),
     .Q(\mul0.intermediate_result_q_161_ )
   );
   DFFQX1 \mul0.intermediate_result_q_162__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0470_),
     .Q(\mul0.intermediate_result_q_162_ )
   );
   DFFQX1 \mul0.intermediate_result_q_163__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0471_),
     .Q(\mul0.intermediate_result_q_163_ )
   );
   DFFQX1 \mul0.intermediate_result_q_164__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0472_),
     .Q(\mul0.intermediate_result_q_164_ )
   );
   DFFQX1 \mul0.intermediate_result_q_165__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0473_),
     .Q(\mul0.intermediate_result_q_165_ )
   );
   DFFQX1 \mul0.intermediate_result_q_166__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0474_),
     .Q(\mul0.intermediate_result_q_166_ )
   );
   DFFQX1 \mul0.intermediate_result_q_168__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0475_),
     .Q(\mul0.intermediate_result_q_168_ )
   );
   DFFQX1 \mul0.intermediate_result_q_169__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0476_),
     .Q(\mul0.intermediate_result_q_169_ )
   );
   DFFQX1 \mul0.intermediate_result_q_16__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0477_),
     .Q(\mul0.intermediate_result_q_16_ )
   );
   DFFQX1 \mul0.intermediate_result_q_170__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0478_),
     .Q(\mul0.intermediate_result_q_170_ )
   );
   DFFQX1 \mul0.intermediate_result_q_171__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0479_),
     .Q(\mul0.intermediate_result_q_171_ )
   );
   DFFQX1 \mul0.intermediate_result_q_172__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0480_),
     .Q(\mul0.intermediate_result_q_172_ )
   );
   DFFQX1 \mul0.intermediate_result_q_173__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0481_),
     .Q(\mul0.intermediate_result_q_173_ )
   );
   DFFQX1 \mul0.intermediate_result_q_174__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0482_),
     .Q(\mul0.intermediate_result_q_174_ )
   );
   DFFQX1 \mul0.intermediate_result_q_175__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0483_),
     .Q(\mul0.intermediate_result_q_175_ )
   );
   DFFQX1 \mul0.intermediate_result_q_176__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0484_),
     .Q(\mul0.intermediate_result_q_176_ )
   );
   DFFQX1 \mul0.intermediate_result_q_177__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0485_),
     .Q(\mul0.intermediate_result_q_177_ )
   );
   DFFQX1 \mul0.intermediate_result_q_178__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0486_),
     .Q(\mul0.intermediate_result_q_178_ )
   );
   DFFQX1 \mul0.intermediate_result_q_179__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0487_),
     .Q(\mul0.intermediate_result_q_179_ )
   );
   DFFQX1 \mul0.intermediate_result_q_17__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0488_),
     .Q(\mul0.intermediate_result_q_17_ )
   );
   DFFQX1 \mul0.intermediate_result_q_180__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0489_),
     .Q(\mul0.intermediate_result_q_180_ )
   );
   DFFQX1 \mul0.intermediate_result_q_182__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0490_),
     .Q(\mul0.intermediate_result_q_182_ )
   );
   DFFQX1 \mul0.intermediate_result_q_183__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0491_),
     .Q(\mul0.intermediate_result_q_183_ )
   );
   DFFQX1 \mul0.intermediate_result_q_184__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0492_),
     .Q(\mul0.intermediate_result_q_184_ )
   );
   DFFQX1 \mul0.intermediate_result_q_185__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0493_),
     .Q(\mul0.intermediate_result_q_185_ )
   );
   DFFQX1 \mul0.intermediate_result_q_186__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0494_),
     .Q(\mul0.intermediate_result_q_186_ )
   );
   DFFQX1 \mul0.intermediate_result_q_187__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0495_),
     .Q(\mul0.intermediate_result_q_187_ )
   );
   DFFQX1 \mul0.intermediate_result_q_188__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0496_),
     .Q(\mul0.intermediate_result_q_188_ )
   );
   DFFQX1 \mul0.intermediate_result_q_189__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0497_),
     .Q(\mul0.intermediate_result_q_189_ )
   );
   DFFQX1 \mul0.intermediate_result_q_18__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0498_),
     .Q(\mul0.intermediate_result_q_18_ )
   );
   DFFQX1 \mul0.intermediate_result_q_190__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0499_),
     .Q(\mul0.intermediate_result_q_190_ )
   );
   DFFQX1 \mul0.intermediate_result_q_191__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0500_),
     .Q(\mul0.intermediate_result_q_191_ )
   );
   DFFQX1 \mul0.intermediate_result_q_192__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0501_),
     .Q(\mul0.intermediate_result_q_192_ )
   );
   DFFQX1 \mul0.intermediate_result_q_193__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0502_),
     .Q(\mul0.intermediate_result_q_193_ )
   );
   DFFQX1 \mul0.intermediate_result_q_194__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0503_),
     .Q(\mul0.intermediate_result_q_194_ )
   );
   DFFQX1 \mul0.intermediate_result_q_196__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0504_),
     .Q(\mul0.intermediate_result_q_196_ )
   );
   DFFQX1 \mul0.intermediate_result_q_197__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0505_),
     .Q(\mul0.intermediate_result_q_197_ )
   );
   DFFQX1 \mul0.intermediate_result_q_198__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0506_),
     .Q(\mul0.intermediate_result_q_198_ )
   );
   DFFQX1 \mul0.intermediate_result_q_199__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0507_),
     .Q(\mul0.intermediate_result_q_199_ )
   );
   DFFQX1 \mul0.intermediate_result_q_19__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0508_),
     .Q(\mul0.intermediate_result_q_19_ )
   );
   DFFQX1 \mul0.intermediate_result_q_1__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0509_),
     .Q(\mul0.intermediate_result_q_1_ )
   );
   DFFQX1 \mul0.intermediate_result_q_200__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0510_),
     .Q(\mul0.intermediate_result_q_200_ )
   );
   DFFQX1 \mul0.intermediate_result_q_201__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0511_),
     .Q(\mul0.intermediate_result_q_201_ )
   );
   DFFQX1 \mul0.intermediate_result_q_202__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0512_),
     .Q(\mul0.intermediate_result_q_202_ )
   );
   DFFQX1 \mul0.intermediate_result_q_203__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0513_),
     .Q(\mul0.intermediate_result_q_203_ )
   );
   DFFQX1 \mul0.intermediate_result_q_204__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0514_),
     .Q(\mul0.intermediate_result_q_204_ )
   );
   DFFQX1 \mul0.intermediate_result_q_205__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0515_),
     .Q(\mul0.intermediate_result_q_205_ )
   );
   DFFQX1 \mul0.intermediate_result_q_206__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0516_),
     .Q(\mul0.intermediate_result_q_206_ )
   );
   DFFQX1 \mul0.intermediate_result_q_207__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0517_),
     .Q(\mul0.intermediate_result_q_207_ )
   );
   DFFQX1 \mul0.intermediate_result_q_208__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0518_),
     .Q(\mul0.intermediate_result_q_208_ )
   );
   DFFQX1 \mul0.intermediate_result_q_20__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0519_),
     .Q(\mul0.intermediate_result_q_20_ )
   );
   DFFQX1 \mul0.intermediate_result_q_210__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0520_),
     .Q(\mul0.intermediate_result_q_210_ )
   );
   DFFQX1 \mul0.intermediate_result_q_211__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0521_),
     .Q(\mul0.intermediate_result_q_211_ )
   );
   DFFQX1 \mul0.intermediate_result_q_212__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0522_),
     .Q(\mul0.intermediate_result_q_212_ )
   );
   DFFQX1 \mul0.intermediate_result_q_213__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0523_),
     .Q(\mul0.intermediate_result_q_213_ )
   );
   DFFQX1 \mul0.intermediate_result_q_214__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0524_),
     .Q(\mul0.intermediate_result_q_214_ )
   );
   DFFQX1 \mul0.intermediate_result_q_215__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0525_),
     .Q(\mul0.intermediate_result_q_215_ )
   );
   DFFQX1 \mul0.intermediate_result_q_216__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0526_),
     .Q(\mul0.intermediate_result_q_216_ )
   );
   DFFQX1 \mul0.intermediate_result_q_217__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0527_),
     .Q(\mul0.intermediate_result_q_217_ )
   );
   DFFQX1 \mul0.intermediate_result_q_218__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0528_),
     .Q(\mul0.intermediate_result_q_218_ )
   );
   DFFQX1 \mul0.intermediate_result_q_219__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0529_),
     .Q(\mul0.intermediate_result_q_219_ )
   );
   DFFQX1 \mul0.intermediate_result_q_21__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0530_),
     .Q(\mul0.intermediate_result_q_21_ )
   );
   DFFQX1 \mul0.intermediate_result_q_220__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0531_),
     .Q(\mul0.intermediate_result_q_220_ )
   );
   DFFQX1 \mul0.intermediate_result_q_221__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0532_),
     .Q(\mul0.intermediate_result_q_221_ )
   );
   DFFQX1 \mul0.intermediate_result_q_222__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0533_),
     .Q(\mul0.intermediate_result_q_222_ )
   );
   DFFQX1 \mul0.intermediate_result_q_22__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0534_),
     .Q(\mul0.intermediate_result_q_22_ )
   );
   DFFQX1 \mul0.intermediate_result_q_23__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0535_),
     .Q(\mul0.intermediate_result_q_23_ )
   );
   DFFQX1 \mul0.intermediate_result_q_24__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0536_),
     .Q(\mul0.intermediate_result_q_24_ )
   );
   DFFQX1 \mul0.intermediate_result_q_25__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0537_),
     .Q(\mul0.intermediate_result_q_25_ )
   );
   DFFQX1 \mul0.intermediate_result_q_26__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0538_),
     .Q(\mul0.intermediate_result_q_26_ )
   );
   DFFQX1 \mul0.intermediate_result_q_28__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0539_),
     .Q(\mul0.intermediate_result_q_28_ )
   );
   DFFQX1 \mul0.intermediate_result_q_29__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0540_),
     .Q(\mul0.intermediate_result_q_29_ )
   );
   DFFQX1 \mul0.intermediate_result_q_2__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0541_),
     .Q(\mul0.intermediate_result_q_2_ )
   );
   DFFQX1 \mul0.intermediate_result_q_30__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0542_),
     .Q(\mul0.intermediate_result_q_30_ )
   );
   DFFQX1 \mul0.intermediate_result_q_31__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0543_),
     .Q(\mul0.intermediate_result_q_31_ )
   );
   DFFQX1 \mul0.intermediate_result_q_32__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0544_),
     .Q(\mul0.intermediate_result_q_32_ )
   );
   DFFQX1 \mul0.intermediate_result_q_33__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0545_),
     .Q(\mul0.intermediate_result_q_33_ )
   );
   DFFQX1 \mul0.intermediate_result_q_34__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0546_),
     .Q(\mul0.intermediate_result_q_34_ )
   );
   DFFQX1 \mul0.intermediate_result_q_35__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0547_),
     .Q(\mul0.intermediate_result_q_35_ )
   );
   DFFQX1 \mul0.intermediate_result_q_36__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0548_),
     .Q(\mul0.intermediate_result_q_36_ )
   );
   DFFQX1 \mul0.intermediate_result_q_37__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0549_),
     .Q(\mul0.intermediate_result_q_37_ )
   );
   DFFQX1 \mul0.intermediate_result_q_38__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0550_),
     .Q(\mul0.intermediate_result_q_38_ )
   );
   DFFQX1 \mul0.intermediate_result_q_39__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0551_),
     .Q(\mul0.intermediate_result_q_39_ )
   );
   DFFQX1 \mul0.intermediate_result_q_3__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0552_),
     .Q(\mul0.intermediate_result_q_3_ )
   );
   DFFQX1 \mul0.intermediate_result_q_40__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0553_),
     .Q(\mul0.intermediate_result_q_40_ )
   );
   DFFQX1 \mul0.intermediate_result_q_42__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0554_),
     .Q(\mul0.intermediate_result_q_42_ )
   );
   DFFQX1 \mul0.intermediate_result_q_43__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0555_),
     .Q(\mul0.intermediate_result_q_43_ )
   );
   DFFQX1 \mul0.intermediate_result_q_44__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0556_),
     .Q(\mul0.intermediate_result_q_44_ )
   );
   DFFQX1 \mul0.intermediate_result_q_45__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0557_),
     .Q(\mul0.intermediate_result_q_45_ )
   );
   DFFQX1 \mul0.intermediate_result_q_46__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0558_),
     .Q(\mul0.intermediate_result_q_46_ )
   );
   DFFQX1 \mul0.intermediate_result_q_47__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0559_),
     .Q(\mul0.intermediate_result_q_47_ )
   );
   DFFQX1 \mul0.intermediate_result_q_48__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0560_),
     .Q(\mul0.intermediate_result_q_48_ )
   );
   DFFQX1 \mul0.intermediate_result_q_49__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0561_),
     .Q(\mul0.intermediate_result_q_49_ )
   );
   DFFQX1 \mul0.intermediate_result_q_4__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0562_),
     .Q(\mul0.intermediate_result_q_4_ )
   );
   DFFQX1 \mul0.intermediate_result_q_50__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0563_),
     .Q(\mul0.intermediate_result_q_50_ )
   );
   DFFQX1 \mul0.intermediate_result_q_51__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0564_),
     .Q(\mul0.intermediate_result_q_51_ )
   );
   DFFQX1 \mul0.intermediate_result_q_52__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0565_),
     .Q(\mul0.intermediate_result_q_52_ )
   );
   DFFQX1 \mul0.intermediate_result_q_53__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0566_),
     .Q(\mul0.intermediate_result_q_53_ )
   );
   DFFQX1 \mul0.intermediate_result_q_54__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0567_),
     .Q(\mul0.intermediate_result_q_54_ )
   );
   DFFQX1 \mul0.intermediate_result_q_56__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0568_),
     .Q(\mul0.intermediate_result_q_56_ )
   );
   DFFQX1 \mul0.intermediate_result_q_57__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0569_),
     .Q(\mul0.intermediate_result_q_57_ )
   );
   DFFQX1 \mul0.intermediate_result_q_58__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0570_),
     .Q(\mul0.intermediate_result_q_58_ )
   );
   DFFQX1 \mul0.intermediate_result_q_59__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0571_),
     .Q(\mul0.intermediate_result_q_59_ )
   );
   DFFQX1 \mul0.intermediate_result_q_5__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0572_),
     .Q(\mul0.intermediate_result_q_5_ )
   );
   DFFQX1 \mul0.intermediate_result_q_60__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0573_),
     .Q(\mul0.intermediate_result_q_60_ )
   );
   DFFQX1 \mul0.intermediate_result_q_61__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0574_),
     .Q(\mul0.intermediate_result_q_61_ )
   );
   DFFQX1 \mul0.intermediate_result_q_62__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0575_),
     .Q(\mul0.intermediate_result_q_62_ )
   );
   DFFQX1 \mul0.intermediate_result_q_63__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0576_),
     .Q(\mul0.intermediate_result_q_63_ )
   );
   DFFQX1 \mul0.intermediate_result_q_64__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0577_),
     .Q(\mul0.intermediate_result_q_64_ )
   );
   DFFQX1 \mul0.intermediate_result_q_65__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0578_),
     .Q(\mul0.intermediate_result_q_65_ )
   );
   DFFQX1 \mul0.intermediate_result_q_66__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0579_),
     .Q(\mul0.intermediate_result_q_66_ )
   );
   DFFQX1 \mul0.intermediate_result_q_67__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0580_),
     .Q(\mul0.intermediate_result_q_67_ )
   );
   DFFQX1 \mul0.intermediate_result_q_68__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0581_),
     .Q(\mul0.intermediate_result_q_68_ )
   );
   DFFQX1 \mul0.intermediate_result_q_6__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0582_),
     .Q(\mul0.intermediate_result_q_6_ )
   );
   DFFQX1 \mul0.intermediate_result_q_70__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0583_),
     .Q(\mul0.intermediate_result_q_70_ )
   );
   DFFQX1 \mul0.intermediate_result_q_71__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0584_),
     .Q(\mul0.intermediate_result_q_71_ )
   );
   DFFQX1 \mul0.intermediate_result_q_72__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0585_),
     .Q(\mul0.intermediate_result_q_72_ )
   );
   DFFQX1 \mul0.intermediate_result_q_73__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0586_),
     .Q(\mul0.intermediate_result_q_73_ )
   );
   DFFQX1 \mul0.intermediate_result_q_74__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0587_),
     .Q(\mul0.intermediate_result_q_74_ )
   );
   DFFQX1 \mul0.intermediate_result_q_75__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0588_),
     .Q(\mul0.intermediate_result_q_75_ )
   );
   DFFQX1 \mul0.intermediate_result_q_76__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0589_),
     .Q(\mul0.intermediate_result_q_76_ )
   );
   DFFQX1 \mul0.intermediate_result_q_77__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0590_),
     .Q(\mul0.intermediate_result_q_77_ )
   );
   DFFQX1 \mul0.intermediate_result_q_78__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0591_),
     .Q(\mul0.intermediate_result_q_78_ )
   );
   DFFQX1 \mul0.intermediate_result_q_79__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0592_),
     .Q(\mul0.intermediate_result_q_79_ )
   );
   DFFQX1 \mul0.intermediate_result_q_7__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0593_),
     .Q(\mul0.intermediate_result_q_7_ )
   );
   DFFQX1 \mul0.intermediate_result_q_80__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0594_),
     .Q(\mul0.intermediate_result_q_80_ )
   );
   DFFQX1 \mul0.intermediate_result_q_81__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0595_),
     .Q(\mul0.intermediate_result_q_81_ )
   );
   DFFQX1 \mul0.intermediate_result_q_82__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0596_),
     .Q(\mul0.intermediate_result_q_82_ )
   );
   DFFQX1 \mul0.intermediate_result_q_84__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0597_),
     .Q(\mul0.intermediate_result_q_84_ )
   );
   DFFQX1 \mul0.intermediate_result_q_85__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0598_),
     .Q(\mul0.intermediate_result_q_85_ )
   );
   DFFQX1 \mul0.intermediate_result_q_86__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0599_),
     .Q(\mul0.intermediate_result_q_86_ )
   );
   DFFQX1 \mul0.intermediate_result_q_87__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0600_),
     .Q(\mul0.intermediate_result_q_87_ )
   );
   DFFQX1 \mul0.intermediate_result_q_88__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0601_),
     .Q(\mul0.intermediate_result_q_88_ )
   );
   DFFQX1 \mul0.intermediate_result_q_89__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0602_),
     .Q(\mul0.intermediate_result_q_89_ )
   );
   DFFQX1 \mul0.intermediate_result_q_8__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0603_),
     .Q(\mul0.intermediate_result_q_8_ )
   );
   DFFQX1 \mul0.intermediate_result_q_90__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0604_),
     .Q(\mul0.intermediate_result_q_90_ )
   );
   DFFQX1 \mul0.intermediate_result_q_91__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0605_),
     .Q(\mul0.intermediate_result_q_91_ )
   );
   DFFQX1 \mul0.intermediate_result_q_92__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0606_),
     .Q(\mul0.intermediate_result_q_92_ )
   );
   DFFQX1 \mul0.intermediate_result_q_93__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0607_),
     .Q(\mul0.intermediate_result_q_93_ )
   );
   DFFQX1 \mul0.intermediate_result_q_94__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0608_),
     .Q(\mul0.intermediate_result_q_94_ )
   );
   DFFQX1 \mul0.intermediate_result_q_95__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0609_),
     .Q(\mul0.intermediate_result_q_95_ )
   );
   DFFQX1 \mul0.intermediate_result_q_96__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0610_),
     .Q(\mul0.intermediate_result_q_96_ )
   );
   DFFQX1 \mul0.intermediate_result_q_98__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0611_),
     .Q(\mul0.intermediate_result_q_98_ )
   );
   DFFQX1 \mul0.intermediate_result_q_99__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0612_),
     .Q(\mul0.intermediate_result_q_99_ )
   );
   DFFQX1 \mul0.intermediate_result_q_9__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0613_),
     .Q(\mul0.intermediate_result_q_9_ )
   );
   DFFQX1 \mul0.operand_A_q_0__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0614_),
     .Q(\mul0.operand_A_q_0_ )
   );
   DFFQX1 \mul0.operand_A_q_10__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0615_),
     .Q(\mul0.operand_A_q_10_ )
   );
   DFFQX1 \mul0.operand_A_q_11__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0616_),
     .Q(\mul0.operand_A_q_11_ )
   );
   DFFQX1 \mul0.operand_A_q_12__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0617_),
     .Q(\mul0.operand_A_q_12_ )
   );
   DFFQX1 \mul0.operand_A_q_13__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0618_),
     .Q(\mul0.operand_A_q_13_ )
   );
   DFFQX1 \mul0.operand_A_q_14__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0619_),
     .Q(\mul0.operand_A_q_14_ )
   );
   DFFQX1 \mul0.operand_A_q_15__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0620_),
     .Q(\mul0.operand_A_q_15_ )
   );
   DFFQX1 \mul0.operand_A_q_16__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0621_),
     .Q(\mul0.operand_A_q_16_ )
   );
   DFFQX1 \mul0.operand_A_q_17__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0622_),
     .Q(\mul0.operand_A_q_17_ )
   );
   DFFQX1 \mul0.operand_A_q_18__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0623_),
     .Q(\mul0.operand_A_q_18_ )
   );
   DFFQX1 \mul0.operand_A_q_19__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0624_),
     .Q(\mul0.operand_A_q_19_ )
   );
   DFFQX1 \mul0.operand_A_q_1__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0625_),
     .Q(\mul0.operand_A_q_1_ )
   );
   DFFQX1 \mul0.operand_A_q_20__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0626_),
     .Q(\mul0.operand_A_q_20_ )
   );
   DFFQX1 \mul0.operand_A_q_21__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0627_),
     .Q(\mul0.operand_A_q_21_ )
   );
   DFFQX1 \mul0.operand_A_q_22__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0628_),
     .Q(\mul0.operand_A_q_22_ )
   );
   DFFQX1 \mul0.operand_A_q_23__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0629_),
     .Q(\mul0.operand_A_q_23_ )
   );
   DFFQX1 \mul0.operand_A_q_24__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0630_),
     .Q(\mul0.operand_A_q_24_ )
   );
   DFFQX1 \mul0.operand_A_q_25__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0631_),
     .Q(\mul0.operand_A_q_25_ )
   );
   DFFQX1 \mul0.operand_A_q_26__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0632_),
     .Q(\mul0.operand_A_q_26_ )
   );
   DFFQX1 \mul0.operand_A_q_27__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0633_),
     .Q(\mul0.operand_A_q_27_ )
   );
   DFFQX1 \mul0.operand_A_q_28__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0634_),
     .Q(\mul0.operand_A_q_28_ )
   );
   DFFQX1 \mul0.operand_A_q_29__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0635_),
     .Q(\mul0.operand_A_q_29_ )
   );
   DFFQX1 \mul0.operand_A_q_2__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0636_),
     .Q(\mul0.operand_A_q_2_ )
   );
   DFFQX1 \mul0.operand_A_q_30__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0637_),
     .Q(\mul0.operand_A_q_30_ )
   );
   DFFQX1 \mul0.operand_A_q_31__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0638_),
     .Q(\mul0.operand_A_q_31_ )
   );
   DFFQX1 \mul0.operand_A_q_32__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0639_),
     .Q(\mul0.operand_A_q_32_ )
   );
   DFFQX1 \mul0.operand_A_q_33__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0640_),
     .Q(\mul0.operand_A_q_33_ )
   );
   DFFQX1 \mul0.operand_A_q_34__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0641_),
     .Q(\mul0.operand_A_q_34_ )
   );
   DFFQX1 \mul0.operand_A_q_35__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0642_),
     .Q(\mul0.operand_A_q_35_ )
   );
   DFFQX1 \mul0.operand_A_q_36__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0643_),
     .Q(\mul0.operand_A_q_36_ )
   );
   DFFQX1 \mul0.operand_A_q_37__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0644_),
     .Q(\mul0.operand_A_q_37_ )
   );
   DFFQX1 \mul0.operand_A_q_38__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0645_),
     .Q(\mul0.operand_A_q_38_ )
   );
   DFFQX1 \mul0.operand_A_q_39__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0646_),
     .Q(\mul0.operand_A_q_39_ )
   );
   DFFQX1 \mul0.operand_A_q_3__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0647_),
     .Q(\mul0.operand_A_q_3_ )
   );
   DFFQX1 \mul0.operand_A_q_40__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0648_),
     .Q(\mul0.operand_A_q_40_ )
   );
   DFFQX1 \mul0.operand_A_q_41__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0649_),
     .Q(\mul0.operand_A_q_41_ )
   );
   DFFQX1 \mul0.operand_A_q_42__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0650_),
     .Q(\mul0.operand_A_q_42_ )
   );
   DFFQX1 \mul0.operand_A_q_43__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0651_),
     .Q(\mul0.operand_A_q_43_ )
   );
   DFFQX1 \mul0.operand_A_q_44__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0652_),
     .Q(\mul0.operand_A_q_44_ )
   );
   DFFQX1 \mul0.operand_A_q_45__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0653_),
     .Q(\mul0.operand_A_q_45_ )
   );
   DFFQX1 \mul0.operand_A_q_46__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0654_),
     .Q(\mul0.operand_A_q_46_ )
   );
   DFFQX1 \mul0.operand_A_q_47__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0655_),
     .Q(\mul0.operand_A_q_47_ )
   );
   DFFQX1 \mul0.operand_A_q_48__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0656_),
     .Q(\mul0.operand_A_q_48_ )
   );
   DFFQX1 \mul0.operand_A_q_49__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0657_),
     .Q(\mul0.operand_A_q_49_ )
   );
   DFFQX1 \mul0.operand_A_q_4__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0658_),
     .Q(\mul0.operand_A_q_4_ )
   );
   DFFQX1 \mul0.operand_A_q_50__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0659_),
     .Q(\mul0.operand_A_q_50_ )
   );
   DFFQX1 \mul0.operand_A_q_51__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0660_),
     .Q(\mul0.operand_A_q_51_ )
   );
   DFFQX1 \mul0.operand_A_q_52__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0661_),
     .Q(\mul0.operand_A_q_52_ )
   );
   DFFQX1 \mul0.operand_A_q_53__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0662_),
     .Q(\mul0.operand_A_q_53_ )
   );
   DFFQX1 \mul0.operand_A_q_54__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0663_),
     .Q(\mul0.operand_A_q_54_ )
   );
   DFFQX1 \mul0.operand_A_q_55__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0664_),
     .Q(\mul0.operand_A_q_55_ )
   );
   DFFQX1 \mul0.operand_A_q_56__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0665_),
     .Q(\mul0.operand_A_q_56_ )
   );
   DFFQX1 \mul0.operand_A_q_57__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0666_),
     .Q(\mul0.operand_A_q_57_ )
   );
   DFFQX1 \mul0.operand_A_q_58__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0667_),
     .Q(\mul0.operand_A_q_58_ )
   );
   DFFQX1 \mul0.operand_A_q_59__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0668_),
     .Q(\mul0.operand_A_q_59_ )
   );
   DFFQX1 \mul0.operand_A_q_5__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0669_),
     .Q(\mul0.operand_A_q_5_ )
   );
   DFFQX1 \mul0.operand_A_q_60__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0670_),
     .Q(\mul0.operand_A_q_60_ )
   );
   DFFQX1 \mul0.operand_A_q_61__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0671_),
     .Q(\mul0.operand_A_q_61_ )
   );
   DFFQX1 \mul0.operand_A_q_62__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0672_),
     .Q(\mul0.operand_A_q_62_ )
   );
   DFFQX1 \mul0.operand_A_q_63__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0673_),
     .Q(\mul0.operand_A_q_63_ )
   );
   DFFQX1 \mul0.operand_A_q_6__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0674_),
     .Q(\mul0.operand_A_q_6_ )
   );
   DFFQX1 \mul0.operand_A_q_7__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0675_),
     .Q(\mul0.operand_A_q_7_ )
   );
   DFFQX1 \mul0.operand_A_q_8__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0676_),
     .Q(\mul0.operand_A_q_8_ )
   );
   DFFQX1 \mul0.operand_A_q_9__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0677_),
     .Q(\mul0.operand_A_q_9_ )
   );
   DFFQX1 \mul0.operand_B_q_0__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0678_),
     .Q(\mul0.operand_B_q_0_ )
   );
   DFFQX1 \mul0.operand_B_q_10__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0679_),
     .Q(\mul0.operand_B_q_10_ )
   );
   DFFQX1 \mul0.operand_B_q_11__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0680_),
     .Q(\mul0.operand_B_q_11_ )
   );
   DFFQX1 \mul0.operand_B_q_12__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0681_),
     .Q(\mul0.operand_B_q_12_ )
   );
   DFFQX1 \mul0.operand_B_q_13__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0682_),
     .Q(\mul0.operand_B_q_13_ )
   );
   DFFQX1 \mul0.operand_B_q_14__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0683_),
     .Q(\mul0.operand_B_q_14_ )
   );
   DFFQX1 \mul0.operand_B_q_15__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0684_),
     .Q(\mul0.operand_B_q_15_ )
   );
   DFFQX1 \mul0.operand_B_q_16__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0685_),
     .Q(\mul0.operand_B_q_16_ )
   );
   DFFQX1 \mul0.operand_B_q_17__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0686_),
     .Q(\mul0.operand_B_q_17_ )
   );
   DFFQX1 \mul0.operand_B_q_18__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0687_),
     .Q(\mul0.operand_B_q_18_ )
   );
   DFFQX1 \mul0.operand_B_q_19__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0688_),
     .Q(\mul0.operand_B_q_19_ )
   );
   DFFQX1 \mul0.operand_B_q_1__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0689_),
     .Q(\mul0.operand_B_q_1_ )
   );
   DFFQX1 \mul0.operand_B_q_20__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0690_),
     .Q(\mul0.operand_B_q_20_ )
   );
   DFFQX1 \mul0.operand_B_q_21__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0691_),
     .Q(\mul0.operand_B_q_21_ )
   );
   DFFQX1 \mul0.operand_B_q_22__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0692_),
     .Q(\mul0.operand_B_q_22_ )
   );
   DFFQX1 \mul0.operand_B_q_23__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0693_),
     .Q(\mul0.operand_B_q_23_ )
   );
   DFFQX1 \mul0.operand_B_q_24__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0694_),
     .Q(\mul0.operand_B_q_24_ )
   );
   DFFQX1 \mul0.operand_B_q_25__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0695_),
     .Q(\mul0.operand_B_q_25_ )
   );
   DFFQX1 \mul0.operand_B_q_26__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0696_),
     .Q(\mul0.operand_B_q_26_ )
   );
   DFFQX1 \mul0.operand_B_q_27__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0697_),
     .Q(\mul0.operand_B_q_27_ )
   );
   DFFQX1 \mul0.operand_B_q_28__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0698_),
     .Q(\mul0.operand_B_q_28_ )
   );
   DFFQX1 \mul0.operand_B_q_29__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0699_),
     .Q(\mul0.operand_B_q_29_ )
   );
   DFFQX1 \mul0.operand_B_q_2__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0700_),
     .Q(\mul0.operand_B_q_2_ )
   );
   DFFQX1 \mul0.operand_B_q_30__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0701_),
     .Q(\mul0.operand_B_q_30_ )
   );
   DFFQX1 \mul0.operand_B_q_31__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0702_),
     .Q(\mul0.operand_B_q_31_ )
   );
   DFFQX1 \mul0.operand_B_q_32__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0703_),
     .Q(\mul0.operand_B_q_32_ )
   );
   DFFQX1 \mul0.operand_B_q_33__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0704_),
     .Q(\mul0.operand_B_q_33_ )
   );
   DFFQX1 \mul0.operand_B_q_34__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0705_),
     .Q(\mul0.operand_B_q_34_ )
   );
   DFFQX1 \mul0.operand_B_q_35__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0706_),
     .Q(\mul0.operand_B_q_35_ )
   );
   DFFQX1 \mul0.operand_B_q_36__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0707_),
     .Q(\mul0.operand_B_q_36_ )
   );
   DFFQX1 \mul0.operand_B_q_37__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0708_),
     .Q(\mul0.operand_B_q_37_ )
   );
   DFFQX1 \mul0.operand_B_q_38__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0709_),
     .Q(\mul0.operand_B_q_38_ )
   );
   DFFQX1 \mul0.operand_B_q_39__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0710_),
     .Q(\mul0.operand_B_q_39_ )
   );
   DFFQX1 \mul0.operand_B_q_3__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0711_),
     .Q(\mul0.operand_B_q_3_ )
   );
   DFFQX1 \mul0.operand_B_q_40__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0712_),
     .Q(\mul0.operand_B_q_40_ )
   );
   DFFQX1 \mul0.operand_B_q_41__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0713_),
     .Q(\mul0.operand_B_q_41_ )
   );
   DFFQX1 \mul0.operand_B_q_42__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0714_),
     .Q(\mul0.operand_B_q_42_ )
   );
   DFFQX1 \mul0.operand_B_q_43__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0715_),
     .Q(\mul0.operand_B_q_43_ )
   );
   DFFQX1 \mul0.operand_B_q_44__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0716_),
     .Q(\mul0.operand_B_q_44_ )
   );
   DFFQX1 \mul0.operand_B_q_45__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0717_),
     .Q(\mul0.operand_B_q_45_ )
   );
   DFFQX1 \mul0.operand_B_q_46__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0718_),
     .Q(\mul0.operand_B_q_46_ )
   );
   DFFQX1 \mul0.operand_B_q_47__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0719_),
     .Q(\mul0.operand_B_q_47_ )
   );
   DFFQX1 \mul0.operand_B_q_48__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0720_),
     .Q(\mul0.operand_B_q_48_ )
   );
   DFFQX1 \mul0.operand_B_q_49__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0721_),
     .Q(\mul0.operand_B_q_49_ )
   );
   DFFQX1 \mul0.operand_B_q_4__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0722_),
     .Q(\mul0.operand_B_q_4_ )
   );
   DFFQX1 \mul0.operand_B_q_50__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0723_),
     .Q(\mul0.operand_B_q_50_ )
   );
   DFFQX1 \mul0.operand_B_q_51__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0724_),
     .Q(\mul0.operand_B_q_51_ )
   );
   DFFQX1 \mul0.operand_B_q_52__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0725_),
     .Q(\mul0.operand_B_q_52_ )
   );
   DFFQX1 \mul0.operand_B_q_53__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0726_),
     .Q(\mul0.operand_B_q_53_ )
   );
   DFFQX1 \mul0.operand_B_q_54__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0727_),
     .Q(\mul0.operand_B_q_54_ )
   );
   DFFQX1 \mul0.operand_B_q_55__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0728_),
     .Q(\mul0.operand_B_q_55_ )
   );
   DFFQX1 \mul0.operand_B_q_56__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0729_),
     .Q(\mul0.operand_B_q_56_ )
   );
   DFFQX1 \mul0.operand_B_q_57__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0730_),
     .Q(\mul0.operand_B_q_57_ )
   );
   DFFQX1 \mul0.operand_B_q_58__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0731_),
     .Q(\mul0.operand_B_q_58_ )
   );
   DFFQX1 \mul0.operand_B_q_59__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0732_),
     .Q(\mul0.operand_B_q_59_ )
   );
   DFFQX1 \mul0.operand_B_q_5__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0733_),
     .Q(\mul0.operand_B_q_5_ )
   );
   DFFQX1 \mul0.operand_B_q_60__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0734_),
     .Q(\mul0.operand_B_q_60_ )
   );
   DFFQX1 \mul0.operand_B_q_61__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0735_),
     .Q(\mul0.operand_B_q_61_ )
   );
   DFFQX1 \mul0.operand_B_q_62__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0736_),
     .Q(\mul0.operand_B_q_62_ )
   );
   DFFQX1 \mul0.operand_B_q_63__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0737_),
     .Q(\mul0.operand_B_q_63_ )
   );
   DFFQX1 \mul0.operand_B_q_6__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0738_),
     .Q(\mul0.operand_B_q_6_ )
   );
   DFFQX1 \mul0.operand_B_q_7__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0739_),
     .Q(\mul0.operand_B_q_7_ )
   );
   DFFQX1 \mul0.operand_B_q_8__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0740_),
     .Q(\mul0.operand_B_q_8_ )
   );
   DFFQX1 \mul0.operand_B_q_9__reg  (
-    .CK(\mul0.cg.clk_o ),
+    .CK(clk_i),
     .D(_0741_),
     .Q(\mul0.operand_B_q_9_ )
   );
@@ -35392,16 +35384,10 @@ module \main$main_chip.u_main (clk_i, rst_ni, req_i, we_i, streamed_wdata_0_i, s
     .D(_0742_),
     .Q(\mul0.start_i )
   );
-  DFFQX1 \mul1.cg.en_i_reg  (
+  DFFQX1 \mul1.enable_i_reg  (
     .CK(clk_i),
     .D(_0743_),
     .Q(GEMM_enable_1_)
-  );
-  CGTSX1 \mul1.cg.u_cg  (
-    .CK(clk_i),
-    .E(GEMM_enable_1_),
-    .ECK(\mul1.cg.clk_o ),
-    .SE(_4391_)
   );
   \matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_area$main_chip.u_main.mul1.gen_matmul_sklansky_area.u_matmul  \mul1.gen_matmul_sklansky_area.u_matmul  (
     .a_0_0_0_(\mul1.operand_A_q_0_ ),
@@ -35966,1682 +35952,1682 @@ module \main$main_chip.u_main (clk_i, rst_ni, req_i, we_i, streamed_wdata_0_i, s
     .y_3_3_9_(GEMM_results_891_)
   );
   DFFQX1 \mul1.intermediate_result_q_0__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0744_),
     .Q(\mul1.intermediate_result_q_0_ )
   );
   DFFQX1 \mul1.intermediate_result_q_100__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0745_),
     .Q(\mul1.intermediate_result_q_100_ )
   );
   DFFQX1 \mul1.intermediate_result_q_101__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0746_),
     .Q(\mul1.intermediate_result_q_101_ )
   );
   DFFQX1 \mul1.intermediate_result_q_102__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0747_),
     .Q(\mul1.intermediate_result_q_102_ )
   );
   DFFQX1 \mul1.intermediate_result_q_103__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0748_),
     .Q(\mul1.intermediate_result_q_103_ )
   );
   DFFQX1 \mul1.intermediate_result_q_104__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0749_),
     .Q(\mul1.intermediate_result_q_104_ )
   );
   DFFQX1 \mul1.intermediate_result_q_105__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0750_),
     .Q(\mul1.intermediate_result_q_105_ )
   );
   DFFQX1 \mul1.intermediate_result_q_106__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0751_),
     .Q(\mul1.intermediate_result_q_106_ )
   );
   DFFQX1 \mul1.intermediate_result_q_107__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0752_),
     .Q(\mul1.intermediate_result_q_107_ )
   );
   DFFQX1 \mul1.intermediate_result_q_108__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0753_),
     .Q(\mul1.intermediate_result_q_108_ )
   );
   DFFQX1 \mul1.intermediate_result_q_109__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0754_),
     .Q(\mul1.intermediate_result_q_109_ )
   );
   DFFQX1 \mul1.intermediate_result_q_10__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0755_),
     .Q(\mul1.intermediate_result_q_10_ )
   );
   DFFQX1 \mul1.intermediate_result_q_110__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0756_),
     .Q(\mul1.intermediate_result_q_110_ )
   );
   DFFQX1 \mul1.intermediate_result_q_112__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0757_),
     .Q(\mul1.intermediate_result_q_112_ )
   );
   DFFQX1 \mul1.intermediate_result_q_113__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0758_),
     .Q(\mul1.intermediate_result_q_113_ )
   );
   DFFQX1 \mul1.intermediate_result_q_114__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0759_),
     .Q(\mul1.intermediate_result_q_114_ )
   );
   DFFQX1 \mul1.intermediate_result_q_115__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0760_),
     .Q(\mul1.intermediate_result_q_115_ )
   );
   DFFQX1 \mul1.intermediate_result_q_116__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0761_),
     .Q(\mul1.intermediate_result_q_116_ )
   );
   DFFQX1 \mul1.intermediate_result_q_117__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0762_),
     .Q(\mul1.intermediate_result_q_117_ )
   );
   DFFQX1 \mul1.intermediate_result_q_118__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0763_),
     .Q(\mul1.intermediate_result_q_118_ )
   );
   DFFQX1 \mul1.intermediate_result_q_119__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0764_),
     .Q(\mul1.intermediate_result_q_119_ )
   );
   DFFQX1 \mul1.intermediate_result_q_11__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0765_),
     .Q(\mul1.intermediate_result_q_11_ )
   );
   DFFQX1 \mul1.intermediate_result_q_120__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0766_),
     .Q(\mul1.intermediate_result_q_120_ )
   );
   DFFQX1 \mul1.intermediate_result_q_121__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0767_),
     .Q(\mul1.intermediate_result_q_121_ )
   );
   DFFQX1 \mul1.intermediate_result_q_122__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0768_),
     .Q(\mul1.intermediate_result_q_122_ )
   );
   DFFQX1 \mul1.intermediate_result_q_123__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0769_),
     .Q(\mul1.intermediate_result_q_123_ )
   );
   DFFQX1 \mul1.intermediate_result_q_124__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0770_),
     .Q(\mul1.intermediate_result_q_124_ )
   );
   DFFQX1 \mul1.intermediate_result_q_126__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0771_),
     .Q(\mul1.intermediate_result_q_126_ )
   );
   DFFQX1 \mul1.intermediate_result_q_127__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0772_),
     .Q(\mul1.intermediate_result_q_127_ )
   );
   DFFQX1 \mul1.intermediate_result_q_128__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0773_),
     .Q(\mul1.intermediate_result_q_128_ )
   );
   DFFQX1 \mul1.intermediate_result_q_129__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0774_),
     .Q(\mul1.intermediate_result_q_129_ )
   );
   DFFQX1 \mul1.intermediate_result_q_12__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0775_),
     .Q(\mul1.intermediate_result_q_12_ )
   );
   DFFQX1 \mul1.intermediate_result_q_130__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0776_),
     .Q(\mul1.intermediate_result_q_130_ )
   );
   DFFQX1 \mul1.intermediate_result_q_131__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0777_),
     .Q(\mul1.intermediate_result_q_131_ )
   );
   DFFQX1 \mul1.intermediate_result_q_132__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0778_),
     .Q(\mul1.intermediate_result_q_132_ )
   );
   DFFQX1 \mul1.intermediate_result_q_133__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0779_),
     .Q(\mul1.intermediate_result_q_133_ )
   );
   DFFQX1 \mul1.intermediate_result_q_134__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0780_),
     .Q(\mul1.intermediate_result_q_134_ )
   );
   DFFQX1 \mul1.intermediate_result_q_135__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0781_),
     .Q(\mul1.intermediate_result_q_135_ )
   );
   DFFQX1 \mul1.intermediate_result_q_136__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0782_),
     .Q(\mul1.intermediate_result_q_136_ )
   );
   DFFQX1 \mul1.intermediate_result_q_137__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0783_),
     .Q(\mul1.intermediate_result_q_137_ )
   );
   DFFQX1 \mul1.intermediate_result_q_138__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0784_),
     .Q(\mul1.intermediate_result_q_138_ )
   );
   DFFQX1 \mul1.intermediate_result_q_140__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0785_),
     .Q(\mul1.intermediate_result_q_140_ )
   );
   DFFQX1 \mul1.intermediate_result_q_141__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0786_),
     .Q(\mul1.intermediate_result_q_141_ )
   );
   DFFQX1 \mul1.intermediate_result_q_142__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0787_),
     .Q(\mul1.intermediate_result_q_142_ )
   );
   DFFQX1 \mul1.intermediate_result_q_143__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0788_),
     .Q(\mul1.intermediate_result_q_143_ )
   );
   DFFQX1 \mul1.intermediate_result_q_144__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0789_),
     .Q(\mul1.intermediate_result_q_144_ )
   );
   DFFQX1 \mul1.intermediate_result_q_145__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0790_),
     .Q(\mul1.intermediate_result_q_145_ )
   );
   DFFQX1 \mul1.intermediate_result_q_146__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0791_),
     .Q(\mul1.intermediate_result_q_146_ )
   );
   DFFQX1 \mul1.intermediate_result_q_147__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0792_),
     .Q(\mul1.intermediate_result_q_147_ )
   );
   DFFQX1 \mul1.intermediate_result_q_148__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0793_),
     .Q(\mul1.intermediate_result_q_148_ )
   );
   DFFQX1 \mul1.intermediate_result_q_149__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0794_),
     .Q(\mul1.intermediate_result_q_149_ )
   );
   DFFQX1 \mul1.intermediate_result_q_14__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0795_),
     .Q(\mul1.intermediate_result_q_14_ )
   );
   DFFQX1 \mul1.intermediate_result_q_150__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0796_),
     .Q(\mul1.intermediate_result_q_150_ )
   );
   DFFQX1 \mul1.intermediate_result_q_151__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0797_),
     .Q(\mul1.intermediate_result_q_151_ )
   );
   DFFQX1 \mul1.intermediate_result_q_152__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0798_),
     .Q(\mul1.intermediate_result_q_152_ )
   );
   DFFQX1 \mul1.intermediate_result_q_154__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0799_),
     .Q(\mul1.intermediate_result_q_154_ )
   );
   DFFQX1 \mul1.intermediate_result_q_155__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0800_),
     .Q(\mul1.intermediate_result_q_155_ )
   );
   DFFQX1 \mul1.intermediate_result_q_156__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0801_),
     .Q(\mul1.intermediate_result_q_156_ )
   );
   DFFQX1 \mul1.intermediate_result_q_157__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0802_),
     .Q(\mul1.intermediate_result_q_157_ )
   );
   DFFQX1 \mul1.intermediate_result_q_158__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0803_),
     .Q(\mul1.intermediate_result_q_158_ )
   );
   DFFQX1 \mul1.intermediate_result_q_159__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0804_),
     .Q(\mul1.intermediate_result_q_159_ )
   );
   DFFQX1 \mul1.intermediate_result_q_15__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0805_),
     .Q(\mul1.intermediate_result_q_15_ )
   );
   DFFQX1 \mul1.intermediate_result_q_160__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0806_),
     .Q(\mul1.intermediate_result_q_160_ )
   );
   DFFQX1 \mul1.intermediate_result_q_161__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0807_),
     .Q(\mul1.intermediate_result_q_161_ )
   );
   DFFQX1 \mul1.intermediate_result_q_162__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0808_),
     .Q(\mul1.intermediate_result_q_162_ )
   );
   DFFQX1 \mul1.intermediate_result_q_163__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0809_),
     .Q(\mul1.intermediate_result_q_163_ )
   );
   DFFQX1 \mul1.intermediate_result_q_164__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0810_),
     .Q(\mul1.intermediate_result_q_164_ )
   );
   DFFQX1 \mul1.intermediate_result_q_165__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0811_),
     .Q(\mul1.intermediate_result_q_165_ )
   );
   DFFQX1 \mul1.intermediate_result_q_166__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0812_),
     .Q(\mul1.intermediate_result_q_166_ )
   );
   DFFQX1 \mul1.intermediate_result_q_168__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0813_),
     .Q(\mul1.intermediate_result_q_168_ )
   );
   DFFQX1 \mul1.intermediate_result_q_169__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0814_),
     .Q(\mul1.intermediate_result_q_169_ )
   );
   DFFQX1 \mul1.intermediate_result_q_16__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0815_),
     .Q(\mul1.intermediate_result_q_16_ )
   );
   DFFQX1 \mul1.intermediate_result_q_170__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0816_),
     .Q(\mul1.intermediate_result_q_170_ )
   );
   DFFQX1 \mul1.intermediate_result_q_171__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0817_),
     .Q(\mul1.intermediate_result_q_171_ )
   );
   DFFQX1 \mul1.intermediate_result_q_172__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0818_),
     .Q(\mul1.intermediate_result_q_172_ )
   );
   DFFQX1 \mul1.intermediate_result_q_173__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0819_),
     .Q(\mul1.intermediate_result_q_173_ )
   );
   DFFQX1 \mul1.intermediate_result_q_174__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0820_),
     .Q(\mul1.intermediate_result_q_174_ )
   );
   DFFQX1 \mul1.intermediate_result_q_175__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0821_),
     .Q(\mul1.intermediate_result_q_175_ )
   );
   DFFQX1 \mul1.intermediate_result_q_176__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0822_),
     .Q(\mul1.intermediate_result_q_176_ )
   );
   DFFQX1 \mul1.intermediate_result_q_177__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0823_),
     .Q(\mul1.intermediate_result_q_177_ )
   );
   DFFQX1 \mul1.intermediate_result_q_178__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0824_),
     .Q(\mul1.intermediate_result_q_178_ )
   );
   DFFQX1 \mul1.intermediate_result_q_179__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0825_),
     .Q(\mul1.intermediate_result_q_179_ )
   );
   DFFQX1 \mul1.intermediate_result_q_17__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0826_),
     .Q(\mul1.intermediate_result_q_17_ )
   );
   DFFQX1 \mul1.intermediate_result_q_180__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0827_),
     .Q(\mul1.intermediate_result_q_180_ )
   );
   DFFQX1 \mul1.intermediate_result_q_182__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0828_),
     .Q(\mul1.intermediate_result_q_182_ )
   );
   DFFQX1 \mul1.intermediate_result_q_183__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0829_),
     .Q(\mul1.intermediate_result_q_183_ )
   );
   DFFQX1 \mul1.intermediate_result_q_184__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0830_),
     .Q(\mul1.intermediate_result_q_184_ )
   );
   DFFQX1 \mul1.intermediate_result_q_185__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0831_),
     .Q(\mul1.intermediate_result_q_185_ )
   );
   DFFQX1 \mul1.intermediate_result_q_186__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0832_),
     .Q(\mul1.intermediate_result_q_186_ )
   );
   DFFQX1 \mul1.intermediate_result_q_187__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0833_),
     .Q(\mul1.intermediate_result_q_187_ )
   );
   DFFQX1 \mul1.intermediate_result_q_188__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0834_),
     .Q(\mul1.intermediate_result_q_188_ )
   );
   DFFQX1 \mul1.intermediate_result_q_189__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0835_),
     .Q(\mul1.intermediate_result_q_189_ )
   );
   DFFQX1 \mul1.intermediate_result_q_18__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0836_),
     .Q(\mul1.intermediate_result_q_18_ )
   );
   DFFQX1 \mul1.intermediate_result_q_190__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0837_),
     .Q(\mul1.intermediate_result_q_190_ )
   );
   DFFQX1 \mul1.intermediate_result_q_191__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0838_),
     .Q(\mul1.intermediate_result_q_191_ )
   );
   DFFQX1 \mul1.intermediate_result_q_192__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0839_),
     .Q(\mul1.intermediate_result_q_192_ )
   );
   DFFQX1 \mul1.intermediate_result_q_193__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0840_),
     .Q(\mul1.intermediate_result_q_193_ )
   );
   DFFQX1 \mul1.intermediate_result_q_194__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0841_),
     .Q(\mul1.intermediate_result_q_194_ )
   );
   DFFQX1 \mul1.intermediate_result_q_196__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0842_),
     .Q(\mul1.intermediate_result_q_196_ )
   );
   DFFQX1 \mul1.intermediate_result_q_197__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0843_),
     .Q(\mul1.intermediate_result_q_197_ )
   );
   DFFQX1 \mul1.intermediate_result_q_198__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0844_),
     .Q(\mul1.intermediate_result_q_198_ )
   );
   DFFQX1 \mul1.intermediate_result_q_199__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0845_),
     .Q(\mul1.intermediate_result_q_199_ )
   );
   DFFQX1 \mul1.intermediate_result_q_19__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0846_),
     .Q(\mul1.intermediate_result_q_19_ )
   );
   DFFQX1 \mul1.intermediate_result_q_1__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0847_),
     .Q(\mul1.intermediate_result_q_1_ )
   );
   DFFQX1 \mul1.intermediate_result_q_200__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0848_),
     .Q(\mul1.intermediate_result_q_200_ )
   );
   DFFQX1 \mul1.intermediate_result_q_201__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0849_),
     .Q(\mul1.intermediate_result_q_201_ )
   );
   DFFQX1 \mul1.intermediate_result_q_202__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0850_),
     .Q(\mul1.intermediate_result_q_202_ )
   );
   DFFQX1 \mul1.intermediate_result_q_203__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0851_),
     .Q(\mul1.intermediate_result_q_203_ )
   );
   DFFQX1 \mul1.intermediate_result_q_204__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0852_),
     .Q(\mul1.intermediate_result_q_204_ )
   );
   DFFQX1 \mul1.intermediate_result_q_205__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0853_),
     .Q(\mul1.intermediate_result_q_205_ )
   );
   DFFQX1 \mul1.intermediate_result_q_206__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0854_),
     .Q(\mul1.intermediate_result_q_206_ )
   );
   DFFQX1 \mul1.intermediate_result_q_207__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0855_),
     .Q(\mul1.intermediate_result_q_207_ )
   );
   DFFQX1 \mul1.intermediate_result_q_208__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0856_),
     .Q(\mul1.intermediate_result_q_208_ )
   );
   DFFQX1 \mul1.intermediate_result_q_20__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0857_),
     .Q(\mul1.intermediate_result_q_20_ )
   );
   DFFQX1 \mul1.intermediate_result_q_210__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0858_),
     .Q(\mul1.intermediate_result_q_210_ )
   );
   DFFQX1 \mul1.intermediate_result_q_211__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0859_),
     .Q(\mul1.intermediate_result_q_211_ )
   );
   DFFQX1 \mul1.intermediate_result_q_212__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0860_),
     .Q(\mul1.intermediate_result_q_212_ )
   );
   DFFQX1 \mul1.intermediate_result_q_213__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0861_),
     .Q(\mul1.intermediate_result_q_213_ )
   );
   DFFQX1 \mul1.intermediate_result_q_214__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0862_),
     .Q(\mul1.intermediate_result_q_214_ )
   );
   DFFQX1 \mul1.intermediate_result_q_215__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0863_),
     .Q(\mul1.intermediate_result_q_215_ )
   );
   DFFQX1 \mul1.intermediate_result_q_216__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0864_),
     .Q(\mul1.intermediate_result_q_216_ )
   );
   DFFQX1 \mul1.intermediate_result_q_217__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0865_),
     .Q(\mul1.intermediate_result_q_217_ )
   );
   DFFQX1 \mul1.intermediate_result_q_218__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0866_),
     .Q(\mul1.intermediate_result_q_218_ )
   );
   DFFQX1 \mul1.intermediate_result_q_219__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0867_),
     .Q(\mul1.intermediate_result_q_219_ )
   );
   DFFQX1 \mul1.intermediate_result_q_21__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0868_),
     .Q(\mul1.intermediate_result_q_21_ )
   );
   DFFQX1 \mul1.intermediate_result_q_220__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0869_),
     .Q(\mul1.intermediate_result_q_220_ )
   );
   DFFQX1 \mul1.intermediate_result_q_221__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0870_),
     .Q(\mul1.intermediate_result_q_221_ )
   );
   DFFQX1 \mul1.intermediate_result_q_222__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0871_),
     .Q(\mul1.intermediate_result_q_222_ )
   );
   DFFQX1 \mul1.intermediate_result_q_22__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0872_),
     .Q(\mul1.intermediate_result_q_22_ )
   );
   DFFQX1 \mul1.intermediate_result_q_23__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0873_),
     .Q(\mul1.intermediate_result_q_23_ )
   );
   DFFQX1 \mul1.intermediate_result_q_24__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0874_),
     .Q(\mul1.intermediate_result_q_24_ )
   );
   DFFQX1 \mul1.intermediate_result_q_25__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0875_),
     .Q(\mul1.intermediate_result_q_25_ )
   );
   DFFQX1 \mul1.intermediate_result_q_26__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0876_),
     .Q(\mul1.intermediate_result_q_26_ )
   );
   DFFQX1 \mul1.intermediate_result_q_28__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0877_),
     .Q(\mul1.intermediate_result_q_28_ )
   );
   DFFQX1 \mul1.intermediate_result_q_29__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0878_),
     .Q(\mul1.intermediate_result_q_29_ )
   );
   DFFQX1 \mul1.intermediate_result_q_2__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0879_),
     .Q(\mul1.intermediate_result_q_2_ )
   );
   DFFQX1 \mul1.intermediate_result_q_30__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0880_),
     .Q(\mul1.intermediate_result_q_30_ )
   );
   DFFQX1 \mul1.intermediate_result_q_31__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0881_),
     .Q(\mul1.intermediate_result_q_31_ )
   );
   DFFQX1 \mul1.intermediate_result_q_32__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0882_),
     .Q(\mul1.intermediate_result_q_32_ )
   );
   DFFQX1 \mul1.intermediate_result_q_33__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0883_),
     .Q(\mul1.intermediate_result_q_33_ )
   );
   DFFQX1 \mul1.intermediate_result_q_34__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0884_),
     .Q(\mul1.intermediate_result_q_34_ )
   );
   DFFQX1 \mul1.intermediate_result_q_35__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0885_),
     .Q(\mul1.intermediate_result_q_35_ )
   );
   DFFQX1 \mul1.intermediate_result_q_36__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0886_),
     .Q(\mul1.intermediate_result_q_36_ )
   );
   DFFQX1 \mul1.intermediate_result_q_37__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0887_),
     .Q(\mul1.intermediate_result_q_37_ )
   );
   DFFQX1 \mul1.intermediate_result_q_38__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0888_),
     .Q(\mul1.intermediate_result_q_38_ )
   );
   DFFQX1 \mul1.intermediate_result_q_39__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0889_),
     .Q(\mul1.intermediate_result_q_39_ )
   );
   DFFQX1 \mul1.intermediate_result_q_3__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0890_),
     .Q(\mul1.intermediate_result_q_3_ )
   );
   DFFQX1 \mul1.intermediate_result_q_40__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0891_),
     .Q(\mul1.intermediate_result_q_40_ )
   );
   DFFQX1 \mul1.intermediate_result_q_42__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0892_),
     .Q(\mul1.intermediate_result_q_42_ )
   );
   DFFQX1 \mul1.intermediate_result_q_43__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0893_),
     .Q(\mul1.intermediate_result_q_43_ )
   );
   DFFQX1 \mul1.intermediate_result_q_44__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0894_),
     .Q(\mul1.intermediate_result_q_44_ )
   );
   DFFQX1 \mul1.intermediate_result_q_45__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0895_),
     .Q(\mul1.intermediate_result_q_45_ )
   );
   DFFQX1 \mul1.intermediate_result_q_46__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0896_),
     .Q(\mul1.intermediate_result_q_46_ )
   );
   DFFQX1 \mul1.intermediate_result_q_47__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0897_),
     .Q(\mul1.intermediate_result_q_47_ )
   );
   DFFQX1 \mul1.intermediate_result_q_48__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0898_),
     .Q(\mul1.intermediate_result_q_48_ )
   );
   DFFQX1 \mul1.intermediate_result_q_49__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0899_),
     .Q(\mul1.intermediate_result_q_49_ )
   );
   DFFQX1 \mul1.intermediate_result_q_4__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0900_),
     .Q(\mul1.intermediate_result_q_4_ )
   );
   DFFQX1 \mul1.intermediate_result_q_50__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0901_),
     .Q(\mul1.intermediate_result_q_50_ )
   );
   DFFQX1 \mul1.intermediate_result_q_51__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0902_),
     .Q(\mul1.intermediate_result_q_51_ )
   );
   DFFQX1 \mul1.intermediate_result_q_52__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0903_),
     .Q(\mul1.intermediate_result_q_52_ )
   );
   DFFQX1 \mul1.intermediate_result_q_53__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0904_),
     .Q(\mul1.intermediate_result_q_53_ )
   );
   DFFQX1 \mul1.intermediate_result_q_54__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0905_),
     .Q(\mul1.intermediate_result_q_54_ )
   );
   DFFQX1 \mul1.intermediate_result_q_56__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0906_),
     .Q(\mul1.intermediate_result_q_56_ )
   );
   DFFQX1 \mul1.intermediate_result_q_57__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0907_),
     .Q(\mul1.intermediate_result_q_57_ )
   );
   DFFQX1 \mul1.intermediate_result_q_58__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0908_),
     .Q(\mul1.intermediate_result_q_58_ )
   );
   DFFQX1 \mul1.intermediate_result_q_59__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0909_),
     .Q(\mul1.intermediate_result_q_59_ )
   );
   DFFQX1 \mul1.intermediate_result_q_5__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0910_),
     .Q(\mul1.intermediate_result_q_5_ )
   );
   DFFQX1 \mul1.intermediate_result_q_60__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0911_),
     .Q(\mul1.intermediate_result_q_60_ )
   );
   DFFQX1 \mul1.intermediate_result_q_61__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0912_),
     .Q(\mul1.intermediate_result_q_61_ )
   );
   DFFQX1 \mul1.intermediate_result_q_62__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0913_),
     .Q(\mul1.intermediate_result_q_62_ )
   );
   DFFQX1 \mul1.intermediate_result_q_63__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0914_),
     .Q(\mul1.intermediate_result_q_63_ )
   );
   DFFQX1 \mul1.intermediate_result_q_64__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0915_),
     .Q(\mul1.intermediate_result_q_64_ )
   );
   DFFQX1 \mul1.intermediate_result_q_65__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0916_),
     .Q(\mul1.intermediate_result_q_65_ )
   );
   DFFQX1 \mul1.intermediate_result_q_66__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0917_),
     .Q(\mul1.intermediate_result_q_66_ )
   );
   DFFQX1 \mul1.intermediate_result_q_67__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0918_),
     .Q(\mul1.intermediate_result_q_67_ )
   );
   DFFQX1 \mul1.intermediate_result_q_68__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0919_),
     .Q(\mul1.intermediate_result_q_68_ )
   );
   DFFQX1 \mul1.intermediate_result_q_6__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0920_),
     .Q(\mul1.intermediate_result_q_6_ )
   );
   DFFQX1 \mul1.intermediate_result_q_70__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0921_),
     .Q(\mul1.intermediate_result_q_70_ )
   );
   DFFQX1 \mul1.intermediate_result_q_71__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0922_),
     .Q(\mul1.intermediate_result_q_71_ )
   );
   DFFQX1 \mul1.intermediate_result_q_72__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0923_),
     .Q(\mul1.intermediate_result_q_72_ )
   );
   DFFQX1 \mul1.intermediate_result_q_73__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0924_),
     .Q(\mul1.intermediate_result_q_73_ )
   );
   DFFQX1 \mul1.intermediate_result_q_74__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0925_),
     .Q(\mul1.intermediate_result_q_74_ )
   );
   DFFQX1 \mul1.intermediate_result_q_75__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0926_),
     .Q(\mul1.intermediate_result_q_75_ )
   );
   DFFQX1 \mul1.intermediate_result_q_76__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0927_),
     .Q(\mul1.intermediate_result_q_76_ )
   );
   DFFQX1 \mul1.intermediate_result_q_77__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0928_),
     .Q(\mul1.intermediate_result_q_77_ )
   );
   DFFQX1 \mul1.intermediate_result_q_78__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0929_),
     .Q(\mul1.intermediate_result_q_78_ )
   );
   DFFQX1 \mul1.intermediate_result_q_79__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0930_),
     .Q(\mul1.intermediate_result_q_79_ )
   );
   DFFQX1 \mul1.intermediate_result_q_7__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0931_),
     .Q(\mul1.intermediate_result_q_7_ )
   );
   DFFQX1 \mul1.intermediate_result_q_80__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0932_),
     .Q(\mul1.intermediate_result_q_80_ )
   );
   DFFQX1 \mul1.intermediate_result_q_81__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0933_),
     .Q(\mul1.intermediate_result_q_81_ )
   );
   DFFQX1 \mul1.intermediate_result_q_82__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0934_),
     .Q(\mul1.intermediate_result_q_82_ )
   );
   DFFQX1 \mul1.intermediate_result_q_84__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0935_),
     .Q(\mul1.intermediate_result_q_84_ )
   );
   DFFQX1 \mul1.intermediate_result_q_85__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0936_),
     .Q(\mul1.intermediate_result_q_85_ )
   );
   DFFQX1 \mul1.intermediate_result_q_86__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0937_),
     .Q(\mul1.intermediate_result_q_86_ )
   );
   DFFQX1 \mul1.intermediate_result_q_87__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0938_),
     .Q(\mul1.intermediate_result_q_87_ )
   );
   DFFQX1 \mul1.intermediate_result_q_88__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0939_),
     .Q(\mul1.intermediate_result_q_88_ )
   );
   DFFQX1 \mul1.intermediate_result_q_89__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0940_),
     .Q(\mul1.intermediate_result_q_89_ )
   );
   DFFQX1 \mul1.intermediate_result_q_8__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0941_),
     .Q(\mul1.intermediate_result_q_8_ )
   );
   DFFQX1 \mul1.intermediate_result_q_90__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0942_),
     .Q(\mul1.intermediate_result_q_90_ )
   );
   DFFQX1 \mul1.intermediate_result_q_91__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0943_),
     .Q(\mul1.intermediate_result_q_91_ )
   );
   DFFQX1 \mul1.intermediate_result_q_92__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0944_),
     .Q(\mul1.intermediate_result_q_92_ )
   );
   DFFQX1 \mul1.intermediate_result_q_93__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0945_),
     .Q(\mul1.intermediate_result_q_93_ )
   );
   DFFQX1 \mul1.intermediate_result_q_94__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0946_),
     .Q(\mul1.intermediate_result_q_94_ )
   );
   DFFQX1 \mul1.intermediate_result_q_95__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0947_),
     .Q(\mul1.intermediate_result_q_95_ )
   );
   DFFQX1 \mul1.intermediate_result_q_96__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0948_),
     .Q(\mul1.intermediate_result_q_96_ )
   );
   DFFQX1 \mul1.intermediate_result_q_98__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0949_),
     .Q(\mul1.intermediate_result_q_98_ )
   );
   DFFQX1 \mul1.intermediate_result_q_99__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0950_),
     .Q(\mul1.intermediate_result_q_99_ )
   );
   DFFQX1 \mul1.intermediate_result_q_9__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0951_),
     .Q(\mul1.intermediate_result_q_9_ )
   );
   DFFQX1 \mul1.operand_A_q_0__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0952_),
     .Q(\mul1.operand_A_q_0_ )
   );
   DFFQX1 \mul1.operand_A_q_10__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0953_),
     .Q(\mul1.operand_A_q_10_ )
   );
   DFFQX1 \mul1.operand_A_q_11__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0954_),
     .Q(\mul1.operand_A_q_11_ )
   );
   DFFQX1 \mul1.operand_A_q_12__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0955_),
     .Q(\mul1.operand_A_q_12_ )
   );
   DFFQX1 \mul1.operand_A_q_13__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0956_),
     .Q(\mul1.operand_A_q_13_ )
   );
   DFFQX1 \mul1.operand_A_q_14__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0957_),
     .Q(\mul1.operand_A_q_14_ )
   );
   DFFQX1 \mul1.operand_A_q_15__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0958_),
     .Q(\mul1.operand_A_q_15_ )
   );
   DFFQX1 \mul1.operand_A_q_16__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0959_),
     .Q(\mul1.operand_A_q_16_ )
   );
   DFFQX1 \mul1.operand_A_q_17__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0960_),
     .Q(\mul1.operand_A_q_17_ )
   );
   DFFQX1 \mul1.operand_A_q_18__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0961_),
     .Q(\mul1.operand_A_q_18_ )
   );
   DFFQX1 \mul1.operand_A_q_19__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0962_),
     .Q(\mul1.operand_A_q_19_ )
   );
   DFFQX1 \mul1.operand_A_q_1__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0963_),
     .Q(\mul1.operand_A_q_1_ )
   );
   DFFQX1 \mul1.operand_A_q_20__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0964_),
     .Q(\mul1.operand_A_q_20_ )
   );
   DFFQX1 \mul1.operand_A_q_21__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0965_),
     .Q(\mul1.operand_A_q_21_ )
   );
   DFFQX1 \mul1.operand_A_q_22__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0966_),
     .Q(\mul1.operand_A_q_22_ )
   );
   DFFQX1 \mul1.operand_A_q_23__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0967_),
     .Q(\mul1.operand_A_q_23_ )
   );
   DFFQX1 \mul1.operand_A_q_24__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0968_),
     .Q(\mul1.operand_A_q_24_ )
   );
   DFFQX1 \mul1.operand_A_q_25__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0969_),
     .Q(\mul1.operand_A_q_25_ )
   );
   DFFQX1 \mul1.operand_A_q_26__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0970_),
     .Q(\mul1.operand_A_q_26_ )
   );
   DFFQX1 \mul1.operand_A_q_27__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0971_),
     .Q(\mul1.operand_A_q_27_ )
   );
   DFFQX1 \mul1.operand_A_q_28__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0972_),
     .Q(\mul1.operand_A_q_28_ )
   );
   DFFQX1 \mul1.operand_A_q_29__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0973_),
     .Q(\mul1.operand_A_q_29_ )
   );
   DFFQX1 \mul1.operand_A_q_2__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0974_),
     .Q(\mul1.operand_A_q_2_ )
   );
   DFFQX1 \mul1.operand_A_q_30__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0975_),
     .Q(\mul1.operand_A_q_30_ )
   );
   DFFQX1 \mul1.operand_A_q_31__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0976_),
     .Q(\mul1.operand_A_q_31_ )
   );
   DFFQX1 \mul1.operand_A_q_32__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0977_),
     .Q(\mul1.operand_A_q_32_ )
   );
   DFFQX1 \mul1.operand_A_q_33__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0978_),
     .Q(\mul1.operand_A_q_33_ )
   );
   DFFQX1 \mul1.operand_A_q_34__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0979_),
     .Q(\mul1.operand_A_q_34_ )
   );
   DFFQX1 \mul1.operand_A_q_35__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0980_),
     .Q(\mul1.operand_A_q_35_ )
   );
   DFFQX1 \mul1.operand_A_q_36__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0981_),
     .Q(\mul1.operand_A_q_36_ )
   );
   DFFQX1 \mul1.operand_A_q_37__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0982_),
     .Q(\mul1.operand_A_q_37_ )
   );
   DFFQX1 \mul1.operand_A_q_38__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0983_),
     .Q(\mul1.operand_A_q_38_ )
   );
   DFFQX1 \mul1.operand_A_q_39__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0984_),
     .Q(\mul1.operand_A_q_39_ )
   );
   DFFQX1 \mul1.operand_A_q_3__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0985_),
     .Q(\mul1.operand_A_q_3_ )
   );
   DFFQX1 \mul1.operand_A_q_40__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0986_),
     .Q(\mul1.operand_A_q_40_ )
   );
   DFFQX1 \mul1.operand_A_q_41__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0987_),
     .Q(\mul1.operand_A_q_41_ )
   );
   DFFQX1 \mul1.operand_A_q_42__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0988_),
     .Q(\mul1.operand_A_q_42_ )
   );
   DFFQX1 \mul1.operand_A_q_43__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0989_),
     .Q(\mul1.operand_A_q_43_ )
   );
   DFFQX1 \mul1.operand_A_q_44__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0990_),
     .Q(\mul1.operand_A_q_44_ )
   );
   DFFQX1 \mul1.operand_A_q_45__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0991_),
     .Q(\mul1.operand_A_q_45_ )
   );
   DFFQX1 \mul1.operand_A_q_46__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0992_),
     .Q(\mul1.operand_A_q_46_ )
   );
   DFFQX1 \mul1.operand_A_q_47__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0993_),
     .Q(\mul1.operand_A_q_47_ )
   );
   DFFQX1 \mul1.operand_A_q_48__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0994_),
     .Q(\mul1.operand_A_q_48_ )
   );
   DFFQX1 \mul1.operand_A_q_49__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0995_),
     .Q(\mul1.operand_A_q_49_ )
   );
   DFFQX1 \mul1.operand_A_q_4__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0996_),
     .Q(\mul1.operand_A_q_4_ )
   );
   DFFQX1 \mul1.operand_A_q_50__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0997_),
     .Q(\mul1.operand_A_q_50_ )
   );
   DFFQX1 \mul1.operand_A_q_51__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0998_),
     .Q(\mul1.operand_A_q_51_ )
   );
   DFFQX1 \mul1.operand_A_q_52__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_0999_),
     .Q(\mul1.operand_A_q_52_ )
   );
   DFFQX1 \mul1.operand_A_q_53__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1000_),
     .Q(\mul1.operand_A_q_53_ )
   );
   DFFQX1 \mul1.operand_A_q_54__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1001_),
     .Q(\mul1.operand_A_q_54_ )
   );
   DFFQX1 \mul1.operand_A_q_55__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1002_),
     .Q(\mul1.operand_A_q_55_ )
   );
   DFFQX1 \mul1.operand_A_q_56__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1003_),
     .Q(\mul1.operand_A_q_56_ )
   );
   DFFQX1 \mul1.operand_A_q_57__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1004_),
     .Q(\mul1.operand_A_q_57_ )
   );
   DFFQX1 \mul1.operand_A_q_58__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1005_),
     .Q(\mul1.operand_A_q_58_ )
   );
   DFFQX1 \mul1.operand_A_q_59__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1006_),
     .Q(\mul1.operand_A_q_59_ )
   );
   DFFQX1 \mul1.operand_A_q_5__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1007_),
     .Q(\mul1.operand_A_q_5_ )
   );
   DFFQX1 \mul1.operand_A_q_60__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1008_),
     .Q(\mul1.operand_A_q_60_ )
   );
   DFFQX1 \mul1.operand_A_q_61__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1009_),
     .Q(\mul1.operand_A_q_61_ )
   );
   DFFQX1 \mul1.operand_A_q_62__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1010_),
     .Q(\mul1.operand_A_q_62_ )
   );
   DFFQX1 \mul1.operand_A_q_63__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1011_),
     .Q(\mul1.operand_A_q_63_ )
   );
   DFFQX1 \mul1.operand_A_q_6__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1012_),
     .Q(\mul1.operand_A_q_6_ )
   );
   DFFQX1 \mul1.operand_A_q_7__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1013_),
     .Q(\mul1.operand_A_q_7_ )
   );
   DFFQX1 \mul1.operand_A_q_8__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1014_),
     .Q(\mul1.operand_A_q_8_ )
   );
   DFFQX1 \mul1.operand_A_q_9__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1015_),
     .Q(\mul1.operand_A_q_9_ )
   );
   DFFQX1 \mul1.operand_B_q_0__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1016_),
     .Q(\mul1.operand_B_q_0_ )
   );
   DFFQX1 \mul1.operand_B_q_10__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1017_),
     .Q(\mul1.operand_B_q_10_ )
   );
   DFFQX1 \mul1.operand_B_q_11__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1018_),
     .Q(\mul1.operand_B_q_11_ )
   );
   DFFQX1 \mul1.operand_B_q_12__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1019_),
     .Q(\mul1.operand_B_q_12_ )
   );
   DFFQX1 \mul1.operand_B_q_13__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1020_),
     .Q(\mul1.operand_B_q_13_ )
   );
   DFFQX1 \mul1.operand_B_q_14__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1021_),
     .Q(\mul1.operand_B_q_14_ )
   );
   DFFQX1 \mul1.operand_B_q_15__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1022_),
     .Q(\mul1.operand_B_q_15_ )
   );
   DFFQX1 \mul1.operand_B_q_16__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1023_),
     .Q(\mul1.operand_B_q_16_ )
   );
   DFFQX1 \mul1.operand_B_q_17__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1024_),
     .Q(\mul1.operand_B_q_17_ )
   );
   DFFQX1 \mul1.operand_B_q_18__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1025_),
     .Q(\mul1.operand_B_q_18_ )
   );
   DFFQX1 \mul1.operand_B_q_19__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1026_),
     .Q(\mul1.operand_B_q_19_ )
   );
   DFFQX1 \mul1.operand_B_q_1__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1027_),
     .Q(\mul1.operand_B_q_1_ )
   );
   DFFQX1 \mul1.operand_B_q_20__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1028_),
     .Q(\mul1.operand_B_q_20_ )
   );
   DFFQX1 \mul1.operand_B_q_21__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1029_),
     .Q(\mul1.operand_B_q_21_ )
   );
   DFFQX1 \mul1.operand_B_q_22__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1030_),
     .Q(\mul1.operand_B_q_22_ )
   );
   DFFQX1 \mul1.operand_B_q_23__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1031_),
     .Q(\mul1.operand_B_q_23_ )
   );
   DFFQX1 \mul1.operand_B_q_24__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1032_),
     .Q(\mul1.operand_B_q_24_ )
   );
   DFFQX1 \mul1.operand_B_q_25__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1033_),
     .Q(\mul1.operand_B_q_25_ )
   );
   DFFQX1 \mul1.operand_B_q_26__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1034_),
     .Q(\mul1.operand_B_q_26_ )
   );
   DFFQX1 \mul1.operand_B_q_27__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1035_),
     .Q(\mul1.operand_B_q_27_ )
   );
   DFFQX1 \mul1.operand_B_q_28__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1036_),
     .Q(\mul1.operand_B_q_28_ )
   );
   DFFQX1 \mul1.operand_B_q_29__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1037_),
     .Q(\mul1.operand_B_q_29_ )
   );
   DFFQX1 \mul1.operand_B_q_2__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1038_),
     .Q(\mul1.operand_B_q_2_ )
   );
   DFFQX1 \mul1.operand_B_q_30__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1039_),
     .Q(\mul1.operand_B_q_30_ )
   );
   DFFQX1 \mul1.operand_B_q_31__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1040_),
     .Q(\mul1.operand_B_q_31_ )
   );
   DFFQX1 \mul1.operand_B_q_32__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1041_),
     .Q(\mul1.operand_B_q_32_ )
   );
   DFFQX1 \mul1.operand_B_q_33__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1042_),
     .Q(\mul1.operand_B_q_33_ )
   );
   DFFQX1 \mul1.operand_B_q_34__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1043_),
     .Q(\mul1.operand_B_q_34_ )
   );
   DFFQX1 \mul1.operand_B_q_35__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1044_),
     .Q(\mul1.operand_B_q_35_ )
   );
   DFFQX1 \mul1.operand_B_q_36__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1045_),
     .Q(\mul1.operand_B_q_36_ )
   );
   DFFQX1 \mul1.operand_B_q_37__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1046_),
     .Q(\mul1.operand_B_q_37_ )
   );
   DFFQX1 \mul1.operand_B_q_38__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1047_),
     .Q(\mul1.operand_B_q_38_ )
   );
   DFFQX1 \mul1.operand_B_q_39__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1048_),
     .Q(\mul1.operand_B_q_39_ )
   );
   DFFQX1 \mul1.operand_B_q_3__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1049_),
     .Q(\mul1.operand_B_q_3_ )
   );
   DFFQX1 \mul1.operand_B_q_40__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1050_),
     .Q(\mul1.operand_B_q_40_ )
   );
   DFFQX1 \mul1.operand_B_q_41__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1051_),
     .Q(\mul1.operand_B_q_41_ )
   );
   DFFQX1 \mul1.operand_B_q_42__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1052_),
     .Q(\mul1.operand_B_q_42_ )
   );
   DFFQX1 \mul1.operand_B_q_43__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1053_),
     .Q(\mul1.operand_B_q_43_ )
   );
   DFFQX1 \mul1.operand_B_q_44__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1054_),
     .Q(\mul1.operand_B_q_44_ )
   );
   DFFQX1 \mul1.operand_B_q_45__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1055_),
     .Q(\mul1.operand_B_q_45_ )
   );
   DFFQX1 \mul1.operand_B_q_46__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1056_),
     .Q(\mul1.operand_B_q_46_ )
   );
   DFFQX1 \mul1.operand_B_q_47__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1057_),
     .Q(\mul1.operand_B_q_47_ )
   );
   DFFQX1 \mul1.operand_B_q_48__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1058_),
     .Q(\mul1.operand_B_q_48_ )
   );
   DFFQX1 \mul1.operand_B_q_49__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1059_),
     .Q(\mul1.operand_B_q_49_ )
   );
   DFFQX1 \mul1.operand_B_q_4__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1060_),
     .Q(\mul1.operand_B_q_4_ )
   );
   DFFQX1 \mul1.operand_B_q_50__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1061_),
     .Q(\mul1.operand_B_q_50_ )
   );
   DFFQX1 \mul1.operand_B_q_51__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1062_),
     .Q(\mul1.operand_B_q_51_ )
   );
   DFFQX1 \mul1.operand_B_q_52__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1063_),
     .Q(\mul1.operand_B_q_52_ )
   );
   DFFQX1 \mul1.operand_B_q_53__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1064_),
     .Q(\mul1.operand_B_q_53_ )
   );
   DFFQX1 \mul1.operand_B_q_54__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1065_),
     .Q(\mul1.operand_B_q_54_ )
   );
   DFFQX1 \mul1.operand_B_q_55__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1066_),
     .Q(\mul1.operand_B_q_55_ )
   );
   DFFQX1 \mul1.operand_B_q_56__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1067_),
     .Q(\mul1.operand_B_q_56_ )
   );
   DFFQX1 \mul1.operand_B_q_57__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1068_),
     .Q(\mul1.operand_B_q_57_ )
   );
   DFFQX1 \mul1.operand_B_q_58__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1069_),
     .Q(\mul1.operand_B_q_58_ )
   );
   DFFQX1 \mul1.operand_B_q_59__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1070_),
     .Q(\mul1.operand_B_q_59_ )
   );
   DFFQX1 \mul1.operand_B_q_5__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1071_),
     .Q(\mul1.operand_B_q_5_ )
   );
   DFFQX1 \mul1.operand_B_q_60__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1072_),
     .Q(\mul1.operand_B_q_60_ )
   );
   DFFQX1 \mul1.operand_B_q_61__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1073_),
     .Q(\mul1.operand_B_q_61_ )
   );
   DFFQX1 \mul1.operand_B_q_62__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1074_),
     .Q(\mul1.operand_B_q_62_ )
   );
   DFFQX1 \mul1.operand_B_q_63__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1075_),
     .Q(\mul1.operand_B_q_63_ )
   );
   DFFQX1 \mul1.operand_B_q_6__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1076_),
     .Q(\mul1.operand_B_q_6_ )
   );
   DFFQX1 \mul1.operand_B_q_7__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1077_),
     .Q(\mul1.operand_B_q_7_ )
   );
   DFFQX1 \mul1.operand_B_q_8__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1078_),
     .Q(\mul1.operand_B_q_8_ )
   );
   DFFQX1 \mul1.operand_B_q_9__reg  (
-    .CK(\mul1.cg.clk_o ),
+    .CK(clk_i),
     .D(_1079_),
     .Q(\mul1.operand_B_q_9_ )
   );
