@@ -41,7 +41,7 @@ set pgcrOffset [expr ($PowRingSpace - $pgcrSpacing - 2 * $pgcrWidth) / 2]
 set tpg1Width     3; # arbitrary number
 set tpg1Pitch    60; # multiple of pad-pitch
 set tpg1Spacing  10; # big enough to skip over a pad
-set tpg1Offset   70; # offset from leftX of core
+set tpg1Offset   27; # offset from leftX of core
 
 set pg4Width      1; # two tracks on Metal4
 set pg4Pitch     90; # multiple of pad-pitch

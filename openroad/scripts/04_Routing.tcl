@@ -41,7 +41,7 @@ save_checkpoint ROUTING_Initial_Fixed.grt_repaired
 ###############################################################################
 
 # Check for any Antenna Violation
-# check_antennas
+check_antennas
 
 # Repaird the Antenna Violation
 repair_antennas

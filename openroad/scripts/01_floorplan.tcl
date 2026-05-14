@@ -83,8 +83,8 @@ set core_topY     [lindex $coreArea 3]
 
 # Placing macros
 # use these for macro placement
-set floorPaddingBottomY 60.0
-set floorPaddingTopY    80.0
+set floorPaddingBottomY 17.0
+set floorPaddingTopY    66.5
 set floor_leftX         [expr $core_leftX]
 set floor_bottomY       [expr $core_bottomY + $floorPaddingBottomY]
 set floor_rightX        [expr $core_rightX]
@@ -94,18 +94,17 @@ set floor_midpointY     [expr $floor_bottomY + ($floor_topY - $floor_bottomY)/2]
 
 set BOTTOM_RAM_0_OFFSET    31.46
 # BANK0
-set X [expr $floor_midpointX - $RamSize256x64_W/2]
+set X [expr $floor_midpointX - $RamSize256x64_W/2] 
 set Y [expr $floor_topY - $RamSize256x64_H + $BOTTOM_RAM_0_OFFSET]
 placeInstance $bank0_sram0 $X $Y MY
 
-set BOTTOM_SRAM_SEPERATION 20
+set BOTTOM_SRAM_SEPERATION 10
 set BOTTOM_RAM_1_OFFSET    21.2
 # Bank1
 set X [expr $floor_leftX + $BOTTOM_SRAM_SEPERATION]
 set Y [expr $floor_bottomY + $BOTTOM_RAM_1_OFFSET]
 placeInstance $bank1_sram0 $X $Y MX
 
-set BOTTOM_RAM_2_OFFSET    8.0
 # BANK2 (center)
 set X [expr $floor_rightX - $RamSize64x64_W - $BOTTOM_SRAM_SEPERATION]
 set Y [expr $floor_bottomY + $BOTTOM_RAM_1_OFFSET]
