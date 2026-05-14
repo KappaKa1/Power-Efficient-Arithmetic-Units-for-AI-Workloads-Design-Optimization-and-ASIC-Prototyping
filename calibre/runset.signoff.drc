@@ -1,0 +1,38 @@
+# Rules
+*drcRulesFile: $IHP_TECH/Calibre/RSF/drc.tvf
+*drcRunDir: ../calibre/drc
+
+# Input
+*drcLayoutPaths: ../dfii/chip.gds
+*drcLayoutPrimary: chip
+*cmnTemplate_LP: %l.gds
+*drcLayoutGetFromViewer: 1
+
+# Output
+*drcResultsFile: chip.drc.results
+*drcTemplate_RD: %l.drc.results
+*drcSummaryFile: chip.drc.summary
+*drcTemplate_SF: %l.drc.summary
+
+*cmnShowOptions: 1
+
+# Run Control
+*cmnRunMT: 1
+*cmnRunHyper: 1
+
+# Runset Changes
+# This runset file will be read only
+*cmnSaveRunsetChanges: 0
+*cmnPromptSaveRunset: 0
+
+# Transcript
+*cmnTranscriptEchoToFile: 1
+*cmnTranscriptFile: chip.drc.log
+*cmnTranscriptFileAppend: 0
+*cmnTemplate_TF: %l.drc.log
+
+# Customization
+*cmnShowCustomDialog: 1
+*cmnUseCustomFile: 1
+*cmnCustomFileName: $IHP_TECH/Calibre/GUI/gui.drc
+*cmnCustomFileOverrideValues: {DEFINE DRC name density 1 {}} {DEFINE DRC name angleCheck 1 {}} {DEFINE DRC name filler 1 {}} {DEFINE DRC name antennaRules 1 {}} {DEFINE DRC name noRecommendedRules 1 {}} {DEFINE DRC name sanityRules 1 {}}

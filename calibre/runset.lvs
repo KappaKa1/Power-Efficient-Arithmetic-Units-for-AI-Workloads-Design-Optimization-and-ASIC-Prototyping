@@ -1,0 +1,44 @@
+# Zerun Mon 19 Jun 12:54:06 CEST 2023
+# copy from /usr/pack/ihp-sg13-kgf/ihp/SG13G2_618_rev1.2.7/Calibre/RunSets/sg13_lvs.runset
+# - add the SRAM special settings for pass lvs
+# - mapping cells and lvs report option: E=Ignore missing properties
+# Zerun  Fri 11 Apr 20:48:59 CEST 2025
+# - add short_ptap1.dz
+
+# Rules
+*lvsRulesFile: $IHP_TECH/Calibre/RSF/lvs.tvf
+*lvsRunDir: ../calibre/lvs
+
+# Input
+*lvsLayoutPaths: ../dfii/chip.gds
+*lvsLayoutPrimary: chip
+*lvsLayoutGetFromViewer: 1
+
+*lvsSourcePath: chip.spi
+*lvsTemplate_SP: %s.src.net
+*lvsSourcePrimary: chip
+*lvsSourceGetFromViewer: 1
+
+# Output
+*lvsSpiceFile: chip.lay.net
+*lvsTemplate_ES: %l.lay.net
+*cmnUseCustomFile: 1
+*cmnShowOptions: 1
+*cmnCustomFileName: $IHP_TECH/Calibre/GUI/gui.lvs
+*lvsERCDatabase: chip.erc.results
+*lvsERCSummaryFile: chip.erc.summary
+*lvsReportFile: chip.lvs.report
+*lvsMaskDBFile: chip.maskdb
+*cmnRun64: 1
+*cmnRunMT: 1
+*cmntranscriptFile:  log
+*cmnFDILayoutLibrary: chip
+*cmnFDILayoutView: layout
+*cmnFDIDEFLayoutPath: chip.def
+
+*lvsSVDBDir:     /scratch/$USER/tmp/svdb
+*lvsTemplate_SV: /scratch/$USER/tmp/svdb
+
+# special settings for IHP SRAM, IHP OPEN IO
+*lvsIncludeFiles: /usr/pack/ihp-sg13-kgf/dz/calibre/ihpsg13g2/RM_addons.lvs4calibre.dz /usr/pack/ihp-sg13-kgf/open_ihp_sg13g2/sg13g2_io/v0.2/cdl/short_ptap1.dz
+*lvsReportOptions: E

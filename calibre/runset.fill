@@ -1,0 +1,41 @@
+# Rules
+*drcRulesFile: /usr/pack/ihp-sg13-kgf/dz/calibre/ihpsg13g2/fillRules/fillDZ.tvf
+*drcRunDir: ../calibre/fill
+
+# Input
+*drcLayoutPaths: ../dfii/chip.gds
+*drcLayoutPrimary: chip
+*cmnTemplate_LP: %l.gds
+*drcLayoutGetFromViewer: 1
+
+# Output
+*drcResultsFile: chip.fill.gds
+*drcTemplate_RD: %l.fill.gds
+*drcSummaryFile: chip.fill.summary
+*drcTemplate_SF: %l.fill.summary
+*drcResultsCellSuffix: _fill
+*drcPostTriggers: {{ihpStreamInPostTrig_fil("%L" "%y" "%d")} layout 1}
+
+# DRC Options
+*cmnShowOptions: 1
+
+# Run Control
+*cmnRunMT: 1
+*cmnRunHyper: 1
+
+# Runset Changes
+# This runset file will be read only
+*cmnSaveRunsetChanges: 0
+*cmnPromptSaveRunset: 0
+
+# Transcript
+*cmnTranscriptEchoToFile: 1
+*cmnTranscriptFile: chip.fill.log
+*cmnTranscriptFileAppend: 0
+*cmnTemplate_TF: %l.fill.log
+
+# Customization
+*cmnShowCustomDialog: 1
+*cmnUseCustomFile: 1
+*cmnCustomFileName: $IHP_TECH/Calibre/GUI/gui.fill
+*cmnCustomFileOverrideValues: {DEFINE DRC name ACT_FILL 1 {}} {DEFINE DRC name GP_FILL 1 {}} {DEFINE DRC name M2_FILL 1 {}} {DEFINE DRC name M3_FILL 1 {}} {DEFINE DRC name M4_FILL 1 {}} {DEFINE DRC name TC1_FILL 1 {}} {DEFINE DRC name TC2_FILL 1 {}} {DEFINE DRC name TnAl_FILL 1 {}} {DEFINE DRC name TkAl_FILL 1 {}}

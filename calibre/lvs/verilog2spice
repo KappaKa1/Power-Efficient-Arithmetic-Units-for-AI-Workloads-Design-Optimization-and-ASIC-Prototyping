@@ -1,0 +1,71 @@
+#!/bin/csh -f
+
+# v0.4 - Zerun Mon  1 Dec 11:35:01 CET 2025
+#  - add actual port VNW/VDD, VPW/VSS connection for ez library
+# v0.3 - <muheim@ee.ethz.ch> - Thu Jul  1 16:43:09 CEST 2021
+#  - add the version to calibre
+#  - changiching howe the "v2lvs".tcl are written
+#  - fix in the grep pars
+# v0.2 - <muheim@ee.ethz.ch> - Thu Jan 28 11:33:29 CET 2021
+#  - adding additional signals to be connected by the script:
+#    VDD, VSS, VDDPST, VSSPST and POC
+# v0.1 - <muheim@ee.ethz.ch> - Mon Nov  4 16:34:34 CET 2019
+#  - new version, use v2lvs with tcl commandos
+
+if ( $#argv == 2 ) then
+
+  cat << EOF > v2lvs.tcl
+v2lvs::set_warning_level -level 4
+#v2lvs::set_warning_level -level 1
+v2lvs::override_globals -default_not_connected
+# needed that the bus connections are correct and
+# the spice.inc is also taken in account, it is needed for the VNW VPW connection
+v2lvs::combine_interface_info  -enable
+v2lvs::load_verilog -filename $1
+v2lvs::load_verilog -filename ./verilog.inc -lib_mode
+v2lvs::load_spice   -filename ./spice.inc -range_mode
+v2lvs::set_includes -filename ./spice.inc
+v2lvs::override_globals -supply0 VSS
+v2lvs::override_globals -supply1 VDD
+#from Oscar ez library to connect VNW/VPW and VDD/VSS respectively:
+v2lvs::add_actual_port -module * -inst * -connect_formal_actual { VNW VDD }
+v2lvs::add_actual_port -module * -inst * -connect_formal_actual { VPW VSS }
+v2lvs::write_output -filename $2
+exit
+EOF
+
+
+  calibre-2021.3  v2lvs -b -tcl v2lvs.tcl |& grep -v -e "Warning: Unsupported compiler directive" \
+                                                  -e "Warning: Duplicate declaration" \
+                                                  -e "Warning: Duplicate port/net" \
+                                                  -e "Warning: Second declaration ignored" \
+                                                  -e "Warning: Module instantiation .* has pin mismatches"
+   echo ""
+   echo    "Warnings:"
+   echo -n "    Unsupported compiler directive :  "
+   grep -c -e "Warning: Unsupported compiler directive" v2lvs.log 
+   echo -n "    Duplicate declaration - First .. declaration will be used in Verilog translation:  "
+   grep -c -e "Warning: Duplicate declaration .*First.*declaration will be used in Verilog translation" v2lvs.log 
+   echo -n "    Duplicate port/net :  "
+   grep -c -e "Warning: Duplicate port/net" v2lvs.log 
+   echo -n "    Second declaration ignored :  "
+   grep -c -e "Warning: Second declaration ignored" v2lvs.log 
+   echo -n "    Module instantiation XXXX has pin mismatches :  "
+   grep -c -e "Warning: Module instantiation .* has pin mismatches" v2lvs.log
+   echo ""
+   echo "The output is filtered, check the log file v2lvs.log for details."
+   echo ""
+   
+else
+
+   set wrapper_name=$0
+   echo ""
+   echo "Usage: $wrapper_name:t <netlist.v> <netlist.spi>"
+   echo ""
+   echo "       Converts verilog netlist to spice format,"
+   echo "       logfile is 'v2lvs.log'"
+   echo ""
+   echo ""
+   exit 1
+
+endif

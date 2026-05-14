@@ -1,0 +1,684 @@
+(inductor3
+   (SG13_dev inductor3 symbol)
+    (
+     (la LA)
+     (lc LC)
+     (lb LB)
+     (bn bn)
+    )
+)
+(sg13_hv_nmos
+   (SG13_dev nmosHV symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(res_rppd
+   (SG13_dev rppd symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(diodevss_2kv
+   (SG13_dev diodevss_2kv symbol)
+    (
+     (vdd VDD)
+     (pad PAD)
+     (vss VSS)
+    )
+)
+(cap_cmim
+   (SG13_dev cmim symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(sg13_lv_pmos
+   (SG13_dev pmos symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(nmoscl_2
+   (SG13_dev nmoscl_2 symbol)
+    (
+     (pos PLUS )
+     (neg MINUS)
+    )
+)
+(idiodevdd_4kv
+   (SG13_dev idiodevdd_4kv symbol)
+    (
+     (vdd VDD)
+     (pad PAD)
+     (vss VSS)
+    )
+)
+(SI
+   (SG13_dev resistors symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(res_pi_cap
+   (SG13_dev res_pi_cap symbol)
+    (
+     (minus MINUS)
+     (plus PLUS)
+    )
+)
+(ptap1
+   (SG13_dev ptapSB symbol)
+    (
+     (tie TIE)
+     (sub SUB)
+    )
+)
+(res_rhigh
+   (SG13_dev rhigh symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(rfnmosHV
+   (SG13_dev rfnmosHV symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b TIE)
+    )
+)
+(npn13G2v
+   (SG13_dev npn13G2V symbol)
+    (
+     (c C)
+     (b B)
+     (e E)
+     (s bn)
+    )
+)
+(idiodevss_4kv
+   (SG13_dev idiodevss_4kv symbol)
+    (
+     (vdd VDD)
+     (pad PAD)
+     (vss VSS)
+    )
+)
+(iprobe
+   (SG13_dev iprobe symbol)
+    (
+     (plus PLUS)
+     (minus MINUS)
+    )
+)
+(npn13G2l
+   (SG13_dev npn13G2L symbol)
+    (
+     (c C)
+     (b B)
+     (e E)
+     (s bn)
+    )
+)
+(diodevdd_2kv
+   (SG13_dev diodevdd_2kv symbol)
+    (
+     (vdd VDD)
+     (pad PAD)
+     (vss VSS)
+    )
+)
+(LP
+   (SG13_dev pinductor symbol)
+    (
+     (plus PLUS)
+     (minus MINUS)
+    )
+)
+(inductor
+   (SG13_dev L2_IND_LVS symbol)
+    (
+     (la LA)
+     (lb LB)
+     (bn bn)
+    )
+)
+(isolbox
+   (SG13_dev isolbox symbol)
+    (
+     (s S)
+     (i I)
+     (bn bn)
+    )
+)
+(bondpad_model
+   (SG13_dev bondpad symbol)
+    (
+     (pad PAD)
+    )
+)
+(rfpmos
+   (SG13_dev rfpmos symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b TIE)
+    )
+)
+(rfcmim
+   (SG13_dev rfcmim symbol)
+    (
+     (plus PLUS)
+     (minus MINUS)
+     (tie TIE)
+    )
+)
+(ptap1
+   (SG13_dev ptap1 symbol)
+    (
+     (tie TIE)
+     (sub SUB)
+    )
+)
+(pdnw
+   (SG13_dev pdnw symbol)
+    (
+     (minus MINUS)
+     (bn bn)
+    )
+)
+(nmoscl_4
+   (SG13_dev nmoscl_4 symbol)
+    (
+     (pos PLUS )
+     (neg MINUS)
+    )
+)
+(dummy1
+   (SG13_dev dummy1 symbol)
+    (
+     (c C)
+    )
+)
+(diodevss_4kv
+   (SG13_dev diodevss_4kv symbol)
+    (
+     (vdd VDD)
+     (pad PAD)
+     (vss VSS)
+    )
+)
+(dantenna
+   (SG13_dev dantenna symbol)
+    (
+     (pos PLUS )
+     (neg MINUS)
+    )
+)
+(inductor
+   (SG13_dev inductor2_sc symbol)
+    (
+     (la LA)
+     (lb LB)
+     (bn bn)
+    )
+)
+(idiodevdd_2kv
+   (SG13_dev idiodevdd_2kv symbol)
+    (
+     (vdd VDD)
+     (pad PAD)
+     (vss VSS)
+    )
+)
+(dpantenna
+   (SG13_dev dpantenna symbol)
+    (
+     (pos PLUS )
+     (neg MINUS)
+    )
+)
+(model
+   (SG13_dev SVaricap symbol)
+    (
+     (g1 G1)
+     (w W)
+     (g2 G2)
+     (bn bn)
+    )
+)
+(inductor3
+   (SG13_dev inductor3_sc symbol)
+    (
+     (la LA)
+     (lc LC)
+     (lb LB)
+     (bn bn)
+    )
+)
+(Cparasitics
+   (SG13_dev pcapacitor symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(npn13G2
+   (SG13_dev npn13G2 symbol)
+    (
+     (c C)
+     (b B)
+     (e E)
+     (s bn)
+    )
+)
+(rfpmosHV
+   (SG13_dev rfpmosHV symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b TIE)
+    )
+)
+(sg13_hv_pmos
+   (SG13_dev pmosHV symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(inductor3
+   (SG13_dev inductor3_sp symbol)
+    (
+     (la LA)
+     (lc LC)
+     (lb LB)
+     (bn bn)
+    )
+)
+(inductor
+   (SG13_dev inductor2_sp symbol)
+    (
+     (la LA)
+     (lb LB)
+     (bn bn)
+    )
+)
+(inductor
+   (SG13_dev inductor2 symbol)
+    (
+     (la LA)
+     (lb LB)
+     (bn bn)
+    )
+)
+(rfnmos
+   (SG13_dev rfnmos symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b TIE)
+    )
+)
+(idiodevss_2kv
+   (SG13_dev idiodevss_2kv symbol)
+    (
+     (vdd VDD)
+     (pad PAD)
+     (vss VSS)
+    )
+)
+(lvsres
+   (SG13_dev lvsres symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(pnpMPA
+   (SG13_dev pnpMPA symbol)
+    (
+     (plus PLUS)
+     (minus MINUS)
+     (tie TIE)
+    )
+)
+(diodevdd_4kv
+   (SG13_dev diodevdd_4kv symbol)
+    (
+     (vdd VDD)
+     (pad PAD)
+     (vss VSS)
+    )
+)
+(ntap1
+   (SG13_dev ntap1 symbol)
+    (
+     (tie TIE)
+     (well WELL)
+    )
+)
+(res_rsil
+   (SG13_dev rsil symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(Rparasitic
+   (SG13_dev presistor symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(sg13_lv_nmos
+   (SG13_dev nmos symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(TSV
+   (SG13_dev TSV symbol)
+    (
+     (top Top)
+     (backside BackSide)
+    )
+)
+(scr1
+   (SG13_dev scr1 symbol)
+    (
+     (pos PLUS )
+     (neg MINUS)
+    )
+)
+(schottky_nbl1
+   (SG13_dev schottky_nbl1 symbol)
+    (
+     (plus PLUS)
+     (minus MINUS)
+     (tie TIE)
+    )
+)
+(PM
+   (analogLib pmos4 symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(NP
+   (analogLib usernpn symbol)
+    (
+     (c C)
+     (b B)
+     (e E)
+     (s bn)
+    )
+)
+(PN
+   (analogLib pnp symbol)
+    (
+     (c C)
+     (b B)
+     (e E)
+     (s bn)
+    )
+)
+(PJ
+   (analogLib pjfet symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+    )
+)
+(NM
+   (analogLib nmos symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(PM
+   (analogLib pbsim4 symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(PM
+   (analogLib pbsim symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(LP
+   (analogLib pinductor symbol)
+    (
+     (plus PLUS)
+     (minus MINUS)
+    )
+)
+(RP
+   (analogLib rcwireload symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(PN
+   (analogLib userpnp symbol)
+    (
+     (c C)
+     (b B)
+     (e E)
+     (s bn)
+    )
+)
+(NM
+   (analogLib nsoi symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(NP
+   (analogLib npn symbol)
+    (
+     (c C)
+     (b B)
+     (e E)
+     (s bn)
+    )
+)
+(PM
+   (analogLib psoi symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(NJ
+   (analogLib njfet symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+    )
+)
+(DP
+   (analogLib diode symbol)
+    (
+     (pos PLUS )
+     (neg MINUS)
+    )
+)
+(NJ
+   (analogLib nmes symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+    )
+)
+(DP
+   (analogLib pdiode symbol)
+    (
+     (pos PLUS )
+     (neg MINUS)
+    )
+)
+(NM
+   (analogLib nbsim symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(LP
+   (analogLib ind symbol)
+    (
+     (plus PLUS)
+     (minus MINUS)
+    )
+)
+(NM
+   (analogLib nbsim4 symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(DP
+   (analogLib zener symbol)
+    (
+     (pos PLUS )
+     (neg MINUS)
+    )
+)
+(NM
+   (analogLib nmos4 symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(RP
+   (analogLib presistor symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(CP
+   (analogLib pcapacitor symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(CP
+   (analogLib cap symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+(DP
+   (analogLib schottky symbol)
+    (
+     (pos PLUS )
+     (neg MINUS)
+    )
+)
+(NJ
+   (analogLib nmes4 symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+    )
+)
+(PM
+   (analogLib pmos symbol)
+    (
+     (d D)
+     (g G)
+     (s S)
+     (b B)
+    )
+)
+(RP
+   (analogLib res symbol)
+    (
+     (pos PLUS)
+     (neg MINUS)
+     (sub bn)
+    )
+)
+((p cap c)
+   (analogLib cap symbol)
+    (
+     (PLUS)
+     (MINUS)
+    )
+)
+((p res r)
+   (analogLib res symbol)
+    (
+     (PLUS)
+     (MINUS)
+    )
+)
