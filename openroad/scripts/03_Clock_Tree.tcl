@@ -43,5 +43,3 @@ estimate_parasitics -placement
 
 report_cts -out_file CTS_Final.cts.rpt
 report_metrics "CTS_Final.cts"
-report_image "CTS_Final.cts" true false true
-save_checkpoint CTS_Final.cts

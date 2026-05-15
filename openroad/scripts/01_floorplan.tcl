@@ -120,6 +120,3 @@ global_connect
 # 01-05: Power Grid
 ########################################################
 source scripts/power_grid.tcl
-
-save_checkpoint Floorplan_Final.floorplan
-report_image "Floorplan_Final.floorplan" true

@@ -1,7 +1,9 @@
 ###############################################################################
 # Stage 02 PLACING AND TIMING 
 ###############################################################################
-
+# To estimate delay with parasitics, use this command and press update 
+set_wire_rc -clock -layer Metal3
+set_wire_rc -signal -layer Metal3
 set_dont_use $dont_use_cells
 set_thread_count 8
 
@@ -24,10 +26,6 @@ remove_buffers
 # Repair the design
 repair_design -verbose
 
-# To estimate delay with parasitics, use this command and press update 
-set_wire_rc -clock -layer Metal3
-set_wire_rc -signal -layer Metal3
-
 ########################################################
 # 02-02: Global Placement
 ########################################################
@@ -40,7 +38,7 @@ set_wire_rc -signal -layer Metal3
 # timing_driven:      Prioritize near-critical timing paths (reduce their length)
 
 # First global_placement 
-global_placement -density 0.60 -routability_driven -routability_check_overflow 0.30 -timing_driven
+global_placement -density 0.55
 
 # Only includes all cell placement (like SRAM)
 report_cell_usage
@@ -54,6 +52,11 @@ repair_design -verbose
 # Repair Setup, done later
 repair_timing -setup -verbose
 
+global_placement -density 0.55 \
+                 -routability_driven \
+                 -routability_check_overflow 0.30 \
+                 -timing_driven
+
 ###############################################################################
 # 02-03: Detailed Placement
 ###############################################################################
@@ -66,5 +69,3 @@ optimize_mirroring
 estimate_parasitics -placement
 
 report_metrics "Placement_Final.placed"
-report_image "Placement_Final.placed" true true
-save_checkpoint Placement_Final.placed

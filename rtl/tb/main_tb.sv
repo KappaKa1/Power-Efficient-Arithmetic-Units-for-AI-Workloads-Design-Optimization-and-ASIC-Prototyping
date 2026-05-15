@@ -214,13 +214,13 @@ module main_tb#(
   //////////////////////
   `ifdef TARGET_NETLIST_OPENROAD // Runs in Vsim and QuestaSIM
     initial begin
-      #5395;
+      #5374;
       $display("@%t | [VCD] Start dump", $time);
       $dumpfile("main_chip.vcd");
       $dumpvars(0, i_dut);
         
-      // keep dumping for duration = 10,525- 5,395 = 5130 ns
-      #5130;
+      // keep dumping for duration = 10,491- 5,374 = 5117 ns
+      #5117;
 
       $display("@%t | [VCD] Stop dump", $time);
       $dumpoff;
