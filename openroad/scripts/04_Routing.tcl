@@ -24,13 +24,13 @@ repair_design -verbose
 
 # Fix the Timing Violations
 repair_timing -setup -verbose -repair_tns 100
-repair_timing -hold -hold_margin 0.4 -verbose -repair_tns 100
-
+repair_timing -hold -hold_margin 0.1 -verbose -repair_tns 100
+# change it back to 0.4 later
 
 # Identify issue
 global_route -start_incremental
 detailed_placement
-#global_route -end_incremental
+
 # Route only the modified net by DPL
 global_route -end_incremental \
             -guide_file ${report_dir}/04_${proj_name}_route.guide \

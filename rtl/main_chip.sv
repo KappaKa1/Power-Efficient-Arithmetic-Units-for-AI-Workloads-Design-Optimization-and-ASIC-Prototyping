@@ -4,6 +4,7 @@ module main_chip #() (
   
   input wire 						req_i, 
   input wire 						we_i, 
+  input wire						stop_compute_i,
   input wire 						streamed_wdata_0_i, // LSB
   input wire 						streamed_wdata_1_i,
   input wire 						streamed_wdata_2_i,
@@ -49,7 +50,6 @@ module main_chip #() (
   output wire 						unused5_o,
   output wire 						unused6_o,
   output wire 						unused7_o,
-  output wire 						unused8_o,
   
   inout wire 						VDD,
   inout wire 						VSS,
@@ -64,7 +64,7 @@ module main_chip #() (
 
   // -------------------- Internal SoC Signals --------------------
   logic soc_clk_i, soc_rst_ni;
-  logic soc_req_i, soc_we_i;
+  logic soc_req_i, soc_we_i, soc_stop_compute_i;
 
   logic soc_streamed_wdata_0_i;
   logic soc_streamed_wdata_1_i;
@@ -103,50 +103,51 @@ module main_chip #() (
   logic soc_streamed_rdata_15_o;
 
   // -------------------- Input Pads --------------------
-  sg13cmos5l_IOPadIn pad_clk_i        (.pad(clk_i),        .p2c(soc_clk_i));
-  sg13cmos5l_IOPadIn pad_rst_ni       (.pad(rst_ni),       .p2c(soc_rst_ni));
+  sg13cmos5l_IOPadIn pad_clk_i        		(.pad(clk_i),        .p2c(soc_clk_i));
+  sg13cmos5l_IOPadIn pad_rst_ni       		(.pad(rst_ni),       .p2c(soc_rst_ni));
 
-  sg13cmos5l_IOPadIn pad_req_i        (.pad(req_i),        .p2c(soc_req_i));
-  sg13cmos5l_IOPadIn pad_we_i         (.pad(we_i),         .p2c(soc_we_i));
+  sg13cmos5l_IOPadIn pad_req_i        		(.pad(req_i),        .p2c(soc_req_i));
+  sg13cmos5l_IOPadIn pad_we_i         		(.pad(we_i),         .p2c(soc_we_i));
+  sg13cmos5l_IOPadIn pad_stop_compute_i         (.pad(stop_compute_i),         .p2c(soc_stop_compute_i));
 
-  sg13cmos5l_IOPadIn pad_wdata_0_i    (.pad(streamed_wdata_0_i),  .p2c(soc_streamed_wdata_0_i));
-  sg13cmos5l_IOPadIn pad_wdata_1_i    (.pad(streamed_wdata_1_i),  .p2c(soc_streamed_wdata_1_i));
-  sg13cmos5l_IOPadIn pad_wdata_2_i    (.pad(streamed_wdata_2_i),  .p2c(soc_streamed_wdata_2_i));
-  sg13cmos5l_IOPadIn pad_wdata_3_i    (.pad(streamed_wdata_3_i),  .p2c(soc_streamed_wdata_3_i));
-  sg13cmos5l_IOPadIn pad_wdata_4_i    (.pad(streamed_wdata_4_i),  .p2c(soc_streamed_wdata_4_i));
-  sg13cmos5l_IOPadIn pad_wdata_5_i    (.pad(streamed_wdata_5_i),  .p2c(soc_streamed_wdata_5_i));
-  sg13cmos5l_IOPadIn pad_wdata_6_i    (.pad(streamed_wdata_6_i),  .p2c(soc_streamed_wdata_6_i));
-  sg13cmos5l_IOPadIn pad_wdata_7_i    (.pad(streamed_wdata_7_i),  .p2c(soc_streamed_wdata_7_i));
-  sg13cmos5l_IOPadIn pad_wdata_8_i    (.pad(streamed_wdata_8_i),  .p2c(soc_streamed_wdata_8_i));
-  sg13cmos5l_IOPadIn pad_wdata_9_i    (.pad(streamed_wdata_9_i),  .p2c(soc_streamed_wdata_9_i));
-  sg13cmos5l_IOPadIn pad_wdata_10_i   (.pad(streamed_wdata_10_i), .p2c(soc_streamed_wdata_10_i));
-  sg13cmos5l_IOPadIn pad_wdata_11_i   (.pad(streamed_wdata_11_i), .p2c(soc_streamed_wdata_11_i));
-  sg13cmos5l_IOPadIn pad_wdata_12_i   (.pad(streamed_wdata_12_i), .p2c(soc_streamed_wdata_12_i));
-  sg13cmos5l_IOPadIn pad_wdata_13_i   (.pad(streamed_wdata_13_i), .p2c(soc_streamed_wdata_13_i));
-  sg13cmos5l_IOPadIn pad_wdata_14_i   (.pad(streamed_wdata_14_i), .p2c(soc_streamed_wdata_14_i));
-  sg13cmos5l_IOPadIn pad_wdata_15_i   (.pad(streamed_wdata_15_i), .p2c(soc_streamed_wdata_15_i));
+  sg13cmos5l_IOPadIn pad_wdata_0_i    		(.pad(streamed_wdata_0_i),  .p2c(soc_streamed_wdata_0_i));
+  sg13cmos5l_IOPadIn pad_wdata_1_i    		(.pad(streamed_wdata_1_i),  .p2c(soc_streamed_wdata_1_i));
+  sg13cmos5l_IOPadIn pad_wdata_2_i    		(.pad(streamed_wdata_2_i),  .p2c(soc_streamed_wdata_2_i));
+  sg13cmos5l_IOPadIn pad_wdata_3_i    		(.pad(streamed_wdata_3_i),  .p2c(soc_streamed_wdata_3_i));
+  sg13cmos5l_IOPadIn pad_wdata_4_i    		(.pad(streamed_wdata_4_i),  .p2c(soc_streamed_wdata_4_i));
+  sg13cmos5l_IOPadIn pad_wdata_5_i    		(.pad(streamed_wdata_5_i),  .p2c(soc_streamed_wdata_5_i));
+  sg13cmos5l_IOPadIn pad_wdata_6_i    		(.pad(streamed_wdata_6_i),  .p2c(soc_streamed_wdata_6_i));
+  sg13cmos5l_IOPadIn pad_wdata_7_i    		(.pad(streamed_wdata_7_i),  .p2c(soc_streamed_wdata_7_i));
+  sg13cmos5l_IOPadIn pad_wdata_8_i    		(.pad(streamed_wdata_8_i),  .p2c(soc_streamed_wdata_8_i));
+  sg13cmos5l_IOPadIn pad_wdata_9_i    		(.pad(streamed_wdata_9_i),  .p2c(soc_streamed_wdata_9_i));
+  sg13cmos5l_IOPadIn pad_wdata_10_i   		(.pad(streamed_wdata_10_i), .p2c(soc_streamed_wdata_10_i));
+  sg13cmos5l_IOPadIn pad_wdata_11_i   		(.pad(streamed_wdata_11_i), .p2c(soc_streamed_wdata_11_i));
+  sg13cmos5l_IOPadIn pad_wdata_12_i   		(.pad(streamed_wdata_12_i), .p2c(soc_streamed_wdata_12_i));
+  sg13cmos5l_IOPadIn pad_wdata_13_i   		(.pad(streamed_wdata_13_i), .p2c(soc_streamed_wdata_13_i));
+  sg13cmos5l_IOPadIn pad_wdata_14_i   		(.pad(streamed_wdata_14_i), .p2c(soc_streamed_wdata_14_i));
+  sg13cmos5l_IOPadIn pad_wdata_15_i   		(.pad(streamed_wdata_15_i), .p2c(soc_streamed_wdata_15_i));
 
   // -------------------- Output Pads --------------------
-  sg13cmos5l_IOPadOut16mA pad_ready_o   (.pad(ready_o),   .c2p(soc_ready_o));
-  sg13cmos5l_IOPadOut16mA pad_finish_o  (.pad(finish_o),  .c2p(soc_finish_o));
-  sg13cmos5l_IOPadOut16mA pad_ack_o     (.pad(ack_o),     .c2p(soc_ack_o));
+  sg13cmos5l_IOPadOut16mA pad_ready_o   	(.pad(ready_o),   .c2p(soc_ready_o));
+  sg13cmos5l_IOPadOut16mA pad_finish_o  	(.pad(finish_o),  .c2p(soc_finish_o));
+  sg13cmos5l_IOPadOut16mA pad_ack_o     	(.pad(ack_o),     .c2p(soc_ack_o));
 
-  sg13cmos5l_IOPadOut16mA pad_rdata_0_o  (.pad(streamed_rdata_0_o),  .c2p(soc_streamed_rdata_0_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_1_o  (.pad(streamed_rdata_1_o),  .c2p(soc_streamed_rdata_1_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_2_o  (.pad(streamed_rdata_2_o),  .c2p(soc_streamed_rdata_2_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_3_o  (.pad(streamed_rdata_3_o),  .c2p(soc_streamed_rdata_3_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_4_o  (.pad(streamed_rdata_4_o),  .c2p(soc_streamed_rdata_4_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_5_o  (.pad(streamed_rdata_5_o),  .c2p(soc_streamed_rdata_5_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_6_o  (.pad(streamed_rdata_6_o),  .c2p(soc_streamed_rdata_6_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_7_o  (.pad(streamed_rdata_7_o),  .c2p(soc_streamed_rdata_7_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_8_o  (.pad(streamed_rdata_8_o),  .c2p(soc_streamed_rdata_8_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_9_o  (.pad(streamed_rdata_9_o),  .c2p(soc_streamed_rdata_9_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_10_o (.pad(streamed_rdata_10_o), .c2p(soc_streamed_rdata_10_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_11_o (.pad(streamed_rdata_11_o), .c2p(soc_streamed_rdata_11_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_12_o (.pad(streamed_rdata_12_o), .c2p(soc_streamed_rdata_12_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_13_o (.pad(streamed_rdata_13_o), .c2p(soc_streamed_rdata_13_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_14_o (.pad(streamed_rdata_14_o), .c2p(soc_streamed_rdata_14_o));
-  sg13cmos5l_IOPadOut16mA pad_rdata_15_o (.pad(streamed_rdata_15_o), .c2p(soc_streamed_rdata_15_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_0_o  	(.pad(streamed_rdata_0_o),  .c2p(soc_streamed_rdata_0_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_1_o  	(.pad(streamed_rdata_1_o),  .c2p(soc_streamed_rdata_1_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_2_o  	(.pad(streamed_rdata_2_o),  .c2p(soc_streamed_rdata_2_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_3_o  	(.pad(streamed_rdata_3_o),  .c2p(soc_streamed_rdata_3_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_4_o  	(.pad(streamed_rdata_4_o),  .c2p(soc_streamed_rdata_4_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_5_o  	(.pad(streamed_rdata_5_o),  .c2p(soc_streamed_rdata_5_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_6_o  	(.pad(streamed_rdata_6_o),  .c2p(soc_streamed_rdata_6_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_7_o  	(.pad(streamed_rdata_7_o),  .c2p(soc_streamed_rdata_7_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_8_o  	(.pad(streamed_rdata_8_o),  .c2p(soc_streamed_rdata_8_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_9_o  	(.pad(streamed_rdata_9_o),  .c2p(soc_streamed_rdata_9_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_10_o 	(.pad(streamed_rdata_10_o), .c2p(soc_streamed_rdata_10_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_11_o 	(.pad(streamed_rdata_11_o), .c2p(soc_streamed_rdata_11_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_12_o 	(.pad(streamed_rdata_12_o), .c2p(soc_streamed_rdata_12_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_13_o 	(.pad(streamed_rdata_13_o), .c2p(soc_streamed_rdata_13_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_14_o 	(.pad(streamed_rdata_14_o), .c2p(soc_streamed_rdata_14_o));
+  sg13cmos5l_IOPadOut16mA pad_rdata_15_o 	(.pad(streamed_rdata_15_o), .c2p(soc_streamed_rdata_15_o));
 
   (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused0_o (.pad(unused0_o), .c2p(soc_unused));
   (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused1_o (.pad(unused1_o), .c2p(soc_unused));
@@ -156,7 +157,6 @@ module main_chip #() (
   (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused5_o (.pad(unused5_o), .c2p(soc_unused));
   (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused6_o (.pad(unused6_o), .c2p(soc_unused));
   (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused7_o (.pad(unused7_o), .c2p(soc_unused));
-  (* dont_touch = "true" *) sg13cmos5l_IOPadOut16mA pad_unused8_o (.pad(unused8_o), .c2p(soc_unused));
 
   (* dont_touch = "true" *)sg13cmos5l_IOPadVdd pad_vdd0();
   (* dont_touch = "true" *)sg13cmos5l_IOPadVdd pad_vdd1();
@@ -194,6 +194,7 @@ module main_chip #() (
 
     .req_i               (soc_req_i),
     .we_i                (soc_we_i),
+    .stop_compute_i  	 (soc_stop_compute_i),
 
     .streamed_wdata_0_i  (soc_streamed_wdata_0_i),
     .streamed_wdata_1_i  (soc_streamed_wdata_1_i),

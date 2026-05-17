@@ -65,9 +65,9 @@ set_max_delay $TCK_SYS -from [get_ports rst_ni]
 puts "Functional inputs..."
 
 set_input_delay  -min -add_delay -clock clk_sys [expr $TCK_SYS * 0.10] \
-  [get_ports {req_i we_i streamed_wdata_*_i}]
+  [get_ports {req_i we_i stop_compute_i streamed_wdata_*_i}]
 set_input_delay  -max -add_delay -clock clk_sys [expr $TCK_SYS * 0.30] \
-  [get_ports {req_i we_i streamed_wdata_*_i}]
+  [get_ports {req_i we_i stop_compute_i streamed_wdata_*_i}]
 
 
 ######################

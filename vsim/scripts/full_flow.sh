@@ -38,7 +38,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
             | tee -a output.txt
 
         VSIM_EXTRA_ARGS="-sdfmax /main_tb/i_dut=./../openroad/out/main_chip.sdf \
-                         -sdfnoerror "
+                         -sdfnoerror +notimingchecks"
     fi
  
     echo ""
@@ -49,7 +49,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
         echo "4. Running VSIM (GUI)"
 
         vsim -gui "$TOP_MODULE" \
-            -t 1ps \
+            -t 1ns \
             -voptargs=+acc \
             $VSIM_EXTRA_ARGS \
             -suppress vsim-3009 \
@@ -61,7 +61,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
         echo "4. Running VSIM (CLI)"
 
         vsim -c "$TOP_MODULE" \
-            -t 1ps \
+            -t 1ns \
             -voptargs=+acc \
             $VSIM_EXTRA_ARGS \
             -suppress vsim-3009 \

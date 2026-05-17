@@ -15,18 +15,22 @@ module GEMM_controller #(
   // Calculated Parameters, DO NOT TOUCH !!
   parameter int unsigned INPUT_SRAM_ADDR_WIDTH        	= 8,
   parameter int unsigned OUTPUT_SRAM_ADDR_WIDTH        	= 8,
-  parameter int unsigned GEMM_SELECT_WIDTH        	= 5
+  parameter int unsigned GEMM_SELECT_WIDTH        	= 5,
+  parameter int unsigned COMPUTATION_MODE		= 3
 )(
   // Global Signals
   input logic 						clk_i,
   input logic 						rst_ni,
+  
+  // from TESTING Device to GEMM Controller	
+  input logic 						stop_computation_loop_i,
   
   // from GEMM Controller to GEMM Core
   output logic [GEMM_SELECT_WIDTH -1 :0]		enable_o,
   output logic [GEMM_SELECT_WIDTH -1 :0]		start_o, // force intermediate result in first cycle to be 0
   
   // from SRAM Controller to GEMM Controller
-  input logic [GEMM_SELECT_WIDTH:0]			GEMM_ctrl_packet_i,
+  input logic [GEMM_SELECT_WIDTH + COMPUTATION_MODE:0]	GEMM_ctrl_packet_i,
   
   // from GEMM Controller to SRAM
   output logic [INPUT_SRAM_ADDR_WIDTH -1 :0] 	 	gemm_inp_A_addr_o, // A(M,K)
@@ -40,9 +44,11 @@ module GEMM_controller #(
   output logic [OUTPUT_SRAM_ADDR_WIDTH - 1:0]		gemm_out_Y_addr_o 
 );
 
-  typedef enum logic [2:0] {IDLE, COMPUTE, FINAL1, FINAL2, FINAL3} gemm_ctrl_state;
+  typedef enum logic [2:0] {IDLE, COMPUTE, COMPUTE_TILL_STOP, FINAL1, FINAL2, FINAL3} gemm_ctrl_state;
   localparam int unsigned OPERAND_COUNT = 32 / 4;
   localparam int unsigned OPERAND_COUNT_WIDTH = $clog2(OPERAND_COUNT);
+  
+  logic stop_computation_flag_q, stop_computation_flag_d;
   
   gemm_ctrl_state state_q, state_d;
   logic [OPERAND_COUNT_WIDTH - 1 : 0] M_count_q, M_count_d;
@@ -78,6 +84,7 @@ module GEMM_controller #(
     gemm_out_addr_d1 = '0;
     done_d1 = '0;
   
+    stop_computation_flag_d = stop_computation_flag_q;
     store_GEMM_select_d = store_GEMM_select_q;
     state_d = state_q;
     M_count_d = M_count_q;
@@ -91,13 +98,18 @@ module GEMM_controller #(
         gemm_inp_A_addr_d = '0;
         gemm_inp_B_addr_d = '0;
         if (GEMM_ctrl_packet_i[0]) begin
-          store_GEMM_select_d = GEMM_ctrl_packet_i[GEMM_SELECT_WIDTH:1];
+          store_GEMM_select_d = GEMM_ctrl_packet_i[GEMM_SELECT_WIDTH + COMPUTATION_MODE: COMPUTATION_MODE + 1];
           M_count_d = '0;
           N_count_d = '0;
           K_count_d = 1'b1;
           gemm_inp_A_addr_d = '0;
           gemm_inp_B_addr_d = '0;
-          state_d = COMPUTE;
+          if (GEMM_ctrl_packet_i[COMPUTATION_MODE:1] == '0) begin
+            state_d = COMPUTE;
+          end else begin 
+            stop_computation_flag_d = '0;
+            state_d = COMPUTE_TILL_STOP;
+          end
         end
       end
     
@@ -121,6 +133,45 @@ module GEMM_controller #(
               M_count_d = '0;
               done_d1 = 1'b1;
               state_d = FINAL1;
+            end else begin
+              M_count_d = M_count_q + 1;
+            end
+          end else begin
+            N_count_d = N_count_q + 1;
+          end
+        end else begin
+          K_count_d = K_count_q + 1;
+        end
+      end
+      
+      COMPUTE_TILL_STOP: begin
+        if(K_count_q == 1'b1 && N_count_q == '0 && M_count_q == '0) begin
+          start_d = store_GEMM_select_q;
+        end
+        
+        if(stop_computation_loop_i) begin
+          stop_computation_flag_d = '1;
+        end
+        
+        enable_d = store_GEMM_select_q;
+        gemm_inp_A_addr_d = M_count_q * OPERAND_COUNT + K_count_q;
+        gemm_inp_B_addr_d = N_count_q * OPERAND_COUNT + K_count_q;
+        gemm_out_addr_d1 = ((M_count_q * OPERAND_COUNT) + N_count_q) * 4; // We let SRAM controller set the address
+        
+        if (K_count_q == OPERAND_COUNT-1) begin
+          K_count_d = '0;
+          valid_d1 = 1'b1;
+
+          if (N_count_q == OPERAND_COUNT-1) begin
+            N_count_d = '0;
+
+            if (M_count_q == OPERAND_COUNT-1 && (stop_computation_flag_q || stop_computation_loop_i)) begin
+              M_count_d = '0;
+              done_d1 = 1'b1;
+              stop_computation_flag_d = '0;
+              state_d = FINAL1;
+            end else if (M_count_q == OPERAND_COUNT-1) begin
+              M_count_d = '0;
             end else begin
               M_count_d = M_count_q + 1;
             end
@@ -156,6 +207,7 @@ module GEMM_controller #(
   always_ff @(posedge clk_i) begin
     if (!rst_ni) begin
       state_q <= IDLE;
+      stop_computation_flag_q <= '0;
       store_GEMM_select_q <= '0;
       M_count_q <= '0;
       N_count_q <= '0;
@@ -176,6 +228,7 @@ module GEMM_controller #(
       gemm_out_addr_q3 <= '0;
     end else begin
       state_q <= state_d;
+      stop_computation_flag_q <= stop_computation_flag_d;
       store_GEMM_select_q <= store_GEMM_select_d;
       M_count_q <= M_count_d;
       N_count_q <= N_count_d;

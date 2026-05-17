@@ -22,7 +22,7 @@ module main #(
   parameter int unsigned INPUT_SRAM_ADDR_WIDTH        	= 8,
   parameter int unsigned OUTPUT_SRAM_ADDR_WIDTH        	= 8,
   parameter int unsigned GEMM_SELECT_WIDTH        	= 5,
-  parameter int unsigned ENCODING_SCHEME_WIDTH        	= 3
+  parameter int unsigned COMPUTATION_MODE        	= 3
 )
 (
   input logic 						clk_i,
@@ -30,6 +30,7 @@ module main #(
   
   input logic 						req_i, 
   input logic 						we_i, 
+  input logic						stop_compute_i,
   input logic 						streamed_wdata_0_i, // LSB
   input logic 						streamed_wdata_1_i,
   input logic 						streamed_wdata_2_i,
@@ -71,6 +72,7 @@ module main #(
   // ------------------------------------ SIGNALS USED to Stabilize input/output for TEST DEVICE ------------------------------------------
   logic req_q, req_d, req_ctrl;
   logic we_q, we_d, we_ctrl;
+  logic stop_compute_q, stop_compute_d, stop_compute_gemm;
   logic ready_q, ready_d, ready_ctrl;
   logic finish_q, finish_d, finish_ctrl;
   logic ack_q, ack_d, ack_ctrl;
@@ -79,6 +81,8 @@ module main #(
   assign req_ctrl = req_q;
   assign we_d = we_i;
   assign we_ctrl = we_q;
+  assign stop_compute_d = stop_compute_i;
+  assign stop_compute_gemm = stop_compute_q;
   assign ready_d = ready_ctrl;
   assign ready_o = ready_q;
   assign finish_d = finish_ctrl;
@@ -90,12 +94,14 @@ module main #(
     if (!rst_ni) begin
       req_q <= '0;
       we_q <= '0;
+      stop_compute_q <= '0;
       ready_q <= '0;
       finish_q <= '0;
       ack_q <= '0;
     end else begin
       req_q <= req_d;
       we_q <= we_d;
+      stop_compute_q <= stop_compute_d;
       ready_q <= ready_d;
       finish_q <= finish_d;
       ack_q <= ack_d;
@@ -253,6 +259,9 @@ module main #(
   GEMM_controller u_gemm_ctrl (
     .clk_i               (clk_i),
     .rst_ni              (rst_ni),
+    
+    // testing device to GEMM controller
+    .stop_computation_loop_i(stop_compute_gemm),
 
     // control from SRAM controller
     .GEMM_ctrl_packet_i  (GEMM_ctrl_packet),

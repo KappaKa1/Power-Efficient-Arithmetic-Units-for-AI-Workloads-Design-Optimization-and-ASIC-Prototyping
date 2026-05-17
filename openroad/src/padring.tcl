@@ -122,9 +122,9 @@ place_pad -row IO_EAST -location [expr {$eastStart +  1*$eastPitch}] "pad_vddio2
 place_pad -row IO_EAST -location [expr {$eastStart +  2*$eastPitch}] "pad_wdata_15_i"   ; # pin no:  3
 place_pad -row IO_EAST -location [expr {$eastStart +  3*$eastPitch}] "pad_req_i"        ; # pin no:  4
 place_pad -row IO_EAST -location [expr {$eastStart +  4*$eastPitch}] "pad_we_i"         ; # pin no:  5
-place_pad -row IO_EAST -location [expr {$eastStart +  5*$eastPitch}] "pad_unused6_o"    ; # pin no:  6
-place_pad -row IO_EAST -location [expr {$eastStart +  6*$eastPitch}] "pad_unused7_o"    ; # pin no:  7
-place_pad -row IO_EAST -location [expr {$eastStart +  7*$eastPitch}] "pad_unused8_o"    ; # pin no:  8
+place_pad -row IO_EAST -location [expr {$eastStart +  5*$eastPitch}] "pad_stop_compute_i"    ; # pin no:  6
+place_pad -row IO_EAST -location [expr {$eastStart +  6*$eastPitch}] "pad_unused6_o"    ; # pin no:  7
+place_pad -row IO_EAST -location [expr {$eastStart +  7*$eastPitch}] "pad_unused7_o"    ; # pin no:  8
 place_pad -row IO_EAST -location [expr {$eastStart +  8*$eastPitch}] "pad_ready_o"      ; # pin no:  9
 place_pad -row IO_EAST -location [expr {$eastStart +  9*$eastPitch}] "pad_ack_o"        ; # pin no: 10
 place_pad -row IO_EAST -location [expr {$eastStart + 10*$eastPitch}] "pad_finish_o"     ; # pin no: 11

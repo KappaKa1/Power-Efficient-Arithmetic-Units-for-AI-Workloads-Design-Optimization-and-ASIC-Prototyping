@@ -30,6 +30,7 @@ module main_tb#(
 
   logic req_i;
   logic we_i;
+  logic stop_compute_i;
 
   logic ready_o;
   logic finish_o;
@@ -102,6 +103,7 @@ module main_tb#(
       .rst_ni (rst_ni),
       .req_i  (req_i),
       .we_i   (we_i),
+      .stop_compute_i     (stop_compute_i),
 
       .streamed_wdata_0_i  (streamed_wdata_pad[0]),
       .streamed_wdata_1_i  (streamed_wdata_pad[1]),
@@ -148,8 +150,7 @@ module main_tb#(
       .unused4_o(),
       .unused5_o(),
       .unused6_o(),
-      .unused7_o(),
-      .unused8_o()
+      .unused7_o()
     );
   `else 
     `ifdef TARGET_NETLIST_YOSYS
@@ -169,6 +170,7 @@ module main_tb#(
     .rst_ni             (rst_ni),
     .req_i              (req_i),
     .we_i               (we_i),
+    .stop_compute_i     (stop_compute_i),
 
     .streamed_wdata_0_i (streamed_wdata_i[0]),
     .streamed_wdata_1_i (streamed_wdata_i[1]),
@@ -306,6 +308,7 @@ module main_tb#(
       #TAppl
       req_i = 1'b1;
       we_i  = 1'b1;
+      stop_compute_i   = 1'b0;
 
       wait (ack_o == 1'b1);
       wait (ack_o != 1'b1);
@@ -322,16 +325,42 @@ module main_tb#(
       we_i             = 1'b0;
       streamed_wdata_i = 16'h0000;
       
-      fork
-        begin
-          wait (finish_o == 1'b1);
-        end
-        begin
-          repeat (2000) @(posedge clk_i);
-          $fatal(1, "Timeout waiting for finish_o after write/compute");
-        end
-      join_any
-      disable fork;
+      if (ctrl_packet[10:8] == '0) begin
+        // Compute once: wait until DUT finishes by itself
+        fork
+          begin
+            wait (finish_o == 1'b1);
+          end
+
+          begin
+            repeat (2000) @(posedge clk_i);
+            $fatal(1, "Timeout waiting for finish_o after single compute");
+          end
+        join_any
+
+        disable fork;
+
+      end else begin
+        // Continuous compute: let it run, then request stop
+        repeat (2047) @(posedge clk_i);
+
+        stop_compute_i = 1'b1;
+
+        fork
+          begin
+            wait (finish_o == 1'b1);
+          end
+
+          begin
+            repeat (2000) @(posedge clk_i);
+            $fatal(1, "Timeout waiting for finish_o after stop request");
+          end
+        join_any
+
+        disable fork;
+
+        stop_compute_i = 1'b0;
+      end
 
       #TAppl
       req_i = 1'b1;
@@ -413,7 +442,7 @@ module main_tb#(
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Non-inverted Data for GEMM 2");
-    Control_Bits = {5'b00010, 3'b001, 8'b00000000};
+    Control_Bits = {5'b00010, 3'b000, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_0.hex");
 
@@ -427,7 +456,7 @@ module main_tb#(
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Inverted Data for GEMM 1");
-    Control_Bits = {5'b00001, 3'b001, 8'b00000000};
+    Control_Bits = {5'b00001, 3'b000, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_1.hex");
 

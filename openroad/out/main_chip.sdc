@@ -1,6 +1,6 @@
 ###############################################################################
 # Created by write_sdc
-# Thu May 14 11:43:31 2026
+# Sun May 17 15:11:06 2026
 ###############################################################################
 current_design main_chip
 ###############################################################################
@@ -14,6 +14,8 @@ set_input_delay 1.0000 -clock [get_clocks {clk_sys}] -min -add_delay [get_ports 
 set_input_delay 3.0000 -clock [get_clocks {clk_sys}] -max -add_delay [get_ports {req_i}]
 set_input_delay 1.0000 -rise -max -add_delay [get_ports {rst_ni}]
 set_input_delay 1.0000 -fall -max -add_delay [get_ports {rst_ni}]
+set_input_delay 1.0000 -clock [get_clocks {clk_sys}] -min -add_delay [get_ports {stop_compute_i}]
+set_input_delay 3.0000 -clock [get_clocks {clk_sys}] -max -add_delay [get_ports {stop_compute_i}]
 set_input_delay 1.0000 -clock [get_clocks {clk_sys}] -min -add_delay [get_ports {streamed_wdata_0_i}]
 set_input_delay 3.0000 -clock [get_clocks {clk_sys}] -max -add_delay [get_ports {streamed_wdata_0_i}]
 set_input_delay 1.0000 -clock [get_clocks {clk_sys}] -min -add_delay [get_ports {streamed_wdata_10_i}]
@@ -124,7 +126,6 @@ set_load -pin_load 15.0000 [get_ports {unused4_o}]
 set_load -pin_load 15.0000 [get_ports {unused5_o}]
 set_load -pin_load 15.0000 [get_ports {unused6_o}]
 set_load -pin_load 15.0000 [get_ports {unused7_o}]
-set_load -pin_load 15.0000 [get_ports {unused8_o}]
 set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {VDD}]
 set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {VDDIO}]
 set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {VSS}]
@@ -132,6 +133,7 @@ set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_
 set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {clk_i}]
 set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {req_i}]
 set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {rst_ni}]
+set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {stop_compute_i}]
 set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {streamed_wdata_0_i}]
 set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {streamed_wdata_10_i}]
 set_driving_cell -lib_cell sg13cmos5l_IOPadOut16mA -pin {pad} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {streamed_wdata_11_i}]

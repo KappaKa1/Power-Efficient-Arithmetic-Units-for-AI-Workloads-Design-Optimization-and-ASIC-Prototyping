@@ -20,7 +20,7 @@ module SRAM_controller #(
   parameter int unsigned INPUT_SRAM_ADDR_WIDTH        	= 8,
   parameter int unsigned OUTPUT_SRAM_ADDR_WIDTH        	= 8,
   parameter int unsigned GEMM_SELECT_WIDTH        	= 5,
-  parameter int unsigned ENCODING_SCHEME_WIDTH        	= 3
+  parameter int unsigned COMPUTATION_MODE        	= 3
 )(
   // Global Signals
   input logic 						clk_i,
@@ -45,7 +45,7 @@ module SRAM_controller #(
   output logic 						mux_sel_o,
   
   // Controller to GEMM Core
-  output logic [GEMM_SELECT_WIDTH :0]			GEMM_ctrl_packet_o, // contains GEMM select information + Start signal
+  output logic [GEMM_SELECT_WIDTH + COMPUTATION_MODE:0]	GEMM_ctrl_packet_o, // contains GEMM select information + Start signal
   
   // GEMM Core to Controller
   input logic 						done_i,
@@ -77,7 +77,7 @@ module SRAM_controller #(
   
   // Internal Signals
   logic [GEMM_SELECT_WIDTH-1:0] select_GEMM_q, select_GEMM_d;
-  logic [ENCODING_SCHEME_WIDTH-1:0] encoding_scheme_q, encoding_scheme_d;
+  logic [COMPUTATION_MODE-1:0] compute_mode_q, compute_mode_d;
   logic pad_load_q, pad_load_d;
   logic pad_enable_q, pad_enable_d;
   
@@ -93,7 +93,7 @@ module SRAM_controller #(
   logic [3 - 1:0] sram_we_q, sram_we_d;
   logic mux_sel_q, mux_sel_d;
   
-  logic [GEMM_SELECT_WIDTH :0] GEMM_ctrl_packet_q, GEMM_ctrl_packet_d;
+  logic [GEMM_SELECT_WIDTH + COMPUTATION_MODE:0] GEMM_ctrl_packet_q, GEMM_ctrl_packet_d; // GEM SELECT + COMPUTE_FOREVER + START SIGNAL
   
   assign pad_load_o = pad_load_q;
   assign pad_enable_o = pad_enable_q;
@@ -128,7 +128,7 @@ module SRAM_controller #(
     GEMM_ctrl_packet_d = '0;
     
     select_GEMM_d = select_GEMM_q;
-    encoding_scheme_d = encoding_scheme_q;
+    compute_mode_d = compute_mode_q;
     shift_reg_cnt_d = shift_reg_cnt_q;
     input_sram_cnt_d = input_sram_cnt_q;
     output_sram_cnt_d = output_sram_cnt_q;
@@ -150,14 +150,14 @@ module SRAM_controller #(
        sr_inp_enable_d = '1;
        shift_reg_cnt_d = '0;
        select_GEMM_d = '0;
-       encoding_scheme_d = '0;
+       compute_mode_d = '0;
        input_sram_cnt_d = '0;
        state_d = READ_CONTROL;
      end
       
      READ_CONTROL: begin
        sr_inp_enable_d = '1;
-       {select_GEMM_d, encoding_scheme_d, input_sram_cnt_d} = ctrl_packet_i;
+       {select_GEMM_d, compute_mode_d, input_sram_cnt_d} = ctrl_packet_i;
        state_d = WRITE_SRAM;
      end
       
@@ -177,7 +177,7 @@ module SRAM_controller #(
           
 	 if(input_sram_cnt_q == INPUT_SRAM_ACCESS_CYCLES - 1) begin 
 	   input_sram_cnt_d = '0;
-           GEMM_ctrl_packet_d = {select_GEMM_q, 1'b1};
+           GEMM_ctrl_packet_d = {select_GEMM_q, compute_mode_d, 1'b1};
            state_d = GET_DATA_GEMM;
 
 	 end else begin
@@ -209,12 +209,16 @@ module SRAM_controller #(
         sram_req_d[2] = '1;
         sram_we_d[2] = '1;
         pad_enable_d = '1;
-        if (output_sram_cnt_q == result_addr_i + 3) begin
+        if(output_sram_cnt_q == OUTPUT_SRAM_ACCESS_CYCLES - 1) begin
+          active_loading_d = '0;
+          output_sram_cnt_d = '0;
+        end if (output_sram_cnt_q == result_addr_i + 3) begin
           active_loading_d = '0;
         end else begin 
           output_sram_cnt_d = output_sram_cnt_q + 1;
         end
-      end else if (done_pending_q || output_sram_cnt_q == OUTPUT_SRAM_ACCESS_CYCLES - 1) begin
+        
+      end else if (done_pending_q) begin
         state_d = COMPUTE_DONE;
         done_pending_d = '0;
         output_sram_cnt_d = '0;
@@ -283,7 +287,7 @@ end
   always_ff @(posedge clk_i) begin
     if (!rst_ni) begin
       select_GEMM_q <= '0;
-      encoding_scheme_q <= '0;
+      compute_mode_q <= '0;
       input_sram_cnt_q <= '0;
       input_sram_addr_q <= '0;
       output_sram_cnt_q <= '0;
@@ -301,7 +305,7 @@ end
       done_pending_q <= '0;
     end else begin
       select_GEMM_q <= select_GEMM_d;
-      encoding_scheme_q <= encoding_scheme_d;
+      compute_mode_q <= compute_mode_d;
       input_sram_cnt_q <= input_sram_cnt_d;
       input_sram_addr_q <= input_sram_addr_d;
       output_sram_cnt_q <= output_sram_cnt_d;
