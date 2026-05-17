@@ -24,7 +24,7 @@ repair_design -verbose
 
 # Fix the Timing Violations
 repair_timing -setup -verbose -repair_tns 100
-repair_timing -hold -hold_margin 0.1 -verbose -repair_tns 100
+repair_timing -hold -hold_margin 0.4 -verbose -repair_tns 100
 # change it back to 0.4 later
 
 # Identify issue

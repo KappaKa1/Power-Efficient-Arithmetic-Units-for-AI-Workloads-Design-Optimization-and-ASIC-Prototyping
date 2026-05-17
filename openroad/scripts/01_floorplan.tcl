@@ -91,24 +91,26 @@ set floor_rightX        [expr $core_rightX]
 set floor_topY          [expr $core_topY - $floorPaddingTopY]
 set floor_midpointX     [expr $floor_leftX + ($floor_rightX - $floor_leftX)/2]
 set floor_midpointY     [expr $floor_bottomY + ($floor_topY - $floor_bottomY)/2]
+set BOTTOM_SRAM_SEPERATION 0
 
-set BOTTOM_RAM_0_OFFSET    31.46
+
+set BOTTOM_RAM_0_OFFSET   46
 # BANK0
-set X [expr $floor_midpointX - $RamSize256x64_W/2] 
+set X [expr $floor_rightX - $RamSize64x64_W - $BOTTOM_SRAM_SEPERATION-7] 
 set Y [expr $floor_topY - $RamSize256x64_H + $BOTTOM_RAM_0_OFFSET]
-placeInstance $bank0_sram0 $X $Y MY
+placeInstance $bank0_sram0 $X $Y R0
 
-set BOTTOM_SRAM_SEPERATION 10
-set BOTTOM_RAM_1_OFFSET    21.2
+set BOTTOM_RAM_1_OFFSET    12.2
 # Bank1
-set X [expr $floor_leftX + $BOTTOM_SRAM_SEPERATION]
+set X [expr $floor_leftX + $BOTTOM_SRAM_SEPERATION+7]
 set Y [expr $floor_bottomY + $BOTTOM_RAM_1_OFFSET]
 placeInstance $bank1_sram0 $X $Y MX
 
+set BOTTOM_RAM_2_OFFSET   33.2
 # BANK2 (center)
-set X [expr $floor_rightX - $RamSize64x64_W - $BOTTOM_SRAM_SEPERATION]
-set Y [expr $floor_bottomY + $BOTTOM_RAM_1_OFFSET]
-placeInstance $bank2_sram0 $X $Y MX
+set X [expr $floor_leftX + $BOTTOM_SRAM_SEPERATION+7]
+set Y [expr $floor_topY - $RamSize64x64_H - $BOTTOM_RAM_2_OFFSET]
+placeInstance $bank2_sram0 $X $Y R0
 
 # defined in init_tech.tcl
 insertTapCells
