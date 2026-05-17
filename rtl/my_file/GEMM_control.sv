@@ -26,6 +26,7 @@ module GEMM_controller #(
   input logic 						stop_computation_loop_i,
   
   // from GEMM Controller to GEMM Core
+  output logic [GEMM_SELECT_WIDTH -1 :0]		select_buffer_o,
   output logic [GEMM_SELECT_WIDTH -1 :0]		enable_o,
   output logic [GEMM_SELECT_WIDTH -1 :0]		start_o, // force intermediate result in first cycle to be 0
   
@@ -40,11 +41,11 @@ module GEMM_controller #(
   output logic 						done_o,
   
   // To Shared Register
-  output logic 					 	result_valid_o, 
+  output logic [GEMM_SELECT_WIDTH -1 :0]		result_valid_o, 
   output logic [OUTPUT_SRAM_ADDR_WIDTH - 1:0]		gemm_out_Y_addr_o 
 );
 
-  typedef enum logic [2:0] {IDLE, COMPUTE, COMPUTE_TILL_STOP, FINAL1, FINAL2, FINAL3} gemm_ctrl_state;
+  typedef enum logic [2:0] {IDLE, PRELOADING, COMPUTE, COMPUTE_TILL_STOP, FINAL1, FINAL2, FINAL3} gemm_ctrl_state;
   localparam int unsigned OPERAND_COUNT = 32 / 4;
   localparam int unsigned OPERAND_COUNT_WIDTH = $clog2(OPERAND_COUNT);
   
@@ -55,13 +56,16 @@ module GEMM_controller #(
   logic [OPERAND_COUNT_WIDTH - 1 : 0] K_count_q, K_count_d;
   logic [OPERAND_COUNT_WIDTH - 1 : 0] N_count_q, N_count_d;
   
+  logic select_buffer_q, select_buffer_d;
   logic [GEMM_SELECT_WIDTH -1 :0] enable_q, enable_d, start_q, start_d, store_GEMM_select_q, store_GEMM_select_d;
+  logic [COMPUTATION_MODE -1 :0] store_computation_mode_q, store_computation_mode_d;
   logic [INPUT_SRAM_ADDR_WIDTH -1 :0] gemm_inp_A_addr_q, gemm_inp_A_addr_d;
   logic [INPUT_SRAM_ADDR_WIDTH -1 :0] gemm_inp_B_addr_q, gemm_inp_B_addr_d;
   logic done_q1, done_d1, done_q2, done_d2, done_q3, done_d3, done_q4, done_d4;
-  logic valid_q1, valid_d1, valid_q2, valid_d2, valid_q3, valid_d3; // Let it delay by 3 more due to computation from GEMM.
+  logic [GEMM_SELECT_WIDTH -1 :0] valid_q1, valid_d1, valid_q2, valid_d2, valid_q3, valid_d3; // Let it delay by 3 more due to computation from GEMM.
   logic [OUTPUT_SRAM_ADDR_WIDTH - 1:0] gemm_out_addr_q1, gemm_out_addr_d1, gemm_out_addr_q2, gemm_out_addr_d2, gemm_out_addr_q3, gemm_out_addr_d3;
   
+  assign select_buffer_o = {GEMM_SELECT_WIDTH{select_buffer_q}} & store_GEMM_select_q;
   assign start_o = start_q;
   assign enable_o = enable_q;
   assign gemm_inp_A_addr_o = gemm_inp_A_addr_q;
@@ -72,12 +76,13 @@ module GEMM_controller #(
   assign done_o = done_q4;
   assign valid_d2 = valid_q1;
   assign valid_d3 = valid_q2;
-  assign result_valid_o = valid_q3;
+  assign result_valid_o = {GEMM_SELECT_WIDTH{valid_q3}} & store_GEMM_select_q;
   assign gemm_out_addr_d2 = gemm_out_addr_q1;
   assign gemm_out_addr_d3 = gemm_out_addr_q2;
   assign gemm_out_Y_addr_o = gemm_out_addr_q3;
   
   always_comb begin
+    select_buffer_d = '0;
     start_d = '0;
     enable_d = '0;
     valid_d1 = '0;
@@ -86,6 +91,7 @@ module GEMM_controller #(
   
     stop_computation_flag_d = stop_computation_flag_q;
     store_GEMM_select_d = store_GEMM_select_q;
+    store_computation_mode_d = store_computation_mode_q;
     state_d = state_q;
     M_count_d = M_count_q;
     K_count_d = K_count_q;
@@ -99,17 +105,24 @@ module GEMM_controller #(
         gemm_inp_B_addr_d = '0;
         if (GEMM_ctrl_packet_i[0]) begin
           store_GEMM_select_d = GEMM_ctrl_packet_i[GEMM_SELECT_WIDTH + COMPUTATION_MODE: COMPUTATION_MODE + 1];
-          M_count_d = '0;
-          N_count_d = '0;
-          K_count_d = 1'b1;
-          gemm_inp_A_addr_d = '0;
-          gemm_inp_B_addr_d = '0;
-          if (GEMM_ctrl_packet_i[COMPUTATION_MODE:1] == '0) begin
-            state_d = COMPUTE;
-          end else begin 
-            stop_computation_flag_d = '0;
-            state_d = COMPUTE_TILL_STOP;
-          end
+          store_computation_mode_d = GEMM_ctrl_packet_i[COMPUTATION_MODE:1];
+          state_d = PRELOADING;
+        end
+      end
+    
+      PRELOADING: begin
+        select_buffer_d = 1'b0;
+        enable_d = store_GEMM_select_q;
+        M_count_d = '0;
+        N_count_d = '0;
+        K_count_d = 1'b1;
+        gemm_inp_A_addr_d = '0;
+        gemm_inp_B_addr_d = '0;
+        if (store_computation_mode_q == '0) begin
+          state_d = COMPUTE;
+        end else begin 
+          stop_computation_flag_d = '0;
+          state_d = COMPUTE_TILL_STOP;
         end
       end
     
@@ -117,6 +130,7 @@ module GEMM_controller #(
         if(K_count_q == 1'b1 && N_count_q == '0 && M_count_q == '0) begin
           start_d = store_GEMM_select_q;
         end
+        select_buffer_d = ~select_buffer_q;
         enable_d = store_GEMM_select_q;
         gemm_inp_A_addr_d = M_count_q * OPERAND_COUNT + K_count_q;
         gemm_inp_B_addr_d = N_count_q * OPERAND_COUNT + K_count_q;
@@ -124,7 +138,7 @@ module GEMM_controller #(
         
         if (K_count_q == OPERAND_COUNT-1) begin
           K_count_d = '0;
-          valid_d1 = 1'b1;
+          valid_d1 = '1;
 
           if (N_count_q == OPERAND_COUNT-1) begin
             N_count_d = '0;
@@ -153,6 +167,7 @@ module GEMM_controller #(
           stop_computation_flag_d = '1;
         end
         
+        select_buffer_d = ~select_buffer_q;
         enable_d = store_GEMM_select_q;
         gemm_inp_A_addr_d = M_count_q * OPERAND_COUNT + K_count_q;
         gemm_inp_B_addr_d = N_count_q * OPERAND_COUNT + K_count_q;
@@ -160,7 +175,7 @@ module GEMM_controller #(
         
         if (K_count_q == OPERAND_COUNT-1) begin
           K_count_d = '0;
-          valid_d1 = 1'b1;
+          valid_d1 = '1;
 
           if (N_count_q == OPERAND_COUNT-1) begin
             N_count_d = '0;
@@ -185,16 +200,19 @@ module GEMM_controller #(
       
       FINAL1: begin 
         enable_d = store_GEMM_select_q;
+        select_buffer_d = ~select_buffer_q;
         state_d = FINAL2;
       end
       
       FINAL2: begin 
         enable_d = store_GEMM_select_q;
+        select_buffer_d = ~select_buffer_q;
         state_d = FINAL3;
       end
 
       FINAL3: begin 
         enable_d = store_GEMM_select_q;
+        select_buffer_d = ~select_buffer_q;
         state_d = IDLE;
       end
       
@@ -209,9 +227,11 @@ module GEMM_controller #(
       state_q <= IDLE;
       stop_computation_flag_q <= '0;
       store_GEMM_select_q <= '0;
+      store_computation_mode_q <= '0;
       M_count_q <= '0;
       N_count_q <= '0;
       K_count_q <= '0;
+      select_buffer_q <= '0;
       start_q <= '0;
       enable_q <= '0;
       gemm_inp_A_addr_q <= '0;
@@ -230,9 +250,11 @@ module GEMM_controller #(
       state_q <= state_d;
       stop_computation_flag_q <= stop_computation_flag_d;
       store_GEMM_select_q <= store_GEMM_select_d;
+      store_computation_mode_q <= store_computation_mode_d;
       M_count_q <= M_count_d;
       N_count_q <= N_count_d;
       K_count_q <= K_count_d;
+      select_buffer_q <= select_buffer_d;
       start_q <= start_d;
       enable_q <= enable_d;
       gemm_inp_A_addr_q <= gemm_inp_A_addr_d;
