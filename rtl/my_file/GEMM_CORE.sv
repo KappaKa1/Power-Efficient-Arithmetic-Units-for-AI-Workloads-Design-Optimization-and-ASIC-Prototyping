@@ -11,7 +11,6 @@ module GEMM_CORE #(
   input logic 				clk_i,
   input logic 				rst_ni,
  
-  input logic				buffers_select_i,
   input logic 				enable_i,
   input logic 				result_valid_i,
   input logic				done_i,
@@ -22,33 +21,26 @@ module GEMM_CORE #(
   
   output logic[FINAL_DATA_WIDTH-1:0] 	final_results_o
 );
-  logic [SRAM_DATA_WIDTH-1:0] operand_A_q [2];
-  logic [SRAM_DATA_WIDTH-1:0] operand_A_d [2];
 
-  logic [SRAM_DATA_WIDTH-1:0] operand_B_q [2];
-  logic [SRAM_DATA_WIDTH-1:0] operand_B_d [2];
-  
-  logic [SRAM_DATA_WIDTH-1:0] operand_A, operand_B;
-  
+  logic [SRAM_DATA_WIDTH-1:0] operand_A_q, operand_A_d;
+  logic [SRAM_DATA_WIDTH-1:0] operand_B_q, operand_B_d;
   logic [FINAL_DATA_WIDTH-1:0] intermediate_result_q ,intermediate_result_d;
   
   logic [FINAL_DATA_WIDTH-1:0] final_results;
-  
-  mux2to1 #(.BIT_WIDTH(SRAM_DATA_WIDTH)) select_operand_A (.sel_i(buffers_select_i), .a_i(operand_A_q[0]), .b_i(operand_A_q[1]), .y_o(operand_A));
-  mux2to1 #(.BIT_WIDTH(SRAM_DATA_WIDTH)) select_operand_B (.sel_i(buffers_select_i), .a_i(operand_B_q[0]), .b_i(operand_B_q[1]), .y_o(operand_B));
+ 
 
 generate
   if (MATMUL_TYPE == "TC_SKLANSKY_FUSED_SPEED") begin : gen_matmul_sklansky_speed
     matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed u_matmul (
-      .a_0_0(operand_A[3:0]),      .a_0_1(operand_A[7:4]),      .a_0_2(operand_A[11:8]),     .a_0_3(operand_A[15:12]),
-      .a_1_0(operand_A[19:16]),    .a_1_1(operand_A[23:20]),    .a_1_2(operand_A[27:24]),    .a_1_3(operand_A[31:28]),
-      .a_2_0(operand_A[35:32]),    .a_2_1(operand_A[39:36]),    .a_2_2(operand_A[43:40]),    .a_2_3(operand_A[47:44]),
-      .a_3_0(operand_A[51:48]),    .a_3_1(operand_A[55:52]),    .a_3_2(operand_A[59:56]),    .a_3_3(operand_A[63:60]),
+      .a_0_0(operand_A_q[3:0]),      .a_0_1(operand_A_q[7:4]),      .a_0_2(operand_A_q[11:8]),     .a_0_3(operand_A_q[15:12]),
+      .a_1_0(operand_A_q[19:16]),    .a_1_1(operand_A_q[23:20]),    .a_1_2(operand_A_q[27:24]),    .a_1_3(operand_A_q[31:28]),
+      .a_2_0(operand_A_q[35:32]),    .a_2_1(operand_A_q[39:36]),    .a_2_2(operand_A_q[43:40]),    .a_2_3(operand_A_q[47:44]),
+      .a_3_0(operand_A_q[51:48]),    .a_3_1(operand_A_q[55:52]),    .a_3_2(operand_A_q[59:56]),    .a_3_3(operand_A_q[63:60]),
 
-      .b_0_0(operand_B[3:0]),      .b_0_1(operand_B[7:4]),      .b_0_2(operand_B[11:8]),     .b_0_3(operand_B[15:12]),
-      .b_1_0(operand_B[19:16]),    .b_1_1(operand_B[23:20]),    .b_1_2(operand_B[27:24]),    .b_1_3(operand_B[31:28]),
-      .b_2_0(operand_B[35:32]),    .b_2_1(operand_B[39:36]),    .b_2_2(operand_B[43:40]),    .b_2_3(operand_B[47:44]),
-      .b_3_0(operand_B[51:48]),    .b_3_1(operand_B[55:52]),    .b_3_2(operand_B[59:56]),    .b_3_3(operand_B[63:60]),
+      .b_0_0(operand_B_q[3:0]),      .b_0_1(operand_B_q[7:4]),      .b_0_2(operand_B_q[11:8]),     .b_0_3(operand_B_q[15:12]),
+      .b_1_0(operand_B_q[19:16]),    .b_1_1(operand_B_q[23:20]),    .b_1_2(operand_B_q[27:24]),    .b_1_3(operand_B_q[31:28]),
+      .b_2_0(operand_B_q[35:32]),    .b_2_1(operand_B_q[39:36]),    .b_2_2(operand_B_q[43:40]),    .b_2_3(operand_B_q[47:44]),
+      .b_3_0(operand_B_q[51:48]),    .b_3_1(operand_B_q[55:52]),    .b_3_2(operand_B_q[59:56]),    .b_3_3(operand_B_q[63:60]),
 
       .c_0_0(intermediate_result_q[12:0]),      .c_0_1(intermediate_result_q[26:14]),    .c_0_2(intermediate_result_q[40:28]),    .c_0_3(intermediate_result_q[54:42]),
       .c_1_0(intermediate_result_q[68:56]),     .c_1_1(intermediate_result_q[82:70]),    .c_1_2(intermediate_result_q[96:84]),    .c_1_3(intermediate_result_q[110:98]),
@@ -62,15 +54,15 @@ generate
     );
   end else if (MATMUL_TYPE == "TC_SKLANSKY_FUSED_AREA") begin : gen_matmul_sklansky_area
     matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_area u_matmul(
-      .a_0_0(operand_A[3:0]),      .a_0_1(operand_A[7:4]),      .a_0_2(operand_A[11:8]),     .a_0_3(operand_A[15:12]),
-      .a_1_0(operand_A[19:16]),    .a_1_1(operand_A[23:20]),    .a_1_2(operand_A[27:24]),    .a_1_3(operand_A[31:28]),
-      .a_2_0(operand_A[35:32]),    .a_2_1(operand_A[39:36]),    .a_2_2(operand_A[43:40]),    .a_2_3(operand_A[47:44]),
-      .a_3_0(operand_A[51:48]),    .a_3_1(operand_A[55:52]),    .a_3_2(operand_A[59:56]),    .a_3_3(operand_A[63:60]),
+      .a_0_0(operand_A_q[3:0]),      .a_0_1(operand_A_q[7:4]),      .a_0_2(operand_A_q[11:8]),     .a_0_3(operand_A_q[15:12]),
+      .a_1_0(operand_A_q[19:16]),    .a_1_1(operand_A_q[23:20]),    .a_1_2(operand_A_q[27:24]),    .a_1_3(operand_A_q[31:28]),
+      .a_2_0(operand_A_q[35:32]),    .a_2_1(operand_A_q[39:36]),    .a_2_2(operand_A_q[43:40]),    .a_2_3(operand_A_q[47:44]),
+      .a_3_0(operand_A_q[51:48]),    .a_3_1(operand_A_q[55:52]),    .a_3_2(operand_A_q[59:56]),    .a_3_3(operand_A_q[63:60]),
 
-      .b_0_0(operand_B[3:0]),      .b_0_1(operand_B[7:4]),      .b_0_2(operand_B[11:8]),     .b_0_3(operand_B[15:12]),
-      .b_1_0(operand_B[19:16]),    .b_1_1(operand_B[23:20]),    .b_1_2(operand_B[27:24]),    .b_1_3(operand_B[31:28]),
-      .b_2_0(operand_B[35:32]),    .b_2_1(operand_B[39:36]),    .b_2_2(operand_B[43:40]),    .b_2_3(operand_B[47:44]),
-      .b_3_0(operand_B[51:48]),    .b_3_1(operand_B[55:52]),    .b_3_2(operand_B[59:56]),    .b_3_3(operand_B[63:60]),
+      .b_0_0(operand_B_q[3:0]),      .b_0_1(operand_B_q[7:4]),      .b_0_2(operand_B_q[11:8]),     .b_0_3(operand_B_q[15:12]),
+      .b_1_0(operand_B_q[19:16]),    .b_1_1(operand_B_q[23:20]),    .b_1_2(operand_B_q[27:24]),    .b_1_3(operand_B_q[31:28]),
+      .b_2_0(operand_B_q[35:32]),    .b_2_1(operand_B_q[39:36]),    .b_2_2(operand_B_q[43:40]),    .b_2_3(operand_B_q[47:44]),
+      .b_3_0(operand_B_q[51:48]),    .b_3_1(operand_B_q[55:52]),    .b_3_2(operand_B_q[59:56]),    .b_3_3(operand_B_q[63:60]),
 
       .c_0_0(intermediate_result_q[12:0]),      .c_0_1(intermediate_result_q[26:14]),    .c_0_2(intermediate_result_q[40:28]),    .c_0_3(intermediate_result_q[54:42]),
       .c_1_0(intermediate_result_q[68:56]),     .c_1_1(intermediate_result_q[82:70]),    .c_1_2(intermediate_result_q[96:84]),    .c_1_3(intermediate_result_q[110:98]),
@@ -89,26 +81,19 @@ generate
     end
   endgenerate
  
-  assign operand_A_d[0] = (enable_i & ~done_i) ? operand_A_i : '0;
-  assign operand_A_d[1] = (enable_i & ~done_i) ? operand_A_i : '0;
-
-  assign operand_B_d[0] = (enable_i & ~done_i) ? operand_B_i : '0;
-  assign operand_B_d[1] = (enable_i & ~done_i) ? operand_B_i : '0;
-  
+  assign operand_A_d = (enable_i & ~done_i) ? operand_A_i : '0;
+  assign operand_B_d = (enable_i & ~done_i) ? operand_B_i : '0;
   assign intermediate_result_d = (start_i | result_valid_i | done_i) ? '0 : final_results;
-
   assign final_results_o = final_results;
 
   always_ff @(posedge clk_i) begin
     if (!rst_ni) begin
-      operand_A_q[0] <= '0;
-      operand_A_q[1] <= '0;
-      operand_B_q[0] <= '0;
-      operand_B_q[1] <= '0;
+      operand_A_q <= '0;
+      operand_B_q <= '0;
       intermediate_result_q <= '0;
     end else if (enable_i) begin
-      operand_A_q[~buffers_select_i] <= operand_A_d[~buffers_select_i];
-      operand_B_q[~buffers_select_i]  <= operand_B_d[~buffers_select_i];
+      operand_A_q <= operand_A_d;
+      operand_B_q <= operand_B_d;
       intermediate_result_q  <= intermediate_result_d;
     end
   end  

@@ -123,8 +123,8 @@ module main #(
   
   // Control Signals for GEMM Cores
   logic [GEMM_SELECT_WIDTH :0]			GEMM_ctrl_packet; // Communication signal from SRAM Controller to GEMM Controller
-  logic 					done; // Communication signal from GEMM Controller to SRAM Controller
-  logic	[GEMM_SELECT_WIDTH - 1:0]		GEMM_buffer_select, GEMM_enable, GEMM_start, result_valid;
+  logic [GEMM_SELECT_WIDTH :0]			done; // Communication signal from GEMM Controller to SRAM Controller
+  logic	[GEMM_SELECT_WIDTH - 1:0]		GEMM_enable, GEMM_start, result_valid;
   logic [SIZE_OF_FINAL_OUTPUT - 1 :0] 		GEMM_results [0:GEMM_SELECT_WIDTH-1]; 
   
   // Control Signals for MUX
@@ -241,7 +241,7 @@ module main #(
     
     .GEMM_ctrl_packet_o(GEMM_ctrl_packet),
     
-    .done_i(done),
+    .done_i(|done),
     .result_valid_i(result_valid_q), 
     .result_addr_i(result_addr_q),
     
@@ -267,7 +267,6 @@ module main #(
     .GEMM_ctrl_packet_i  (GEMM_ctrl_packet),
 
     // control to GEMM core
-    .select_buffer_o	 (GEMM_buffer_select),
     .enable_o		 (GEMM_enable),
     .start_o		 (GEMM_start),
 
@@ -283,9 +282,9 @@ module main #(
     .gemm_out_Y_addr_o   (result_addr)
   );
   
-  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_SKLANSKY_FUSED_SPEED")) mul0 (.clk_i(clk_i), .rst_ni(rst_ni), .buffers_select_i(GEMM_buffer_select[0]), .enable_i(GEMM_enable[0]), .result_valid_i(result_valid[0]), .done_i(done), .start_i(GEMM_start[0]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[0]));
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_SKLANSKY_FUSED_SPEED")) mul0 (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[0]), .result_valid_i(result_valid[0]), .done_i(done[0]), .start_i(GEMM_start[0]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[0]));
   
-  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_SKLANSKY_FUSED_AREA")) mul1 (.clk_i(clk_i), .rst_ni(rst_ni), .buffers_select_i(GEMM_buffer_select[1]), .enable_i(GEMM_enable[1]), .result_valid_i(result_valid[1]), .done_i(done), .start_i(GEMM_start[1]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[1]));
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_SKLANSKY_FUSED_AREA")) mul1 (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[1]), .result_valid_i(result_valid[1]), .done_i(done[1]), .start_i(GEMM_start[1]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[1]));
   
   mux_5to1_onehot #(.WIDTH(SIZE_OF_FINAL_OUTPUT)) select_final_result (.in(GEMM_results), .sel(GEMM_enable), .out(final_results));
   

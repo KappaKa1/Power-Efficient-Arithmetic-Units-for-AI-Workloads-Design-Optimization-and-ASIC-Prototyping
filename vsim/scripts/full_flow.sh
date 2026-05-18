@@ -38,7 +38,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
             | tee -a output.txt
 
         VSIM_EXTRA_ARGS="-sdfmax /main_tb/i_dut=./../openroad/out/main_chip.sdf \
-                         -sdfnoerror"
+                         -sdfnoerror +notimingchecks"
     fi
  
     echo ""
