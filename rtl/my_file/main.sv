@@ -122,8 +122,8 @@ module main #(
   logic [3 - 1 :0] 				sram_req, sram_we; // MSB is Highest index and is Output, [1]
   
   // Control Signals for GEMM Cores
-  logic [GEMM_SELECT_WIDTH :0]			GEMM_ctrl_packet; // Communication signal from SRAM Controller to GEMM Controller
-  logic [GEMM_SELECT_WIDTH :0]			done; // Communication signal from GEMM Controller to SRAM Controller
+  logic [GEMM_SELECT_WIDTH + COMPUTATION_MODE:0]GEMM_ctrl_packet; // Communication signal from SRAM Controller to GEMM Controller
+  logic [GEMM_SELECT_WIDTH - 1 :0]		done; // Communication signal from GEMM Controller to SRAM Controller
   logic	[GEMM_SELECT_WIDTH - 1:0]		GEMM_enable, GEMM_start, result_valid;
   logic [SIZE_OF_FINAL_OUTPUT - 1 :0] 		GEMM_results [0:GEMM_SELECT_WIDTH-1]; 
   
@@ -282,10 +282,17 @@ module main #(
     .gemm_out_Y_addr_o   (result_addr)
   );
   
-  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_SKLANSKY_FUSED_SPEED")) mul0 (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[0]), .result_valid_i(result_valid[0]), .done_i(done[0]), .start_i(GEMM_start[0]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[0]));
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("DC_Default")) dc_gemm (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[0]), .result_valid_i(result_valid[0]), .done_i(done[0]), .start_i(GEMM_start[0]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[0]));
   
-  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_SKLANSKY_FUSED_AREA")) mul1 (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[1]), .result_valid_i(result_valid[1]), .done_i(done[1]), .start_i(GEMM_start[1]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[1]));
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("SM_Best_Power")) sm_gemm (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[1]), .result_valid_i(result_valid[1]), .done_i(done[1]), .start_i(GEMM_start[1]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[1]));
   
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_Best_Area")) tc_gemm_area (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[2]), .result_valid_i(result_valid[2]), .done_i(done[2]), .start_i(GEMM_start[2]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[2]));
+  
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_Best_FMax")) tc_gemm_fmax (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[3]), .result_valid_i(result_valid[3]), .done_i(done[3]), .start_i(GEMM_start[3]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[3]));
+  
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_Best_Power")) tc_gemm_power (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[4]), .result_valid_i(result_valid[4]), .done_i(done[4]), .start_i(GEMM_start[4]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[4]));
+    
+      
   mux_5to1_onehot #(.WIDTH(SIZE_OF_FINAL_OUTPUT)) select_final_result (.in(GEMM_results), .sel(GEMM_enable), .out(final_results));
   
   
