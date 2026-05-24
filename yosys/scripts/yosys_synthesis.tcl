@@ -20,6 +20,13 @@ set abc_script [processAbcScript scripts/abc-opt.script]
 # read liberty files and prepare some variables
 source scripts/init_tech.tcl
 
+# read in all the matmuls
+yosys read_verilog ./out/DC_Default/baseline_gemm_4x4x4_4b_tc_netlist.v
+yosys read_verilog ./out/SM_Best_Power/matmul_4x4x4_int4_cw13_cst_rca_sm_no_enc_350mhz_netlist.v
+yosys read_verilog ./out/TC_Best_Area/matmul_4x4x4_int4_tc_cw13_dadda_han_carlson_fused_speed_netlist.v
+yosys read_verilog ./out/TC_Best_FMax/matmul_4x4x4_int4_tc_cw13_wallace_kogge_stone_fused_speed_netlist.v
+yosys read_verilog ./out/TC_Best_Power/matmul_4x4x4_int4_tc_cw13_dadda_prefix_rca_fused_area_netlist.v
+
 yosys plugin -i slang.so
 # default from yosys_common.tcl: top_design=croc_chip; sv_flist=./croc.flist
 yosys read_slang --top $top_design -f $sv_flist \
@@ -31,7 +38,12 @@ yosys read_slang --top $top_design -f $sv_flist \
 # yosys-slang uniquifies all modules with the naming scheme:
 # <module-name>$<instance-name> -> match for t:<module-name>$$
 yosys setattr -set keep_hierarchy 1 "t:main$*"
+
 yosys setattr -set keep_hierarchy 1 "t:matmul*"
+yosys setattr -set dont_touch 1 "t:matmul*"
+
+yosys setattr -set keep_hierarchy 1 "t:baseline_gemm_4x4x4_4b*"
+yosys setattr -set dont_touch 1 "t:baseline_gemm_4x4x4_4b*"
 
 # blackbox modules (applies the *blackbox* attribute)
 yosys blackbox "t:tc_sram_blackbox$*"
@@ -120,7 +132,7 @@ yosys dfflibmap {*}$tech_cells_args
 
 # then perform bit-level optimization and mapping on all combinational clouds in ABC
 # target period (per optimized block/module) in picoseconds
-set period_ps 10000
+set period_ps 3333
 # pre-process abc file (written to tmp directory)
 set abc_comb_script   [processAbcScript scripts/abc-opt.script]
 # call ABC

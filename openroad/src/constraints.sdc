@@ -36,9 +36,13 @@ set_driving_cell [all_inputs] -lib_cell sg13cmos5l_IOPadOut16mA -pin pad
 puts "Clocks..."
 
 # Target 100 MHz
-set TCK_SYS 10.0
+set TCK_SYS 5
 create_clock -name clk_sys -period $TCK_SYS [get_ports clk_i]
 
+set_dont_touch [get_cells {u_main/sm_gemm.gen_sm_power.u_matmul}]
+set_dont_touch [get_cells {u_main/tc_gemm_area.gen_tc_area.u_matmul}]
+set_dont_touch [get_cells {u_main/tc_gemm_fmax.gen_tc_fmax.u_matmul}]
+set_dont_touch [get_cells {u_main/tc_gemm_power.gen_tc_power.u_matmul}]
 
 ##################################
 ## Clock Uncertainty/Transition ##

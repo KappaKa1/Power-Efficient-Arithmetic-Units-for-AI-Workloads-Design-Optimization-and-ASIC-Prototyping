@@ -437,7 +437,7 @@ module main_tb#(
     $display("\nComputing Non-inverted Data for DC GEMM");
     Control_Bits = {5'b00001, 3'b001, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
-    compare_results("../Python/outputs/Golden_Model_Out_UNSIGNED_0.hex");
+    compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
 
     repeat (20) @(posedge clk_i);
 
@@ -458,7 +458,7 @@ module main_tb#(
     $display("\nComputing Inverted Data for DC GEMM");
     Control_Bits = {5'b00001, 3'b000, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
-    compare_results("../Python/outputs/Golden_Model_Out_UNSIGNED_1.hex");
+    compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
     
     repeat (20) @(posedge clk_i);
     

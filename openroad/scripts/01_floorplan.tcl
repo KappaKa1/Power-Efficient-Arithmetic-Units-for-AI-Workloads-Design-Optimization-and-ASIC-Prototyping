@@ -96,7 +96,7 @@ set BOTTOM_SRAM_SEPERATION 0
 
 set BOTTOM_RAM_0_OFFSET   46
 # BANK0
-set X [expr $floor_rightX - $RamSize64x64_W - $BOTTOM_SRAM_SEPERATION-7] 
+set X [expr $floor_rightX - $RamSize64x64_W - $BOTTOM_SRAM_SEPERATION-21] 
 set Y [expr $floor_topY - $RamSize256x64_H + $BOTTOM_RAM_0_OFFSET]
 placeInstance $bank0_sram0 $X $Y R0
 

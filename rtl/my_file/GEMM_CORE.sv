@@ -31,7 +31,7 @@ module GEMM_CORE #(
 
   generate
     if (MATMUL_TYPE == "DC_Default") begin : gen_dc_default
-      matmul_4x4x4_int4_tc_cw13_carry_save_sparse_ks2_fused_area u_matmul (
+      baseline_gemm_4x4x4_4b_tc u_matmul (
       .a_0_0(operand_A_q[3:0]),      .a_0_1(operand_A_q[7:4]),      .a_0_2(operand_A_q[11:8]),     .a_0_3(operand_A_q[15:12]),
       .a_1_0(operand_A_q[19:16]),    .a_1_1(operand_A_q[23:20]),    .a_1_2(operand_A_q[27:24]),    .a_1_3(operand_A_q[31:28]),
       .a_2_0(operand_A_q[35:32]),    .a_2_1(operand_A_q[39:36]),    .a_2_2(operand_A_q[43:40]),    .a_2_3(operand_A_q[47:44]),
