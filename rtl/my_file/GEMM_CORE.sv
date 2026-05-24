@@ -76,7 +76,7 @@ module GEMM_CORE #(
     );
     
   end else if (MATMUL_TYPE == "TC_Best_Area") begin : gen_tc_area
-    matmul_4x4x4_int4_tc_cw13_carry_save_prefix_rca_std_speed u_matmul(
+    matmul_4x4x4_int4_tc_cw13_dadda_han_carlson_fused_speed u_matmul(
       .a_0_0(operand_A_q[3:0]),      .a_0_1(operand_A_q[7:4]),      .a_0_2(operand_A_q[11:8]),     .a_0_3(operand_A_q[15:12]),
       .a_1_0(operand_A_q[19:16]),    .a_1_1(operand_A_q[23:20]),    .a_1_2(operand_A_q[27:24]),    .a_1_3(operand_A_q[31:28]),
       .a_2_0(operand_A_q[35:32]),    .a_2_1(operand_A_q[39:36]),    .a_2_2(operand_A_q[43:40]),    .a_2_3(operand_A_q[47:44]),
@@ -98,7 +98,7 @@ module GEMM_CORE #(
       .y_3_0(final_results[181:168]),   .y_3_1(final_results[195:182]),   .y_3_2(final_results[209:196]),   .y_3_3(final_results[223:210])
     );
   end else if (MATMUL_TYPE == "TC_Best_FMax") begin : gen_tc_fmax
-    matmul_4x4x4_int4_tc_cw13_carry_save_prefix_rca_fused_speed u_matmul(
+    matmul_4x4x4_int4_tc_cw13_wallace_kogge_stone_fused_speed u_matmul(
       .a_0_0(operand_A_q[3:0]),      .a_0_1(operand_A_q[7:4]),      .a_0_2(operand_A_q[11:8]),     .a_0_3(operand_A_q[15:12]),
       .a_1_0(operand_A_q[19:16]),    .a_1_1(operand_A_q[23:20]),    .a_1_2(operand_A_q[27:24]),    .a_1_3(operand_A_q[31:28]),
       .a_2_0(operand_A_q[35:32]),    .a_2_1(operand_A_q[39:36]),    .a_2_2(operand_A_q[43:40]),    .a_2_3(operand_A_q[47:44]),
@@ -114,13 +114,13 @@ module GEMM_CORE #(
       .c_2_0(intermediate_result_q[124:112]),   .c_2_1(intermediate_result_q[138:126]),  .c_2_2(intermediate_result_q[152:140]),  .c_2_3(intermediate_result_q[166:154]),
       .c_3_0(intermediate_result_q[180:168]),   .c_3_1(intermediate_result_q[194:182]),  .c_3_2(intermediate_result_q[208:196]),  .c_3_3(intermediate_result_q[222:210]),
 
-      .y_0_0(final_results[12:0]),      .y_0_1(final_results[26:14]),     .y_0_2(final_results[40:28]),     .y_0_3(final_results[54:42]),
-      .y_1_0(final_results[68:56]),     .y_1_1(final_results[82:70]),     .y_1_2(final_results[96:84]),     .y_1_3(final_results[110:98]),
-      .y_2_0(final_results[124:112]),   .y_2_1(final_results[138:126]),   .y_2_2(final_results[152:140]),   .y_2_3(final_results[166:154]),
-      .y_3_0(final_results[180:168]),   .y_3_1(final_results[194:182]),   .y_3_2(final_results[208:196]),   .y_3_3(final_results[222:210])
+      .y_0_0(final_results[13:0]),      .y_0_1(final_results[27:14]),     .y_0_2(final_results[41:28]),     .y_0_3(final_results[55:42]),
+      .y_1_0(final_results[69:56]),     .y_1_1(final_results[83:70]),     .y_1_2(final_results[97:84]),     .y_1_3(final_results[111:98]),
+      .y_2_0(final_results[125:112]),   .y_2_1(final_results[139:126]),   .y_2_2(final_results[153:140]),   .y_2_3(final_results[167:154]),
+      .y_3_0(final_results[181:168]),   .y_3_1(final_results[195:182]),   .y_3_2(final_results[209:196]),   .y_3_3(final_results[223:210])
     );
   end else if (MATMUL_TYPE == "TC_Best_Power") begin : gen_tc_power
-    matmul_4x4x4_int4_tc_cw13_carry_save_ripple_fused_275mhz u_matmul(
+    matmul_4x4x4_int4_tc_cw13_dadda_prefix_rca_fused_area u_matmul(
       .a_0_0(operand_A_q[3:0]),      .a_0_1(operand_A_q[7:4]),      .a_0_2(operand_A_q[11:8]),     .a_0_3(operand_A_q[15:12]),
       .a_1_0(operand_A_q[19:16]),    .a_1_1(operand_A_q[23:20]),    .a_1_2(operand_A_q[27:24]),    .a_1_3(operand_A_q[31:28]),
       .a_2_0(operand_A_q[35:32]),    .a_2_1(operand_A_q[39:36]),    .a_2_2(operand_A_q[43:40]),    .a_2_3(operand_A_q[47:44]),
@@ -136,10 +136,10 @@ module GEMM_CORE #(
       .c_2_0(intermediate_result_q[124:112]),   .c_2_1(intermediate_result_q[138:126]),  .c_2_2(intermediate_result_q[152:140]),  .c_2_3(intermediate_result_q[166:154]),
       .c_3_0(intermediate_result_q[180:168]),   .c_3_1(intermediate_result_q[194:182]),  .c_3_2(intermediate_result_q[208:196]),  .c_3_3(intermediate_result_q[222:210]),
 
-      .y_0_0(final_results[12:0]),      .y_0_1(final_results[26:14]),     .y_0_2(final_results[40:28]),     .y_0_3(final_results[54:42]),
-      .y_1_0(final_results[68:56]),     .y_1_1(final_results[82:70]),     .y_1_2(final_results[96:84]),     .y_1_3(final_results[110:98]),
-      .y_2_0(final_results[124:112]),   .y_2_1(final_results[138:126]),   .y_2_2(final_results[152:140]),   .y_2_3(final_results[166:154]),
-      .y_3_0(final_results[180:168]),   .y_3_1(final_results[194:182]),   .y_3_2(final_results[208:196]),   .y_3_3(final_results[222:210])
+      .y_0_0(final_results[13:0]),      .y_0_1(final_results[27:14]),     .y_0_2(final_results[41:28]),     .y_0_3(final_results[55:42]),
+      .y_1_0(final_results[69:56]),     .y_1_1(final_results[83:70]),     .y_1_2(final_results[97:84]),     .y_1_3(final_results[111:98]),
+      .y_2_0(final_results[125:112]),   .y_2_1(final_results[139:126]),   .y_2_2(final_results[153:140]),   .y_2_3(final_results[167:154]),
+      .y_3_0(final_results[181:168]),   .y_3_1(final_results[195:182]),   .y_3_2(final_results[209:196]),   .y_3_3(final_results[223:210])
     );
     end else begin : gen_bad_matmul
       initial begin

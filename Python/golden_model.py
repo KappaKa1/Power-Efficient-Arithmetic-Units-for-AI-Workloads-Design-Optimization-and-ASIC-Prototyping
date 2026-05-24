@@ -47,6 +47,13 @@ def print_matrix_packed(mat, name, width):
 def sign_extend_4(x):
     return x if x < 8 else x - 16
 
+def sm4_to_int(x):
+    x &= 0xF
+    sign = (x >> 3) & 1
+    mag = x & 0x7
+    return -mag if sign else mag
+
+
 def _pack_row_SE(row, bits=16):
     packed_elements = []
     for x in reversed(row):
@@ -79,10 +86,10 @@ def matmul_hw_unsigned(A, B, C):
     Y = [[0] * 4 for _ in range(4)]
     for i in range(4):
         for j in range(4):
-            acc = C[i][j] & 0x1FFF
+            acc = C[i][j] & 0x3FFF
             for k in range(4):
                 acc += A[i][k] * B[k][j]
-            acc &= 0x1FFF
+            acc &= 0x3FFF
             Y[i][j] = 0x0000 | acc
     return Y
 
@@ -112,9 +119,8 @@ def matmul_hw_SM_TC(A, B, C):
                 nibble_a = A[i][k] & 0xF
                 sign_a = -1 if (nibble_a & 0x8) else 1
                 mag_a = nibble_a & 0x7
-                a = sign_a * mag_a
-                
-                b = sign_extend_4(B[k][j])  # Always Signed Two's Complement
+                a = sm4_to_int(A[i][k])
+                b = sm4_to_int(B[k][j])
                 acc += a * b
             acc &= 0x3FFF
             Y[i][j] = acc
