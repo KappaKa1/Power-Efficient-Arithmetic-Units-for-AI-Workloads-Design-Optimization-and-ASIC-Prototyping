@@ -1,0 +1,1 @@
+./start_klayout out/main_chip.gds
