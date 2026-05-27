@@ -15,11 +15,50 @@ echo "Top module: $TOP_MODULE"
 
 echo "Generating file list..."
 
-find ../rtl ../technology ../ihp13 ../yosys/out \
-  \( -type f -o -type l \) \
-  \( -name "*.v" -o -name "*.sv" \) \
-  ! -path "*/tb/*" \
-  | sort > "$FILELIST"
+: > "$FILELIST"
+
+if [[ "${VERILATOR_DEFINES:-}" == *"TARGET_NETLIST_YOSYS"* ]]; then
+    echo "Mode: Yosys netlist matmul simulation"
+
+    # Include RTL/top/control/technology files, but exclude RTL GEMM/matmul implementations
+'''    find ../rtl ../technology ../ihp13 ../yosys/out/main_chip_yosys.v\
+      \( -type f -o -type l \) \
+      \( -name "*.v" -o -name "*.sv" \) \
+      ! -path "*/tb/*" \
+      ! -name "*main*.sv" \
+      ! -name "*matmul*.v" \
+      ! -name "*matmul*.sv" \
+      ! -name "*gemm*.v" \
+      ! -name "*gemm*.sv" \
+      | sort >> "$FILELIST"
+
+    # Explicitly include only the synthesised GEMM/matmul netlists
+    cat >> "$FILELIST" <<EOF
+../yosys/out/DC_Default/baseline_gemm_4x4x4_4b_tc_netlist.v
+../yosys/out/SM_Best_Power/matmul_4x4x4_int4_cw13_cst_rca_sm_no_enc_350mhz_netlist.v
+../yosys/out/TC_Best_Area/matmul_4x4x4_int4_tc_cw13_dadda_han_carlson_fused_speed_netlist.v
+../yosys/out/TC_Best_FMax/matmul_4x4x4_int4_tc_cw13_wallace_kogge_stone_fused_speed_netlist.v
+../yosys/out/TC_Best_Power/matmul_4x4x4_int4_tc_cw13_dadda_prefix_rca_fused_area_netlist.v
+../yosys/out/main_chip_yosys.v
+EOF
+'''
+      find ../technology ../ihp13 ../yosys/out/main_chip_yosys.v\
+      \( -type f -o -type l \) \
+      \( -name "*.v" -o -name "*.sv" \) \
+      ! -path "*/tb/*" \
+      ! -name "*main*.sv" \
+      | sort >> "$FILELIST"
+
+else
+    echo "Mode: RTL matmul simulation"
+
+    # Include RTL/technology files only, not yosys/out
+    find ../rtl ../technology ../ihp13 ../yosys/out/main_chip_yosys.v\
+      \( -type f -o -type l \) \
+      \( -name "*.v" -o -name "*.sv" \) \
+      ! -path "*/tb/*" \
+      | sort >> "$FILELIST"
+fi
 
 echo "File list:"
 cat $FILELIST

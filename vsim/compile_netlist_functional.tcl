@@ -109,8 +109,6 @@ vlog -incr -sv -svinputport=compat \
     $ROOT/rtl/common_cells/stream_arbiter.sv \
     $ROOT/rtl/common_cells/stream_omega_net.sv \
     $ROOT/rtl/common_cells/mem_to_banks.sv \
-    $ROOT/rtl/MATMULS/matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_area.v \
-    $ROOT/rtl/MATMULS/matmul_4x4x4_int4_tc_cw13_4to2_sklansky_fused_speed.v \
     $ROOT/rtl/my_file/clock_gate.sv \
     $ROOT/rtl/my_file/GEMM_control.sv  \
     $ROOT/rtl/my_file/GEMM_CORE.sv \
@@ -120,7 +118,14 @@ vlog -incr -sv -svinputport=compat \
     $ROOT/rtl/my_file/pack14to16_signext.sv \
     $ROOT/rtl/my_file/shift_register_out.sv \
     $ROOT/rtl/my_file/shift_registers_in.sv \
-    $ROOT/rtl/my_file/SRAM_controller.sv 
+    $ROOT/rtl/my_file/SRAM_controller.sv \
+    $ROOT/rtl/MATMULS/Sample_Correct.v \
+    $ROOT/rtl/MATMULS/DC_Default/baseline_gemm_4x4x4_4b_tc.v \
+    $ROOT/rtl/MATMULS/SM_Best_Power/matmul_4x4x4_int4_cw13_cst_rca_sm_no_enc_350mhz.v \
+    $ROOT/rtl/MATMULS/TC_Best_Area/matmul_4x4x4_int4_tc_cw13_dadda_han_carlson_fused_speed.v \
+    $ROOT/rtl/MATMULS/TC_Best_FMax/matmul_4x4x4_int4_tc_cw13_wallace_kogge_stone_fused_speed.v \
+    $ROOT/rtl/MATMULS/TC_Best_Power/matmul_4x4x4_int4_tc_cw13_dadda_prefix_rca_fused_area.v
+
 
 # Compile Croc netlist
 vlog -incr $ROOT/openroad/out/main_chip.v 
