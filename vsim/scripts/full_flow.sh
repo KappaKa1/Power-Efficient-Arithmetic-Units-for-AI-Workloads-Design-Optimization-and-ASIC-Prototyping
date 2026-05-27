@@ -16,9 +16,14 @@ for ((run=0; run<NUM_RUNS; run++)); do
     echo "========================================"
  
     echo ""
-    echo "1. Generating inputs"
-    python3 ./../Python/input_generator.py
- 
+    echo "3. Running golden model for TC-to-TC"
+    python3 ./../Python/golden_model.py --mode UNSIGNED
+
+    echo "4. Running golden model for TC-to-TC"
+    python3 ./../Python/golden_model.py --mode TC_TC
+
+    echo "5. Running golden model for SM-to-TC"
+    python3 ./../Python/golden_model.py --mode SM_TC
     echo ""
     echo "2. Running golden model"
     python3 ./../Python/golden_model.py
@@ -38,7 +43,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
             | tee -a output.txt
 
         VSIM_EXTRA_ARGS="-sdfmax /main_tb/i_dut=./../openroad/out/main_chip.sdf \
-                         -sdfnoerror +notimingchecks"
+                         -sdfnoerror"
     fi
  
     echo ""

@@ -432,22 +432,7 @@ module main_tb#(
     we_i             = 1'b0;
     streamed_wdata_i = 16'h0000;
     
-    $display("\n=== WRITE TRANSACTION DONE ===");
-    $display("\nComputing Non-inverted Data for UNSIGNED");
-    Control_Bits = {5'b00001, 3'b001, 8'b00000000};
-    do_write_transaction(1'b0, Control_Bits);
-    compare_results("../Python/outputs/Golden_Model_Out_UNSIGNED_0.hex");
 
-    repeat (20) @(posedge clk_i);
-
-    $display("\nComputing Non-inverted Data for UNSIGNED");
-    Control_Bits = {5'b00001, 3'b000, 8'b00000000};
-    do_write_transaction(1'b1, Control_Bits);
-    compare_results("../Python/outputs/Golden_Model_Out_UNSIGNED_1.hex");
-
-    repeat (20) @(posedge clk_i);
-    
-/*
     $display("\nComputing Non-inverted Data for DC GEMM");
     Control_Bits = {5'b00001, 3'b001, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
@@ -475,7 +460,7 @@ module main_tb#(
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
     
     repeat (20) @(posedge clk_i);
-    
+
     $display("\nComputing Non-inverted Data for SM GEMM");
     Control_Bits = {5'b00010, 3'b000, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
@@ -517,7 +502,7 @@ module main_tb#(
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
 
     repeat (20) @(posedge clk_i);
-*/    
+
     $finish;
   end
 

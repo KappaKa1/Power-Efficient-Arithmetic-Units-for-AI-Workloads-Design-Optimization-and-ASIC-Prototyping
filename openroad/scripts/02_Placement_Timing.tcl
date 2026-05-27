@@ -38,7 +38,10 @@ repair_design -verbose
 # timing_driven:      Prioritize near-critical timing paths (reduce their length)
 
 # First global_placement 
-global_placement -density 0.50
+global_placement -density 0.50 \
+                 -routability_driven \
+                 -routability_check_overflow 0.30 \
+                 -timing_driven
 
 # Only includes all cell placement (like SRAM)
 report_cell_usage
