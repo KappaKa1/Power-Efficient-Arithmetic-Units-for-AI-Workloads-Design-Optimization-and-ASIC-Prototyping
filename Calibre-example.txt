@@ -1,0 +1,13 @@
+./start_calibre
+
+./verilog2spice ../../openroad/out/main_chip_lvs.v main_chip.spice (must be in /lvs)
+
+Do the follwing inside the Calibre Window:
+1. Open ./../klayout/out/main_chip.gds
+2. Locate the toolbar and find 'Verification' -> 'nmLVS'
+3. Go to tab 'Inputs' and make sure 'EXPORT FROM LAYOUT VIEWER' is unchecked
+4. Make sure ./../klayout/out/main_chip.gds is in the 'LAYOUT FILE'
+5. Go to the 'NETLIST' tab under 'INPUTS', uncheck 'EXPORT FROM THE SCHEMATIC VIEWER"
+6. In the same tab, open the ./out/main_chip.spice file we created
+7. Also make sure the 'TOP CELL' corresponds to main_chip
+8. RUN LVS

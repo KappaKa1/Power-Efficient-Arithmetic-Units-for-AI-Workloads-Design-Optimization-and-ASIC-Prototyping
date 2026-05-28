@@ -1,4 +1,4 @@
 cp ../openroad/out/main_chip.def ./main_chip.def
 oseda ./def2gds.sh
 oseda ./run_drc.sh
-oseda ./start_klayout ./out/main_chip.gds
+./start_klayout ./out/main_chip.gds
