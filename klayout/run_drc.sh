@@ -22,23 +22,23 @@ set topcell  = main_chip
 
 rm ./drc/out/croc_*
 
-#time oseda -2026.04 python3 ./drc/tech/run_drc.py \
-# --path=$gds_path \
-# --topcell=$topcell \
-# --run_dir ./drc/out \
-# --no_recommended \
-# --no_density \
-# --antenna \
-# --no_feol \
-# --no_offgrid \
-# --mp 32
+time oseda -2026.04 python3 ./drc/tech/run_drc.py \
+ --path=$gds_path \
+ --topcell=$topcell \
+ --run_dir ./drc/out \
+ --no_recommended \
+ --no_density \
+ --antenna \
+ --no_feol \
+ --no_offgrid \
+ --mp 10
 
- time oseda -2026.04 python3 $IHP_TECH/klayout/tech/drc/run_drc.py \
-  --path=$gds_path \
-  --topcell=$topcell \
-  --run_dir ./drc/out \
-  --no_recommended \
-  --no_density \
-  --antenna \
-  --mp 10
+#time oseda -2026.04 python3 $IHP_TECH/klayout/tech/drc/run_drc.py \
+#  --path=$gds_path \
+#  --topcell=$topcell \
+#  --run_dir ./drc/out \
+#  --no_recommended \
+#  --no_density \
+#  --antenna \
+#  --mp 10
 
