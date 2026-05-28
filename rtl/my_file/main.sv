@@ -21,8 +21,8 @@ module main #(
   // Calculated Parameters, DO NOT TOUCH !!
   parameter int unsigned INPUT_SRAM_ADDR_WIDTH        	= 8,
   parameter int unsigned OUTPUT_SRAM_ADDR_WIDTH        	= 8,
-  parameter int unsigned GEMM_SELECT_WIDTH        	= 5,
-  parameter int unsigned COMPUTATION_MODE        	= 3
+  parameter int unsigned GEMM_SELECT_WIDTH        	= 7,
+  parameter int unsigned COMPUTATION_MODE        	= 1
 )
 (
   input logic 						clk_i,
@@ -282,18 +282,22 @@ module main #(
     .gemm_out_Y_addr_o   (result_addr)
   );
   
-  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("DC_Default")) dc_gemm (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[0]), .result_valid_i(result_valid[0]), .done_i(done[0]), .start_i(GEMM_start[0]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[0]));
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("DC_Default")) dc_gemm_baseline (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[0]), .result_valid_i(result_valid[0]), .done_i(done[0]), .start_i(GEMM_start[0]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[0]));
   
-  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("SM_Best_Power")) sm_gemm (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[1]), .result_valid_i(result_valid[1]), .done_i(done[1]), .start_i(GEMM_start[1]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[1]));
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("SM_Best_Area")) sm_gemm_area (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[1]), .result_valid_i(result_valid[1]), .done_i(done[1]), .start_i(GEMM_start[1]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[1]));
   
   GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_Best_Area")) tc_gemm_area (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[2]), .result_valid_i(result_valid[2]), .done_i(done[2]), .start_i(GEMM_start[2]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[2]));
   
   GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_Best_FMax")) tc_gemm_fmax (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[3]), .result_valid_i(result_valid[3]), .done_i(done[3]), .start_i(GEMM_start[3]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[3]));
   
   GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("TC_Best_Power")) tc_gemm_power (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[4]), .result_valid_i(result_valid[4]), .done_i(done[4]), .start_i(GEMM_start[4]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[4]));
+
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("SM_Best_Power")) sm_gemm_power (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[5]), .result_valid_i(result_valid[5]), .done_i(done[5]), .start_i(GEMM_start[5]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[5]));
+
+  //GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("Yosys_Baseline")) yosys_gemm_baseline (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[6]), .result_valid_i(result_valid[6]), .done_i(done[6]), .start_i(GEMM_start[6]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[6]));
     
       
-  mux_5to1_onehot #(.WIDTH(SIZE_OF_FINAL_OUTPUT)) select_final_result (.in(GEMM_results), .sel(GEMM_enable), .out(final_results));
+  mux_7to1_onehot #(.WIDTH(SIZE_OF_FINAL_OUTPUT)) select_final_result (.in(GEMM_results), .sel(GEMM_enable), .out(final_results));
   
   
   assign final_data_d = final_results;

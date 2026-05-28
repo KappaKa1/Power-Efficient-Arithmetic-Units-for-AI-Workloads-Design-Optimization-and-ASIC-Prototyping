@@ -22,7 +22,7 @@ set gds_path = chip_w_sealring.gds
 set name = $gds_path:r
 set output = ${name}_merged_fill.gds
 
-time oseda -2026.04 klayout -n $technology -zz -r $IHP_TECH/klayout/tech/scripts/filler.py \
+time oseda -2026.02 klayout -n $technology -zz -r $IHP_TECH/klayout/tech/scripts/filler.py \
         -rd output_file=$output \
         $gds_path
 

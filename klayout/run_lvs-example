@@ -32,7 +32,7 @@ set topcell      = chip
 #    --verbose                   Enables detailed rule execution logs for debugging purposes.
 #    --allow_unmatched_ports     Allows unmatched or improperly labeled ports(pins) in the top-level circuit.
 
-time oseda -2026.04 python3 $IHP_TECH/klayout/tech/lvs/run_lvs.py \
+time oseda -2026.02 python3 $IHP_TECH/klayout/tech/lvs/run_lvs.py \
  --layout=$gds_path \
  --netlist=$netlist_path \
  --topcell=$topcell \

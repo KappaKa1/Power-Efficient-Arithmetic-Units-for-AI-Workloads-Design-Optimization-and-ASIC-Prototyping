@@ -21,7 +21,7 @@ set height = 2000
 
 echo "###"
 echo "generate sealring..."
-oseda -2026.04 klayout -n $technology -zz -r $IHP_TECH/klayout/tech/scripts/sealring.py \
+oseda -2026.02 klayout -n $technology -zz -r $IHP_TECH/klayout/tech/scripts/sealring.py \
      -rd width=$width -rd height=$height -rd output=output/sealring_${width}x${height}.gds
 echo "output: output/sealring_${width}x${height}.gds"
 
@@ -30,7 +30,7 @@ echo "merge sealring with $gds_path ..."
 set name = $gds_path:r
 set output = ${name}_sealring.gds
 
-oseda -2026.04 klayout -zz -rm /usr/pack/ihp-sg13-kgf/dz/klayout/merge_sealring.py \
+oseda -2026.02 klayout -zz -rm /usr/pack/ihp-sg13-kgf/dz/klayout/merge_sealring.py \
       -rd chip_gds=$gds_path -rd seal_gds=output/sealring_${width}x${height}.gds \
       -rd dx_um=42 -rd dy_um=42 -rd new_top_name=$newtopcell \
       -rd out_gds=$output

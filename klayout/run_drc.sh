@@ -2,7 +2,7 @@
 
 # v1.0 Zerun Thu 29 Feb 16:16:23 CET 2024
 # - klayout batch mode running drc
-source ../setPDK.csh
+source ../.setPDK.csh
 ### set your gds and topcell ###
 set gds_path = ./out/main_chip.gds
 set topcell  = main_chip
@@ -17,28 +17,16 @@ set topcell  = main_chip
 #            [--density_thr=<density_threads>] [--density_only] [--antenna]
 #            [--antenna_only] [--no_offgrid] [--no_recommended]
 
+setenv out_dir ./drc/out
 
-### keep the version to 2025.03 for drc running at the moment, because other version run time is 20 times longer
+rm $out_dir/croc_*
 
-rm ./drc/out/croc_*
-
-time oseda -2026.04 python3 ./drc/tech/run_drc.py \
+python3 $IHP_TECH/klayout/tech/drc/run_drc.py \
  --path=$gds_path \
  --topcell=$topcell \
- --run_dir ./drc/out \
+ --run_dir $out_dir \
  --no_recommended \
  --no_density \
  --antenna \
- --no_feol \
- --no_offgrid \
- --mp 10
-
-#time oseda -2026.04 python3 $IHP_TECH/klayout/tech/drc/run_drc.py \
-#  --path=$gds_path \
-#  --topcell=$topcell \
-#  --run_dir ./drc/out \
-#  --no_recommended \
-#  --no_density \
-#  --antenna \
-#  --mp 10
+ --mp 32
 

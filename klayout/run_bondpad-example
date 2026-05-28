@@ -13,7 +13,7 @@ set diameter  = 70
 
 echo "###"
 echo "generate bondpad..."
-oseda -2026.04 klayout -n $technology -zz -r $IHP_TECH/klayout/tech/scripts/bondpad.py \
+oseda -2026.02 klayout -n $technology -zz -r $IHP_TECH/klayout/tech/scripts/bondpad.py \
      -rd diameter=$diameter -rd output=output/bondpad_${diameter}x${diameter}.gds
 
 echo "output: output/bondpad_${diameter}x${diameter}.gds"

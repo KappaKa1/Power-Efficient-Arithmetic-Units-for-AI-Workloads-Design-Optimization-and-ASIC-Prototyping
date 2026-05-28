@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 
 module main_tb#(
-  parameter time         ClkPeriod     = 10ns,
+  parameter time         ClkPeriod     = 6.67ns,
   parameter time         ClkPeriodRef  = 30518ns,
   parameter time         TAppl         = 0.2*ClkPeriod,
   parameter time         TTest         = 0.8*ClkPeriod,
@@ -392,6 +392,8 @@ module main_tb#(
   task automatic compare_results(input string filename);
     int error_count;
     begin
+      $display("Reading values from %s", filename);
+    
       $readmemh(filename, expected_data);
 
       error_count = 0;
@@ -434,74 +436,103 @@ module main_tb#(
     
 
     $display("\nComputing Non-inverted Data for DC GEMM");
-    Control_Bits = {5'b00001, 3'b001, 8'b00000000};
+    Control_Bits = {7'b0000001, 1'b1, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
 
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Non-inverted Data for TC GEMM AREA");
-    Control_Bits = {5'b00100, 3'b000, 8'b00000000};
+    Control_Bits = {7'b0000100, 1'b0, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
 
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Inverted Data for TC GEMM AREA");
-    Control_Bits = {5'b00100, 3'b001, 8'b00000000};
+    Control_Bits = {7'b0000100, 1'b1, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
 
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Inverted Data for DC GEMM");
-    Control_Bits = {5'b00001, 3'b000, 8'b00000000};
+    Control_Bits = {7'b0000001, 1'b0, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
     
     repeat (20) @(posedge clk_i);
 
-    $display("\nComputing Non-inverted Data for SM GEMM");
-    Control_Bits = {5'b00010, 3'b000, 8'b00000000};
+    $display("\nComputing Non-inverted Data for SM GEMM AREA");
+    Control_Bits = {7'b0000010, 1'b0, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_SM_TC_0.hex");
 
     repeat (20) @(posedge clk_i);
 
-    $display("\nComputing Inverted Data for SM GEMM");
-    Control_Bits = {5'b00010, 3'b001, 8'b00000000};
+    $display("\nComputing Inverted Data for SM GEMM AREA");
+    Control_Bits = {7'b0000010, 1'b1, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_SM_TC_1.hex");
 
     repeat (20) @(posedge clk_i);
     
     $display("\nComputing Non-inverted Data TC GEMM FMAX");
-    Control_Bits = {5'b01000, 3'b001, 8'b00000000};
+    Control_Bits = {7'b0001000, 1'b1, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
 
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Non-inverted Data for TC GEMM POWER");
-    Control_Bits = {5'b10000, 3'b001, 8'b00000000};
+    Control_Bits = {7'b0010000, 1'b1, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
 
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Inverted Data for TC GEMM POWER");
-    Control_Bits = {5'b10000, 3'b000, 8'b00000000};
+    Control_Bits = {7'b0010000, 1'b0, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
 
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Inverted Data for TC GEMM FMAX");
-    Control_Bits = {5'b01000, 3'b000, 8'b00000000};
+    Control_Bits = {7'b0001000, 1'b0, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
 
     repeat (20) @(posedge clk_i);
+
+    $display("\nComputing Non-inverted Data SM GEMM POWER");
+    Control_Bits = {7'b0100000, 1'b1, 8'b00000000};
+    do_write_transaction(1'b0, Control_Bits);
+    compare_results("../Python/outputs/Golden_Model_Out_SM_TC_0.hex");
+
+    repeat (20) @(posedge clk_i);
+
+    $display("\nComputing Inverted Data for SM GEMM POWER");
+    Control_Bits = {7'b0100000, 1'b0, 8'b00000000};
+    do_write_transaction(1'b1, Control_Bits);
+    compare_results("../Python/outputs/Golden_Model_Out_SM_TC_1.hex");
+
+    repeat (20) @(posedge clk_i);
+/*
+    $display("\nComputing Non-inverted Data for Yosys Baseline");
+    Control_Bits = {7'b1000000, 1'b1, 8'b00000000};
+    do_write_transaction(1'b0, Control_Bits);
+    compare_results("../Python/outputs/Golden_Model_Out_SM_TC_0.hex");
+
+    repeat (20) @(posedge clk_i);
+
+    $display("\nComputing Inverted Data for Yosys Baseline");
+    Control_Bits = {7'b1000000, 1'b0, 8'b00000000};
+    do_write_transaction(1'b1, Control_Bits);
+    compare_results("../Python/outputs/Golden_Model_Out_SM_TC_1.hex");
+
+    repeat (20) @(posedge clk_i);
+*/
 
     $finish;
   end

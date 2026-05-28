@@ -15,8 +15,8 @@ module GEMM_controller #(
   // Calculated Parameters, DO NOT TOUCH !!
   parameter int unsigned INPUT_SRAM_ADDR_WIDTH        	= 8,
   parameter int unsigned OUTPUT_SRAM_ADDR_WIDTH        	= 8,
-  parameter int unsigned GEMM_SELECT_WIDTH        	= 5,
-  parameter int unsigned COMPUTATION_MODE		= 3
+  parameter int unsigned GEMM_SELECT_WIDTH        	= 7,
+  parameter int unsigned COMPUTATION_MODE		= 1
 )(
   // Global Signals
   input logic 						clk_i,
@@ -57,7 +57,7 @@ module GEMM_controller #(
   
   logic [GEMM_SELECT_WIDTH -1 :0] store_GEMM_select_q, store_GEMM_select_d;
   logic enable_q, enable_d, start_q, start_d;
-  logic [COMPUTATION_MODE -1 :0] store_computation_mode_q, store_computation_mode_d;
+  logic store_computation_mode_q, store_computation_mode_d;
   logic [INPUT_SRAM_ADDR_WIDTH -1 :0] gemm_inp_A_addr_q, gemm_inp_A_addr_d;
   logic [INPUT_SRAM_ADDR_WIDTH -1 :0] gemm_inp_B_addr_q, gemm_inp_B_addr_d;
   logic done_q1, done_d1, done_q2, done_d2, done_q3, done_d3, done_q4, done_d4;

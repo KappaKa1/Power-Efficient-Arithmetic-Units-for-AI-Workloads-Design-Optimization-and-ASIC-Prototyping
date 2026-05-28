@@ -1,0 +1,4 @@
+When changing frequency:
+1. Testbench
+2. Yosys source file
+3. OpenROAD .sdc file

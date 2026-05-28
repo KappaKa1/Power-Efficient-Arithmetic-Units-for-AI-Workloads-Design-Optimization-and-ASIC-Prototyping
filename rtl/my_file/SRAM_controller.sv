@@ -19,8 +19,8 @@ module SRAM_controller #(
   // Calculated Parameters, DO NOT TOUCH !!
   parameter int unsigned INPUT_SRAM_ADDR_WIDTH        	= 8,
   parameter int unsigned OUTPUT_SRAM_ADDR_WIDTH        	= 8,
-  parameter int unsigned GEMM_SELECT_WIDTH        	= 5,
-  parameter int unsigned COMPUTATION_MODE        	= 3
+  parameter int unsigned GEMM_SELECT_WIDTH        	= 7,
+  parameter int unsigned COMPUTATION_MODE        	= 1
 )(
   // Global Signals
   input logic 						clk_i,
@@ -77,7 +77,7 @@ module SRAM_controller #(
   
   // Internal Signals
   logic [GEMM_SELECT_WIDTH-1:0] select_GEMM_q, select_GEMM_d;
-  logic [COMPUTATION_MODE-1:0] compute_mode_q, compute_mode_d;
+  logic compute_mode_q, compute_mode_d;
   logic pad_load_q, pad_load_d;
   logic pad_enable_q, pad_enable_d;
   

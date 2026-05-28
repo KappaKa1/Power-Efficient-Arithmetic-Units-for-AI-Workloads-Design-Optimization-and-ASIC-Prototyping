@@ -5,7 +5,7 @@
 # v0.1 - <bmuheim@ethz.ch> - Tue Mar 21 16:35:48 CET 2023
 #  - new
 
-source ../setPDK.csh
+source ../.setPDK.csh
 
-oseda -2026.04 klayout -l ${technology}.lyp -c .klayout/klayoutrc -e $* &
+oseda -2026.02 klayout -l ${technology}.lyp -c .klayout/klayoutrc -e $* &
 
