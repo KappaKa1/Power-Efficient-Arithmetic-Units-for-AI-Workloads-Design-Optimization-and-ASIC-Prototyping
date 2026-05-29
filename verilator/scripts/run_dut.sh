@@ -53,7 +53,7 @@ else
     echo "Mode: RTL matmul simulation"
 
     # Include RTL/technology files only, not yosys/out
-    find ../rtl ../technology ../ihp13 ../yosys/out/main_chip_yosys.v\
+    find ../rtl ../technology ../ihp13 \
       \( -type f -o -type l \) \
       \( -name "*.v" -o -name "*.sv" \) \
       ! -path "*/tb/*" \

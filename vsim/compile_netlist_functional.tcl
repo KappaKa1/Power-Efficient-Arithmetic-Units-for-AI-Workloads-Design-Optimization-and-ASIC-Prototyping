@@ -13,6 +13,7 @@ vlog -incr -sv \
     $ROOT/technology/verilog/RM_IHPSG13_2P_core_behavioral_bm_bist_ideal.v \
     $ROOT/technology/verilog/RM_IHPSG13_2P_core_behavioral_ideal.v \
     $ROOT/ihp13/tc_sram_impl.sv \
+    $ROOT/ihp13/empty_cells.v \
     $ROOT/ihp13/tc_clk.sv
     
 # Compile Croc netlist

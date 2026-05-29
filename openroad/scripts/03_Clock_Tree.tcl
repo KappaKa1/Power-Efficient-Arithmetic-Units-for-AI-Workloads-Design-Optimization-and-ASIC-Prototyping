@@ -17,7 +17,7 @@ repair_clock_inverters
 
 # CTS buffer list (defined in init_tech.tcl)
 # ctsBuf and ctsBufRoot are set based on PDK
-clock_tree_synthesis -buf_list $ctsBuf -root_buf $ctsBufRoot -sink_clustering_enable -repair_clock_nets
+clock_tree_synthesis -buf_list $ctsBuf -root_buf $ctsBufRoot -sink_clustering_enable -repair_clock_nets -balance_levels
 
 repair_clock_nets
 
