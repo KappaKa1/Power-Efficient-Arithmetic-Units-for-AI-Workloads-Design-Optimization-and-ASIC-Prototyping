@@ -1,0 +1,361 @@
+
+==========================================================================
+CTS_Final.cts check_setup
+--------------------------------------------------------------------------
+1
+
+==========================================================================
+CTS_Final.cts report_tns
+--------------------------------------------------------------------------
+tns max 0.00
+
+==========================================================================
+CTS_Final.cts report_wns
+--------------------------------------------------------------------------
+wns max 0.00
+
+==========================================================================
+CTS_Final.cts report_worst_slack
+--------------------------------------------------------------------------
+worst slack max 0.00
+
+==========================================================================
+CTS_Final.cts report_checks -path_delay min
+--------------------------------------------------------------------------
+[WARNING STA-0168] unknown field nets.
+Startpoint: u_main/final64_wdata_20__reg
+            (rising edge-triggered flip-flop clocked by clk_sys)
+Endpoint: u_main/inp_sram_1 (rising edge-triggered flip-flop clocked by clk_sys)
+Path Group: clk_sys
+Path Type: min
+Corner: ff
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.20    0.25    0.02    0.02 ^ clk_i (in)
+                  0.25    0.00    0.02 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.14    0.17    0.09    0.11 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.15    0.04    0.15 ^ clkbuf_regs_0_clk_sys/A (BUFX64)
+     1    0.03    0.02    0.10    0.25 ^ clkbuf_regs_0_clk_sys/Y (BUFX64)
+                  0.02    0.00    0.25 ^ clkbuf_0_soc_clk_i_regs/A (BUFX64)
+     4    0.15    0.03    0.06    0.31 ^ clkbuf_0_soc_clk_i_regs/Y (BUFX64)
+                  0.03    0.01    0.32 ^ clkbuf_2_0_0_soc_clk_i_regs/A (BUFX64)
+     2    0.09    0.02    0.06    0.38 ^ clkbuf_2_0_0_soc_clk_i_regs/Y (BUFX64)
+                  0.03    0.01    0.39 ^ clkbuf_3_0__f_soc_clk_i_regs/A (BUFX64)
+    13    0.36    0.05    0.08    0.47 ^ clkbuf_3_0__f_soc_clk_i_regs/Y (BUFX64)
+                  0.05    0.01    0.48 ^ clkbuf_leaf_105_soc_clk_i_regs/A (BUFX64)
+    15    0.09    0.02    0.07    0.55 ^ clkbuf_leaf_105_soc_clk_i_regs/Y (BUFX64)
+                  0.02    0.00    0.55 ^ u_main/final64_wdata_20__reg/CK (DFFQX1)
+     2    0.01    0.04    0.15    0.69 ^ u_main/final64_wdata_20__reg/Q (DFFQX1)
+                  0.04    0.00    0.69 ^ place11387/A (BUFX3)
+     2    0.02    0.05    0.09    0.78 ^ place11387/Y (BUFX3)
+                  0.07    0.00    0.78 ^ u_main/inp_sram_1/A_DIN[20] (RM_IHPSG13_1P_64x64_c2_bm_bist)
+                                  0.78   data arrival time
+
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.24    0.26    0.03    0.03 ^ clk_i (in)
+                  0.26    0.00    0.03 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.15    0.18    0.09    0.12 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.17    0.05    0.17 ^ clkbuf_0_soc_clk_i/A (BUFX64)
+     2    0.11    0.03    0.11    0.28 ^ clkbuf_0_soc_clk_i/Y (BUFX64)
+                  0.03    0.01    0.28 ^ clkbuf_1_0__f_soc_clk_i/A (BUFX64)
+     2    0.12    0.02    0.06    0.34 ^ clkbuf_1_0__f_soc_clk_i/Y (BUFX64)
+                  0.05    0.02    0.36 ^ u_main/inp_sram_1/A_CLK (RM_IHPSG13_1P_64x64_c2_bm_bist)
+                          0.10    0.46   clock uncertainty
+                         -0.01    0.45   clock reconvergence pessimism
+                          0.36    0.82   library hold time
+                                  0.82   data required time
+-----------------------------------------------------------------------------
+                                  0.82   data required time
+                                 -0.78   data arrival time
+-----------------------------------------------------------------------------
+                                 -0.03   slack (VIOLATED)
+
+
+
+==========================================================================
+CTS_Final.cts report_checks -path_delay max
+--------------------------------------------------------------------------
+[WARNING STA-0168] unknown field nets.
+Startpoint: rst_ni (input port)
+Endpoint: IO_BOND_pad_rst_ni/pad (internal path endpoint)
+Path Group: path delay
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.67    0.67 ^ input external delay
+     2    0.24    0.35    0.04    0.70 ^ rst_ni (in)
+                  0.26    0.00    0.70 ^ IO_BOND_pad_rst_ni/pad (bondpad5l_70x70)
+                                  0.70   data arrival time
+
+                          6.67    6.67   max_delay
+                          0.00    6.67   output external delay
+                                  6.67   data required time
+-----------------------------------------------------------------------------
+                                  6.67   data required time
+                                 -0.70   data arrival time
+-----------------------------------------------------------------------------
+                                  5.97   slack (MET)
+
+
+Startpoint: u_main/streamed_rdata_14_o_reg
+            (rising edge-triggered flip-flop clocked by clk_sys)
+Endpoint: streamed_rdata_14_o (output port clocked by clk_sys)
+Path Group: clk_sys
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.24    0.35    0.04    0.04 ^ clk_i (in)
+                  0.35    0.00    0.04 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.15    0.27    0.15    0.19 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.23    0.05    0.24 ^ clkbuf_regs_0_clk_sys/A (BUFX64)
+     1    0.04    0.03    0.15    0.39 ^ clkbuf_regs_0_clk_sys/Y (BUFX64)
+                  0.03    0.00    0.39 ^ clkbuf_0_soc_clk_i_regs/A (BUFX64)
+     4    0.18    0.04    0.09    0.48 ^ clkbuf_0_soc_clk_i_regs/Y (BUFX64)
+                  0.05    0.01    0.50 ^ clkbuf_2_1_0_soc_clk_i_regs/A (BUFX64)
+     2    0.11    0.03    0.09    0.59 ^ clkbuf_2_1_0_soc_clk_i_regs/Y (BUFX64)
+                  0.04    0.01    0.60 ^ clkbuf_3_2__f_soc_clk_i_regs/A (BUFX64)
+    13    0.49    0.09    0.13    0.73 ^ clkbuf_3_2__f_soc_clk_i_regs/Y (BUFX64)
+                  0.09    0.01    0.74 ^ clkbuf_leaf_33_soc_clk_i_regs/A (BUFX64)
+    24    0.11    0.04    0.11    0.86 ^ clkbuf_leaf_33_soc_clk_i_regs/Y (BUFX64)
+                  0.04    0.00    0.86 ^ u_main/streamed_rdata_14_o_reg/CK (DFFQX1P5)
+     1    0.05    0.31    0.41    1.27 ^ u_main/streamed_rdata_14_o_reg/Q (DFFQX1P5)
+                  0.41    0.00    1.27 ^ pad_rdata_14_o/c2p (sg13cmos5l_IOPadOut16mA)
+     2   15.00    3.55    3.29    4.57 ^ pad_rdata_14_o/pad (sg13cmos5l_IOPadOut16mA)
+                  2.66    0.00    4.57 ^ streamed_rdata_14_o (out)
+                                  4.57   data arrival time
+
+                          6.67    6.67   clock clk_sys (rise edge)
+                          0.00    6.67   clock network delay (propagated)
+                         -0.10    6.57   clock uncertainty
+                          0.00    6.57   clock reconvergence pessimism
+                         -2.00    4.57   output external delay
+                                  4.57   data required time
+-----------------------------------------------------------------------------
+                                  4.57   data required time
+                                 -4.57   data arrival time
+-----------------------------------------------------------------------------
+                                  0.00   slack (MET)
+
+
+
+==========================================================================
+CTS_Final.cts report_checks -unconstrained
+--------------------------------------------------------------------------
+[WARNING STA-0168] unknown field nets.
+Startpoint: rst_ni (input port)
+Endpoint: IO_BOND_pad_rst_ni/pad (internal path endpoint)
+Path Group: path delay
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.67    0.67 ^ input external delay
+     2    0.24    0.35    0.04    0.70 ^ rst_ni (in)
+                  0.26    0.00    0.70 ^ IO_BOND_pad_rst_ni/pad (bondpad5l_70x70)
+                                  0.70   data arrival time
+
+                          6.67    6.67   max_delay
+                          0.00    6.67   output external delay
+                                  6.67   data required time
+-----------------------------------------------------------------------------
+                                  6.67   data required time
+                                 -0.70   data arrival time
+-----------------------------------------------------------------------------
+                                  5.97   slack (MET)
+
+
+Startpoint: u_main/streamed_rdata_14_o_reg
+            (rising edge-triggered flip-flop clocked by clk_sys)
+Endpoint: streamed_rdata_14_o (output port clocked by clk_sys)
+Path Group: clk_sys
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.24    0.35    0.04    0.04 ^ clk_i (in)
+                  0.35    0.00    0.04 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.15    0.27    0.15    0.19 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.23    0.05    0.24 ^ clkbuf_regs_0_clk_sys/A (BUFX64)
+     1    0.04    0.03    0.15    0.39 ^ clkbuf_regs_0_clk_sys/Y (BUFX64)
+                  0.03    0.00    0.39 ^ clkbuf_0_soc_clk_i_regs/A (BUFX64)
+     4    0.18    0.04    0.09    0.48 ^ clkbuf_0_soc_clk_i_regs/Y (BUFX64)
+                  0.05    0.01    0.50 ^ clkbuf_2_1_0_soc_clk_i_regs/A (BUFX64)
+     2    0.11    0.03    0.09    0.59 ^ clkbuf_2_1_0_soc_clk_i_regs/Y (BUFX64)
+                  0.04    0.01    0.60 ^ clkbuf_3_2__f_soc_clk_i_regs/A (BUFX64)
+    13    0.49    0.09    0.13    0.73 ^ clkbuf_3_2__f_soc_clk_i_regs/Y (BUFX64)
+                  0.09    0.01    0.74 ^ clkbuf_leaf_33_soc_clk_i_regs/A (BUFX64)
+    24    0.11    0.04    0.11    0.86 ^ clkbuf_leaf_33_soc_clk_i_regs/Y (BUFX64)
+                  0.04    0.00    0.86 ^ u_main/streamed_rdata_14_o_reg/CK (DFFQX1P5)
+     1    0.05    0.31    0.41    1.27 ^ u_main/streamed_rdata_14_o_reg/Q (DFFQX1P5)
+                  0.41    0.00    1.27 ^ pad_rdata_14_o/c2p (sg13cmos5l_IOPadOut16mA)
+     2   15.00    3.55    3.29    4.57 ^ pad_rdata_14_o/pad (sg13cmos5l_IOPadOut16mA)
+                  2.66    0.00    4.57 ^ streamed_rdata_14_o (out)
+                                  4.57   data arrival time
+
+                          6.67    6.67   clock clk_sys (rise edge)
+                          0.00    6.67   clock network delay (propagated)
+                         -0.10    6.57   clock uncertainty
+                          0.00    6.57   clock reconvergence pessimism
+                         -2.00    4.57   output external delay
+                                  4.57   data required time
+-----------------------------------------------------------------------------
+                                  4.57   data required time
+                                 -4.57   data arrival time
+-----------------------------------------------------------------------------
+                                  0.00   slack (MET)
+
+
+
+==========================================================================
+CTS_Final.cts report_check_types -max_slew -max_cap -max_fanout -violators
+--------------------------------------------------------------------------
+
+==========================================================================
+CTS_Final.cts max_slew_check_slack
+--------------------------------------------------------------------------
+-2.349522829055786
+
+==========================================================================
+CTS_Final.cts max_slew_check_limit
+--------------------------------------------------------------------------
+1.2000000476837158
+
+==========================================================================
+CTS_Final.cts max_slew_check_slack_limit
+--------------------------------------------------------------------------
+-1.9579
+
+==========================================================================
+CTS_Final.cts max_fanout_check_slack
+--------------------------------------------------------------------------
+-29.0
+
+==========================================================================
+CTS_Final.cts max_fanout_check_limit
+--------------------------------------------------------------------------
+16.0
+
+==========================================================================
+CTS_Final.cts max_fanout_check_slack_limit
+--------------------------------------------------------------------------
+-1.8125
+
+==========================================================================
+CTS_Final.cts max_capacitance_check_slack
+--------------------------------------------------------------------------
+-10.786949157714844
+
+==========================================================================
+CTS_Final.cts max_capacitance_check_limit
+--------------------------------------------------------------------------
+4.21304988861084
+
+==========================================================================
+CTS_Final.cts max_capacitance_check_slack_limit
+--------------------------------------------------------------------------
+-2.5604
+
+==========================================================================
+CTS_Final.cts max_slew_violation_count
+--------------------------------------------------------------------------
+max slew violation count 19
+
+==========================================================================
+CTS_Final.cts max_fanout_violation_count
+--------------------------------------------------------------------------
+max fanout violation count 101
+
+==========================================================================
+CTS_Final.cts max_cap_violation_count
+--------------------------------------------------------------------------
+max cap violation count 19
+
+==========================================================================
+CTS_Final.cts setup_violation_count
+--------------------------------------------------------------------------
+setup violation count 0
+
+==========================================================================
+CTS_Final.cts hold_violation_count
+--------------------------------------------------------------------------
+hold violation count 16
+
+==========================================================================
+CTS_Final.cts critical path delay
+--------------------------------------------------------------------------
+4.5655
+
+==========================================================================
+CTS_Final.cts critical path slack
+--------------------------------------------------------------------------
+0.0035
+
+==========================================================================
+CTS_Final.cts slack div critical path delay
+--------------------------------------------------------------------------
+0.076662
+
+==========================================================================
+CTS_Final.cts report_power tt
+--------------------------------------------------------------------------
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             7.26e-03   2.28e-06   6.68e-07   7.27e-03  67.4%
+Combinational          3.09e-05   1.27e-04   3.72e-06   1.62e-04   1.5%
+Clock                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Macro                  1.45e-04   0.00e+00   2.97e-07   1.45e-04   1.3%
+Pad                    1.76e-04   3.03e-03   4.47e-08   3.21e-03  29.7%
+----------------------------------------------------------------
+Total                  7.62e-03   3.16e-03   4.73e-06   1.08e-02 100.0%
+                          70.6%      29.3%       0.0%
+
+==========================================================================
+CTS_Final.cts report_design_area
+--------------------------------------------------------------------------
+
+==========================================================================
+CTS_Final.cts area by hierarchy
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Design Area Summary
+--------------------------------------------------------------------------------
+Die Area:              4629056.0 um2
+Core Area:             2200258.368 um2
+Total Area:            2427766.5856 um2
+Total Active Area:     785046.5855999999 um2
+
+Core Utilization:      0.3567974547978176
+Std Cell Utilization:  0.2945455923651343
+
+--------------------------------------------------------------------------------
+Hierarchical Area Report
+--------------------------------------------------------------------------------
+                                                                                Global Area (um^2)                                                              Global Instances                                                                Local Area (um^2)                                                               Local Instances
+                                                                                ------------------------------------------------------------------------------- ------------------------------------------------------------------------------- ------------------------------------------------------------------------------- ----------------------------------------------------------------------------
+Hierarchy Name                                                                  Total           StdCell         Macro           Cover           Pad             Total           StdCell         Macro           Cover           Pad             Total           StdCell         Macro           Cover           Pad             Total           StdCell         Macro           Cover           Pad             
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<top>                                                                           2427766.586     590887.786      194158.800      313600.000      1329120.000     66377           66052           3               64              258             1701967.821     59247.821       0.000           313600.000      1329120.000     11523           11201           0               64              258             
+  u_main                                                                        725798.765      531639.965      194158.800      0.000           0.000           54854           54851           3               0               0               336287.808      142129.008      194158.800      0.000           0.000           13110           13107           3               0               0               
+    dc_gemm_baseline.gen_dc_default.u_matmul                                    42577.315       42577.315       0.000           0.000           0.000           3703            3703            0               0               0               42577.315       42577.315       0.000           0.000           0.000           3703            3703            0               0               0               
+    sm_gemm_area.gen_sm_area.u_matmul                                           63348.768       63348.768       0.000           0.000           0.000           7806            7806            0               0               0               63348.768       63348.768       0.000           0.000           0.000           7806            7806            0               0               0               
+    sm_gemm_power.gen_sm_power.u_matmul                                         67899.888       67899.888       0.000           0.000           0.000           8563            8563            0               0               0               67899.888       67899.888       0.000           0.000           0.000           8563            8563            0               0               0               
+    tc_gemm_area.gen_tc_area.u_matmul                                           45879.523       45879.523       0.000           0.000           0.000           4534            4534            0               0               0               45879.523       45879.523       0.000           0.000           0.000           4534            4534            0               0               0               
+    tc_gemm_fmax.gen_tc_fmax.u_matmul                                           63887.846       63887.846       0.000           0.000           0.000           6688            6688            0               0               0               63887.846       63887.846       0.000           0.000           0.000           6688            6688            0               0               0               
+    tc_gemm_power.gen_tc_power.u_matmul                                         48900.902       48900.902       0.000           0.000           0.000           4727            4727            0               0               0               48900.902       48900.902       0.000           0.000           0.000           4727            4727            0               0               0               
+    yosys_gemm_baseline.gen_yosys_baseline.u_matmul                             57016.714       57016.714       0.000           0.000           0.000           5723            5723            0               0               0               57016.714       57016.714       0.000           0.000           0.000           5723            5723            0               0               0               

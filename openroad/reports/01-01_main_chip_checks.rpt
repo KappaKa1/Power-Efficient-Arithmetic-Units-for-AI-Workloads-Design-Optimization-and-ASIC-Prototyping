@@ -1,0 +1,36 @@
+Warning: There are 4 input ports missing set_input_delay.
+  VDD
+  VDDIO
+  VSS
+  VSSIO
+Warning: There are 4 output ports missing set_output_delay.
+  VDD
+  VDDIO
+  VSS
+  VSSIO
+Warning: There are 4 unconstrained endpoints.
+  VDD
+  VDDIO
+  VSS
+  VSSIO
+max_delay/setup group clk_sys
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+ack_o (output)                          4.57    3.86    0.71 (MET)
+
+max_delay/setup group clk_sys
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+ack_o (output)                          4.57    3.86    0.71 (MET)
+
+max_delay/setup group clk_sys
+
+                                     Required  Actual
+Endpoint                               Delay   Delay   Slack
+------------------------------------------------------------
+ack_o (output)                          4.57    3.86    0.71 (MET)
+
