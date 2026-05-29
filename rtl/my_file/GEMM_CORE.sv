@@ -165,7 +165,7 @@ module GEMM_CORE #(
       .y_3_0(final_results[181:168]),   .y_3_1(final_results[195:182]),   .y_3_2(final_results[209:196]),   .y_3_3(final_results[223:210])
     );
   end else if (MATMUL_TYPE == "Yosys_Baseline") begin : gen_yosys_baseline  // Must add correct CORE
-    matmul_4x4x4_int4_cw13_cst_rca_sm_no_enc_350mhz u_matmul(
+    yosys_abc_baseline_booth_mapping u_matmul(
       .a_0_0(operand_A_q[3:0]),      .a_0_1(operand_A_q[7:4]),      .a_0_2(operand_A_q[11:8]),     .a_0_3(operand_A_q[15:12]),
       .a_1_0(operand_A_q[19:16]),    .a_1_1(operand_A_q[23:20]),    .a_1_2(operand_A_q[27:24]),    .a_1_3(operand_A_q[31:28]),
       .a_2_0(operand_A_q[35:32]),    .a_2_1(operand_A_q[39:36]),    .a_2_2(operand_A_q[43:40]),    .a_2_3(operand_A_q[47:44]),

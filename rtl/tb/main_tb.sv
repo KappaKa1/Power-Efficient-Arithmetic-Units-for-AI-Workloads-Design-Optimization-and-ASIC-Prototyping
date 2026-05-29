@@ -518,21 +518,21 @@ module main_tb#(
     compare_results("../Python/outputs/Golden_Model_Out_SM_TC_1.hex");
 
     repeat (20) @(posedge clk_i);
-/*
+
     $display("\nComputing Non-inverted Data for Yosys Baseline");
     Control_Bits = {7'b1000000, 1'b1, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
-    compare_results("../Python/outputs/Golden_Model_Out_SM_TC_0.hex");
+    compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
 
     repeat (20) @(posedge clk_i);
 
     $display("\nComputing Inverted Data for Yosys Baseline");
     Control_Bits = {7'b1000000, 1'b0, 8'b00000000};
     do_write_transaction(1'b1, Control_Bits);
-    compare_results("../Python/outputs/Golden_Model_Out_SM_TC_1.hex");
+    compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
 
     repeat (20) @(posedge clk_i);
-*/
+
 
     $finish;
   end

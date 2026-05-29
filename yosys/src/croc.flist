@@ -109,4 +109,4 @@
 ./Synthesized_MATMULS/TC_Best_Area/matmul_4x4x4_int4_tc_cw13_dadda_han_carlson_fused_speed_netlist.v
 ./Synthesized_MATMULS/TC_Best_FMax/matmul_4x4x4_int4_tc_cw13_wallace_kogge_stone_fused_speed_netlist.v
 ./Synthesized_MATMULS/TC_Best_Power/matmul_4x4x4_int4_tc_cw13_dadda_prefix_rca_fused_area_netlist.v
-# ./Synthesized_MATMULS/Yosys_Baseline/.v
+./Synthesized_MATMULS/Yosys_Default/yosys_abc_baseline_booth_mapping_netlist.v

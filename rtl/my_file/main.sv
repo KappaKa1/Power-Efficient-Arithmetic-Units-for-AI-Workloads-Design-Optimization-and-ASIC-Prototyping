@@ -294,7 +294,7 @@ module main #(
 
   GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("SM_Best_Power")) sm_gemm_power (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[5]), .result_valid_i(result_valid[5]), .done_i(done[5]), .start_i(GEMM_start[5]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[5]));
 
-  //GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("Yosys_Baseline")) yosys_gemm_baseline (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[6]), .result_valid_i(result_valid[6]), .done_i(done[6]), .start_i(GEMM_start[6]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[6]));
+  GEMM_CORE # (.SRAM_DATA_WIDTH(SRAM_DATA_WIDTH), .FINAL_DATA_WIDTH(SIZE_OF_FINAL_OUTPUT), .MATMUL_TYPE("Yosys_Baseline")) yosys_gemm_baseline (.clk_i(clk_i), .rst_ni(rst_ni), .enable_i(GEMM_enable[6]), .result_valid_i(result_valid[6]), .done_i(done[6]), .start_i(GEMM_start[6]), .operand_A_i(SRAM_out_1), .operand_B_i(SRAM_out_2), .final_results_o(GEMM_results[6]));
     
       
   mux_7to1_onehot #(.WIDTH(SIZE_OF_FINAL_OUTPUT)) select_final_result (.in(GEMM_results), .sel(GEMM_enable), .out(final_results));
