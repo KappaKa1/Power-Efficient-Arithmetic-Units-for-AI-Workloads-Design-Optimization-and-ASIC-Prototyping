@@ -218,11 +218,11 @@ module main_tb#(
     initial begin
       #3237;
       $display("@%t | [VCD] Start dump", $time);
-      $dumpfile("main_chip.vcd");
+      $dumpfile("loading.vcd");
       $dumpvars(0, i_dut);
         
-      // keep dumping for duration = 15532 - 3237 = 12295 ns
-      #12295;
+      // keep dumping for duration = x - 3237 = 3078 ns
+      #3078;
 
       $display("@%t | [VCD] Stop dump", $time);
       $dumpoff;
@@ -436,7 +436,7 @@ module main_tb#(
     
 
     $display("\nComputing Non-inverted Data for DC GEMM");
-    Control_Bits = {7'b0000001, 1'b1, 8'b00000000};
+    Control_Bits = {7'b000001, 1'b1, 8'b00000000};
     do_write_transaction(1'b0, Control_Bits);
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
 

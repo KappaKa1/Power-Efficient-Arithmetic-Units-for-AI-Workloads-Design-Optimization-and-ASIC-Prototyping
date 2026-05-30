@@ -16,7 +16,7 @@ vlog -incr -sv \
     $ROOT/ihp13/tc_clk.sv
 
 # Compile Croc netlist
-vlog -incr $ROOT/openroad/out/main_chip.v 
+vlog -incr +acc $ROOT/openroad/out/main_chip.v 
 
 # Compile Croc's testbench
 vlog -incr -sv -svinputport=compat \

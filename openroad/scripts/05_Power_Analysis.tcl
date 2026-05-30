@@ -21,3 +21,5 @@ set_power_activity -input_port rst_ni -activity 0
 read_vcd -scope main_tb/i_dut ../vsim/main_chip.vcd
 
 report_power -corner tt
+report_power -corner ff
+#report_power -corner tt -instances [get_cells -hierarchical u_main/*gemm*]
