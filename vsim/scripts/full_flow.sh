@@ -15,7 +15,10 @@ for ((run=0; run<NUM_RUNS; run++)); do
     echo "SIM_MODE=$SIM_MODE"
     echo "========================================"
  
-    echo ""
+ 
+    echo "1. Generating inputs (seed=$run)"
+    python3 ./../Python/input_generator.py --seed $run
+    
     echo "3. Running golden model for TC-to-TC"
     python3 ./../Python/golden_model.py --mode UNSIGNED
 
@@ -73,7 +76,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
             -suppress vsim-8683 \
             -suppress vsim-8386 \
             -l vsim_run_${run}.log \
-            -do "run -all; quit" \
+            -do "run 6500; quit" \
             | tee -a output.txt
     fi
  

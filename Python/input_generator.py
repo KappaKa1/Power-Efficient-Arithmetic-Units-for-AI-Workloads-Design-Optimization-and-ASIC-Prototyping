@@ -27,5 +27,5 @@ if __name__ == "__main__":
     if args.seed is not None:
         random.seed(args.seed)
 
-    generate_hex_file("A.hex", num_words=64, mean=8, std=3)
-    generate_hex_file("B.hex", num_words=64, mean=8, std=3)
+    generate_hex_file("A.hex", num_words=64, mean=0, std=9)
+    generate_hex_file("B.hex", num_words=64, mean=0, std=9)

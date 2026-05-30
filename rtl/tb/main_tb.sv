@@ -222,7 +222,7 @@ module main_tb#(
       $dumpvars(0, i_dut);
         
       // keep dumping for duration = 15532 - 3237 = 12295 ns
-      #12295;
+      #3078;
 
       $display("@%t | [VCD] Stop dump", $time);
       $dumpoff;
