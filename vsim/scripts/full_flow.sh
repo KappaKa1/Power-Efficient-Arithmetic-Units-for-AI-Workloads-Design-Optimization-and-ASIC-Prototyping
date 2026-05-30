@@ -58,7 +58,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
 
         vsim -gui "$TOP_MODULE" \
             -t 1ns \
-            -voptargs=+acc=blnr \
+            -voptargs=+acc \
             $VSIM_EXTRA_ARGS \
             -suppress vsim-3009 \
             -suppress vsim-8683 \
@@ -70,7 +70,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
 
         vsim -c "$TOP_MODULE" \
             -t 1ns \
-            -voptargs=+acc=blnr \
+            -voptargs=+acc \
             $VSIM_EXTRA_ARGS \
             -suppress vsim-3009 \
             -suppress vsim-8683 \
