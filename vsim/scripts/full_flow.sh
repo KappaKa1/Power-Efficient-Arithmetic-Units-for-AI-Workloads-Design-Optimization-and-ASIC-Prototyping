@@ -76,7 +76,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
             -suppress vsim-8683 \
             -suppress vsim-8386 \
             -l vsim_run_${run}.log \
-            -do "run 6500; quit" \
+            -do "run 10000; quit" \
             | tee -a output.txt
     fi
  

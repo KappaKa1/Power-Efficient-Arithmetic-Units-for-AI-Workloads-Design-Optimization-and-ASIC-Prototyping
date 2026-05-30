@@ -218,7 +218,7 @@ module main_tb#(
     initial begin
       #3237;
       $display("@%t | [VCD] Start dump", $time);
-      $dumpfile("loading.vcd");
+      $dumpfile("main_chip.vcd");
       $dumpvars(0, i_dut);
         
       // keep dumping for duration = x - 3237 = 3078 ns
