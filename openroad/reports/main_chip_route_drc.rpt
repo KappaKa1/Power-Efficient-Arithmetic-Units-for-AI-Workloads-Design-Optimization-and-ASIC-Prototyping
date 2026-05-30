@@ -1,0 +1,18 @@
+violation type: Metal Spacing
+	srcs: net:u_main/sm_gemm_area.gen_sm_area.u_matmul/_00837_ net:u_main/sm_gemm_area.gen_sm_area.u_matmul/_00839_
+	bbox = (664.7650, 804.2400) - (664.9300, 804.4000) on Layer Metal2
+violation type: Metal Spacing
+	srcs: net:u_main/sm_gemm_area.gen_sm_area.u_matmul/_00841_ net:u_main/sm_gemm_area.gen_sm_area.u_matmul/_00842_
+	bbox = (681.1600, 810.9600) - (681.3150, 811.1200) on Layer Metal2
+violation type: Metal Spacing
+	srcs: net:u_main/sm_gemm_power.gen_sm_power.u_matmul/_04639_ net:u_main/sm_gemm_power.gen_sm_power.u_matmul/_04641_
+	bbox = (720.4100, 1322.2850) - (720.5500, 1322.4350) on Layer Metal2
+violation type: Metal Spacing
+	srcs: net:net12275
+	bbox = (1199.4550, 935.8300) - (1199.6250, 935.8650) on Layer Metal1
+violation type: Metal Spacing
+	srcs: net:net12245
+	bbox = (1210.3750, 949.2700) - (1210.5450, 949.3050) on Layer Metal1
+violation type: Cut Spacing
+	srcs: net:u_main/sm_gemm_area.gen_sm_area.u_matmul/_00841_ net:u_main/sm_gemm_area.gen_sm_area.u_matmul/_00842_
+	bbox = (681.1550, 811.0100) - (681.3650, 811.1150) on Layer Via1

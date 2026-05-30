@@ -1,0 +1,497 @@
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired check_setup
+--------------------------------------------------------------------------
+1
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired report_tns
+--------------------------------------------------------------------------
+tns max 0.00
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired report_wns
+--------------------------------------------------------------------------
+wns max 0.00
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired report_worst_slack
+--------------------------------------------------------------------------
+worst slack max 0.00
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired report_checks -path_delay min
+--------------------------------------------------------------------------
+[WARNING STA-0168] unknown field nets.
+Startpoint: u_main/SRAM_gen_out_sram_addr_0__reg
+            (rising edge-triggered flip-flop clocked by clk_sys)
+Endpoint: u_main/out_sram (rising edge-triggered flip-flop clocked by clk_sys)
+Path Group: clk_sys
+Path Type: min
+Corner: ff
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.20    0.25    0.02    0.02 ^ clk_i (in)
+                  0.25    0.00    0.02 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.14    0.17    0.09    0.11 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.15    0.04    0.15 ^ clkbuf_regs_0_clk_sys/A (BUFX64)
+     1    0.03    0.02    0.10    0.25 ^ clkbuf_regs_0_clk_sys/Y (BUFX64)
+                  0.02    0.00    0.25 ^ clkbuf_0_soc_clk_i_regs/A (BUFX64)
+     2    0.11    0.02    0.06    0.31 ^ clkbuf_0_soc_clk_i_regs/Y (BUFX64)
+                  0.03    0.01    0.32 ^ clkbuf_1_1__f_soc_clk_i_regs/A (BUFX64)
+    14    0.47    0.05    0.07    0.40 ^ clkbuf_1_1__f_soc_clk_i_regs/Y (BUFX64)
+                  0.09    0.04    0.43 ^ clkbuf_leaf_14_soc_clk_i_regs/A (BUFX64)
+    25    0.08    0.02    0.08    0.52 ^ clkbuf_leaf_14_soc_clk_i_regs/Y (BUFX64)
+                  0.02    0.00    0.52 ^ u_main/SRAM_gen_out_sram_addr_0__reg/CK (DFFQX1)
+     1    0.00    0.02    0.13    0.65 ^ u_main/SRAM_gen_out_sram_addr_0__reg/Q (DFFQX1)
+                  0.02    0.00    0.65 ^ hold12323/A (BUFX3)
+     1    0.00    0.02    0.05    0.71 ^ hold12323/Y (BUFX3)
+                  0.02    0.00    0.71 ^ hold12073/A (BUFX3)
+     1    0.00    0.02    0.05    0.75 ^ hold12073/Y (BUFX3)
+                  0.02    0.00    0.75 ^ hold12324/A (BUFX3)
+     1    0.01    0.02    0.06    0.81 ^ hold12324/Y (BUFX3)
+                  0.03    0.00    0.81 ^ u_main/out_sram/A_ADDR[0] (RM_IHPSG13_1P_256x64_c2_bm_bist)
+                                  0.81   data arrival time
+
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.24    0.26    0.03    0.03 ^ clk_i (in)
+                  0.26    0.00    0.03 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.15    0.18    0.09    0.12 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.17    0.05    0.17 ^ clkbuf_0_soc_clk_i/A (BUFX64)
+     2    0.11    0.03    0.11    0.28 ^ clkbuf_0_soc_clk_i/Y (BUFX64)
+                  0.04    0.01    0.29 ^ clkbuf_1_1__f_soc_clk_i/A (BUFX64)
+     6    0.17    0.02    0.06    0.35 ^ clkbuf_1_1__f_soc_clk_i/Y (BUFX64)
+                  0.07    0.02    0.38 ^ u_main/out_sram/A_CLK (RM_IHPSG13_1P_256x64_c2_bm_bist)
+                          0.10    0.48   clock uncertainty
+                         -0.01    0.47   clock reconvergence pessimism
+                          0.37    0.84   library hold time
+                                  0.84   data required time
+-----------------------------------------------------------------------------
+                                  0.84   data required time
+                                 -0.81   data arrival time
+-----------------------------------------------------------------------------
+                                 -0.03   slack (VIOLATED)
+
+
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired report_checks -path_delay max
+--------------------------------------------------------------------------
+[WARNING STA-0168] unknown field nets.
+Startpoint: rst_ni (input port)
+Endpoint: IO_BOND_pad_rst_ni/pad (internal path endpoint)
+Path Group: path delay
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.67    0.67 ^ input external delay
+     2    0.24    0.35    0.04    0.70 ^ rst_ni (in)
+                  0.26    0.00    0.70 ^ IO_BOND_pad_rst_ni/pad (bondpad5l_70x70)
+                                  0.70   data arrival time
+
+                          6.67    6.67   max_delay
+                          0.00    6.67   output external delay
+                                  6.67   data required time
+-----------------------------------------------------------------------------
+                                  6.67   data required time
+                                 -0.70   data arrival time
+-----------------------------------------------------------------------------
+                                  5.97   slack (MET)
+
+
+Startpoint: u_main/sm_gemm_area.operand_A_q_5__reg
+            (rising edge-triggered flip-flop clocked by clk_sys)
+Endpoint: u_main/final_data_q_26__reg
+          (rising edge-triggered flip-flop clocked by clk_sys)
+Path Group: clk_sys
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.24    0.35    0.04    0.04 ^ clk_i (in)
+                  0.35    0.00    0.04 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.15    0.27    0.15    0.19 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.23    0.05    0.24 ^ clkbuf_0_soc_clk_i/A (BUFX64)
+     2    0.10    0.04    0.16    0.40 ^ clkbuf_0_soc_clk_i/Y (BUFX64)
+                  0.05    0.01    0.41 ^ clkbuf_1_0__f_soc_clk_i/A (BUFX64)
+     5    0.12    0.03    0.09    0.50 ^ clkbuf_1_0__f_soc_clk_i/Y (BUFX64)
+                  0.05    0.02    0.52 ^ u_main/sm_gemm_area.cg.u_cg/CK (CGTSX1)
+     1    0.03    0.27    0.27    0.79 ^ u_main/sm_gemm_area.cg.u_cg/ECK (CGTSX1)
+                  0.27    0.00    0.79 ^ clkbuf_0_u_main/sm_gemm_area.cg.clk_o/A (BUFX64)
+     2    0.07    0.04    0.17    0.96 ^ clkbuf_0_u_main/sm_gemm_area.cg.clk_o/Y (BUFX64)
+                  0.04    0.01    0.97 ^ clkbuf_1_0__f_u_main/sm_gemm_area.cg.clk_o/A (BUFX64)
+     6    0.22    0.04    0.10    1.07 ^ clkbuf_1_0__f_u_main/sm_gemm_area.cg.clk_o/Y (BUFX64)
+                  0.06    0.02    1.09 ^ clkbuf_leaf_1_u_main/sm_gemm_area.cg.clk_o/A (BUFX64)
+    27    0.11    0.03    0.10    1.18 ^ clkbuf_leaf_1_u_main/sm_gemm_area.cg.clk_o/Y (BUFX64)
+                  0.04    0.01    1.20 ^ u_main/sm_gemm_area.operand_A_q_5__reg/CK (DFFQX1)
+     7    0.02    0.20    0.33    1.53 ^ u_main/sm_gemm_area.operand_A_q_5__reg/Q (DFFQX1)
+                  0.20    0.00    1.53 ^ place11298/A (BUFX3)
+    16    0.05    0.20    0.26    1.79 ^ place11298/Y (BUFX3)
+                  0.20    0.00    1.79 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09609_/B (NAND2X1)
+     3    0.01    0.20    0.21    2.01 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09609_/Y (NAND2X1)
+                  0.20    0.00    2.01 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09625_/B (XNOR3X1)
+     2    0.01    0.08    0.31    2.32 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09625_/Y (XNOR3X1)
+                  0.08    0.00    2.32 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09628_/A (NOR2X1)
+     3    0.01    0.20    0.18    2.50 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09628_/Y (NOR2X1)
+                  0.20    0.00    2.50 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09629_/B (NAND2X2)
+     4    0.01    0.11    0.15    2.65 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09629_/Y (NAND2X2)
+                  0.11    0.00    2.65 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09692_/A (NOR4X2)
+     6    0.02    0.38    0.37    3.02 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09692_/Y (NOR4X2)
+                  0.38    0.00    3.03 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09709_/D (NOR4X1)
+     2    0.01    0.16    0.23    3.25 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09709_/Y (NOR4X1)
+                  0.16    0.00    3.25 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09711_/AB (NAND2BX1)
+     3    0.01    0.19    0.22    3.47 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09711_/Y (NAND2BX1)
+                  0.19    0.00    3.47 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09712_/C (AOI21X2)
+     2    0.01    0.11    0.14    3.62 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09712_/Y (AOI21X2)
+                  0.11    0.00    3.62 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09920_/A (OAI211X1)
+     2    0.02    0.49    0.45    4.06 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09920_/Y (OAI211X1)
+                  0.49    0.00    4.06 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09953_/A (AOI22X1)
+     3    0.01    0.25    0.36    4.42 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09953_/Y (AOI22X1)
+                  0.25    0.00    4.42 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09984_/A (OAI21X1)
+     3    0.01    0.17    0.23    4.65 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09984_/Y (OAI21X1)
+                  0.17    0.00    4.65 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09986_/B (AOI21BX1)
+     3    0.01    0.16    0.18    4.84 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09986_/Y (AOI21BX1)
+                  0.16    0.00    4.84 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10046_/A (OAI21X1)
+     2    0.01    0.17    0.21    5.04 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10046_/Y (OAI21X1)
+                  0.17    0.00    5.05 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10051_/A (AOI21BX1)
+     1    0.01    0.14    0.15    5.20 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10051_/Y (AOI21BX1)
+                  0.14    0.00    5.20 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10052_/B (OAI21X1)
+     2    0.01    0.12    0.15    5.35 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10052_/Y (OAI21X1)
+                  0.12    0.00    5.35 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10056_/A (AOI21BX1)
+     2    0.01    0.21    0.21    5.56 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10056_/Y (AOI21BX1)
+                  0.21    0.00    5.56 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10058_/B (OAOI211X2)
+     2    0.01    0.10    0.14    5.70 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10058_/Y (OAOI211X2)
+                  0.10    0.00    5.70 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10060_/B (OAOI211X2)
+     2    0.01    0.18    0.17    5.87 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10060_/Y (OAOI211X2)
+                  0.18    0.00    5.87 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10061_/B (OAOI211X1)
+     1    0.01    0.12    0.15    6.02 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10061_/Y (OAOI211X1)
+                  0.12    0.00    6.02 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10062_/D (OAI2BB2X2)
+     1    0.00    0.07    0.09    6.11 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10062_/Y (OAI2BB2X2)
+                  0.07    0.00    6.11 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10063_/B (NAND2X1)
+     2    0.01    0.14    0.14    6.26 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10063_/Y (NAND2X1)
+                  0.14    0.00    6.26 v u_main/_13871_/A (AND2X1)
+     1    0.04    0.29    0.30    6.55 v u_main/_13871_/Y (AND2X1)
+                  0.29    0.01    6.56 v u_main/_13872_/E (AOI221X1)
+     1    0.00    0.18    0.27    6.83 ^ u_main/_13872_/Y (AOI221X1)
+                  0.18    0.00    6.83 ^ place9510/A (BUFX3)
+     1    0.02    0.07    0.16    6.99 ^ place9510/Y (BUFX3)
+                  0.07    0.00    6.99 ^ u_main/_13873_/C (AO31X2)
+     1    0.00    0.04    0.19    7.18 ^ u_main/_13873_/Y (AO31X2)
+                  0.04    0.00    7.18 ^ u_main/_13874_/B (AOI21X1)
+     1    0.00    0.07    0.08    7.26 v u_main/_13874_/Y (AOI21X1)
+                  0.07    0.00    7.26 v u_main/final_data_q_26__reg/D (DFFQX1)
+                                  7.26   data arrival time
+
+                          6.67    6.67   clock clk_sys (rise edge)
+                          0.00    6.67   clock source latency
+     2    0.20    0.34    0.03    6.70 ^ clk_i (in)
+                  0.34    0.00    6.70 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.13    0.25    0.14    6.84 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.20    0.04    6.89 ^ clkbuf_regs_0_clk_sys/A (BUFX64)
+     1    0.03    0.03    0.14    7.03 ^ clkbuf_regs_0_clk_sys/Y (BUFX64)
+                  0.03    0.00    7.03 ^ clkbuf_0_soc_clk_i_regs/A (BUFX64)
+     2    0.11    0.03    0.08    7.12 ^ clkbuf_0_soc_clk_i_regs/Y (BUFX64)
+                  0.04    0.01    7.13 ^ clkbuf_1_1__f_soc_clk_i_regs/A (BUFX64)
+    14    0.46    0.08    0.11    7.24 ^ clkbuf_1_1__f_soc_clk_i_regs/Y (BUFX64)
+                  0.10    0.03    7.27 ^ clkbuf_leaf_19_soc_clk_i_regs/A (BUFX64)
+    28    0.11    0.03    0.11    7.38 ^ clkbuf_leaf_19_soc_clk_i_regs/Y (BUFX64)
+                  0.05    0.02    7.40 ^ u_main/final_data_q_26__reg/CK (DFFQX1)
+                         -0.10    7.30   clock uncertainty
+                          0.01    7.31   clock reconvergence pessimism
+                         -0.05    7.26   library setup time
+                                  7.26   data required time
+-----------------------------------------------------------------------------
+                                  7.26   data required time
+                                 -7.26   data arrival time
+-----------------------------------------------------------------------------
+                                  0.00   slack (MET)
+
+
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired report_checks -unconstrained
+--------------------------------------------------------------------------
+[WARNING STA-0168] unknown field nets.
+Startpoint: rst_ni (input port)
+Endpoint: IO_BOND_pad_rst_ni/pad (internal path endpoint)
+Path Group: path delay
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.67    0.67 ^ input external delay
+     2    0.24    0.35    0.04    0.70 ^ rst_ni (in)
+                  0.26    0.00    0.70 ^ IO_BOND_pad_rst_ni/pad (bondpad5l_70x70)
+                                  0.70   data arrival time
+
+                          6.67    6.67   max_delay
+                          0.00    6.67   output external delay
+                                  6.67   data required time
+-----------------------------------------------------------------------------
+                                  6.67   data required time
+                                 -0.70   data arrival time
+-----------------------------------------------------------------------------
+                                  5.97   slack (MET)
+
+
+Startpoint: u_main/sm_gemm_area.operand_A_q_5__reg
+            (rising edge-triggered flip-flop clocked by clk_sys)
+Endpoint: u_main/final_data_q_26__reg
+          (rising edge-triggered flip-flop clocked by clk_sys)
+Path Group: clk_sys
+Path Type: max
+Corner: tt
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk_sys (rise edge)
+                          0.00    0.00   clock source latency
+     2    0.24    0.35    0.04    0.04 ^ clk_i (in)
+                  0.35    0.00    0.04 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.15    0.27    0.15    0.19 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.23    0.05    0.24 ^ clkbuf_0_soc_clk_i/A (BUFX64)
+     2    0.10    0.04    0.16    0.40 ^ clkbuf_0_soc_clk_i/Y (BUFX64)
+                  0.05    0.01    0.41 ^ clkbuf_1_0__f_soc_clk_i/A (BUFX64)
+     5    0.12    0.03    0.09    0.50 ^ clkbuf_1_0__f_soc_clk_i/Y (BUFX64)
+                  0.05    0.02    0.52 ^ u_main/sm_gemm_area.cg.u_cg/CK (CGTSX1)
+     1    0.03    0.27    0.27    0.79 ^ u_main/sm_gemm_area.cg.u_cg/ECK (CGTSX1)
+                  0.27    0.00    0.79 ^ clkbuf_0_u_main/sm_gemm_area.cg.clk_o/A (BUFX64)
+     2    0.07    0.04    0.17    0.96 ^ clkbuf_0_u_main/sm_gemm_area.cg.clk_o/Y (BUFX64)
+                  0.04    0.01    0.97 ^ clkbuf_1_0__f_u_main/sm_gemm_area.cg.clk_o/A (BUFX64)
+     6    0.22    0.04    0.10    1.07 ^ clkbuf_1_0__f_u_main/sm_gemm_area.cg.clk_o/Y (BUFX64)
+                  0.06    0.02    1.09 ^ clkbuf_leaf_1_u_main/sm_gemm_area.cg.clk_o/A (BUFX64)
+    27    0.11    0.03    0.10    1.18 ^ clkbuf_leaf_1_u_main/sm_gemm_area.cg.clk_o/Y (BUFX64)
+                  0.04    0.01    1.20 ^ u_main/sm_gemm_area.operand_A_q_5__reg/CK (DFFQX1)
+     7    0.02    0.20    0.33    1.53 ^ u_main/sm_gemm_area.operand_A_q_5__reg/Q (DFFQX1)
+                  0.20    0.00    1.53 ^ place11298/A (BUFX3)
+    16    0.05    0.20    0.26    1.79 ^ place11298/Y (BUFX3)
+                  0.20    0.00    1.79 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09609_/B (NAND2X1)
+     3    0.01    0.20    0.21    2.01 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09609_/Y (NAND2X1)
+                  0.20    0.00    2.01 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09625_/B (XNOR3X1)
+     2    0.01    0.08    0.31    2.32 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09625_/Y (XNOR3X1)
+                  0.08    0.00    2.32 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09628_/A (NOR2X1)
+     3    0.01    0.20    0.18    2.50 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09628_/Y (NOR2X1)
+                  0.20    0.00    2.50 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09629_/B (NAND2X2)
+     4    0.01    0.11    0.15    2.65 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09629_/Y (NAND2X2)
+                  0.11    0.00    2.65 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09692_/A (NOR4X2)
+     6    0.02    0.38    0.37    3.02 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09692_/Y (NOR4X2)
+                  0.38    0.00    3.03 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09709_/D (NOR4X1)
+     2    0.01    0.16    0.23    3.25 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09709_/Y (NOR4X1)
+                  0.16    0.00    3.25 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09711_/AB (NAND2BX1)
+     3    0.01    0.19    0.22    3.47 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09711_/Y (NAND2BX1)
+                  0.19    0.00    3.47 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09712_/C (AOI21X2)
+     2    0.01    0.11    0.14    3.62 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09712_/Y (AOI21X2)
+                  0.11    0.00    3.62 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09920_/A (OAI211X1)
+     2    0.02    0.49    0.45    4.06 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09920_/Y (OAI211X1)
+                  0.49    0.00    4.06 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09953_/A (AOI22X1)
+     3    0.01    0.25    0.36    4.42 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09953_/Y (AOI22X1)
+                  0.25    0.00    4.42 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09984_/A (OAI21X1)
+     3    0.01    0.17    0.23    4.65 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09984_/Y (OAI21X1)
+                  0.17    0.00    4.65 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_09986_/B (AOI21BX1)
+     3    0.01    0.16    0.18    4.84 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_09986_/Y (AOI21BX1)
+                  0.16    0.00    4.84 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10046_/A (OAI21X1)
+     2    0.01    0.17    0.21    5.04 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10046_/Y (OAI21X1)
+                  0.17    0.00    5.05 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10051_/A (AOI21BX1)
+     1    0.01    0.14    0.15    5.20 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10051_/Y (AOI21BX1)
+                  0.14    0.00    5.20 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10052_/B (OAI21X1)
+     2    0.01    0.12    0.15    5.35 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10052_/Y (OAI21X1)
+                  0.12    0.00    5.35 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10056_/A (AOI21BX1)
+     2    0.01    0.21    0.21    5.56 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10056_/Y (AOI21BX1)
+                  0.21    0.00    5.56 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10058_/B (OAOI211X2)
+     2    0.01    0.10    0.14    5.70 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10058_/Y (OAOI211X2)
+                  0.10    0.00    5.70 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10060_/B (OAOI211X2)
+     2    0.01    0.18    0.17    5.87 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10060_/Y (OAOI211X2)
+                  0.18    0.00    5.87 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10061_/B (OAOI211X1)
+     1    0.01    0.12    0.15    6.02 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10061_/Y (OAOI211X1)
+                  0.12    0.00    6.02 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10062_/D (OAI2BB2X2)
+     1    0.00    0.07    0.09    6.11 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10062_/Y (OAI2BB2X2)
+                  0.07    0.00    6.11 ^ u_main/sm_gemm_area.gen_sm_area.u_matmul/_10063_/B (NAND2X1)
+     2    0.01    0.14    0.14    6.26 v u_main/sm_gemm_area.gen_sm_area.u_matmul/_10063_/Y (NAND2X1)
+                  0.14    0.00    6.26 v u_main/_13871_/A (AND2X1)
+     1    0.04    0.29    0.30    6.55 v u_main/_13871_/Y (AND2X1)
+                  0.29    0.01    6.56 v u_main/_13872_/E (AOI221X1)
+     1    0.00    0.18    0.27    6.83 ^ u_main/_13872_/Y (AOI221X1)
+                  0.18    0.00    6.83 ^ place9510/A (BUFX3)
+     1    0.02    0.07    0.16    6.99 ^ place9510/Y (BUFX3)
+                  0.07    0.00    6.99 ^ u_main/_13873_/C (AO31X2)
+     1    0.00    0.04    0.19    7.18 ^ u_main/_13873_/Y (AO31X2)
+                  0.04    0.00    7.18 ^ u_main/_13874_/B (AOI21X1)
+     1    0.00    0.07    0.08    7.26 v u_main/_13874_/Y (AOI21X1)
+                  0.07    0.00    7.26 v u_main/final_data_q_26__reg/D (DFFQX1)
+                                  7.26   data arrival time
+
+                          6.67    6.67   clock clk_sys (rise edge)
+                          0.00    6.67   clock source latency
+     2    0.20    0.34    0.03    6.70 ^ clk_i (in)
+                  0.34    0.00    6.70 ^ pad_clk_i/pad (sg13cmos5l_IOPadIn)
+     2    0.13    0.25    0.14    6.84 ^ pad_clk_i/p2c (sg13cmos5l_IOPadIn)
+                  0.20    0.04    6.89 ^ clkbuf_regs_0_clk_sys/A (BUFX64)
+     1    0.03    0.03    0.14    7.03 ^ clkbuf_regs_0_clk_sys/Y (BUFX64)
+                  0.03    0.00    7.03 ^ clkbuf_0_soc_clk_i_regs/A (BUFX64)
+     2    0.11    0.03    0.08    7.12 ^ clkbuf_0_soc_clk_i_regs/Y (BUFX64)
+                  0.04    0.01    7.13 ^ clkbuf_1_1__f_soc_clk_i_regs/A (BUFX64)
+    14    0.46    0.08    0.11    7.24 ^ clkbuf_1_1__f_soc_clk_i_regs/Y (BUFX64)
+                  0.10    0.03    7.27 ^ clkbuf_leaf_19_soc_clk_i_regs/A (BUFX64)
+    28    0.11    0.03    0.11    7.38 ^ clkbuf_leaf_19_soc_clk_i_regs/Y (BUFX64)
+                  0.05    0.02    7.40 ^ u_main/final_data_q_26__reg/CK (DFFQX1)
+                         -0.10    7.30   clock uncertainty
+                          0.01    7.31   clock reconvergence pessimism
+                         -0.05    7.26   library setup time
+                                  7.26   data required time
+-----------------------------------------------------------------------------
+                                  7.26   data required time
+                                 -7.26   data arrival time
+-----------------------------------------------------------------------------
+                                  0.00   slack (MET)
+
+
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired report_check_types -max_slew -max_cap -max_fanout -violators
+--------------------------------------------------------------------------
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_slew_check_slack
+--------------------------------------------------------------------------
+-2.3495242595672607
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_slew_check_limit
+--------------------------------------------------------------------------
+1.2000000476837158
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_slew_check_slack_limit
+--------------------------------------------------------------------------
+-1.9579
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_fanout_check_slack
+--------------------------------------------------------------------------
+-30.0
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_fanout_check_limit
+--------------------------------------------------------------------------
+16.0
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_fanout_check_slack_limit
+--------------------------------------------------------------------------
+-1.8750
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_capacitance_check_slack
+--------------------------------------------------------------------------
+-10.786949157714844
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_capacitance_check_limit
+--------------------------------------------------------------------------
+4.21304988861084
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_capacitance_check_slack_limit
+--------------------------------------------------------------------------
+-2.5604
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_slew_violation_count
+--------------------------------------------------------------------------
+max slew violation count 19
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_fanout_violation_count
+--------------------------------------------------------------------------
+max fanout violation count 108
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired max_cap_violation_count
+--------------------------------------------------------------------------
+max cap violation count 23
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired setup_violation_count
+--------------------------------------------------------------------------
+setup violation count 0
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired hold_violation_count
+--------------------------------------------------------------------------
+hold violation count 6
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired critical path delay
+--------------------------------------------------------------------------
+7.2601
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired critical path slack
+--------------------------------------------------------------------------
+0.0001
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired slack div critical path delay
+--------------------------------------------------------------------------
+0.001377
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired report_power tt
+--------------------------------------------------------------------------
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             1.70e-03   3.68e-06   7.06e-07   1.71e-03  24.2%
+Combinational          3.13e-05   1.37e-04   3.77e-06   1.72e-04   2.4%
+Clock                  1.71e-03   1.15e-03   4.27e-07   2.86e-03  40.5%
+Macro                  1.45e-04   0.00e+00   2.97e-07   1.45e-04   2.1%
+Pad                    1.78e-04   2.01e-03   4.47e-08   2.18e-03  30.9%
+----------------------------------------------------------------
+Total                  3.77e-03   3.30e-03   5.24e-06   7.07e-03 100.0%
+                          53.3%      46.6%       0.1%
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired report_design_area
+--------------------------------------------------------------------------
+
+==========================================================================
+ROUTING_Initial_Fixed.grt_repaired area by hierarchy
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Design Area Summary
+--------------------------------------------------------------------------------
+Die Area:              4629056.0 um2
+Core Area:             2200258.368 um2
+Total Area:            2431516.144 um2
+Total Active Area:     788796.1440000001 um2
+
+Core Utilization:      0.3585015993903495
+Std Cell Utilization:  0.2964146712781706
+
+--------------------------------------------------------------------------------
+Hierarchical Area Report
+--------------------------------------------------------------------------------
+                                                                                Global Area (um^2)                                                              Global Instances                                                                Local Area (um^2)                                                               Local Instances
+                                                                                ------------------------------------------------------------------------------- ------------------------------------------------------------------------------- ------------------------------------------------------------------------------- ----------------------------------------------------------------------------
+Hierarchy Name                                                                  Total           StdCell         Macro           Cover           Pad             Total           StdCell         Macro           Cover           Pad             Total           StdCell         Macro           Cover           Pad             Total           StdCell         Macro           Cover           Pad             
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<top>                                                                           2431516.144     594637.344      194158.800      313600.000      1329120.000     66816           66491           3               64              258             1705577.670     62857.670       0.000           313600.000      1329120.000     11948           11626           0               64              258             
+  u_main                                                                        725938.474      531779.674      194158.800      0.000           0.000           54868           54865           3               0               0               336423.283      142264.483      194158.800      0.000           0.000           13124           13121           3               0               0               
+    dc_gemm_baseline.gen_dc_default.u_matmul                                    42577.315       42577.315       0.000           0.000           0.000           3703            3703            0               0               0               42577.315       42577.315       0.000           0.000           0.000           3703            3703            0               0               0               
+    sm_gemm_area.gen_sm_area.u_matmul                                           63348.768       63348.768       0.000           0.000           0.000           7806            7806            0               0               0               63348.768       63348.768       0.000           0.000           0.000           7806            7806            0               0               0               
+    sm_gemm_power.gen_sm_power.u_matmul                                         67904.122       67904.122       0.000           0.000           0.000           8563            8563            0               0               0               67904.122       67904.122       0.000           0.000           0.000           8563            8563            0               0               0               
+    tc_gemm_area.gen_tc_area.u_matmul                                           45879.523       45879.523       0.000           0.000           0.000           4534            4534            0               0               0               45879.523       45879.523       0.000           0.000           0.000           4534            4534            0               0               0               
+    tc_gemm_fmax.gen_tc_fmax.u_matmul                                           63887.846       63887.846       0.000           0.000           0.000           6688            6688            0               0               0               63887.846       63887.846       0.000           0.000           0.000           6688            6688            0               0               0               
+    tc_gemm_power.gen_tc_power.u_matmul                                         48900.902       48900.902       0.000           0.000           0.000           4727            4727            0               0               0               48900.902       48900.902       0.000           0.000           0.000           4727            4727            0               0               0               
+    yosys_gemm_baseline.gen_yosys_baseline.u_matmul                             57016.714       57016.714       0.000           0.000           0.000           5723            5723            0               0               0               57016.714       57016.714       0.000           0.000           0.000           5723            5723            0               0               0               
