@@ -16,7 +16,6 @@ set_power_activity -input_port rst_ni -activity 0
 report_power -corner tt
 report_power -corner ff
 
-set_power_activity -global -activity 0.01
 set_power_activity -input_port rst_ni -activity 0
 read_vcd -scope main_tb/i_dut ../vsim/main_chip.vcd
 
