@@ -1,16 +1,16 @@
 `timescale 1ns/1ps
-
+ 
 module main_tb#(
   parameter time         ClkPeriod     = 6.67ns,
   parameter time         ClkPeriodRef  = 30518ns,
   parameter time         TAppl         = 0.2*ClkPeriod,
   parameter time         TTest         = 0.8*ClkPeriod,
   parameter int unsigned RstCycles     = 20,
-
+ 
   localparam int unsigned ClkFrequency = 1s / ClkPeriod,
   localparam int unsigned NO_OF_TEST              = 128
 )();
-
+ 
   localparam int unsigned INPUT_SRAM_NUM_WORDS    = 64;
   localparam int unsigned INPUT_NUM_BITS          = 4;
   localparam int unsigned OUTPUT_SRAM_NUM_WORDS   = 256;
@@ -20,41 +20,47 @@ module main_tb#(
   localparam int unsigned MATRIX_DIMENSION        = 32*32;
   localparam int unsigned INPUT_SRAM_ADDR_WIDTH   = $clog2(INPUT_SRAM_NUM_WORDS);
   localparam int unsigned OUTPUT_SRAM_ADDR_WIDTH  = $clog2(OUTPUT_SRAM_NUM_WORDS);
-
+ 
   ///////////////////
   //  DUT signals  //
   ///////////////////
-
+ 
   logic clk_i;
   logic rst_ni;
-
+ 
   logic req_i;
   logic we_i;
   logic stop_compute_i;
-
+ 
   logic ready_o;
   logic finish_o;
   logic ack_o;
-
+ 
   logic [15:0] streamed_wdata_i;
   logic [15:0] streamed_rdata_o;
-
+ 
   //////////////////
   //  TB signals  //
   //////////////////
-
+ 
   logic [15:0] Control_Bits;
-  logic [63:0] Operand_A [0:NO_OF_TEST/2 -1];
-  logic [63:0] Operand_B [0:NO_OF_TEST/2 -1];
-  logic [63:0] test_data [0:NO_OF_TEST-1];
+ 
+  logic [63:0] Operand_A_TC [0:NO_OF_TEST/2-1];
+  logic [63:0] Operand_B_TC [0:NO_OF_TEST/2-1];
+  logic [63:0] Operand_A_SM [0:NO_OF_TEST/2-1];
+  logic [63:0] Operand_B_SM [0:NO_OF_TEST/2-1];
+ 
+  logic [63:0] test_data_TC [0:NO_OF_TEST-1];
+  logic [63:0] test_data_SM [0:NO_OF_TEST-1];
+ 
   logic [63:0] rx_word;
   logic [63:0] expected_data [0:255];
   logic [63:0] actual_data   [0:255];
-  
+ 
   //////////////////
   //  Print Mode  //
   //////////////////
-  
+ 
   initial begin
     `ifdef TARGET_NETLIST_OPENROAD
       $display("[TB] DUT mode: OpenROAD post-PnR netlist");
@@ -64,30 +70,25 @@ module main_tb#(
       $display("[TB] DUT mode: RTL / normal simulation");
     `endif
   end
-  
+ 
   //////////////////
   //  Clock Gen   //
   //////////////////
-
-  // system clock
+ 
   initial clk_i = 1'b0;
   always #(ClkPeriod/2) clk_i = ~clk_i;
-  
+ 
   //////////////////
   //  Reset Gen   //
   //////////////////
-
+ 
   initial begin
     rst_ni = 1'b0;
-
-    // hold reset for RstCycles clock cycles
     repeat (RstCycles) @(posedge clk_i);
-
-    // small delay to align with application phase (optional, like VIP style)
     #TAppl;
     rst_ni = 1'b1;
   end
-  
+ 
   ////////////
   //  DUT   //
   ////////////
@@ -95,16 +96,15 @@ module main_tb#(
     wire [15:0] streamed_wdata_pad;
     wire [15:0] streamed_rdata_pad;
     assign streamed_wdata_pad = streamed_wdata_i;
-
     assign streamed_rdata_o = streamed_rdata_pad;
-  
+ 
     main_chip i_dut (
       .clk_i  (clk_i),
       .rst_ni (rst_ni),
       .req_i  (req_i),
       .we_i   (we_i),
       .stop_compute_i     (stop_compute_i),
-
+ 
       .streamed_wdata_0_i  (streamed_wdata_pad[0]),
       .streamed_wdata_1_i  (streamed_wdata_pad[1]),
       .streamed_wdata_2_i  (streamed_wdata_pad[2]),
@@ -121,11 +121,11 @@ module main_tb#(
       .streamed_wdata_13_i (streamed_wdata_pad[13]),
       .streamed_wdata_14_i (streamed_wdata_pad[14]),
       .streamed_wdata_15_i (streamed_wdata_pad[15]),
-
+ 
       .ready_o  (ready_o),
       .finish_o (finish_o),
       .ack_o    (ack_o),
-
+ 
       .streamed_rdata_0_o  (streamed_rdata_pad[0]),
       .streamed_rdata_1_o  (streamed_rdata_pad[1]),
       .streamed_rdata_2_o  (streamed_rdata_pad[2]),
@@ -142,7 +142,7 @@ module main_tb#(
       .streamed_rdata_13_o (streamed_rdata_pad[13]),
       .streamed_rdata_14_o (streamed_rdata_pad[14]),
       .streamed_rdata_15_o (streamed_rdata_pad[15]),
-
+ 
       .unused0_o(),
       .unused1_o(),
       .unused2_o(),
@@ -152,7 +152,7 @@ module main_tb#(
       .unused6_o(),
       .unused7_o()
     );
-  `else 
+  `else
     `ifdef TARGET_NETLIST_YOSYS
       \main$main_chip.u_main i_dut (
     `else
@@ -171,7 +171,7 @@ module main_tb#(
     .req_i              (req_i),
     .we_i               (we_i),
     .stop_compute_i     (stop_compute_i),
-
+ 
     .streamed_wdata_0_i (streamed_wdata_i[0]),
     .streamed_wdata_1_i (streamed_wdata_i[1]),
     .streamed_wdata_2_i (streamed_wdata_i[2]),
@@ -188,11 +188,11 @@ module main_tb#(
     .streamed_wdata_13_i(streamed_wdata_i[13]),
     .streamed_wdata_14_i(streamed_wdata_i[14]),
     .streamed_wdata_15_i(streamed_wdata_i[15]),
-
+ 
     .ready_o            (ready_o),
     .finish_o           (finish_o),
     .ack_o              (ack_o),
-
+ 
     .streamed_rdata_0_o (streamed_rdata_o[0]),
     .streamed_rdata_1_o (streamed_rdata_o[1]),
     .streamed_rdata_2_o (streamed_rdata_o[2]),
@@ -211,37 +211,34 @@ module main_tb#(
     .streamed_rdata_15_o(streamed_rdata_o[15])
     );
   `endif
+ 
   //////////////////////
   //  VCD Generation  //
   //////////////////////
-  `ifdef TARGET_NETLIST_OPENROAD // Runs in Vsim and QuestaSIM
+  `ifdef TARGET_NETLIST_OPENROAD
     initial begin
       #3237;
       $display("@%t | [VCD] Start dump", $time);
       $dumpfile("main_chip.vcd");
       $dumpvars(0, i_dut);
-        
-      // keep dumping for duration = x - 3237 = 3078 ns
       #3078;
-
       $display("@%t | [VCD] Stop dump", $time);
       $dumpoff;
     end
-
     final begin
-        $dumpflush;
+      $dumpflush;
     end
-  `else // Runs in Verilator
+  `else
     initial begin
       $dumpfile("waveform.vcd");
       $dumpvars(0, main_tb);
     end
   `endif
-
+ 
   ////////////////////////
   //  Task for Testing  //
   ////////////////////////
-
+ 
   task automatic send_ctrl16(input logic [15:0] ctrl_packet);
     begin
       #TAppl
@@ -252,152 +249,130 @@ module main_tb#(
  
   task automatic send_data64(input logic [63:0] data);
     begin
-      // Send 64 bits as 4 chunks of 16 bits, MSB first
       #TAppl
       streamed_wdata_i = data[63:48];
       @(posedge clk_i);
-
+ 
       #TAppl
       streamed_wdata_i = data[47:32];
       @(posedge clk_i);
-
+ 
       #TAppl
       streamed_wdata_i = data[31:16];
       @(posedge clk_i);
-
+ 
       #TAppl
       streamed_wdata_i = data[15:0];
       @(posedge clk_i);
     end
   endtask
-
+ 
   task automatic read_data64(output logic [63:0] data);
     logic [15:0] chunk0, chunk1, chunk2, chunk3;
     begin
-      chunk0 = '0;
-      chunk1 = '0;
-      chunk2 = '0;
-      chunk3 = '0;
-
-      #TAppl
-      chunk0 = streamed_rdata_o;
-      @(posedge clk_i);
-
-      #TAppl
-      chunk1 = streamed_rdata_o;
-      @(posedge clk_i);
-
-      #TAppl
-      chunk2 = streamed_rdata_o;
-      @(posedge clk_i);
-
-      #TAppl
-      chunk3 = streamed_rdata_o;
-      @(posedge clk_i);
-
+      chunk0 = '0; chunk1 = '0; chunk2 = '0; chunk3 = '0;
+ 
+      #TAppl chunk0 = streamed_rdata_o; @(posedge clk_i);
+      #TAppl chunk1 = streamed_rdata_o; @(posedge clk_i);
+      #TAppl chunk2 = streamed_rdata_o; @(posedge clk_i);
+      #TAppl chunk3 = streamed_rdata_o; @(posedge clk_i);
+ 
       data = {chunk0, chunk1, chunk2, chunk3};
     end
   endtask
-
-  task automatic do_write_transaction(input bit invert_data, input logic [15:0] ctrl_packet);
+ 
+  // encoding: 0 = TC, 1 = SM
+  task automatic do_write_transaction(
+    input bit         invert_data,
+    input logic[15:0] ctrl_packet,
+    input bit         encoding       // 0=TC, 1=SM
+  );
     logic [63:0] curr_word;
+    logic [63:0] selected_data [0:NO_OF_TEST-1];
     begin
+      // Select the appropriate test data
+      for (int i = 0; i < NO_OF_TEST; i++) begin
+        selected_data[i] = (encoding == 1'b0) ? test_data_TC[i] : test_data_SM[i];
+      end
+ 
       wait (rst_ni == 1'b1);
       wait (ready_o == 1'b1);
-      
+ 
       #TAppl
-      req_i = 1'b1;
-      we_i  = 1'b1;
-      stop_compute_i   = 1'b0;
-
+      req_i          = 1'b1;
+      we_i           = 1'b1;
+      stop_compute_i = 1'b0;
+ 
       wait (ack_o == 1'b1);
       wait (ack_o != 1'b1);
-
+ 
       send_ctrl16(ctrl_packet);
-
+ 
       for (int i = 0; i < NO_OF_TEST; i++) begin
-        curr_word = invert_data ? ~test_data[i] : test_data[i];
+        curr_word = invert_data ? ~selected_data[i] : selected_data[i];
         send_data64(curr_word);
       end
-
+ 
       @(negedge clk_i);
       req_i            = 1'b0;
       we_i             = 1'b0;
       streamed_wdata_i = 16'h0000;
-      
+ 
       if (ctrl_packet[10:8] == '0) begin
-        // Compute once: wait until DUT finishes by itself
         fork
-          begin
-            wait (finish_o == 1'b1);
-          end
-
+          begin wait (finish_o == 1'b1); end
           begin
             repeat (2000) @(posedge clk_i);
             $fatal(1, "Timeout waiting for finish_o after single compute");
           end
         join_any
-
         disable fork;
-
       end else begin
-        // Continuous compute: let it run, then request stop
         repeat (2047) @(posedge clk_i);
-
         stop_compute_i = 1'b1;
-
         fork
-          begin
-            wait (finish_o == 1'b1);
-          end
-
+          begin wait (finish_o == 1'b1); end
           begin
             repeat (2000) @(posedge clk_i);
             $fatal(1, "Timeout waiting for finish_o after stop request");
           end
         join_any
-
         disable fork;
-
         stop_compute_i = 1'b0;
       end
-
+ 
       #TAppl
       req_i = 1'b1;
       we_i  = 1'b0;
-
+ 
       wait (ack_o == 1'b1);
       wait (ack_o != 1'b1);
-      
-      // DUT note: wait 1 more cycle after ACK
+ 
       @(negedge clk_i);
       @(posedge clk_i);
-      
+ 
       `ifdef TIMING_SIM
         @(negedge clk_i);
         @(posedge clk_i);
       `endif
-      
+ 
       for (int i = 0; i < 256; i++) begin
         read_data64(rx_word);
         actual_data[i] = rx_word;
       end
-
+ 
       @(negedge clk_i);
       req_i = 1'b0;
       we_i  = 1'b0;
     end
   endtask
-
+ 
   task automatic compare_results(input string filename);
     int error_count;
     begin
       $display("Reading values from %s", filename);
-    
       $readmemh(filename, expected_data);
-
       error_count = 0;
-
       for (int i = 0; i < 256; i++) begin
         if (actual_data[i] !== expected_data[i]) begin
           $display("MISMATCH at [%0d]: expected=0x%016h actual=0x%016h",
@@ -405,27 +380,31 @@ module main_tb#(
           error_count++;
         end
       end
-
       if (error_count == 0)
         $display("PASS: all outputs match expected results");
       else
         $display("FAIL: %0d mismatches found", error_count);
     end
   endtask
-
+ 
+  //////////////////////////
+  //  Load Operands       //
+  //////////////////////////
+ 
   initial begin
-    // Read files
-    $readmemh("../Python/inputs/A.hex", Operand_A);
-    $readmemh("../Python/inputs/B.hex", Operand_B);
-
-    // Concatenate into test_data
+    $readmemh("../Python/inputs/A_TC.hex", Operand_A_TC);
+    $readmemh("../Python/inputs/B_TC.hex", Operand_B_TC);
+    $readmemh("../Python/inputs/A_SM.hex", Operand_A_SM);
+    $readmemh("../Python/inputs/B_SM.hex", Operand_B_SM);
+ 
     for (int i = 0; i < NO_OF_TEST/2; i++) begin
-      test_data[i] = Operand_A[i];
-      test_data[i + NO_OF_TEST/2] = Operand_B[i];
+      test_data_TC[i]              = Operand_A_TC[i];
+      test_data_TC[i + NO_OF_TEST/2] = Operand_B_TC[i];
+      test_data_SM[i]              = Operand_A_SM[i];
+      test_data_SM[i + NO_OF_TEST/2] = Operand_B_SM[i];
     end
   end
-
-
+ 
   /////////////////
   //  Testbench  //
   /////////////////
@@ -433,108 +412,106 @@ module main_tb#(
     req_i            = 1'b0;
     we_i             = 1'b0;
     streamed_wdata_i = 16'h0000;
-    
-
+ 
     $display("\nComputing Non-inverted Data for DC GEMM");
-    Control_Bits = {7'b000001, 1'b1, 8'b00000000};
-    do_write_transaction(1'b0, Control_Bits);
+    Control_Bits = {7'b0000001, 1'b1, 8'b00000000};
+    do_write_transaction(1'b0, Control_Bits, 1'b0);  // TC
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Non-inverted Data for TC GEMM AREA");
     Control_Bits = {7'b0000100, 1'b0, 8'b00000000};
-    do_write_transaction(1'b0, Control_Bits);
+    do_write_transaction(1'b0, Control_Bits, 1'b0);  // TC
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Inverted Data for TC GEMM AREA");
     Control_Bits = {7'b0000100, 1'b1, 8'b00000000};
-    do_write_transaction(1'b1, Control_Bits);
+    do_write_transaction(1'b1, Control_Bits, 1'b0);  // TC
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Inverted Data for DC GEMM");
     Control_Bits = {7'b0000001, 1'b0, 8'b00000000};
-    do_write_transaction(1'b1, Control_Bits);
+    do_write_transaction(1'b1, Control_Bits, 1'b0);  // TC
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
-    
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Non-inverted Data for SM GEMM AREA");
     Control_Bits = {7'b0000010, 1'b0, 8'b00000000};
-    do_write_transaction(1'b0, Control_Bits);
+    do_write_transaction(1'b0, Control_Bits, 1'b1);  // SM
     compare_results("../Python/outputs/Golden_Model_Out_SM_TC_0.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Inverted Data for SM GEMM AREA");
     Control_Bits = {7'b0000010, 1'b1, 8'b00000000};
-    do_write_transaction(1'b1, Control_Bits);
+    do_write_transaction(1'b1, Control_Bits, 1'b1);  // SM
     compare_results("../Python/outputs/Golden_Model_Out_SM_TC_1.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-    
+ 
     $display("\nComputing Non-inverted Data TC GEMM FMAX");
     Control_Bits = {7'b0001000, 1'b1, 8'b00000000};
-    do_write_transaction(1'b0, Control_Bits);
+    do_write_transaction(1'b0, Control_Bits, 1'b0);  // TC
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Non-inverted Data for TC GEMM POWER");
     Control_Bits = {7'b0010000, 1'b1, 8'b00000000};
-    do_write_transaction(1'b0, Control_Bits);
+    do_write_transaction(1'b0, Control_Bits, 1'b0);  // TC
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Inverted Data for TC GEMM POWER");
     Control_Bits = {7'b0010000, 1'b0, 8'b00000000};
-    do_write_transaction(1'b1, Control_Bits);
+    do_write_transaction(1'b1, Control_Bits, 1'b0);  // TC
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Inverted Data for TC GEMM FMAX");
     Control_Bits = {7'b0001000, 1'b0, 8'b00000000};
-    do_write_transaction(1'b1, Control_Bits);
+    do_write_transaction(1'b1, Control_Bits, 1'b0);  // TC
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Non-inverted Data SM GEMM POWER");
     Control_Bits = {7'b0100000, 1'b1, 8'b00000000};
-    do_write_transaction(1'b0, Control_Bits);
+    do_write_transaction(1'b0, Control_Bits, 1'b1);  // SM
     compare_results("../Python/outputs/Golden_Model_Out_SM_TC_0.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Inverted Data for SM GEMM POWER");
     Control_Bits = {7'b0100000, 1'b0, 8'b00000000};
-    do_write_transaction(1'b1, Control_Bits);
+    do_write_transaction(1'b1, Control_Bits, 1'b1);  // SM
     compare_results("../Python/outputs/Golden_Model_Out_SM_TC_1.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Non-inverted Data for Yosys Baseline");
     Control_Bits = {7'b1000000, 1'b1, 8'b00000000};
-    do_write_transaction(1'b0, Control_Bits);
+    do_write_transaction(1'b0, Control_Bits, 1'b0);  // TC
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_0.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
+ 
     $display("\nComputing Inverted Data for Yosys Baseline");
     Control_Bits = {7'b1000000, 1'b0, 8'b00000000};
-    do_write_transaction(1'b1, Control_Bits);
+    do_write_transaction(1'b1, Control_Bits, 1'b0);  // TC
     compare_results("../Python/outputs/Golden_Model_Out_TC_TC_1.hex");
-
+ 
     repeat (20) @(posedge clk_i);
-
-
+ 
     $finish;
   end
-
+ 
 endmodule

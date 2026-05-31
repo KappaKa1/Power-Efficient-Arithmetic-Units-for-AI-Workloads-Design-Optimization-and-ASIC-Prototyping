@@ -19,15 +19,6 @@ for ((run=0; run<NUM_RUNS; run++)); do
     python3 ./../Python/input_generator.py --seed $run
  
     echo ""
-    echo "3. Running golden model for TC-to-TC"
-    python3 ./../Python/golden_model.py --mode UNSIGNED
-
-    echo "4. Running golden model for TC-to-TC"
-    python3 ./../Python/golden_model.py --mode TC_TC
-
-    echo "5. Running golden model for SM-to-TC"
-    python3 ./../Python/golden_model.py --mode SM_TC
-    echo ""
     echo "2. Running golden model"
     python3 ./../Python/golden_model.py
  
@@ -76,7 +67,7 @@ for ((run=0; run<NUM_RUNS; run++)); do
             -suppress vsim-8683 \
             -suppress vsim-8386 \
             -l vsim_run_${run}.log \
-            -do "run 10000; quit" \
+            -do "run -all; quit" \
             | tee -a output.txt
     fi
  

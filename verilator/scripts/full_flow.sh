@@ -19,14 +19,9 @@ for ((run=0; run<NUM_RUNS; run++)); do
     echo "1. Generating inputs (seed=$run)"
     python3 ./../Python/input_generator.py --seed $run
 
-    echo "3. Running golden model for TC-to-TC"
-    python3 ./../Python/golden_model.py --mode UNSIGNED
-
     echo "4. Running golden model for TC-to-TC"
-    python3 ./../Python/golden_model.py --mode TC_TC
-
-    echo "5. Running golden model for SM-to-TC"
-    python3 ./../Python/golden_model.py --mode SM_TC
+    python3 ./../Python/golden_model.py
+    
 
     echo "6. Running Verilator simulation"
     OPEN_WAVE=0 ./scripts/run_dut.sh "$TB_FILE" "$TOP_MODULE"
